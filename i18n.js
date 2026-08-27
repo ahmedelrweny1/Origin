@@ -7,6 +7,7 @@ const translations = {
     btnStart: "Begin Journey &rarr;",
     btnLocked: "Locked",
     
+    // Abacus Lesson
     abacusHeroKicker: "An interactive journey through time",
     abacusHeroTitle: "From <span class=\"hl-abacus\">Abacus</span><br>to <span class=\"hl-ai\">AI</span>",
     abacusHeroIntro: "Before we start learning computers, programming, and the main curriculum, let's ask a simple question:<br><br><strong>How did we get from this... to this?</strong><br><br>Computers did not appear suddenly. They are the result of hundreds of years of people trying to solve one basic problem:<br><strong>How can we make calculations and work easier and faster?</strong><br><br>An old calculator or abacus eventually led to the computers, smartphones, and AI systems we use today. You're about to travel through that story, one stop at a time.",
@@ -27,16 +28,25 @@ const translations = {
     whyMattered: "🌍 Why it mattered",
     funFact: "🎉 Fun fact",
     revealBtn: "👀 Click to reveal a fun fact",
-    
     quickCheck: "🧠 Quick check:",
-    
     guessTitle: "🔮 Guess what comes next…",
     
     challengeTitle: "🏁 Final Challenge",
     challengeSub: "You made it to the end! Now prove it: tap two cards to swap them until the inventions are in the correct order — oldest first.",
     swapsCount: "Swaps:",
     hintDefault: "Tip: tap a card, then tap where you think it belongs.",
-    btnShuffle: "🔄 Shuffle again"
+    btnShuffle: "🔄 Shuffle again",
+
+    // Lecture 1 (Unit 1: Information & Ethics)
+    lect1Brand: "Information & Cyber Ethics",
+    lect1HeroBadge: "📚 Unit 1 · 1st Secondary",
+    lect1HeroTitle: "Information & Media <br><span class=\"text-gradient\">+ Cyber Ethics</span>",
+    lect1HeroDesc: "An interactive visual journey through Data, Information & Knowledge, superpowers of digital media, and ethical rules of cyber conduct.",
+    lect1StartBtn: "🚀 Start Interactive Journey &rarr;",
+    finalChallengeBadge: "🏁 Final Challenge",
+    finalChallengeTitle: "Unit 1 Concept Matching Challenge",
+    finalChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Information Studies and Ethics.",
+    btnResetMatch: "🔄 Reset and Try Again"
   },
   ar: {
     portalBadge: "باكالوريا التفاعلية",
@@ -46,6 +56,7 @@ const translations = {
     btnStart: "&larr; ابدأ الرحلة",
     btnLocked: "مقفول",
     
+    // Abacus Lesson
     abacusHeroKicker: "المحاضرة الأولى - تعريفية",
     abacusHeroTitle: "من <span class=\"hl-abacus\">العداد</span><br>لـ <span class=\"hl-ai\">الذكاء الاصطناعي</span>",
     abacusHeroIntro: "قبل ما ندخل في المنهج ونبدأ نتكلم عن الكمبيوتر والبرمجة، تعالوا نسأل نفسنا سؤال بسيط جداً:<br><br><strong>إزاي وصلنا من ده... لده؟ 🤔</strong><br><br>الكمبيوترات دي مطلعتش فجأة كده زي السحر. دي نتيجة مئات السنين من محاولات الناس إنهم يحلو مشكلة واحدة بس:<br><strong>إزاي نقدر نحسب ونخلص شغلنا أسهل وأسرع؟ 🚀</strong><br><br>متخيلين إن آلة حاسبة قديمة (العداد) هي اللي وصلتنا للكمبيوترات والموبايلات والذكاء الاصطناعي اللي في إيدينا النهاردة؟ يالا بينا نسافر عبر الزمن ونشوف القصة دي محطة بمحطة!",
@@ -66,20 +77,29 @@ const translations = {
     whyMattered: "🌍 ليه كان مهم؟",
     funFact: "🎉 معلومة في السريع",
     revealBtn: "👀 دوس هنا عشان تشوف المعلومة",
-    
     quickCheck: "🧠 سؤال عالسريع:",
-    
     guessTitle: "🔮 تفتكر إيه اللي هييجي بعد كده؟",
     
     challengeTitle: "🏁 التحدي الأخير",
     challengeSub: "وصلت للنهاية! وريني شطارتك: دوس على كارتين عشان تبدلهم لحد ما ترتب الاختراعات كلها صح — من الأقدم للأحدث.",
     swapsCount: "عدد التبديلات:",
     hintDefault: "تلميح: دوس على كارت، وبعدين دوس على المكان اللي تفتكر إنه الصح.",
-    btnShuffle: "🔄 لخبطهم وجرب تاني"
+    btnShuffle: "🔄 لخبطهم وجرب تاني",
+
+    // Lecture 1 (Unit 1: Information & Ethics)
+    lect1Brand: "دراسة المعلومات وأخلاقياتها",
+    lect1HeroBadge: "📚 أولى ثانوي · الوحدة الأولى",
+    lect1HeroTitle: "المعلومات والوسائط <br><span class=\"text-gradient\">+ أخلاقيات الفضاء الرقمي</span>",
+    lect1HeroDesc: "رحلة بصرية تفاعلية تفصل بين البيانات والمعلومات والمعرفة، وتستكشف خصائص المعلومات وسحر الوسائط، وقواعد السلوك الآمن والأخلاقي خلف الشاشات.",
+    lect1StartBtn: "🚀 ابدأ الاستكشاف التفاعلي &rarr;",
+    finalChallengeBadge: "🏁 التحدي الختامي",
+    finalChallengeTitle: "تحدي مطابقة مفاهيم الوحدة الأولى",
+    finalChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك لمفاهيم دراسة المعلومات وأخلاقياتها.",
+    btnResetMatch: "🔄 إعادة الترتيب والمحاولة"
   }
 };
 
-let currentLang = localStorage.getItem('origin-lang') || 'en';
+let currentLang = localStorage.getItem('origin-lang') || 'ar';
 
 function setLang(lang) {
   currentLang = lang;
@@ -93,13 +113,16 @@ function setLang(lang) {
 }
 
 function t(key) {
-  return translations[currentLang][key] || key;
+  if (!translations[currentLang] || !translations[currentLang][key]) {
+    return translations.en[key] || key;
+  }
+  return translations[currentLang][key];
 }
 
 function applyTranslations() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (translations[currentLang][key]) {
+    if (translations[currentLang] && translations[currentLang][key]) {
       el.innerHTML = translations[currentLang][key];
     }
   });
@@ -109,7 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Setup language toggle buttons if they exist
   document.querySelectorAll('#langToggle').forEach(btn => {
     btn.addEventListener('click', () => {
-      const newLang = document.documentElement.getAttribute('lang') === 'ar' ? 'en' : 'ar';
+      const currentDocLang = document.documentElement.getAttribute('lang') || currentLang;
+      const newLang = currentDocLang === 'ar' ? 'en' : 'ar';
       setLang(newLang);
     });
   });

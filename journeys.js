@@ -1,5 +1,27 @@
 const journeys = [
   {
+    id: 'info-and-ethics',
+    title: {
+      en: 'Information, Media & Cyber Ethics',
+      ar: 'دراسة المعلومات والوسائط وأخلاقيات التكنولوجيا'
+    },
+    description: {
+      en: 'Explore Data vs Information vs Knowledge, characteristics of digital media, cross-checking, and safe online conduct.',
+      ar: 'استكشف الفرق بين البيانات والمعلومات والمعرفة، وسائط الاتصال، التحقق المتبادل، وقواعد السلوك والأمان الرقمي.'
+    },
+    url: 'lecture1.html',
+    status: 'active',
+    icon: '🛡️',
+    duration: {
+      en: '~20 min',
+      ar: '~٢٠ دقيقة'
+    },
+    tag: {
+      en: 'Unit 1 · 1st Secondary',
+      ar: 'الوحدة الأولى · أولى ثانوي'
+    }
+  },
+  {
     id: 'abacus-to-ai',
     title: {
       en: 'From Abacus to AI',
@@ -17,8 +39,8 @@ const journeys = [
       ar: '~١٥ دقيقة'
     },
     tag: {
-      en: 'Lecture 1 - Intro',
-      ar: 'المحاضرة الأولى - تعريفية'
+      en: 'Introductory Journey',
+      ar: 'محاضرة تمهيدية'
     }
   }
 ];
