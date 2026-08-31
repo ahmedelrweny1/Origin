@@ -363,3 +363,6 @@ const LECT1_MATCH_ITEMS_AR = [
   { id: "m7", concept: "العلامة الجغرافية (Geotagging)", match: "بيانات الموقع الجغرافي المضمنة في الصور" },
   { id: "m8", concept: "انتحال الشخصية (Identity Theft)", match: "تقمص هوية شخص آخر لسرقة بيانات أو النصب" }
 ];
+
+
+if (typeof window !== 'undefined') { window.LECT1_STAGES_AR = LECT1_STAGES_AR; window.LECT1_MATCH_ITEMS_AR = LECT1_MATCH_ITEMS_AR; }

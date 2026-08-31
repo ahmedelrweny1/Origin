@@ -786,3 +786,5 @@ const LECT1_QUIZBANK_AR = [
     explain: 'ميثق كويس = قصير + مألوم + عملي. الجمل الأربعة كل واحدة بترسّخ فصل — بتحوّل المعرفة لعادات.'
   }
 ];
+
+if (typeof window !== 'undefined') { window.LECT1_QUIZBANK_AR = LECT1_QUIZBANK_AR; }

@@ -37,15 +37,25 @@ function loadScript(src) {
 async function ensureLectureLoaded(id) {
   const map = LECTURE_DATA_MAP[id];
   if (!map) return null;
-  if (!window[map.stagesAr]) await loadScript(map.scriptAr);
-  if (!window[map.stagesEn]) await loadScript(map.scriptEn);
-  if (map.bankAr && !window[map.bankArVar]) await loadScript(map.bankAr);
-  if (map.bankEn && !window[map.bankEnVar]) await loadScript(map.bankEn);
+  try {
+    // For classic <script> tags (not modules), top-level const/let declarations
+    // are accessible across scripts in the same realm — but NOT via `window`.
+    // Use direct identifier access via globalThis to avoid name collisions.
+    const g = globalThis;
+    if (typeof g[map.stagesAr] === 'undefined') await loadScript(map.scriptAr);
+    if (typeof g[map.stagesEn] === 'undefined') await loadScript(map.scriptEn);
+    if (map.bankAr && typeof g[map.bankArVar] === 'undefined') await loadScript(map.bankAr);
+    if (map.bankEn && typeof g[map.bankEn] === 'undefined') await loadScript(map.bankEn);
+  } catch (e) {
+    console.error('[quiz] failed to load script', e);
+    return null;
+  }
+  const g = globalThis;
   return {
-    stagesAr: window[map.stagesAr] || [],
-    stagesEn: window[map.stagesEn] || [],
-    bankAr: window[map.bankArVar] || [],
-    bankEn: window[map.bankEnVar] || []
+    stagesAr: g[map.stagesAr] || [],
+    stagesEn: g[map.stagesEn] || [],
+    bankAr: g[map.bankArVar] || [],
+    bankEn: g[map.bankEnVar] || []
   };
 }
 
@@ -435,14 +445,15 @@ window.addEventListener('langChanged', () => {
   const data = (typeof LECTURE_DATA_MAP !== 'undefined') ? LECTURE_DATA_MAP[runnerState.lecture.id] : null;
   if (!data) return;
 
+  const g = globalThis;
   const stages = getStagesForCurrentLang({
-    stagesAr: window[data.stagesAr] || [],
-    stagesEn: window[data.stagesEn] || []
+    stagesAr: g[data.stagesAr] || [],
+    stagesEn: g[data.stagesEn] || []
   });
   runnerState.stages = stages;
   runnerState.bank = getBankForCurrentLang({
-    bankAr: window[data.bankArVar] || [],
-    bankEn: window[data.bankEnVar] || []
+    bankAr: g[data.bankArVar] || [],
+    bankEn: g[data.bankEnVar] || []
   });
 
   document.getElementById('quizLectureLabel').textContent =
@@ -453,7 +464,6 @@ window.addEventListener('langChanged', () => {
     return;
   }
   if (!document.getElementById('quizRunner').classList.contains('hidden')) {
-    // Reset run with same filter
     runnerState.questions = shuffle(runnerState.filteredBank);
     runnerState.cursor = 0;
     runnerState.correct = 0;

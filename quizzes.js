@@ -19,16 +19,19 @@ async function ensureLectureLoaded(lectureId) {
   const map = LECTURE_DATA_MAP[lectureId];
   if (!map) return null;
 
-  if (!window[map.stagesAr]) await loadScript(map.scriptAr);
-  if (!window[map.stagesEn]) await loadScript(map.scriptEn);
-  if (map.bankAr && !window[map.bankArVar]) await loadScript(map.bankAr);
-  if (map.bankEn && !window[map.bankEnVar]) await loadScript(map.bankEn);
+  // Top-level const/let from classic scripts is accessible via globalThis,
+  // NOT via window. (This is the difference from var.)
+  const g = globalThis;
+  if (typeof g[map.stagesAr] === 'undefined') await loadScript(map.scriptAr);
+  if (typeof g[map.stagesEn] === 'undefined') await loadScript(map.scriptEn);
+  if (map.bankAr && typeof g[map.bankArVar] === 'undefined') await loadScript(map.bankAr);
+  if (map.bankEn && typeof g[map.bankEnVar] === 'undefined') await loadScript(map.bankEn);
 
   loadedLectureData[lectureId] = {
-    stagesAr: window[map.stagesAr] || [],
-    stagesEn: window[map.stagesEn] || [],
-    bankAr: window[map.bankArVar] || [],
-    bankEn: window[map.bankEnVar] || []
+    stagesAr: g[map.stagesAr] || [],
+    stagesEn: g[map.stagesEn] || [],
+    bankAr: g[map.bankArVar] || [],
+    bankEn: g[map.bankEnVar] || []
   };
   return loadedLectureData[lectureId];
 }

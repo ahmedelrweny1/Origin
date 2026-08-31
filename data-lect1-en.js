@@ -363,3 +363,6 @@ const LECT1_MATCH_ITEMS_EN = [
   { id: "m7", concept: "Geotagging (العلامة الجغرافية)", match: "Geographic GPS coordinates embedded inside photo metadata" },
   { id: "m8", concept: "Identity Theft (انتحال الشخصية)", match: "Impersonating an individual or entity to steal data or scam" }
 ];
+
+
+if (typeof window !== 'undefined') { window.LECT1_STAGES_EN = LECT1_STAGES_EN; window.LECT1_MATCH_ITEMS_EN = LECT1_MATCH_ITEMS_EN; }

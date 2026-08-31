@@ -786,3 +786,5 @@ const LECT1_QUIZBANK_EN = [
     explain: 'A great pledge is short, memorable and action-oriented. The four clauses each anchor one chapter — turning knowledge into habits.'
   }
 ];
+
+if (typeof window !== 'undefined') { window.LECT1_QUIZBANK_EN = LECT1_QUIZBANK_EN; }
