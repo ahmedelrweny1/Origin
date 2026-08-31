@@ -10,6 +10,8 @@ const journeys = [
       ar: 'استكشف الفرق بين البيانات والمعلومات والمعرفة، وسائط الاتصال، التحقق المتبادل، وقواعد السلوك والأمان الرقمي.'
     },
     url: 'lecture1.html',
+    quizUrl: 'quiz.html?lecture=info-and-ethics',
+    hasQuizzes: true,
     status: 'active',
     icon: '🛡️',
     duration: {
@@ -32,6 +34,7 @@ const journeys = [
       ar: 'سافر عبر ٤٠٠٠ سنة من تاريخ الكمبيوتر — من خرز الخشب للآلات اللي بتفكر.'
     },
     url: 'abacus.html',
+    hasQuizzes: false,
     status: 'active',
     icon: '🚀',
     duration: {
@@ -44,3 +47,17 @@ const journeys = [
     }
   }
 ];
+
+const LECTURE_DATA_MAP = {
+  'info-and-ethics': {
+    stagesVar: 'LECT1_STAGES',
+    stagesAr: 'LECT1_STAGES_AR',
+    stagesEn: 'LECT1_STAGES_EN',
+    scriptAr: 'data-lect1-ar.js',
+    scriptEn: 'data-lect1-en.js',
+    bankAr: 'quizbank-lect1-ar.js',
+    bankEn: 'quizbank-lect1-en.js',
+    bankArVar: 'LECT1_QUIZBANK_AR',
+    bankEnVar: 'LECT1_QUIZBANK_EN'
+  }
+};

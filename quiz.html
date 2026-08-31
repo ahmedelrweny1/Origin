@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz — Origin Atlas</title>
+  <meta name="description" content="Multiple-choice quizzes for computer science lectures.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=2">
+  <link rel="stylesheet" href="quiz.css?v=2">
+  <link rel="stylesheet" href="rtl.css?v=2">
+  <script src="i18n.js"></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="topbar-meta" id="quizLectureLabel" data-i18n="qzLabel">Quiz · Lecture</span>
+      <a class="brand" href="index.html">Origin <span>Atlas</span></a>
+      <div class="top-controls">
+        <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="qzBackToList">← All quizzes</a>
+        <button id="themeToggle" class="control-btn">🌙</button>
+        <button id="langToggle" class="control-btn">AR / EN</button>
+      </div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-bar"><div class="progress-fill" id="quizProgressFill"></div></div>
+      <span class="progress-label" id="quizProgressLabel">00 / 00</span>
+    </div>
+  </header>
+
+  <main class="quiz-main">
+
+    <!-- Picker view -->
+    <section class="quiz-picker" id="quizPicker">
+      <div class="picker-head">
+        <span class="mono" data-i18n="qzPickerEyebrow">Choose your scope</span>
+        <h1 id="pickerTitle" data-i18n="qzPickerTitle">How do you want to be tested?</h1>
+        <p class="muted" data-i18n="qzPickerSub">Pick a difficulty, then a chapter — or do them all.</p>
+      </div>
+
+      <!-- Difficulty filter -->
+      <div class="difficulty-row">
+        <span class="mono" data-i18n="qzDifficulty">Difficulty</span>
+        <div class="difficulty-chips" id="diffChips">
+          <button class="diff-chip active" data-diff="all"><span data-i18n="diff_all">All</span></button>
+          <button class="diff-chip diff-easy" data-diff="easy"><span class="dot"></span><span data-i18n="diff_easy">Easy</span></button>
+          <button class="diff-chip diff-medium" data-diff="medium"><span class="dot"></span><span data-i18n="diff_medium">Medium</span></button>
+          <button class="diff-chip diff-hard" data-diff="hard"><span class="dot"></span><span data-i18n="diff_hard">Hard</span></button>
+          <button class="diff-chip diff-creative" data-diff="creative"><span class="dot"></span><span data-i18n="diff_creative">Creative</span></button>
+        </div>
+      </div>
+
+      <div class="picker-actions">
+        <button class="quiz-mode" data-mode="all">
+          <span class="mono" data-i18n="qzModeAllLabel">All chapters</span>
+          <strong id="allCount">—</strong>
+          <span class="mono faint">
+            <span data-i18n="qzModeAllHint">Shuffled · full deck</span>
+            <span id="allScopeLabel"></span>
+          </span>
+        </button>
+      </div>
+
+      <div class="picker-stages">
+        <span class="mono" data-i18n="qzStagesHeading">Or pick a chapter</span>
+        <div class="stage-grid" id="stageButtons"></div>
+      </div>
+    </section>
+
+    <!-- Runner view -->
+    <section class="quiz-runner hidden" id="quizRunner">
+      <div class="quiz-card-stage" id="quizStage">
+        <div class="quiz-card-eyebrow">
+          <span class="mono" id="runnerStageLabel">Question 01</span>
+          <span class="mono faint" id="runnerScore">0 / 0 correct</span>
+        </div>
+        <div class="quiz-card-head">
+          <h2 class="quiz-card-title" id="runnerStageTitle">—</h2>
+          <span class="diff-badge" id="runnerDifficulty">—</span>
+        </div>
+        <p class="quiz-card-q" id="runnerQuestion">—</p>
+
+        <div class="quiz-card-options" id="runnerOptions"></div>
+
+        <div class="quiz-card-feedback hidden" id="runnerFeedback"></div>
+
+        <div class="quiz-card-actions">
+          <button class="btn btn-ghost" id="runnerSkipBtn" data-i18n="qzSkip">Skip</button>
+          <button class="btn btn-primary btn-arrow hidden" id="runnerNextBtn" data-i18n="qzNext">Next question</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result view -->
+    <section class="quiz-result hidden" id="quizResult">
+      <div class="result-head">
+        <span class="mono" data-i18n="qzResultEyebrow">Completed</span>
+        <h1 id="resultTitle" data-i18n="qzResultTitle">Results</h1>
+        <p class="muted" id="resultSubtitle">—</p>
+      </div>
+      <div class="result-score" id="resultScore">—</div>
+      <div class="result-grid" id="resultTopGrid">
+        <div class="result-stat">
+          <span class="mono" data-i18n="qzStatCorrect">Correct</span>
+          <strong id="resultCorrect">0</strong>
+        </div>
+        <div class="result-stat">
+          <span class="mono" data-i18n="qzStatWrong">Wrong</span>
+          <strong id="resultWrong">0</strong>
+        </div>
+        <div class="result-stat">
+          <span class="mono" data-i18n="qzStatSkipped">Skipped</span>
+          <strong id="resultSkipped">0</strong>
+        </div>
+      </div>
+      <div class="result-breakdown" id="resultBreakdown"></div>
+      <div class="result-actions">
+        <button class="btn btn-ghost" id="resultRetryBtn" data-i18n="qzRetry">Try again</button>
+        <a class="btn btn-primary btn-arrow" href="quizzes.html" data-i18n="qzOtherLectures">Other lectures</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span class="mono" data-i18n="footerText">Made for curious minds · Intro to Computer Science</span>
+  </footer>
+
+  <script src="journeys.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>
