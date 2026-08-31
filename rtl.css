@@ -1,44 +1,88 @@
+/* ============================================================
+   RTL — Arabic language overrides
+   Handled primarily inline in atlas.css / portal.css / styles.css.
+   This file is reserved for cross-cutting RTL rules.
+   ============================================================ */
+
 html[dir="rtl"] {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Cairo', 'Newsreader', serif;
 }
 
 html[dir="rtl"] body {
-  font-family: 'Cairo', sans-serif;
+  font-family: 'Cairo', 'Newsreader', serif;
 }
 
-html[dir="rtl"] h1, 
-html[dir="rtl"] h2, 
-html[dir="rtl"] h3, 
-html[dir="rtl"] h4, 
-html[dir="rtl"] h5, 
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
 html[dir="rtl"] h6,
 html[dir="rtl"] .brand,
+html[dir="rtl"] .wordmark,
 html[dir="rtl"] .btn,
-html[dir="rtl"] .badge {
-  font-family: 'Cairo', sans-serif;
+html[dir="rtl"] .badge,
+html[dir="rtl"] .badge-tag,
+html[dir="rtl"] .journey-title,
+html[dir="rtl"] .stage-title,
+html[dir="rtl"] .dilemma-scenario {
+  font-family: 'Cairo', 'Fraunces', serif;
 }
 
-/* Fix portal grid flex ordering for rtl if needed */
-html[dir="rtl"] .card-header,
-html[dir="rtl"] .card-footer {
-  flex-direction: row-reverse;
+html[dir="rtl"] .mono,
+html[dir="rtl"] .progress-label,
+html[dir="rtl"] .progress-text,
+html[dir="rtl"] .colophon,
+html[dir="rtl"] .chip,
+html[dir="rtl"] .topic-node,
+html[dir="rtl"] .char-tab-btn,
+html[dir="rtl"] .dikw-step-desc,
+html[dir="rtl"] .exif-data-rows,
+html[dir="rtl"] .topbar-meta,
+html[dir="rtl"] .source-badge,
+html[dir="rtl"] .control-btn,
+html[dir="rtl"] .stage-category,
+html[dir="rtl"] .widget-title,
+html[dir="rtl"] .stage-caption,
+html[dir="rtl"] .label,
+html[dir="rtl"] .order-card .chip-num,
+html[dir="rtl"] .tl-year {
+  font-family: 'Cairo', 'JetBrains Mono', monospace;
+  letter-spacing: 0.04em;
 }
 
-html[dir="rtl"] .card-action {
-  flex-direction: row-reverse;
+/* Buttons: arrow direction */
+html[dir="rtl"] .btn-arrow::after { content: "←"; }
+html[dir="rtl"] .btn-arrow:hover::after { transform: translateX(-4px); }
+
+/* Body text: use Cairo for fluid Arabic reading */
+html[dir="rtl"] p,
+html[dir="rtl"] .hero-lede,
+html[dir="rtl"] .hero-subtitle,
+html[dir="rtl"] .hero-intro,
+html[dir="rtl"] .stage-tagline,
+html[dir="rtl"] .stage-text,
+html[dir="rtl"] .quiz-question,
+html[dir="rtl"] .match-card,
+html[dir="rtl"] .choice-btn,
+html[dir="rtl"] .quiz-btn,
+html[dir="rtl"] .quiz-opt,
+html[dir="rtl"] .draggable-item,
+html[dir="rtl"] .dilemma-scenario,
+html[dir="rtl"] .dilemma-box,
+html[dir="rtl"] .match-card {
+  font-family: 'Cairo', 'Newsreader', serif;
 }
 
-html[dir="rtl"] .journey-card::before {
-  left: auto;
-  right: -100%;
-  transform: skewX(20deg);
+/* RTL-specific subtle scrollbar on the right (for chapter rails) */
+html[dir="rtl"] .chapter-rail::-webkit-scrollbar,
+html[dir="rtl"] .topics-scroll::-webkit-scrollbar {
+  direction: rtl;
 }
 
-html[dir="rtl"] .journey-card:hover::before {
-  right: 200%;
-}
-
-html[dir="rtl"] .btnPrev,
-html[dir="rtl"] .btnNext {
-  flex-direction: row-reverse;
+/* RTL: ensure certain sections flow correctly */
+html[dir="rtl"] .dossier-list li,
+html[dir="rtl"] .colophon-row,
+html[dir="rtl"] .unit-meta li {
+  direction: rtl;
 }

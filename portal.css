@@ -1,353 +1,439 @@
-:root {
-  --bg-color: #0b0c10;
-  --text-main: #f8f9fa;
-  --text-muted: #a0aab2;
-  --accent-1: #4facfe;
-  --accent-2: #00f2fe;
-  --accent-3: #f093fb;
-  --accent-4: #f5576c;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.1);
-  
-  --font-heading: 'Outfit', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-}
+/* ============================================================
+   PORTAL — Editorial Front Page
+   ============================================================ */
 
-[data-theme="light"] {
-  --bg-color: #f8f9fa;
-  --text-main: #212529;
-  --text-muted: #6c757d;
-  --accent-1: #0d6efd;
-  --accent-2: #0dcaf0;
-  --accent-3: #6f42c1;
-  --accent-4: #dc3545;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-hover: rgba(255, 255, 255, 0.9);
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  font-family: var(--font-body);
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
-  position: relative;
-}
-
-/* Animated Mesh Background */
-.mesh-bg {
+/* Subtle paper grain (very light, optional) */
+body::before {
+  content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -2;
-  overflow: hidden;
-  background: radial-gradient(circle at center, #111 0%, #000 100%);
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image:
+    radial-gradient(circle at 1px 1px, var(--ink) 1px, transparent 0);
+  background-size: 3px 3px;
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] body::before {
+  opacity: 0.06;
+  mix-blend-mode: screen;
 }
 
-.mesh-blob {
-  position: absolute;
-  filter: blur(80px);
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: float 20s infinite alternate ease-in-out;
-}
-
-.blob-1 {
-  width: 600px;
-  height: 600px;
-  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-  top: -200px;
-  left: -200px;
-  animation-duration: 25s;
-}
-
-.blob-2 {
-  width: 500px;
-  height: 500px;
-  background: linear-gradient(135deg, var(--accent-3), var(--accent-4));
-  bottom: -100px;
-  right: -100px;
-  animation-duration: 22s;
-  animation-delay: -5s;
-}
-
-.blob-3 {
-  width: 400px;
-  height: 400px;
-  background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
-  top: 40%;
-  left: 40%;
-  opacity: 0.4;
-  animation-duration: 30s;
-  animation-delay: -10s;
-}
-
-@keyframes float {
-  0% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(100px, 50px) scale(1.1); }
-  66% { transform: translate(-50px, 150px) scale(0.9); }
-  100% { transform: translate(0, 0) scale(1); }
-}
-
-/* Particles */
-.particles {
+/* Remove legacy mesh + particles container visual interference */
+.mesh-bg, .particles {
   position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
+  inset: 0;
   z-index: -1;
   pointer-events: none;
 }
 
-.particle {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0;
-  animation: twinkle var(--duration) ease-in-out infinite;
-  animation-delay: var(--delay);
+/* ============================================================
+   MASTHEAD (replaces the old top-controls strip)
+   ============================================================ */
+.masthead {
+  border-bottom: var(--rule-thick) solid var(--rule);
+  padding: 1.4rem 0 1.2rem;
+  position: relative;
+  z-index: 5;
+  background: var(--paper);
 }
 
-@keyframes twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50% { opacity: 0.8; transform: scale(1); }
-}
-
-/* Container */
-.portal-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: calc(100vh - 80px);
-}
-
-/* Hero */
-.portal-hero {
-  text-align: center;
-  margin-bottom: 5rem;
-  max-width: 800px;
-  animation: slideUp 1s ease-out backwards;
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  font-size: 0.875rem;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 1.5rem;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.portal-hero h1 {
-  font-family: var(--font-heading);
-  font-size: clamp(3rem, 8vw, 5rem);
-  font-weight: 800;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-}
-
-.text-glow {
-  background: linear-gradient(to right, var(--accent-1), var(--accent-3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(79, 172, 254, 0.4));
-}
-
-.portal-hero p {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Grid */
-.journeys-grid {
+.masthead-inner {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  width: 100%;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
 }
 
-/* Card */
-.journey-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  padding: 2rem;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.masthead-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.masthead-meta:first-child { text-align: left; }
+.masthead-meta:last-child  { text-align: right; }
+
+@media (max-width: 640px) {
+  .masthead-meta { display: none; }
+  .masthead-inner { grid-template-columns: auto 1fr auto; }
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  letter-spacing: -0.04em;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--ink);
+}
+
+.wordmark span {
+  color: var(--c-red);
+}
+
+.controls {
   display: flex;
-  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .controls { justify-content: flex-end; }
+}
+
+.control-btn {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.9rem;
+  background: transparent;
+  border: var(--rule-medium) solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.control-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ============================================================
+   HERO — asymmetric editorial
+   ============================================================ */
+.hero {
+  padding: clamp(3rem, 8vw, 5.5rem) 0 clamp(2rem, 5vw, 3.5rem);
   position: relative;
   overflow: hidden;
-  opacity: 0;
-  animation: fadeIn 0.8s ease-out forwards;
+  border-bottom: var(--rule-thick) solid var(--rule);
 }
 
-.journey-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 50%; height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
-  transform: skewX(-20deg);
-  transition: 0.5s;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
 }
 
-.journey-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  background: var(--glass-hover);
-  border-color: rgba(255,255,255,0.3);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(79, 172, 254, 0.2);
-}
-
-.journey-card:hover::before {
-  left: 200%;
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-}
-
-.card-icon {
-  font-size: 3rem;
-  background: linear-gradient(135deg, var(--glass-bg), rgba(255,255,255,0.1));
-  width: 80px;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
-}
-
-.card-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.4rem 0.8rem;
-  border-radius: 12px;
-  letter-spacing: 1px;
-}
-
-.tag-active {
-  background: rgba(79, 172, 254, 0.2);
-  color: #4facfe;
-  border: 1px solid rgba(79, 172, 254, 0.3);
-}
-
-.tag-coming-soon {
-  background: rgba(160, 170, 178, 0.1);
-  color: var(--text-muted);
-  border: 1px solid rgba(160, 170, 178, 0.2);
-}
-
-.journey-card h2 {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.journey-card p {
-  color: var(--text-muted);
-  flex-grow: 1;
-  margin-bottom: 1.5rem;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--glass-border);
-  padding-top: 1.5rem;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-.card-action {
-  color: #4facfe;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: gap 0.3s;
-}
-
-.journey-card:hover .card-action {
-  gap: 0.8rem;
-}
-
-/* Card variants */
-.card-coming-soon {
-  opacity: 0.7;
-}
-
-.card-coming-soon:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.card-coming-soon .card-icon {
-  filter: grayscale(1);
-  opacity: 0.5;
-}
-
-/* Footer */
-.portal-footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  border-top: 1px solid var(--glass-border);
-  background: rgba(0,0,0,0.2);
-}
-
-/* Animations */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .portal-hero h1 { font-size: 2.5rem; }
-  .portal-container { padding: 3rem 1.5rem; }
-  .mesh-blob { filter: blur(50px); opacity: 0.4; }
-  
-  .journeys-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 7fr 5fr;
+    gap: 4rem;
+    align-items: end;
   }
 }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.4rem;
+  flex-wrap: wrap;
+}
+
+.hero-eyebrow .mono { color: var(--c-red); }
+.hero-eyebrow .bar {
+  display: inline-block;
+  width: 48px;
+  height: 4px;
+  background: var(--ink);
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 11vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  font-weight: 800;
+  margin-bottom: 1.6rem;
+}
+
+.hero h1 .accent {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--c-blue);
+}
+
+.hero h1 .strike {
+  position: relative;
+  display: inline-block;
+}
+.hero h1 .strike::after {
+  content: "";
+  position: absolute;
+  left: -4%;
+  right: -4%;
+  top: 52%;
+  height: 6px;
+  background: var(--c-red);
+  transform: rotate(-2deg);
+}
+
+.hero-lede {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 38ch;
+  font-style: italic;
+}
+
+/* Hero side panel — index / dossier feel */
+.hero-side {
+  position: relative;
+  padding-top: 2rem;
+  border-top: var(--rule-thick) solid var(--rule);
+}
+
+@media (min-width: 900px) {
+  .hero-side {
+    border-top: none;
+    padding-top: 0;
+    border-left: var(--rule-medium) solid var(--rule);
+    padding-left: 3rem;
+  }
+  html[dir="rtl"] .hero-side {
+    border-left: none;
+    border-right: var(--rule-medium) solid var(--rule);
+    padding-left: 0;
+    padding-right: 3rem;
+  }
+}
+
+.dossier-list {
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.dossier-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: var(--rule-hair) solid var(--rule-soft);
+  align-items: baseline;
+}
+
+.dossier-list li:last-child { border-bottom: none; }
+
+.dossier-list .num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--c-red);
+}
+
+.dossier-list .label {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Decorative geometric shapes */
+.hero .shape-1 {
+  position: absolute;
+  right: -60px;
+  top: 60px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: var(--c-blue);
+  opacity: 0.12;
+  z-index: 0;
+}
+@media (min-width: 900px) { .hero .shape-1 { width: 320px; height: 320px; } }
+
+.hero .shape-2 {
+  position: absolute;
+  left: 38%;
+  bottom: -40px;
+  width: 90px;
+  height: 90px;
+  background: var(--c-amber);
+  transform: rotate(20deg);
+  z-index: 0;
+}
+
+/* ============================================================
+   JOURNEYS — large editorial index cards
+   ============================================================ */
+.journeys-section {
+  padding: clamp(3rem, 6vw, 4.5rem) 0;
+  border-bottom: var(--rule-thick) solid var(--rule);
+}
+
+.journeys-list {
+  display: grid;
+  gap: 0;
+}
+
+.journey-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: start;
+  padding: clamp(1.6rem, 4vw, 2.4rem) 0;
+  border-bottom: var(--rule-medium) solid var(--rule);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: padding 0.2s ease;
+}
+
+.journey-card:first-child { padding-top: 1rem; }
+.journey-card:last-child { border-bottom: none; }
+
+.journey-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--ink);
+  transition: width 0.25s ease;
+}
+html[dir="rtl"] .journey-card::before { left: auto; right: 0; }
+
+.journey-card:hover {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+html[dir="rtl"] .journey-card:hover {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.journey-card:hover::before { width: 6px; }
+
+.journey-card.coming-soon {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.journey-index {
+  font-family: var(--font-mono);
+  font-size: clamp(1.4rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--c-red);
+  line-height: 1;
+  min-width: 3.5rem;
+}
+
+.journey-body { display: grid; gap: 0.8rem; }
+
+.journey-tag-row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.journey-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.journey-desc {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+.journey-meta {
+  display: flex;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-top: 0.4rem;
+}
+
+.journey-meta span { display: inline-flex; gap: 0.4rem; align-items: center; }
+
+.journey-arrow {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+  align-self: center;
+  transition: transform 0.25s ease;
+}
+
+.journey-card:hover .journey-arrow { transform: translateX(8px); }
+html[dir="rtl"] .journey-card:hover .journey-arrow { transform: translateX(-8px) rotate(180deg); }
+html[dir="rtl"] .journey-arrow { display: inline-block; transform: rotate(180deg); }
+
+.journey-card.coming-soon .journey-arrow { display: none; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  padding: 2.5rem 0 2rem;
+  border-top: var(--rule-thick) solid var(--rule);
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media (min-width: 700px) {
+  .footer-inner {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+  }
+}
+
+.footer .mono { color: var(--ink); }
+.footer .credit { color: var(--ink-faint); text-align: center; }
+.footer .colophon { text-align: right; color: var(--ink-faint); }
+
+@media (max-width: 700px) {
+  .footer .credit, .footer .colophon { text-align: left; }
+}
+
+/* ============================================================
+   Animations
+   ============================================================ */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero h1, .hero-lede, .hero-side, .journey-card {
+  animation: riseIn 0.5s ease-out backwards;
+}
+.hero h1 { animation-delay: 0.05s; }
+.hero-lede { animation-delay: 0.18s; }
+.hero-side { animation-delay: 0.28s; }
+.journey-card:nth-child(1) { animation-delay: 0.40s; }
+.journey-card:nth-child(2) { animation-delay: 0.52s; }
+.journey-card:nth-child(3) { animation-delay: 0.64s; }
+.journey-card:nth-child(4) { animation-delay: 0.76s; }

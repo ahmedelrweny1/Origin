@@ -29,14 +29,17 @@ function buildTimeline() {
     li.className = "tl-node";
     li.innerHTML = `
       <span class="tl-icon">${era.glyph}</span>
-      <span class="tl-label">${era.title}</span>
-      <span class="tl-year">${era.year}</span>`;
+      <span class="tl-text">
+        <span class="tl-label">${era.title}</span>
+        <span class="tl-year">${era.year}</span>
+      </span>`;
     li.addEventListener("click", () => goToEra(i));
     timelineEl.appendChild(li);
 
+    const num = String(i + 1).padStart(2, '0');
     const chip = document.createElement("button");
     chip.className = "chip";
-    chip.textContent = era.title;
+    chip.innerHTML = `<span class="chip-num">${num}</span><span>${era.title}</span>`;
     chip.addEventListener("click", () => goToEra(i));
     chipsEl.appendChild(chip);
   });
@@ -120,8 +123,11 @@ function renderEra(i) {
     </div>`;
 
   stagePanel.innerHTML = `
-    <p class="stage-era">${currentLang === 'ar' ? 'محطة ' + (i + 1) + ' من ' + ERAS.length : 'Stop ' + (i + 1) + ' of ' + ERAS.length} · ${era.year}</p>
-    <h3 class="stage-title">${era.glyph} ${era.title}</h3>
+    <header class="stage-eyebrow">
+      <span class="chapter-num">${currentLang === 'ar' ? 'الفصل ' + (i + 1) + ' من ' + ERAS.length : 'Chapter ' + String(i + 1).padStart(2,'0') + ' / ' + String(ERAS.length).padStart(2,'0')}</span>
+      <span class="chapter-year">${era.year}</span>
+    </header>
+    <h3 class="stage-title"><span class="glyph">${era.glyph}</span><span>${era.title}</span></h3>
     <p class="stage-tagline">${era.tagline}</p>
     <div class="stage-grid">
       <div class="stage-body">

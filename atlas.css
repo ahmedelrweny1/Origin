@@ -1,0 +1,315 @@
+/* ============================================================
+   ORIGIN ATLAS — Shared Primitives
+   Neo-bauhaus editorial. Mobile-first.
+   ============================================================ */
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Tokens: Light (paper) --- */
+:root {
+  /* Palette — printed ink on cream paper */
+  --paper: #f3ede1;            /* warm cream stock */
+  --paper-deep: #e8e0cf;       /* darker paper for stripes */
+  --ink: #14110f;              /* near-black ink */
+  --ink-soft: #5b554a;         /* muted body text */
+  --ink-faint: #8d8678;        /* metadata, captions */
+  --rule: #14110f;             /* thick rules */
+  --rule-soft: rgba(20, 17, 15, 0.18);
+
+  /* Accents — limited, deliberate (Bauhaus uses 3 primaries) */
+  --c-blue: #1f3a93;           /* primary blue */
+  --c-red:  #c8302a;           /* alarm / wrong */
+  --c-amber: #c98a14;          /* accent / amber */
+  --c-green: #1a6b3a;          /* correct / done */
+
+  /* Typography */
+  --font-display: 'Fraunces', 'Playfair Display', 'Cairo', Georgia, serif;
+  --font-body: 'Newsreader', 'Inter', 'Cairo', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  /* Geometry */
+  --rule-thick: 4px;
+  --rule-medium: 2px;
+  --rule-hair: 1px;
+}
+
+/* --- Tokens: Dark (ink) --- */
+[data-theme="dark"] {
+  --paper: #0e0d0b;
+  --paper-deep: #16140f;
+  --ink: #f1ead9;
+  --ink-soft: #b8b0a0;
+  --ink-faint: #7a7468;
+  --rule: #f1ead9;
+  --rule-soft: rgba(241, 234, 217, 0.16);
+
+  --c-blue: #5b8df9;
+  --c-red:  #f06b62;
+  --c-amber: #e8b550;
+  --c-green: #5dc287;
+}
+
+/* --- Base typography --- */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "kern", "liga", "onum";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+h1 { font-size: clamp(2.6rem, 9vw, 5.8rem); font-weight: 800; }
+h2 { font-size: clamp(1.8rem, 5vw, 3rem); }
+h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+h4 { font-size: 1.05rem; letter-spacing: -0.01em; }
+
+p { max-width: 64ch; }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.muted { color: var(--ink-soft); }
+.faint { color: var(--ink-faint); }
+.hidden { display: none !important; }
+
+/* --- Mono labels (chapter numbers, metadata) --- */
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* --- Thick rule divider --- */
+.rule {
+  border: 0;
+  border-top: var(--rule-thick) solid var(--rule);
+  margin: 0;
+}
+
+.rule-thin {
+  border: 0;
+  border-top: var(--rule-medium) solid var(--rule);
+}
+
+.rule-hair {
+  border: 0;
+  border-top: var(--rule-hair) solid var(--rule-soft);
+}
+
+/* --- Drop cap (used on opening paragraphs) --- */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 4.6em;
+  line-height: 0.85;
+  float: left;
+  margin: 0.05em 0.12em 0 -0.05em;
+  color: var(--c-red);
+}
+
+/* RTL flip for drop cap */
+html[dir="rtl"] .dropcap::first-letter {
+  float: right;
+  margin: 0.05em -0.05em 0 0.12em;
+}
+
+/* --- Buttons: editorial primary + ghost --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 1.05rem 1.6rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--paper);
+  color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn:active { transform: translate(0, 0); box-shadow: none; }
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: var(--rule-medium) solid var(--ink);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.btn-arrow::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+html[dir="rtl"] .btn-arrow::after { content: "←"; }
+.btn-arrow:hover::after { transform: translateX(4px); }
+html[dir="rtl"] .btn-arrow:hover::after { transform: translateX(-4px); }
+
+/* --- Pill / chip (editorial inverted) --- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.8rem;
+  border: var(--rule-medium) solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+.chip-solid {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* --- Decorative geometric shapes (Bauhaus signature) --- */
+.shape {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.shape-circle {
+  border-radius: 50%;
+  background: var(--c-blue);
+}
+
+.shape-square {
+  background: var(--c-red);
+}
+
+.shape-bar {
+  height: 14px;
+  background: var(--ink);
+}
+
+/* --- Section header pattern (used across pages) --- */
+.section-head {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+  padding-bottom: 1.4rem;
+  border-bottom: var(--rule-thick) solid var(--rule);
+  margin-bottom: 2.4rem;
+}
+
+@media (min-width: 768px) {
+  .section-head {
+    grid-template-columns: auto 1fr auto;
+    align-items: end;
+    gap: 2rem;
+  }
+}
+
+.section-head .mono { color: var(--ink); }
+.section-head h2 { letter-spacing: -0.03em; }
+
+/* --- Container widths --- */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.container-narrow {
+  max-width: 760px;
+}
+
+/* --- Marginalia (desktop only) --- */
+.marginalia {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  line-height: 1.5;
+}
+
+@media (min-width: 1100px) {
+  .marginalia {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+  }
+  html[dir="rtl"] .marginalia {
+    writing-mode: vertical-lr;
+    transform: rotate(0);
+  }
+}
+
+/* --- Focus ring (accessibility) --- */
+:focus-visible {
+  outline: var(--rule-medium) solid var(--c-blue);
+  outline-offset: 3px;
+}
+
+/* --- Reduce motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

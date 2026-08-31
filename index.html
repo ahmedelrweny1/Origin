@@ -3,16 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Origin — Interactive Computer Science</title>
-  <meta name="description" content="Immersive, interactive journeys into computer science for curious minds.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@400;500;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>Origin Atlas — Interactive Computer Science</title>
+  <meta name="description" content="An editorial, story-driven atlas of computer science for curious minds.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=2">
   <link rel="stylesheet" href="portal.css?v=2">
   <link rel="stylesheet" href="rtl.css?v=2">
   <script src="i18n.js"></script>
 </head>
 <body>
-  
+
   <div class="mesh-bg">
     <div class="mesh-blob blob-1"></div>
     <div class="mesh-blob blob-2"></div>
@@ -21,28 +22,67 @@
 
   <div class="particles" id="particles"></div>
 
-  <main class="portal-container">
-    <div style="width: 100%; display: flex; justify-content: flex-end; margin-bottom: 2rem;">
-      <div class="top-controls">
-        <button id="themeToggle" class="control-btn">🌙</button>
-        <button id="langToggle" class="control-btn">🌐 AR / EN</button>
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <div class="masthead-meta">
+        <span data-i18n="mastheadEdition">Edition 01 · Vol. I</span>
+      </div>
+      <a href="index.html" class="wordmark">Origin <span>Atlas</span></a>
+      <div class="controls">
+        <button id="themeToggle" class="control-btn" aria-label="Toggle theme">🌙</button>
+        <button id="langToggle" class="control-btn" aria-label="Toggle language">AR / EN</button>
       </div>
     </div>
-    <header class="portal-hero">
-      <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-        <div class="badge" data-i18n="portalBadge">Origin Interactive</div>
-      </div>
-      <h1 data-i18n="portalTitle">Explore the <span class="text-glow">Digital Cosmos</span></h1>
-      <p data-i18n="portalDesc">Immersive, story-driven journeys into the history and science of computers. Select your destination.</p>
-    </header>
+  </header>
 
-    <section class="journeys-grid" id="journeysGrid">
-      <!-- Injected by portal.js -->
+  <main>
+    <section class="hero">
+      <span class="shape shape-1"></span>
+      <span class="shape shape-2"></span>
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <div class="hero-eyebrow">
+            <span class="bar"></span>
+            <span class="mono" data-i18n="heroEyebrow">An Atlas of Computing</span>
+          </div>
+          <h1>
+            <span data-i18n="heroTitle1">Explore the</span><br>
+            <span class="accent" data-i18n="heroTitle2">Digital</span>
+            <span class="strike" data-i18n="heroTitle3">Cosmos</span>.
+          </h1>
+          <p class="hero-lede" data-i18n="heroLede">
+            An editorial journey through the history, science, and ethics of computing — printed page by page, for the curious mind.
+          </p>
+        </div>
+        <aside class="hero-side">
+          <ul class="dossier-list">
+            <li><span class="num">01</span><span class="label" data-i18n="dossier1">Story-driven journeys</span></li>
+            <li><span class="num">02</span><span class="label" data-i18n="dossier2">Bilingual · AR / EN</span></li>
+            <li><span class="num">03</span><span class="label" data-i18n="dossier3">Built for the classroom</span></li>
+            <li><span class="num">04</span><span class="label" data-i18n="dossier4">Save your progress</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="journeys-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="mono" data-i18n="tocLabel">Table of Contents</span>
+          <h2 data-i18n="tocTitle">The Journeys</h2>
+          <span class="mono faint" data-i18n="tocCount">02 entries</span>
+        </div>
+        <div class="journeys-list" id="journeysGrid"></div>
+      </div>
     </section>
   </main>
 
-  <footer class="portal-footer">
-    <p data-i18n="footerText">Made for curious minds · Intro to Computer Science</p>
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="mono" data-i18n="footerLeft">Origin Atlas</span>
+      <span class="mono credit" data-i18n="footerCenter">Made for curious minds</span>
+      <span class="mono colophon" data-i18n="footerRight">Intro to Computer Science</span>
+    </div>
   </footer>
 
   <script src="journeys.js"></script>

@@ -376,8 +376,11 @@ function renderStage(i) {
 
   stagePanel.innerHTML = `
     <div class="stage-header">
-      <div class="stage-category">${stage.category} · ${isAr ? 'محطة ' + (i + 1) + ' من ' + LECT1_STAGES.length : 'Stage ' + (i + 1) + ' of ' + LECT1_STAGES.length}</div>
-      <h2 class="stage-title"><span>${stage.glyph}</span> ${stage.title}</h2>
+      <div class="stage-eyebrow">
+        <span class="stage-category">${stage.category}</span>
+        <span class="stage-num">${isAr ? 'محطة ' + String(i + 1).padStart(2,'0') + ' من ' + String(LECT1_STAGES.length).padStart(2,'0') : 'Stage ' + String(i + 1).padStart(2,'0') + ' / ' + String(LECT1_STAGES.length).padStart(2,'0')}</span>
+      </div>
+      <h2 class="stage-title"><span>${stage.glyph}</span> <span>${stage.title}</span></h2>
       <p class="stage-tagline">${stage.tagline}</p>
     </div>
 

@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>From Abacus to AI — A Journey Through Computer History</title>
 <meta name="description" content="An interactive journey through the history of computers, from the Abacus to Artificial Intelligence. Built for intro computer lessons.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="atlas.css?v=2">
 <link rel="stylesheet" href="styles.css?v=2">
 <link rel="stylesheet" href="rtl.css?v=2">
 <script src="i18n.js"></script>
@@ -14,18 +15,19 @@
 <body>
 
 <header class="topbar">
-  <div class="header-top">
-    <a class="brand" href="index.html">⬅ 🚀 <span>Abacus&nbsp;→&nbsp;AI</span></a>
+  <div class="topbar-inner">
+    <span class="topbar-meta" data-i18n="abacusEdition">Chapter 01 · Opening</span>
+    <a class="brand" href="index.html">Origin <span>Atlas</span></a>
     <div class="top-controls">
       <button id="themeToggle" class="control-btn">🌙</button>
-      <button id="langToggle" class="control-btn">🌐 AR / EN</button>
-    </div>
-    <div class="progress-wrap" title="Your journey progress">
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <span class="progress-label" id="progressLabel">0%</span>
+      <button id="langToggle" class="control-btn">AR / EN</button>
     </div>
   </div>
-  <nav class="topics" aria-label="Journey stages">
+  <div class="progress-row">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <span class="progress-label" id="progressLabel">00%</span>
+  </div>
+  <nav class="chapter-rail" aria-label="Journey stages">
     <div class="topic-chips" id="topicChips"></div>
   </nav>
 </header>
@@ -33,33 +35,61 @@
 <main id="top">
 
   <section class="hero" id="hero">
-    <p class="hero-kicker" data-i18n="abacusHeroKicker">An interactive journey through time</p>
-    <h1 data-i18n="abacusHeroTitle">From <span class="hl-abacus">Abacus</span><br>to <span class="hl-ai">AI</span></h1>
-    <p class="hero-intro" data-i18n="abacusHeroIntro">
-      Before we start learning computers, programming, and the main curriculum, let's ask a simple question:<br><br>
-      <strong>How did we get from this... to this?</strong><br><br>
-      Computers did not appear suddenly. They are the result of hundreds of years of people trying to solve one basic problem:<br>
-      <strong>How can we make calculations and work easier and faster?</strong><br><br>
-      An old calculator or abacus eventually led to the computers, smartphones, and AI systems we use today. You're about to travel through that story, one stop at a time.
-    </p>
-    <button class="btn btn-primary btn-lg" id="startBtn" data-i18n="abacusBtnStart">Start the journey &rarr;</button>
-    <div class="hero-meta">
-      <span data-i18n="heroMeta1">⏱ ~15 min</span>
-      <span data-i18n="heroMeta2">🗺 11 stops</span>
-      <span data-i18n="heroMeta3">🧩 1 final challenge</span>
+    <div class="hero-main">
+      <div class="hero-eyebrow">
+        <span class="bar"></span>
+        <span class="mono" data-i18n="abacusHeroKicker">An interactive journey through time</span>
+      </div>
+      <h1>
+        <span data-i18n="abacusHeroTitlePart1">From</span>
+        <span class="hl-abacus" data-i18n="abacusHeroTitlePart2">Abacus</span><br>
+        <span data-i18n="abacusHeroTitlePart3">to</span>
+        <span class="hl-ai" data-i18n="abacusHeroTitlePart4">AI</span>.
+      </h1>
+      <div class="hero-intro dropcap" data-i18n="abacusHeroIntro">
+        Before we start learning computers, programming, and the main curriculum, let's ask a simple question: How did we get from this... to this? Computers did not appear suddenly. They are the result of hundreds of years of people trying to solve one basic problem: How can we make calculations and work easier and faster? An old calculator or abacus eventually led to the computers, smartphones, and AI systems we use today.
+      </div>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-arrow" id="startBtn" data-i18n="abacusBtnStart">Start the journey</button>
+      </div>
+      <div class="hero-meta">
+        <span data-i18n="heroMeta1">⏱ ~15 min</span>
+        <span data-i18n="heroMeta2">🗺 11 stops</span>
+        <span data-i18n="heroMeta3">🧩 1 final challenge</span>
+      </div>
     </div>
-    <div class="hero-track" aria-hidden="true">
-      <span class="dot"></span><span class="dash"></span>
-      <span class="dot"></span><span class="dash"></span>
-      <span class="dot"></span><span class="dash"></span>
-      <span class="dot glow"></span>
-    </div>
+    <aside class="hero-side">
+      <div class="colophon">
+        <div class="colophon-row">
+          <span class="label">VOL</span>
+          <span class="value">01 — Origins</span>
+        </div>
+        <div class="colophon-row">
+          <span class="label">ERA</span>
+          <span class="value">~2400 BC → Today</span>
+        </div>
+        <div class="colophon-row">
+          <span class="label">READ</span>
+          <span class="value">~15 minutes</span>
+        </div>
+        <div class="colophon-row">
+          <span class="label">STOPS</span>
+          <span class="value">11 chapters</span>
+        </div>
+      </div>
+      <div class="hero-track" aria-hidden="true">
+        <span class="dot glow"></span><span class="dash"></span>
+        <span class="dot"></span><span class="dash"></span>
+        <span class="dot"></span><span class="dash"></span>
+        <span class="dot"></span>
+      </div>
+    </aside>
   </section>
 
   <section class="journey hidden" id="journey">
     <div class="journey-head">
       <h2 data-i18n="timelineTitle">The Timeline</h2>
-      <p class="muted" data-i18n="timelineSub">Click any stop on the map — or travel in order with the arrows.</p>
+      <span class="mono" data-i18n="timelineSub">Tap any chapter · or travel in order</span>
     </div>
 
     <ol class="timeline" id="timeline"></ol>
@@ -67,15 +97,18 @@
     <article class="stage-panel" id="stagePanel" aria-live="polite"></article>
 
     <div class="stage-nav">
-      <button class="btn" id="prevBtn" data-i18n="btnPrev">&larr; Previous</button>
-      <button class="btn btn-primary" id="nextBtn" data-i18n="btnNext">Next stop &rarr;</button>
+      <button class="btn btn-ghost" id="prevBtn" data-i18n="btnPrev">&larr; Previous</button>
+      <button class="btn btn-primary btn-arrow" id="nextBtn" data-i18n="btnNext">Next stop</button>
     </div>
   </section>
 
   <section class="challenge hidden" id="challengeSection">
-    <div class="journey-head">
-      <h2 data-i18n="challengeTitle">🏁 Final Challenge</h2>
-      <p class="muted" data-i18n="challengeSub">You made it to the end! Now prove it: tap two cards to swap them until the inventions are in the correct order — oldest first.</p>
+    <div class="challenge-head">
+      <span class="mono" data-i18n="challengeTitle">🏁 Final Challenge</span>
+      <h2 data-i18n="challengeSub">Prove what you learned.</h2>
+      <p class="muted" style="max-width: 60ch; margin: 1rem auto 0;" data-i18n="challengeDesc">
+        Tap two cards to swap them until the inventions are in the correct order — oldest first.
+      </p>
     </div>
     <div class="challenge-status">
       <span id="swapCount" data-i18n="swapsCount">Swaps: 0</span>
@@ -84,7 +117,7 @@
     <div class="challenge-board" id="challengeBoard"></div>
     <div class="challenge-result hidden" id="challengeResult"></div>
     <div class="stage-nav">
-      <button class="btn" id="shuffleBtn" data-i18n="btnShuffle">🔄 Shuffle again</button>
+      <button class="btn btn-ghost" id="shuffleBtn" data-i18n="btnShuffle">🔄 Shuffle again</button>
     </div>
   </section>
 
@@ -92,6 +125,7 @@
 
 <div class="modal-backdrop hidden" id="guessBackdrop" role="dialog" aria-modal="true" aria-labelledby="guessTitle">
   <div class="modal" id="guessModal">
+    <span class="mono" data-i18n="guessEyebrow">Predict the next chapter</span>
     <h3 id="guessTitle" data-i18n="guessTitle">🔮 Guess what comes next…</h3>
     <p class="muted" id="guessPrompt"></p>
     <div class="guess-options" id="guessOptions"></div>
@@ -100,7 +134,7 @@
 </div>
 
 <footer class="footer">
-  <p data-i18n="footerText">Made for curious minds · Intro to Computer Science</p>
+  <span class="mono" data-i18n="footerText">Made for curious minds · Intro to Computer Science</span>
 </footer>
 
 <script src="data-en.js"></script>
