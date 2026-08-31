@@ -1,8 +1,10 @@
 /* ============================================================
-   Quizzes landing — count + render quiz cards per lecture
+   Quizzes landing — per lecture: exam card + gated practice card
    ============================================================ */
 
 const loadedLectureData = {};
+const EXAM_STORE_KEY = (id) => `origin-exam-${id}`;
+const UNLOCK_STORE_KEY = (id) => `origin-unlock-${id}`;
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {
@@ -18,20 +20,21 @@ async function ensureLectureLoaded(lectureId) {
   if (loadedLectureData[lectureId]) return loadedLectureData[lectureId];
   const map = LECTURE_DATA_MAP[lectureId];
   if (!map) return null;
-
-  // Top-level const/let from classic scripts is accessible via globalThis,
-  // NOT via window. (This is the difference from var.)
   const g = globalThis;
   if (typeof g[map.stagesAr] === 'undefined') await loadScript(map.scriptAr);
   if (typeof g[map.stagesEn] === 'undefined') await loadScript(map.scriptEn);
   if (map.bankAr && typeof g[map.bankArVar] === 'undefined') await loadScript(map.bankAr);
   if (map.bankEn && typeof g[map.bankEnVar] === 'undefined') await loadScript(map.bankEn);
+  if (map.examAr && typeof g[map.examArVar] === 'undefined') await loadScript(map.examAr);
+  if (map.examEn && typeof g[map.examEnVar] === 'undefined') await loadScript(map.examEn);
 
   loadedLectureData[lectureId] = {
     stagesAr: g[map.stagesAr] || [],
     stagesEn: g[map.stagesEn] || [],
     bankAr: g[map.bankArVar] || [],
-    bankEn: g[map.bankEnVar] || []
+    bankEn: g[map.bankEnVar] || [],
+    examAr: g[map.examArVar] || [],
+    examEn: g[map.examEnVar] || []
   };
   return loadedLectureData[lectureId];
 }
@@ -42,6 +45,23 @@ function countByDifficulty(bank) {
     if (out[q.difficulty] !== undefined) out[q.difficulty]++;
   });
   return out;
+}
+
+function getBestExamScore(id) {
+  try {
+    const v = parseInt(localStorage.getItem(EXAM_STORE_KEY(id)) || '0', 10);
+    return isNaN(v) ? 0 : v;
+  } catch (e) { return 0; }
+}
+
+function isUnlocked(id) {
+  try { return localStorage.getItem(UNLOCK_STORE_KEY(id)) === '1'; } catch (e) { return false; }
+}
+
+function tOrEn(key) {
+  return (translations[currentLang] && translations[currentLang][key])
+    || (translations.en && translations.en[key])
+    || key;
 }
 
 async function renderQuizCards() {
@@ -70,36 +90,89 @@ async function renderQuizCards() {
     const desc = journey.description[currentLang] || journey.description.en;
     const tag = journey.tag[currentLang] || journey.tag.en;
 
+    const map = LECTURE_DATA_MAP[journey.id];
+    const threshold = map && map.passThreshold;
+
     let quizCount = '—';
     let stageCount = '—';
+    let examCount = '—';
     let byDiff = { easy: 0, medium: 0, hard: 0, creative: 0 };
     try {
       const data = await ensureLectureLoaded(journey.id);
       if (data) {
         const stages = isAr ? data.stagesAr : data.stagesEn;
         const bank = isAr ? data.bankAr : data.bankEn;
+        const exam = isAr ? data.examAr : data.examEn;
         byDiff = countByDifficulty(bank);
         quizCount = String(bank.length).padStart(2, '0');
         stageCount = String(stages.length).padStart(2, '0');
+        examCount = String(exam.length).padStart(2, '0');
       }
     } catch (e) {
       console.warn('Could not load lecture data', journey.id, e);
     }
 
-    const card = document.createElement('a');
-    card.href = journey.quizUrl || `quiz.html?lecture=${encodeURIComponent(journey.id)}`;
-    card.className = 'quiz-card';
-    card.setAttribute('aria-label', title);
+    const passed = isUnlocked(journey.id);
+    const bestScore = getBestExamScore(journey.id);
 
-    card.innerHTML = `
+    // ---- Exam card (always available) ----
+    const examHref = journey.examUrl || `quiz.html?lecture=${encodeURIComponent(journey.id)}&mode=exam`;
+    const examCard = document.createElement('a');
+    examCard.href = examHref;
+    examCard.className = 'quiz-card';
+    examCard.setAttribute('aria-label', title + ' · exam');
+
+    const examStatus = passed
+      ? `<span class="quiz-card-status status-passed">✓ ${tOrEn('examPassed')} · ${bestScore}/${examCount}</span>`
+      : `<span class="quiz-card-status status-locked">🔒 ${tOrEn('examLocked')}</span>`;
+
+    examCard.innerHTML = `
       <span class="journey-index">${num}</span>
       <div class="journey-body">
         <div class="journey-tag-row">
           <span class="chip chip-solid">${tag}</span>
-          <span class="chip">${journey.icon} ${isAr ? 'أسئلة' : 'Quizzes'}</span>
+          <span class="chip">📝 ${isAr ? 'امتحان شامل' : 'Final exam'}</span>
         </div>
-        <h3 class="journey-title">${title}</h3>
-        <p class="journey-desc">${desc}</p>
+        <h3 class="journey-title">${title} · ${isAr ? 'الامتحان الشامل' : 'Final Exam'}</h3>
+        <p class="journey-desc">${isAr
+          ? `١٥ سؤال مختلط المستوى بغطي كل الفصول. لازم تجيب ${threshold} من ${examCount} عشان يفتحلك بنك الأسئلة الكامل.`
+          : `15 mixed-difficulty questions covering every chapter. Pass with ${threshold} / ${examCount} to unlock the full practice bank.`}</p>
+        ${examStatus}
+        <div class="journey-meta">
+          <span>❓ ${examCount} ${isAr ? 'سؤال' : 'questions'}</span>
+          <span>· ⏱ ${tOrEn('examTimeEst')}</span>
+          <span>· 🎯 ${threshold} / ${examCount} ${isAr ? 'للنجاح' : 'to pass'}</span>
+        </div>
+      </div>
+      <span class="journey-arrow">→</span>
+    `;
+    grid.appendChild(examCard);
+
+    // ---- Practice card (gated) ----
+    const practiceHref = `quiz.html?lecture=${encodeURIComponent(journey.id)}`;
+    const practiceCard = document.createElement(passed ? 'a' : 'div');
+    practiceCard.className = 'quiz-card quiz-card-practice' + (passed ? '' : ' locked');
+    practiceCard.setAttribute('aria-label', title + ' · practice');
+    if (passed) practiceCard.href = practiceHref;
+
+    const lockOverlay = passed ? '' : `
+      <div class="quiz-card-lock">
+        <span class="lock-icon">🔒</span>
+        <span class="lock-text">${isAr ? 'افتح الامتحان الأول' : 'Pass the exam to unlock'}</span>
+      </div>
+    `;
+
+    practiceCard.innerHTML = `
+      <span class="journey-index">${isAr ? 'م' : 'P'}</span>
+      <div class="journey-body">
+        <div class="journey-tag-row">
+          <span class="chip chip-solid">${tag}</span>
+          <span class="chip">🎯 ${isAr ? 'بنك الأسئلة' : 'Practice bank'}</span>
+        </div>
+        <h3 class="journey-title">${title} · ${isAr ? 'بنك الأسئلة' : 'Practice Bank'}</h3>
+        <p class="journey-desc">${isAr
+          ? '٥٢ سؤال موزعين على كل فصل وبكل المستويات (سهل/ متوسط/ صعب/ إبداعي). اختار فصل أو اعمل الكل مخلوط.'
+          : '52 questions across all chapters and all difficulties (Easy / Medium / Hard / Creative). Pick a chapter or do them all shuffled.'}</p>
         <div class="journey-meta">
           <span>❓ ${quizCount} ${isAr ? 'سؤال' : 'questions'}</span>
           <span>· 🗺 ${stageCount} ${isAr ? 'محطة' : 'stages'}</span>
@@ -111,10 +184,10 @@ async function renderQuizCards() {
           <span class="diff-mini diff-mini-creative">${diffLabels.creative}: ${String(byDiff.creative).padStart(2, '0')}</span>
         </div>
       </div>
-      <span class="journey-arrow">→</span>
+      ${passed ? '<span class="journey-arrow">→</span>' : ''}
+      ${lockOverlay}
     `;
-
-    grid.appendChild(card);
+    grid.appendChild(practiceCard);
   }
 }
 

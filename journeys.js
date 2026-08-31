@@ -11,6 +11,7 @@ const journeys = [
     },
     url: 'lecture1.html',
     quizUrl: 'quiz.html?lecture=info-and-ethics',
+    examUrl: 'quiz.html?lecture=info-and-ethics&mode=exam',
     hasQuizzes: true,
     status: 'active',
     icon: '🛡️',
@@ -58,6 +59,11 @@ const LECTURE_DATA_MAP = {
     bankAr: 'quizbank-lect1-ar.js',
     bankEn: 'quizbank-lect1-en.js',
     bankArVar: 'LECT1_QUIZBANK_AR',
-    bankEnVar: 'LECT1_QUIZBANK_EN'
+    bankEnVar: 'LECT1_QUIZBANK_EN',
+    examAr: 'exam-lect1-ar.js',
+    examEn: 'exam-lect1-en.js',
+    examArVar: 'LECT1_EXAM_AR',
+    examEnVar: 'LECT1_EXAM_EN',
+    passThreshold: 7
   }
 };

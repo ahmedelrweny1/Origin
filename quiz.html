@@ -32,7 +32,7 @@
 
   <main class="quiz-main">
 
-    <!-- Picker view -->
+    <!-- Picker view (practice mode) -->
     <section class="quiz-picker" id="quizPicker">
       <div class="picker-head">
         <span class="mono" data-i18n="qzPickerEyebrow">Choose your scope</span>
@@ -40,7 +40,6 @@
         <p class="muted" data-i18n="qzPickerSub">Pick a difficulty, then a chapter — or do them all.</p>
       </div>
 
-      <!-- Difficulty filter -->
       <div class="difficulty-row">
         <span class="mono" data-i18n="qzDifficulty">Difficulty</span>
         <div class="difficulty-chips" id="diffChips">
@@ -69,7 +68,7 @@
       </div>
     </section>
 
-    <!-- Runner view -->
+    <!-- Runner view (shared by practice + exam) -->
     <section class="quiz-runner hidden" id="quizRunner">
       <div class="quiz-card-stage" id="quizStage">
         <div class="quiz-card-eyebrow">
@@ -93,10 +92,10 @@
       </div>
     </section>
 
-    <!-- Result view -->
+    <!-- Result view (shared) -->
     <section class="quiz-result hidden" id="quizResult">
       <div class="result-head">
-        <span class="mono" data-i18n="qzResultEyebrow">Completed</span>
+        <span class="mono" id="resultEyebrow" data-i18n="qzResultEyebrow">Completed</span>
         <h1 id="resultTitle" data-i18n="qzResultTitle">Results</h1>
         <p class="muted" id="resultSubtitle">—</p>
       </div>

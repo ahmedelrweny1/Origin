@@ -473,6 +473,108 @@ html[dir="rtl"] .quiz-card-feedback {
 .hidden { display: none !important; }
 .muted { color: var(--ink-soft); }
 
+.quiz-card-title.exam-title-hidden { display: none; }
+
+/* ============================================================
+   EXAM MODE — gate banner, rules, overview stats
+   ============================================================ */
+.exam-banner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.4rem;
+  border: var(--rule-thick) solid var(--ink);
+  background: var(--paper-deep);
+  margin-bottom: 0.5rem;
+}
+
+.exam-banner .mono { color: var(--c-red); }
+.exam-banner strong { font-family: var(--font-display); font-size: clamp(1rem, 1.5vw, 1.2rem); }
+
+.exam-banner-pass {
+  background: rgba(26, 107, 58, 0.1);
+  border-color: var(--c-green);
+}
+.exam-banner-pass .mono { color: var(--c-green); }
+
+.exam-banner-locked {
+  background: rgba(200, 48, 42, 0.08);
+  border-color: var(--c-red);
+}
+
+.exam-overview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: var(--rule-medium) solid var(--ink);
+  margin: 1.5rem 0;
+}
+
+.exam-stat {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.2rem 1rem;
+  border-right: var(--rule-medium) solid var(--ink);
+}
+.exam-stat:last-child { border-right: none; }
+.exam-stat .mono { color: var(--c-red); }
+.exam-stat strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  letter-spacing: -0.03em;
+}
+
+.exam-rules {
+  padding: 1.4rem 1.6rem;
+  border: var(--rule-medium) solid var(--ink);
+  border-left: var(--rule-thick) solid var(--c-amber);
+  margin-bottom: 1.5rem;
+}
+.exam-rules .mono { color: var(--c-amber); margin-bottom: 0.6rem; display: block; }
+.exam-rules ul {
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+  padding: 0;
+}
+.exam-rules li {
+  font-family: var(--font-body);
+  font-style: italic;
+  padding-left: 1.2rem;
+  position: relative;
+}
+.exam-rules li::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  font-weight: 800;
+  color: var(--c-amber);
+}
+html[dir="rtl"] .exam-rules li { padding-left: 0; padding-right: 1.2rem; }
+html[dir="rtl"] .exam-rules li::before { left: auto; right: 0; }
+
+.exam-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 700px) {
+  .exam-overview { grid-template-columns: 1fr; }
+  .exam-stat { border-right: none; border-bottom: var(--rule-medium) solid var(--ink); }
+  .exam-stat:last-child { border-bottom: none; }
+}
+
+/* ============================================================
+   RESULT — exam pass/fail visual treatment
+   ============================================================ */
+.quiz-result.result-pass .result-head .mono { color: var(--c-green); }
+.quiz-result.result-fail .result-head .mono { color: var(--c-red); }
+.quiz-result.result-pass .result-score { color: var(--c-green); }
+.quiz-result.result-fail .result-score { color: var(--c-red); }
+
 /* ============================================================
    Difficulty filter (chips)
    ============================================================ */
@@ -718,6 +820,86 @@ html[dir="rtl"] .quiz-card:hover {
   font-style: italic;
   max-width: 48ch;
   margin: 0 auto;
+}
+
+/* Status badges on landing cards */
+.quiz-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border: var(--rule-medium) solid currentColor;
+  border-radius: 0;
+  margin: 0.4rem 0 0.4rem;
+  line-height: 1;
+}
+
+.quiz-card-status.status-passed {
+  color: var(--c-green);
+  background: rgba(26, 107, 58, 0.08);
+}
+
+.quiz-card-status.status-locked {
+  color: var(--c-red);
+  background: rgba(200, 48, 42, 0.06);
+}
+
+/* Locked practice card */
+.quiz-card-practice {
+  position: relative;
+  min-height: 220px;
+}
+
+.quiz-card-practice.locked {
+  opacity: 0.85;
+  cursor: not-allowed;
+  pointer-events: auto;
+}
+
+.quiz-card-practice.locked:hover {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.quiz-card-practice.locked::before {
+  display: none;
+}
+
+.quiz-card-practice .quiz-card-lock {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--paper);
+  border: var(--rule-thick) solid var(--c-red);
+  margin: 0;
+  pointer-events: none;
+}
+
+.quiz-card-practice .quiz-card-lock .lock-icon {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.4));
+}
+
+.quiz-card-practice .quiz-card-lock .lock-text {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+[data-theme="light"] .quiz-card-practice .quiz-card-lock {
+  background: rgba(20, 17, 15, 0.6);
 }
 
 /* Difficulty breakdown strip on the landing card */

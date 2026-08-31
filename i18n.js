@@ -121,7 +121,35 @@ const translations = {
     diff_easy: "Easy",
     diff_medium: "Medium",
     diff_hard: "Hard",
-    diff_creative: "Creative"
+    diff_creative: "Creative",
+
+    // Comprehensive exam
+    examEyebrow: "Final Comprehensive Exam",
+    examTitle: "Prove you understand the lecture.",
+    examSubtitle: "15 questions covering every chapter. Pass with at least 7 to unlock the full practice bank.",
+    examPassed: "Exam passed",
+    examBestScore: "Best score",
+    examLocked: "Exam not yet passed",
+    examPassReq: "Pass mark",
+    examCount: "Questions",
+    examPassMark: "Pass mark",
+    examTime: "Time",
+    examTimeEst: "~15 min",
+    examRulesHeading: "Rules",
+    examRule1: "Each question is worth 1 point. No penalty for wrong answers.",
+    examRule2: "Skipping counts as a wrong answer (0 points).",
+    examRule3: "You need at least 7 / 15 correct to unlock the practice bank.",
+    examStart: "Start exam",
+    examBackList: "Back to quiz list",
+    examQuestion: "Question",
+    examScoreLabel: "Score",
+    examScopeLabel: "Comprehensive exam",
+    examPassedTitle: "🎓 You passed!",
+    examFailedTitle: "Almost there.",
+    examPassedMsg: "The full practice bank is now unlocked for you.",
+    examFailedMsg: "Review the explanations and try again.",
+    examGoPractice: "Open practice bank →",
+    examRetry: "Try the exam again"
   },
   ar: {
     mastheadEdition: "العدد ٠١ · المجلد الأول",
@@ -245,7 +273,35 @@ const translations = {
     diff_easy: "سهل",
     diff_medium: "متوسط",
     diff_hard: "صعب",
-    diff_creative: "إبداعي"
+    diff_creative: "إبداعي",
+
+    // Comprehensive exam
+    examEyebrow: "الامتحان الشامل النهائي",
+    examTitle: "اثبت إنك فاهم المحاضرة.",
+    examSubtitle: "١٥ سؤال بغطي كل الفصول. لازم تجيب ٧ على الأقل عشان يفتحلك بنك الأسئلة الكامل.",
+    examPassed: "الامتحان ناجح",
+    examBestScore: "أعلى درجة",
+    examLocked: "الامتحان لسه ما اتنجحش",
+    examPassReq: "درجة النجاح",
+    examCount: "الأسئلة",
+    examPassMark: "درجة النجاح",
+    examTime: "الوقت",
+    examTimeEst: "~١٥ دقيقة",
+    examRulesHeading: "القواعد",
+    examRule1: "كل سؤال بدرجة واحدة. مفيش عقوبة على الإجابة الغلط.",
+    examRule2: "التجاوز بيبقى صفر.",
+    examRule3: "محتاج على الأقل ٧ من ١٥ صح عشان بنك الأسئلة يفتحلك.",
+    examStart: "ابدأ الامتحان",
+    examBackList: "رجوع لقائمة الأسئلة",
+    examQuestion: "سؤال",
+    examScoreLabel: "الدرجة",
+    examScopeLabel: "الامتحان الشامل",
+    examPassedTitle: "🎓 نجحت!",
+    examFailedTitle: "قريب جداً.",
+    examPassedMsg: "بنك الأسئلة الكامل اتفتحلك دلوقتي.",
+    examFailedMsg: "راجع التوضيحات وجرب تاني.",
+    examGoPractice: "افتح بنك الأسئلة ←",
+    examRetry: "حاول تاني"
   }
 };
 
