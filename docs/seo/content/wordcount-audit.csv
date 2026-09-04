@@ -1,0 +1,12 @@
+﻿file,words,required,status
+money-suez.md,1000,1000,PASS full
+areas/full-faisal-real.md,575,500,PASS full real
+areas/full-exemplar-arbain-500w.md,532,500,PASS exemplar
+money-sokhna.md,452,1000,STANDARD real TODO-expand
+money-galala.md,322,1000,STANDARD real TODO-expand
+areas/full-batchA(3 areas),846,1500,STANDARD ~280/area real unique TODO-expand
+areas/full-batchB(3 areas),393,1500,STANDARD ~130/area real unique TODO-expand
+areas/full-batchC(3 areas),377,1500,STANDARD ~125/area real unique TODO-expand
+areas/full-batchD(3 areas),371,1500,STANDARD ~125/area real unique TODO-expand
+areas/full-batchE(3 areas),365,1500,STANDARD ~120/area real unique TODO-expand
+guides/full-exemplar-highway-800w.md,806,800,PASS exemplar

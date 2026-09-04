@@ -25,6 +25,31 @@ const journeys = [
     }
   },
   {
+    id: 'privacy-and-ip',
+    title: {
+      en: 'Personal Data & Intellectual Property',
+      ar: 'البيانات الشخصية والملكية الفكرية'
+    },
+    description: {
+      en: 'Master personal data protection, privacy rights, patents vs copyrights, quotation rules, and Creative Commons.',
+      ar: 'احترف حماية البيانات والخصوصية، براءات الاختراع مقابل حقوق المؤلف، ضوابط الاقتباس القانوني، ورخص المشاع الإبداعي.'
+    },
+    url: 'lecture2.html',
+    quizUrl: 'quiz.html?lecture=privacy-and-ip',
+    examUrl: 'quiz.html?lecture=privacy-and-ip&mode=exam',
+    hasQuizzes: true,
+    status: 'active',
+    icon: '⚖️',
+    duration: {
+      en: '~25 min',
+      ar: '~٢٥ دقيقة'
+    },
+    tag: {
+      en: 'Unit 1 · 1st Secondary',
+      ar: 'الوحدة الأولى · أولى ثانوي'
+    }
+  },
+  {
     id: 'abacus-to-ai',
     title: {
       en: 'From Abacus to AI',
@@ -64,6 +89,22 @@ const LECTURE_DATA_MAP = {
     examEn: 'exam-lect1-en.js',
     examArVar: 'LECT1_EXAM_AR',
     examEnVar: 'LECT1_EXAM_EN',
+    passThreshold: 7
+  },
+  'privacy-and-ip': {
+    stagesVar: 'LECT2_STAGES',
+    stagesAr: 'LECT2_STAGES_AR',
+    stagesEn: 'LECT2_STAGES_EN',
+    scriptAr: 'data-lect2-ar.js',
+    scriptEn: 'data-lect2-en.js',
+    bankAr: 'quizbank-lect2-ar.js',
+    bankEn: 'quizbank-lect2-en.js',
+    bankArVar: 'LECT2_QUIZBANK_AR',
+    bankEnVar: 'LECT2_QUIZBANK_EN',
+    examAr: 'exam-lect2-ar.js',
+    examEn: 'exam-lect2-en.js',
+    examArVar: 'LECT2_EXAM_AR',
+    examEnVar: 'LECT2_EXAM_EN',
     passThreshold: 7
   }
 };

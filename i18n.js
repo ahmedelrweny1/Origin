@@ -13,7 +13,7 @@ const translations = {
     dossier4: "Save your progress",
     tocLabel: "Table of Contents",
     tocTitle: "The Journeys",
-    tocCount: "02 entries",
+    tocCount: "03 entries",
     footerLeft: "Origin Atlas",
     footerCenter: "Made for curious minds",
     footerRight: "Intro to Computer Science",
@@ -75,6 +75,20 @@ const translations = {
     finalChallengeTitle: "Unit 1 Concept Matching Challenge",
     finalChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Information Studies and Ethics.",
     btnResetMatch: "🔄 Reset and Try Again",
+
+    // Lecture 2 (Unit 1: Personal Data & Intellectual Property)
+    lect2Edition: "Unit 01 · 1st Secondary · Part 2",
+    lect2Brand: "Personal Data & Intellectual Property",
+    lect2HeroBadge: "⚖️ Unit 1 · 1st Secondary · Chapter 2",
+    lect2HeroTitle: "Personal Information <br><span class=\"text-gradient\">+ Intellectual Property</span>",
+    lect2HeroDesc: "An editorial journey through data privacy, industrial property patents vs copyrights, rules of lawful quotation, and Creative Commons.",
+    lect2StartBtn: "Start Interactive Journey",
+    lect2UnitName: "Personal Data & IP",
+    lect2Level: "1st Secondary",
+    lect2Stops: "7 chapters",
+    lect2Final: "Match challenge",
+    lect2ChallengeTitle: "Unit 1 Part 2 Concept Matching Challenge",
+    lect2ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Personal Data and Intellectual Property.",
 
     // Quizzes landing
     qzEdition: "Section 02 · Exam Hall",
@@ -165,7 +179,7 @@ const translations = {
     dossier4: "تقدر تحفظ تقدمك",
     tocLabel: "فهرس الرحلات",
     tocTitle: "الرحلات",
-    tocCount: "٢ رحلات",
+    tocCount: "٣ رحلات",
     footerLeft: "أطلس الأصل",
     footerCenter: "للعقول اللي بتسأل",
     footerRight: "مقدمة في علوم الكمبيوتر",
@@ -227,6 +241,20 @@ const translations = {
     finalChallengeTitle: "تحدي مطابقة مفاهيم الوحدة الأولى",
     finalChallengeDesc: "وصلت للمحطة الأخيرة! وصّل كل كلمة بالتعريف الصح عشان تثبت إنك فاهم.",
     btnResetMatch: "🔄 رتّب وجرب تاني",
+
+    // Lecture 2 (Unit 1: Personal Data & Intellectual Property)
+    lect2Edition: "الوحدة ١ · أولى ثانوي · الجزء الثاني",
+    lect2Brand: "البيانات الشخصية والملكية الفكرية",
+    lect2HeroBadge: "⚖️ أولى ثانوي · الوحدة الأولى · الفصل الثاني",
+    lect2HeroTitle: "البيانات الشخصية <br><span class=\"text-gradient\">+ الملكية الفكرية ونشر المعلومات</span>",
+    lect2HeroDesc: "رحلة بصرية تفاعلية تحترف فيها حماية الهوية والخصوصية، وتستكشف أسرار الملكية الصناعية وبراءات الاختراع، وحقوق المؤلف والحقوق المجاورة، وضوابط الاقتباس ورخص المشاع الإبداعي.",
+    lect2StartBtn: "يلا نبدأ الاستكشاف",
+    lect2UnitName: "البيانات والملكية الفكرية",
+    lect2Level: "أولى ثانوي",
+    lect2Stops: "٧ محطات",
+    lect2Final: "تحدي المطابقة",
+    lect2ChallengeTitle: "تحدي مطابقة مفاهيم البيانات والملكية الفكرية",
+    lect2ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات الرسمية لتثبيت فهمك لقواعد حماية البيانات وحقوق الملكية الصناعية والمؤلف.",
 
     // Quizzes landing
     qzEdition: "القسم ٢ · قاعة الاختبارات",

@@ -1,0 +1,458 @@
+/* ============================================================
+   LECTURE 2 — Editorial Journal CSS
+   Personal Data, Intellectual Property & Information Utilization
+   ============================================================ */
+
+/* Reuses base typography and layouts from atlas.css and lecture1.css */
+
+/* Generic Widget Container */
+.interactive-widget {
+  background: var(--paper-deep);
+  border: var(--rule-thick) solid var(--ink);
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  margin: 1.8rem 0;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.widget-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 0.8rem;
+  border-bottom: var(--rule-medium) solid var(--rule);
+  padding-bottom: 0.6rem;
+}
+
+.widget-subtitle {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------
+   Widget 1: Personal Data Classifier / Vault
+   ------------------------------------------------------------ */
+.vault-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.vault-bucket {
+  background: var(--paper);
+  border: var(--rule-medium) dashed var(--ink);
+  padding: 1rem;
+  min-height: 130px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.vault-bucket.active-zone {
+  border-style: solid;
+  border-color: var(--c-blue);
+  box-shadow: 4px 4px 0 var(--c-blue);
+}
+
+.vault-bucket h5 {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-blue);
+  margin-bottom: 0.6rem;
+}
+
+.vault-items-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.vault-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.vault-chip:hover {
+  background: var(--ink);
+  color: var(--paper);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.vault-chip.assigned {
+  background: var(--c-green);
+  color: var(--paper);
+  border-color: var(--c-green);
+  box-shadow: none;
+  cursor: default;
+}
+
+.vault-chip.wrong-placement {
+  background: var(--c-red);
+  color: var(--paper);
+  border-color: var(--c-red);
+  animation: shake 0.3s ease;
+}
+
+/* ------------------------------------------------------------
+   Widget 2: Privacy Rights Legal Case Simulator
+   ------------------------------------------------------------ */
+.case-selector-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.case-tab-btn {
+  padding: 0.5rem 0.9rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.case-tab-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 3px 3px 0 var(--c-amber);
+}
+
+.case-scenario-card {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  border-inline-start: var(--rule-thick) solid var(--c-blue);
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.case-scenario-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.case-decision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.6rem;
+}
+
+.case-verdict-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: none;
+}
+
+.case-verdict-box.show { display: block; }
+.case-verdict-box.good { border-color: var(--c-green); background: rgba(40, 167, 69, 0.08); }
+.case-verdict-box.bad { border-color: var(--c-red); background: rgba(220, 53, 69, 0.08); }
+
+/* ------------------------------------------------------------
+   Widget 3: Corporate Opt-in vs Opt-out Consent Engine
+   ------------------------------------------------------------ */
+.consent-engine-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+@media (max-width: 700px) {
+  .consent-engine-display { grid-template-columns: 1fr; }
+}
+
+.consent-mode-panel {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.2rem;
+  position: relative;
+}
+
+.consent-mode-panel.active-mode {
+  border-color: var(--c-blue);
+  box-shadow: 4px 4px 0 var(--c-blue);
+}
+
+.consent-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.toggle-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.live-flow-tracer {
+  background: var(--paper-deep);
+  border: var(--rule-hair) solid var(--rule);
+  padding: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------
+   Widget 4: Industrial Property Matrix & Filing Desk
+   ------------------------------------------------------------ */
+.ip-matrix-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+.ip-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+.ip-matrix-table th,
+.ip-matrix-table td {
+  border: var(--rule-hair) solid var(--rule);
+  padding: 0.75rem 1rem;
+  text-align: start;
+}
+
+.ip-matrix-table th {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ip-interactive-tester {
+  margin-top: 1.2rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.2rem;
+}
+
+.ip-item-card {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.ip-choice-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.5rem;
+}
+
+/* ------------------------------------------------------------
+   Widget 5: Copyright Lifespan & Public Domain Calculator
+   ------------------------------------------------------------ */
+.lifespan-calc-box {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.4rem;
+}
+
+.lifespan-slider-group {
+  margin: 1.2rem 0;
+}
+
+.lifespan-slider-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.lifespan-range-input {
+  width: 100%;
+  accent-color: var(--c-red);
+  cursor: pointer;
+}
+
+.lifespan-timeline-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  border: var(--rule-medium) solid var(--ink);
+  margin: 1rem 0;
+}
+
+.timeline-zone {
+  padding: 0.8rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.zone-life { background: #e3f2fd; color: #0d47a1; }
+.zone-post { background: #fff3e0; color: #e65100; }
+.zone-public { background: #e8f5e9; color: #1b5e20; }
+
+.lifespan-status-card {
+  padding: 1rem;
+  background: var(--paper-deep);
+  border: var(--rule-hair) solid var(--rule);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* ------------------------------------------------------------
+   Widget 6: Legal Quotation & Fair Use Validator
+   ------------------------------------------------------------ */
+.quote-checklist-grid {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.quote-rule-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.quote-rule-item.checked {
+  background: rgba(40, 167, 69, 0.1);
+  border-color: var(--c-green);
+}
+
+.quote-checkbox {
+  width: 20px;
+  height: 20px;
+  border: var(--rule-medium) solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.9rem;
+}
+
+.quote-rule-item.checked .quote-checkbox {
+  background: var(--c-green);
+  color: var(--paper);
+  border-color: var(--c-green);
+}
+
+.quote-sample-container {
+  background: var(--paper);
+  border: var(--rule-hair) solid var(--rule);
+  padding: 1rem;
+  margin-top: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+}
+
+/* ------------------------------------------------------------
+   Widget 7: Creative Commons License Builder & Badge Matrix
+   ------------------------------------------------------------ */
+.cc-builder-container {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.4rem;
+}
+
+.cc-badge-toggle-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.cc-toggle-card {
+  border: var(--rule-medium) solid var(--ink);
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  background: var(--paper-deep);
+  transition: all 0.15s ease;
+}
+
+.cc-toggle-card.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--c-amber);
+}
+
+.cc-icon-large {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.cc-result-preview {
+  margin-top: 1.4rem;
+  padding: 1.2rem;
+  background: var(--paper-deep);
+  border: var(--rule-medium) dashed var(--ink);
+  text-align: center;
+}
+
+.cc-result-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.cc-result-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.cc-result-summary {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+/* Keyframe animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}

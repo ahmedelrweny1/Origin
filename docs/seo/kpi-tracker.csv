@@ -1,0 +1,17 @@
+metric,baseline_2026_09_03,target_3mo,target_6mo,target_12mo,source,notes
+indexed_pages,817,<60,<40,<40,GSC Index Coverage,sitemap <60 after prune
+seo_health,58,75+,85+,90+,audit calc,weighted 7 cats
+rank_ونش_انقاذ_السويس,dropped UNKNOWN,top 20,top 10,top 3 + pack,GSC Performance + manual incognito,core money term
+rank_ونش_انقاذ_العين_السخنة,UNKNOWN,top 20,top 10,top 3,GSC,money page 2
+rank_ونش_انقاذ_طريق_الجلالة,UNKNOWN,top 20,top 10,top 3,GSC,money page 3
+rank_رقم_ونش_السويس,UNKNOWN,top 20,top 10,top 3,GSC,call intent
+local_pack_present,UNKNOWN_absent,appear,top 3,top 3 stable,Maps + GBP insights,needs GBP
+organic_calls_month,UNKNOWN_setup_tracking,+30%,+80%,+150%,GA4 tel: + WhatsApp events,primary KPI
+whatsapp_clicks_month,UNKNOWN,track,track,track,GA4 wa.me events,location share
+gbp_reviews_count,0 verified (claim 1250+),15+ 4.8+,40+ 4.8+,100+ 4.8+,GBP dashboard,1 per <18 days real only
+citations_live,0 verified,15,25,35,citations.csv,same Arabic NAP
+LCP_mobile,UNKNOWN lab+field,<=2.5s,<=2.5s,<=2.5s,PageSpeed + CrUX,React bundle split
+INP_mobile,UNKNOWN,<=200ms,<=200ms,<=200ms,PageSpeed + CrUX,never FID
+CLS,UNKNOWN,<=0.1,<=0.1,<=0.1,PageSpeed,sticky bar test
+AI_citation_chatgpt,UNKNOWN,listed,top 3,top 1-2,manual ChatGPT/Perplexity,quotable price/time
+sitemap_urls,817,<60,<40,<40,sitemap.xml,real lastmod
