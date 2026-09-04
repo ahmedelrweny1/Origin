@@ -738,35 +738,47 @@ function renderStage(index) {
 
   stagePanel.innerHTML = `
     <div class="stage-header">
-      <span class="stage-category">${stage.category}</span>
-      <h2 class="stage-title">${stage.title}</h2>
+      <div class="stage-eyebrow">
+        <span class="stage-category">${stage.category}</span>
+        <span class="stage-num">${isAr ? 'محطة ' + String(index + 1).padStart(2,'0') + ' من ' + String(LECT2_STAGES.length).padStart(2,'0') : 'Stage ' + String(index + 1).padStart(2,'0') + ' / ' + String(LECT2_STAGES.length).padStart(2,'0')}</span>
+      </div>
+      <h2 class="stage-title"><span>${stage.glyph}</span> <span>${stage.title}</span></h2>
       <p class="stage-tagline">${stage.tagline}</p>
     </div>
 
-    <figure class="stage-visual">
-      <img src="${stage.image}" alt="${stage.title}" class="stage-image">
-      <figcaption class="stage-caption">${stage.visualCaption}</figcaption>
-    </figure>
-
-    <div class="stage-story">
-      ${stage.story.map(p => `<p>${p}</p>`).join("")}
-    </div>
-
-    ${widgetHtml}
-
-    <div class="fact-grid">
-      <div class="fact-item highlight-takeaway">
-        <h4>${isAr ? "💡 الخلاصة الذهبية" : "💡 Core Takeaway"}</h4>
-        <p>${stage.takeaway}</p>
+    <div class="stage-grid">
+      <div class="stage-text">
+        ${stage.story.map(item => {
+          const t = item.trim();
+          if (t.startsWith('<div') || t.startsWith('<ul') || t.startsWith('<ol') || t.startsWith('<blockquote') || t.startsWith('<section') || t.startsWith('<p')) {
+            return t;
+          }
+          return `<p class="story-lead">${t}</p>`;
+        }).join("")}
+        ${widgetHtml}
       </div>
-      <div class="fact-item fun-fact">
-        <h4>${isAr ? "🎉 معلومة إثرائية" : "🎉 Fun Fact"}</h4>
-        <p>${stage.funFact}</p>
+
+      <div class="stage-visual-container">
+        <div class="stage-visual-box">
+          <img src="${stage.image}" alt="${stage.title}" class="stage-img">
+          <p class="stage-caption">${stage.visualCaption}</p>
+        </div>
+
+        <div class="fact-grid">
+          <div class="fact-item highlight-takeaway">
+            <h4>💡 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>
+            <p>${stage.takeaway}</p>
+          </div>
+          <div class="fact-item fun-fact">
+            <h4>🎉 ${isAr ? "معلومة إثرائية" : "Fun Fact"}</h4>
+            <p>${stage.funFact}</p>
+          </div>
+        </div>
       </div>
     </div>
 
     <div class="stage-quiz" id="stageQuizBox">
-      <h3 class="quiz-question">${stage.quiz.question}</h3>
+      <h3 class="quiz-question"><span>🧠</span> ${isAr ? "سؤال التحدي السريع:" : "Quick Challenge Check:"} ${stage.quiz.question}</h3>
       <div class="quiz-options-list">
         ${stage.quiz.options.map((opt, optIdx) => `
           <button class="quiz-btn" data-opt="${optIdx}">${opt}</button>

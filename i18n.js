@@ -60,10 +60,10 @@ const translations = {
     hintDefault: "Tip: tap a card, then tap where you think it belongs.",
     btnShuffle: "🔄 Shuffle again",
 
-    // Lecture 1 (Unit 1: Information & Ethics)
-    lect1Edition: "Unit 01 · 1st Secondary",
+    // Lecture 1 (Chapter 1: Information & Ethics)
+    lect1Edition: "Chapter 01 · 1st Secondary",
     lect1Brand: "Information & Cyber Ethics",
-    lect1HeroBadge: "📚 Unit 1 · 1st Secondary",
+    lect1HeroBadge: "📚 Chapter 1 · 1st Secondary",
     lect1HeroTitle: "Information & Media <br><span class=\"text-gradient\">+ Cyber Ethics</span>",
     lect1HeroDesc: "An interactive visual journey through Data, Information & Knowledge, superpowers of digital media, and ethical rules of cyber conduct.",
     lect1StartBtn: "Start Interactive Journey",
@@ -72,14 +72,14 @@ const translations = {
     lect1Stops: "7 chapters",
     lect1Final: "Match challenge",
     finalChallengeBadge: "🏁 Final Challenge",
-    finalChallengeTitle: "Unit 1 Concept Matching Challenge",
+    finalChallengeTitle: "Chapter 1 Concept Matching Challenge",
     finalChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Information Studies and Ethics.",
     btnResetMatch: "🔄 Reset and Try Again",
 
-    // Lecture 2 (Unit 1: Personal Data & Intellectual Property)
-    lect2Edition: "Unit 01 · 1st Secondary · Part 2",
+    // Lecture 2 (Chapter 2: Personal Data & Intellectual Property)
+    lect2Edition: "Chapter 02 · 1st Secondary",
     lect2Brand: "Personal Data & Intellectual Property",
-    lect2HeroBadge: "⚖️ Unit 1 · 1st Secondary · Chapter 2",
+    lect2HeroBadge: "⚖️ Chapter 2 · 1st Secondary",
     lect2HeroTitle: "Personal Information <br><span class=\"text-gradient\">+ Intellectual Property</span>",
     lect2HeroDesc: "An editorial journey through data privacy, industrial property patents vs copyrights, rules of lawful quotation, and Creative Commons.",
     lect2StartBtn: "Start Interactive Journey",
@@ -87,7 +87,7 @@ const translations = {
     lect2Level: "1st Secondary",
     lect2Stops: "7 chapters",
     lect2Final: "Match challenge",
-    lect2ChallengeTitle: "Unit 1 Part 2 Concept Matching Challenge",
+    lect2ChallengeTitle: "Chapter 2 Concept Matching Challenge",
     lect2ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Personal Data and Intellectual Property.",
 
     // Quizzes landing
@@ -226,10 +226,10 @@ const translations = {
     hintDefault: "تلميح: دوس على كارت، وبعدين دوس على مكانه الجديد.",
     btnShuffle: "🔄 اخلط وجرب تاني",
 
-    // Lecture 1 (Unit 1: Information & Ethics)
-    lect1Edition: "الوحدة ١ · أولى ثانوي",
+    // Lecture 1 (Chapter 1: Information & Ethics)
+    lect1Edition: "الفصل ١ · أولى ثانوي",
     lect1Brand: "المعلومات وأخلاقياتها",
-    lect1HeroBadge: "📚 أولى ثانوي · الوحدة الأولى",
+    lect1HeroBadge: "📚 الفصل الأول · أولى ثانوي",
     lect1HeroTitle: "المعلومات والوسائط <br><span class=\"text-gradient\">+ أخلاقيات النت</span>",
     lect1HeroDesc: "رحلة بصرية تفاعلية: إيه الفرق بين البيانات والمعلومات والمعرفة، خصائص المعلومات، أنواع الوسائط، وقواعد السلوك الآمن على النت.",
     lect1StartBtn: "يلا نبدأ الرحلة",
@@ -238,14 +238,14 @@ const translations = {
     lect1Stops: "٧ محطات",
     lect1Final: "تحدي المطابقة",
     finalChallengeBadge: "🏁 التحدي الأخير",
-    finalChallengeTitle: "تحدي مطابقة مفاهيم الوحدة الأولى",
+    finalChallengeTitle: "تحدي مطابقة مفاهيم الفصل الأول",
     finalChallengeDesc: "وصلت للمحطة الأخيرة! وصّل كل كلمة بالتعريف الصح عشان تثبت إنك فاهم.",
     btnResetMatch: "🔄 رتّب وجرب تاني",
 
-    // Lecture 2 (Unit 1: Personal Data & Intellectual Property)
-    lect2Edition: "الوحدة ١ · أولى ثانوي · الجزء الثاني",
+    // Lecture 2 (Chapter 2: Personal Data & Intellectual Property)
+    lect2Edition: "الفصل ٢ · أولى ثانوي",
     lect2Brand: "البيانات الشخصية والملكية الفكرية",
-    lect2HeroBadge: "⚖️ أولى ثانوي · الوحدة الأولى · الفصل الثاني",
+    lect2HeroBadge: "⚖️ الفصل الثاني · أولى ثانوي",
     lect2HeroTitle: "البيانات الشخصية <br><span class=\"text-gradient\">+ الملكية الفكرية ونشر المعلومات</span>",
     lect2HeroDesc: "رحلة بصرية تفاعلية تحترف فيها حماية الهوية والخصوصية، وتستكشف أسرار الملكية الصناعية وبراءات الاختراع، وحقوق المؤلف والحقوق المجاورة، وضوابط الاقتباس ورخص المشاع الإبداعي.",
     lect2StartBtn: "يلا نبدأ الاستكشاف",
@@ -253,7 +253,7 @@ const translations = {
     lect2Level: "أولى ثانوي",
     lect2Stops: "٧ محطات",
     lect2Final: "تحدي المطابقة",
-    lect2ChallengeTitle: "تحدي مطابقة مفاهيم البيانات والملكية الفكرية",
+    lect2ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الثاني",
     lect2ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات الرسمية لتثبيت فهمك لقواعد حماية البيانات وحقوق الملكية الصناعية والمؤلف.",
 
     // Quizzes landing

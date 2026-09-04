@@ -1,5 +1,5 @@
 /* ============================================================
-   الوحدة الأولى: المحاضرة الثانية (البيانات الشخصية والملكية الفكرية)
+   الفصل الثاني: المحاضرة الثانية (البيانات الشخصية والملكية الفكرية)
    بيانات المراحل والتحدي الختامي باللغة العربية
    ============================================================ */
 
@@ -14,10 +14,51 @@ const LECT2_STAGES_AR = [
     visualCaption: "خزينة الهوية: البيانات الأساسية الأربعة، وأرقام الهوية المشفرة، والبيانات الحساسة التي تستوجب عناية وحماية قصوى.",
     interactiveType: "data_classifier",
     story: [
-      "في عصر التحول الرقمي، أصبحت بياناتك الشخصية أغلى من الذهب، ويُعرّف <strong>قانون حماية البيانات الشخصية</strong> البيانات بأنها: 'كل بيان أو معلومة تتعلق بشخص طبيعي محدد أو يمكن تحديده بشكل مباشر أو غير مباشر من خلال الربط مع بيانات أخرى'.",
-      "<strong>١. البيانات الأساسية الأربعة (Four Basic Items):</strong> هي حجر الزاوية في إثبات شخصية الفرد وتضم تحديداً: <em>الاسم، العنوان، تاريخ الميلاد، والنوع (الجنس)</em>.",
-      "<strong>٢. أرقام الهوية الشخصية (Personal Identification Codes):</strong> سلاسل رقمية فريدة تمنحها الدولة لتمييز المواطنين بدقة مطلقة، مثل: <em>الرقم القومي، رقم جواز السفر، ورقم رخصة القيادة</em>. وبالرغم من كونها مجرد أرقام، إلا أنها بيانات شخصية سيادية لأنها تحدد هوية حاملها فوراً.",
-      "<strong>٣. البيانات الشخصية الحساسة (Special Care-Required / Sensitive Data):</strong> معلومات خطيرة تتطلب عناية فائقة لأن إفشاءها يسبب تمييزاً أو ضرراً كبيراً لصاحبها، مثل: <em>الديانة، المعتقدات، الآراء السياسية، السجل الجنائي، الحالة الصحية والاقتصادية، والبيانات البيومترية</em> (كصورة حدقية العين وبصمات الأصابع)."
+      `<p class="story-lead">في عصر التحول الرقمي، أصبحت بياناتك الشخصية أغلى من الذهب. يُعرّف <strong>قانون حماية البيانات الشخصية</strong> البيانات بأنها: <em>«كل بيان أو معلومة تتعلق بشخص طبيعي محدد، أو يمكن تحديده بشكل مباشر أو غير مباشر من خلال الربط مع بيانات أخرى»</em>.</p>`,
+      `<div class="content-cards-stack">
+        <div class="story-card card-blue-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🪪</span> ١. البيانات الأساسية الأربعة (Four Basic Items)</h4>
+            <span class="card-badge badge-blue">حجر الزاوية للهوية</span>
+          </div>
+          <p class="card-desc">الركائز الأربع المعتمدة قانونياً للتحقق من هوية أي شخص طبيعي بدقة تامة:</p>
+          <div class="pill-cloud">
+            <span class="pill-item">👤 الاسم بالكامل</span>
+            <span class="pill-item">🏠 العنوان ومحل الإقامة</span>
+            <span class="pill-item">📅 تاريخ الميلاد</span>
+            <span class="pill-item">⚧️ النوع (الجنس)</span>
+          </div>
+        </div>
+
+        <div class="story-card card-amber-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🔢</span> ٢. أرقام الهوية الشخصية (Personal ID Codes)</h4>
+            <span class="card-badge badge-amber">بيانات سيادية فريدة</span>
+          </div>
+          <p class="card-desc">سلاسل رقمية حصرية تمنحها الدولة لتمييز كل مواطن بدقة، وتُعد بيانات شخصية مباشرة لأنها تدل فوراً على شخص محدد:</p>
+          <div class="pill-cloud">
+            <span class="pill-item">💳 الرقم القومي</span>
+            <span class="pill-item">🛂 رقم جواز السفر</span>
+            <span class="pill-item">🚗 رقم رخصة القيادة</span>
+          </div>
+        </div>
+
+        <div class="story-card card-red-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🔒</span> ٣. البيانات الحساسة فائقة العناية (Special Care / Sensitive)</h4>
+            <span class="card-badge badge-red">حماية قصوى وعقوبات مشددة</span>
+          </div>
+          <p class="card-desc">معلومات بالغة الخطورة تتطلب عناية استثنائية لأن إفشاءها يسبب تمييزاً أو ضرراً جسيماً للفرد:</p>
+          <div class="pill-cloud">
+            <span class="pill-item">🏥 الحالة الصحية والطبية</span>
+            <span class="pill-item">🧬 البيانات البيومترية (بصمة العين واليد)</span>
+            <span class="pill-item">⚖️ السجل الجنائي</span>
+            <span class="pill-item">🕌 المعتقدات والديانة</span>
+            <span class="pill-item">🗳️ الآراء السياسية</span>
+            <span class="pill-item">💰 الذمة المالية</span>
+          </div>
+        </div>
+      </div>`
     ],
     takeaway: "البيانات الشخصية تشمل أي معلومة تحدد هويتك منفرداً أو بالدمج ⬝ الرباعي الأساسي: اسم، عنوان، ميلاد، ونوع ⬝ والبيانات البيومترية والصحية تقع في أعلى درجات الحساسية.",
     funFact: "بصمة حدقية العين (Iris Scan) تحتوي على أكثر من ٢٤٠ نقطة مميزة فريدة، مقارنة بحوالي ٤٠ نقطة فقط في بصمة الإصبع، مما يجعلها من أدق البيانات الحساسة عالمياً!",
@@ -43,11 +84,45 @@ const LECT2_STAGES_AR = [
     visualCaption: "درع الحماية القانونية: الحق في الخصوصية وحق الصورة يحظران التعدي أو التصوير، وحق الدعاية يحمي القيمة الاقتصادية للمشاهير.",
     interactiveType: "privacy_rights_sim",
     story: [
-      "تمنح القوانين والدساتير الحديثة (مثل <strong>المادة 57 من الدستور المصري</strong>) حماية صريحة للحياة الخاصة للمواطنين، وتنقسم الحقوق المرتبطة بالشخصية إلى ثلاثة محاور رئيسية:",
-      "<strong>١. الحق في الخصوصية (Right to Privacy):</strong> حق دستوري أصيل للفرد في حماية حياته الخاصة وأسراره ومعلوماته التي لا يرغب في أن يطلع عليها الآخرون دون مسوغ مشروع.",
-      "<strong>٢. حقوق الصورة (Image / Portrait Rights):</strong> حق الفرد في منع الآخرين من تصويره أو استخدام صورته أو مظهره أو ملامح وجهه دون إذنه المسبق الصريح. حتى وإن كان الشخص صديقك أو أحد أفراد عائلتك، فإن نشر صورته على الإنترنت دون موافقته يُعد انتهاكاً لحق الصورة.",
-      "<strong>٣. حقوق الشهرة / الدعاية (Publicity Rights):</strong> حق يحمي المصالح الاقتصادية للمشاهير والرياضيين والشخصيات العامة الناتجة عن استغلال صورهم وأسمائهم في الإعلانات أو السلع التجارية. فلا يجوز مثلاً طباعة صورة لاعب مشهور على قمصان وبيعها للتربح دون ترخيص رسمي منه.",
-      "<strong>استثناءات تقديم البيانات لطرف ثالث دون إذن:</strong> استثنى القانون حالات محددة يجوز فيها كشف البيانات دون موافقة صاحبها: <em>[1] تنفيذ نصوص القوانين واللوائح، [2] حماية الأمن القومي والمصلحة العامة، [3] إنقاذ حياة الشخص أو صحته أو ممتلكاته في حالات الطوارئ، [4] تنفيذ حكم قضائي أو طلب جهات التحقيق الرسمية</em>."
+      `<p class="story-lead">تمنح القوانين والدساتير الحديثة (وعلى رأسها <strong>المادة 57 من الدستور المصري</strong>) حماية مقدسة للحياة الخاصة للمواطنين، مؤكدة أن <em>«للحياة الخاصة حرمة، وهي مصونة لا تمس»</em>، وتتفرع الحماية إلى ثلاثة أركان:</p>`,
+      `<div class="content-cards-stack">
+        <div class="story-card card-blue-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🛡️</span> ١. الحق في الخصوصية (Right to Privacy)</h4>
+            <span class="card-badge badge-blue">حق دستوري أصيل</span>
+          </div>
+          <p class="card-desc">حقك المطلق في الحفاظ على أسرار حياتك الخاصة ومعلوماتك الشخصية بعيداً عن التطفل والاطلاع غير المشروع.</p>
+        </div>
+
+        <div class="story-card card-amber-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>📷</span> ٢. حقوق الصورة (Image / Portrait Rights)</h4>
+            <span class="card-badge badge-amber">حظر التصوير دون إذن</span>
+          </div>
+          <p class="card-desc">حظر تصوير أو تسجيل أو نشر صورة أي فرد أو ملامح وجهه دون موافقته الصريحة المسبقة، حتى وإن كان من أصدقائك أو عائلتك!</p>
+        </div>
+
+        <div class="story-card card-red-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>⭐</span> ٣. حقوق الشهرة والدعاية (Publicity Rights)</h4>
+            <span class="card-badge badge-red">المصلحة الاقتصادية للمشاهير</span>
+          </div>
+          <p class="card-desc">حماية القيمة التجارية والمالية لأسماء وصور المشاهير والرياضيين، فلا يجوز استغلال صورهم في إعلانات أو سلع تجارية دون ترخيص رسمي منهم.</p>
+        </div>
+      </div>`,
+      `<div class="editorial-callout callout-red">
+        <div class="callout-header">
+          <span class="callout-icon">⚖️</span>
+          <h4 class="callout-title">استثناءات قانونية: متى يجوز كشف البيانات لطرف ثالث دون إذن؟</h4>
+        </div>
+        <p style="font-size:0.92rem; margin-bottom:0.6rem; color:var(--ink-soft);">حدد القانون ٤ حالات طارئة واستثنائية فقط:</p>
+        <ul class="structured-list">
+          <li><span class="list-bullet-icon">📜</span> <strong>تنفيذ القانون:</strong> نصوص القوانين واللوائح الرسمية للدولة.</li>
+          <li><span class="list-bullet-icon">🛡️</span> <strong>المصلحة العامة:</strong> مقتضيات الأمن القومي ومكافحة الجرائم.</li>
+          <li><span class="list-bullet-icon">🚑</span> <strong>إنقاذ الأرواح:</strong> حماية حياة الشخص أو صحته وسلامته في حالات الطوارئ الطبية.</li>
+          <li><span class="list-bullet-icon">🏛️</span> <strong>أوامر القضاء:</strong> تنفيذ أحكام المحاكم وقرارات النيابة العامة وجهات التحقيق.</li>
+        </ul>
+      </div>`
     ],
     takeaway: "الخصوصية حق دستوري ⬝ لا تصوّر ولا تنشر صورة أحد دون إذنه ⬝ استغلال صور المشاهير تجارياً ينتهك حقوق الدعاية ⬝ والاستثناءات تنحصر في القانون والأمن وإنقاذ الأرواح.",
     funFact: "أول دعوى قضائية شهيرة في تاريخ حق الشهرة (Publicity Rights) رُفعت عام ١٩٥٣ في أمريكا بسبب طباعة صور لاعبي البيسبول على بطاقات علكة دون إذنهم!",
@@ -73,11 +148,45 @@ const LECT2_STAGES_AR = [
     visualCaption: "حوكمة البيانات في المؤسسات: سياسات واضحة، تراخيص نظامية، وخيارات تحكم للمستخدم بين Opt-In و Opt-Out.",
     interactiveType: "consent_opt_sim",
     story: [
-      "عندما تتعامل مع التطبيقات ومواقع التجارة الإلكترونية، لا تُترك بياناتك في فراغ؛ بل تُلزم التشريعات الشركات بأطر رقابية وتنظيمية صارمة:",
-      "<strong>١. سياسة الخصوصية (Privacy Policy):</strong> وثيقة ملزمة قانوناً تنشرها الشركة توضح فيها للمستخدمين بشفافية: ما البيانات التي تجمعها؟ كيف تعالجها وتخزنها؟ ومن له حق الوصول إليها؟ وكيف تحميها من التسريب؟",
-      "<strong>٢. ترخيص مركز حماية البيانات / علامة الخصوصية (Privacy Mark / License):</strong> علامة أو ترخيص تمنحه الهيئة التنظيمية الرسمية للشركات التي تثبت التزامها الكامل بالمعايير القانونية والأمنية لحماية بيانات المواطنين.",
-      "<strong>٣. نظام الموافقة المسبقة (Prior Approval / Opt-in System):</strong> فلسفة تحترم المستخدم لأقصى درجة؛ حيث لا يجوز للشركة جمع أي بيانات أو تقديم خدمة ترويجية إلا بعد أن يضغط المستخدم بنفسه بالموافقة الصريحة المسبقة (مثل ترك خانة الاشتراك في النشرة الإعلانية فارغة حتى يضع علامة صح بنفسه).",
-      "<strong>٤. نظام الاعتراض (Objection / Opt-out System):</strong> نظام يبدأ فيه تقديم الخدمة أو معالجة البيانات تلقائياً، ويستمر ذلك ما لم يتدخل المستخدم ويبادر صراحة بالاعتراض وطلب إيقاف جمع البيانات أو التوقف عن استلام الرسائل."
+      `<p class="story-lead">عند التعامل مع المنصات الرقمية وتطبيقات الهواتف، يخضع جمع البيانات لمعايير حوكمة صارمة تكفل الشفافية وتمنحك التحكم الكامل:</p>`,
+      `<div class="content-grid-2">
+        <div class="story-card">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>📋</span> سياسة الخصوصية (Privacy Policy)</h4>
+            <span class="card-badge">وثيقة شفافة وملزمة</span>
+          </div>
+          <p class="card-desc">إعلان قانوني يوضح للمستخدم بوضوح: ما البيانات التي تجمعها الشركة؟ ولماذا؟ وكيف تُخزنها وتؤمنها؟ ومن يحق له الاطلاع عليها؟</p>
+        </div>
+
+        <div class="story-card">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🏅</span> علامة الثقة والترخيص (Privacy Mark)</h4>
+            <span class="card-badge badge-green">شهادة اعتماد رسمية</span>
+          </div>
+          <p class="card-desc">ترخيص تصدره الهيئة الوطنية لحماية البيانات للشركات التي تثبت امتثالها التام لأعلى معايير الأمان التقني والقانوني المعتمدة.</p>
+        </div>
+      </div>`,
+      `<div class="versus-deck">
+        <div class="versus-card versus-optin">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🔒</span> نظام الموافقة المسبقة (Opt-in)</h4>
+            <span class="card-badge badge-green">الأكثر أماناً وحماية</span>
+          </div>
+          <div class="versus-status-pill">الافتراضي: <strong>محظور تماماً</strong></div>
+          <p class="card-desc">لا يجوز للشركة جمع البيانات أو إرسال عروض إعلانية إلا بعد أن يبادر المستخدم بنفسه بوضع علامة الموافقة الصريحة.</p>
+          <div class="versus-rule-quote">«لا تفعل شيئاً حتى أطلب منك صراحة»</div>
+        </div>
+
+        <div class="versus-card versus-optout">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>📡</span> نظام الاعتراض (Opt-out)</h4>
+            <span class="card-badge badge-amber">شائع تجارياً</span>
+          </div>
+          <div class="versus-status-pill">الافتراضي: <strong>مفعّل ونشط تلقائياً</strong></div>
+          <p class="card-desc">يتم جمع البيانات وإرسال الرسائل فور تسجيلك، ويستمر ذلك ما لم تتدخل بنفسك وتضغط على زر إلغاء الاشتراك أو الاعتراض.</p>
+          <div class="versus-rule-quote">«مستمر في العمل حتى تأمرني بالتوقف»</div>
+        </div>
+      </div>`
     ],
     takeaway: "الشركات ملتزمة بنشر سياسة الخصوصية والحصول على ترخيص ⬝ Opt-in يعني: 'لا تفعل حتى أطلب منك' ⬝ Opt-out يعني: 'مستمر حتى تطلب الإيقاف'.",
     funFact: "في الاتحاد الأوروبي ومصر، يفرض قانون حماية البيانات نظام Opt-in كشرط أساسي لجمع البيانات الحساسة، مع غرامات تصل للملايين ضد الشركات المخالفة!",
@@ -103,13 +212,51 @@ const LECT2_STAGES_AR = [
     visualCaption: "خريطة الملكية الصناعية: براءات الاختراع لحلول التكنولوجيا، ونماذج المنفعة للتحسينات الهيكلية، والرسوم للمظهر، والعلامات للشهرة.",
     interactiveType: "industrial_prop_matrix",
     story: [
-      "<strong>الملكية الفكرية (Intellectual Property Rights):</strong> هي منظومة الحقوق القانونية التي تحمي نتاج الفكر والإبداع البشري. وتتفرع إلى فرعين كبيرين: <em>الملكية الصناعية والتجارية</em>، و<em>حقوق المؤلف والحقوق المجاورة</em>.",
-      "تخضع الملكية الصناعية لقاعدة جوهرية تسمى <strong>مبدأ الشكلية (Formality Principle)</strong>: أي أن الحقوق لا تولد تلقائياً، بل يلزم التقدم بطلب رسمي والتسجيل لدى الهيئة المختصة (مثل مكتب براءات الاختراع المصري) للحصول على الحماية القانونية.",
-      "<strong>الأركان الأربعة للملكية الصناعية:</strong>",
-      "• <strong>١. براءات الاختراع (Patent Rights):</strong> تحمي الاختراعات التقنية الجديدة غير المسبوقة والقابلة للتطبيق الصناعي (مثل ابتكار دواء جديد أو معالج كمبيوتر مبتكر). مدة الحماية: <em>٢٠ عاماً من تاريخ تقديم الطلب</em>.",
-      "• <strong>٢. حقوق نموذج المنفعة (Utility Model Rights):</strong> تُسمى أحياناً 'براءة الاختراع الصغيرة'؛ وتحمي الحلول والتحسينات العملية على هيكل أو شكل منتج قائم لتسهيل استخدامه (مثل فكرة تعديل مجرى تصريف المياه داخل الغسالة). مدة الحماية: <em>٧ سنوات في القانون المصري / ١٠ سنوات دولياً</em>.",
-      "• <strong>٣. الرسوم والنماذج الصناعية (Industrial Design Rights):</strong> تحمي المظهر الخارجي أو الهيكل الجمالي للمنتج كالانحناءات والخطوط والألوان (مثل تصميم هيكل سيارة رياضية أو مظهر هاتف ذكي). مدة الحماية: <em>١٠ سنوات (تجدد ٥ سنوات إضافية لتصل إلى ١٥ سنة)</em>.",
-      "• <strong>٤. حقوق العلامات التجارية (Trademark Rights):</strong> تحمي الأسماء والشعارات والرموز والأصوات التي تميز منتجات أو خدمات شركة عن غيرها. مدة الحماية: <em>١٠ سنوات من تاريخ التسجيل قابلة للتجديد لمدد مماثلة بلا نهاية</em>."
+      `<p class="story-lead"><strong>الملكية الفكرية (Intellectual Property):</strong> هي منظومة الحماية القانونية لنتاج العقل والإبداع البشري، وتنقسم إلى فرعين رئيسيين: <em>الملكية الصناعية والتجارية</em>، و<em>حقوق المؤلف والحقوق المجاورة</em>.</p>`,
+      `<div class="editorial-callout callout-amber">
+        <div class="callout-header">
+          <span class="callout-icon">🏛️</span>
+          <h4 class="callout-title">القاعدة الأساسية: مبدأ الشكلية (Formality Principle)</h4>
+        </div>
+        <p class="card-desc">في الملكية الصناعية، <strong>لا تنشأ الحماية القانونية تلقائياً أبداً</strong>، بل يجب اتباع إجراءات شكلية دقيقة بتقديم طلب وفحص وتسجيل لدى مكاتب براءات الاختراع والعلامات وسداد الرسوم المقررة.</p>
+      </div>`,
+      `<div class="content-grid-2">
+        <div class="story-card card-blue-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>💡</span> براءات الاختراع (Patents)</h4>
+            <span class="card-badge badge-blue">٢٠ عاماً</span>
+          </div>
+          <p class="card-desc"><strong>الموضوع:</strong> أفكار وتقنيات صناعية جديدة وغير مسبوقة وقابلة للتطبيق العملي الصناعي.</p>
+          <p class="card-example">🔍 <em>مثال:</em> تركيبة عقار طبي مبتكر، معالج إلكتروني فائق السرعة.</p>
+        </div>
+
+        <div class="story-card card-amber-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🔧</span> نماذج المنفعة (Utility Models)</h4>
+            <span class="card-badge badge-amber">٧ إلى ١٠ سنوات</span>
+          </div>
+          <p class="card-desc"><strong>الموضوع:</strong> تحسينات وإضافات عملية مفيدة على هيكل أو شكل منتج قائم لتسهيل استخدامه (براءة اختراع صغيرة).</p>
+          <p class="card-example">🔍 <em>مثال:</em> تعديل ميكانيكي لشكل مجرى تصريف مياه الغسالة.</p>
+        </div>
+
+        <div class="story-card card-green-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🎨</span> الرسوم والنماذج (Industrial Designs)</h4>
+            <span class="card-badge badge-green">١٠ + ٥ سنوات</span>
+          </div>
+          <p class="card-desc"><strong>الموضوع:</strong> المظهر الخارجي والشكل الجمالي والتزييني للمنتج كالأبعاد والخطوط والألوان.</p>
+          <p class="card-example">🔍 <em>مثال:</em> انحناءات هيكل سيارة رياضية، المظهر الخارجي للهاتف.</p>
+        </div>
+
+        <div class="story-card card-red-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🏷️</span> العلامات التجارية (Trademarks)</h4>
+            <span class="card-badge badge-red">١٠ سنوات (تجدد دائماً)</span>
+          </div>
+          <p class="card-desc"><strong>الموضوع:</strong> الأسماء والشعارات والرموز والنغمات المميزة التي تفرق بين منتجات الشركات في السوق.</p>
+          <p class="card-example">🔍 <em>مثال:</em> نجمة مرسيدس، علامة كوكاكولا، تفاحة أبل.</p>
+        </div>
+      </div>`
     ],
     takeaway: "الملكية الصناعية تشترط مبدأ الشكلية (التسجيل) ⬝ البراءة = ٢٠ سنة ⬝ نموذج المنفعة = ٧ إلى ١٠ سنوات ⬝ الرسوم الصناعية = ١٠+٥ سنوات ⬝ العلامة التجارية = ١٠ سنوات قابلة للتجديد دائماً.",
     funFact: "شعار كوكاكولا وعلامة مرسيدس كُتبتا وسُجلتا منذ أكثر من قرن، وبفضل ميزة تجديد العلامات التجارية كل ١٠ سنوات، ما زالتا محميتين قانونياً حتى اليوم!",
@@ -135,13 +282,85 @@ const LECT2_STAGES_AR = [
     visualCaption: "حماية الإبداع: حقوق أدبية أبدية لا تسقط، وحقوق مالية تمتد لعقود بعد وفاة المؤلف، وحقوق مجاورة لفناني الأداء وهيئات البث.",
     interactiveType: "copyright_lifespan_calc",
     story: [
-      "على النقيض تماماً من الملكية الصناعية، يتبع <strong>حق المؤلف (Copyright)</strong> قاعدة ذهبية هي <strong>مبدأ عدم الشكلية (Non-Formality Principle)</strong>: أي أن الحماية القانونية تنشأ في نفس لحظة ابتكار العمل وتدوينه، دون حاجة إلى أي تسجيل أو إيداع رسمي، وتثبت الحماية للمبدع سواء كان هاوياً أو محترفاً أو حتى قاصراً وطفلاً!",
-      "يشمل حق المؤلف: الروايات، المقالات، الأشعار، الألحان، اللوحات، الصور، الأفلام، التصاميم المعمارية، و<em>برامج الحاسوب وشيفراتها البرمجية</em>.",
-      "<strong>حزمتان من الحقوق لكل مبدع:</strong>",
-      "• <strong>الحقوق الأدبية / المعنوية (Moral Rights):</strong> حقوق أبدية لا تقبل البيع أو التنازل أو السقوط بالتقادم! تشمل: <em>حق نسبة المصنف إلى صاحبه</em>، و<em>حق منع أي تشويه أو تحريف أو تعديل يمس العمل</em>.",
-      "• <strong>الحقوق المالية (Economic / Property Rights):</strong> حقوق استغلال المصنف تجارياً كإعادة الطباعة والبيع والنشر والترجمة والعرض العلني. وهذه الحقوق يمكن للمؤلف بيعها أو التنازل عنها لناشر.",
-      "<strong>مدة الحماية والملكية العامة (Public Domain):</strong> تمتد حماية الحقوق المالية طوال حياة المؤلف بالإضافة إلى <em>٥٠ عاماً بعد وفاته في القانون المصري (أو ٧٠ عاماً في المعايير الدولية واليابانية)</em>. وبعد انقضاء هذه المدة، يسقط العمل في 'الملكية العامة' ويصبح حراً للجميع دون إذن (مثل روايات طه حسين أو سيمفونيات بتهوفن).",
-      "<strong>الحقوق المجاورة (Neighboring Rights):</strong> حقوق ممنوحة لمن يقوم بنقل المصنف وأدائه للمجتمع، وتمنح لثلاث فئات: <em>[1] فنانو الأداء (المطربون والممثلون والعازفون)، [2] منتجو التسجيلات الصوتية، [3] هيئات البث الإذاعي والتلفزيوني</em>."
+      `<div class="editorial-callout callout-green">
+        <div class="callout-header">
+          <span class="callout-icon">✨</span>
+          <h4 class="callout-title">القاعدة الذهبية: مبدأ عدم الشكلية (Non-Formality Principle)</h4>
+        </div>
+        <p class="card-desc">على النقيض تماماً من الملكية الصناعية، <strong>تنشأ حماية حق المؤلف تلقائياً فور ابتكار العمل وتدوينه</strong>، دون حاجة إلى أي تسجيل أو إيداع رسمي أو رسوم، وتثبت الحماية للمبدع سواء كان هاوياً، محترفاً، أو حتى قاصراً وطفلاً!</p>
+      </div>`,
+      `<div class="story-card">
+        <div class="card-header-row">
+          <h4 class="card-title"><span>📚</span> ماذا يشمل حق المؤلف؟ (Scope of Works)</h4>
+          <span class="card-badge">إبداعات فكرية ورقمية</span>
+        </div>
+        <div class="pill-cloud">
+          <span class="pill-item">📖 الروايات والمقالات</span>
+          <span class="pill-item">🎭 المسرحيات والأشعار</span>
+          <span class="pill-item">🎨 اللوحات والرسومات</span>
+          <span class="pill-item">📸 الصور الفوتوغرافية</span>
+          <span class="pill-item">🎵 الألحان والموسيقى</span>
+          <span class="pill-item">🎬 الأفلام والسينما</span>
+          <span class="pill-item">🏛️ التصاميم المعمارية</span>
+          <span class="pill-item">💻 برامج وشيفرات الحاسوب</span>
+        </div>
+      </div>`,
+      `<div class="content-grid-2">
+        <div class="story-card card-blue-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>⚖️</span> الحقوق الأدبية / المعنوية (Moral Rights)</h4>
+            <span class="card-badge badge-blue">أبدية لا تسقط ولا تُباع</span>
+          </div>
+          <p class="card-desc">حقوق لصيقة بشخص المبدع لا تسقط بالتقادم ولا يجوز التنازل عنها أو التصرف فيها بأي ثمن:</p>
+          <ul class="structured-list">
+            <li><span class="list-bullet-icon">✍️</span> <strong>حق نسبة المصنف:</strong> ذكر اسم المؤلف على عمله دائماً.</li>
+            <li><span class="list-bullet-icon">🛡️</span> <strong>حق سلامة المصنف:</strong> منع أي تشويه أو تحريف أو تعديل يمس العمل.</li>
+          </ul>
+        </div>
+
+        <div class="story-card card-amber-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>💰</span> الحقوق المالية (Economic Rights)</h4>
+            <span class="card-badge badge-amber">مؤقتة وقابلة للتنازل</span>
+          </div>
+          <p class="card-desc">حقوق الاستغلال التجاري للعمل وجني الأرباح، ويجوز للمؤلف بيعها أو التنازل عنها لناشر:</p>
+          <ul class="structured-list">
+            <li><span class="list-bullet-icon">🖨️</span> <strong>الاستغلال المادي:</strong> الطباعة، النشر، البيع، الترجمة، والعرض العلني.</li>
+            <li><span class="list-bullet-icon">🤝</span> <strong>عقود النشر:</strong> التنازل لدار نشر أو شركة إنتاج بمقابل مالي.</li>
+          </ul>
+        </div>
+      </div>`,
+      `<div class="story-card card-red-accent">
+        <div class="card-header-row">
+          <h4 class="card-title"><span>⏳</span> مدة الحماية والملكية العامة (Public Domain)</h4>
+          <span class="card-badge badge-red">حياة المؤلف + ٥٠ / ٧٠ عاماً</span>
+        </div>
+        <p class="card-desc">تستمر حماية الحقوق المالية طوال حياة المؤلف <strong>بالإضافة إلى ٥٠ عاماً بعد وفاته</strong> في القانون المصري (أو ٧٠ عاماً في المعايير الدولية واليابانية). بعد انقضاء هذه المدة، يسقط العمل في <strong>«الملكية العامة»</strong> ويصبح حراً ومجاناً للجميع دون ترخيص (كروايات طه حسين وسيمفونيات بتهوفن).</p>
+      </div>`,
+      `<div class="story-card">
+        <div class="card-header-row">
+          <h4 class="card-title"><span>📻</span> الحقوق المجاورة (Neighboring Rights)</h4>
+          <span class="card-badge">حماية ناقلي ومؤدي الفن</span>
+        </div>
+        <p class="card-desc">حقوق خاصة تُمنح لمن يقوم بنقل المصنفات وأدائها للجمهور، وتقتصر على ٣ فئات محددة:</p>
+        <div class="content-grid-3" style="margin-top:0.8rem;">
+          <div class="mini-feature-box">
+            <div class="mini-icon">🎭</div>
+            <strong>فنانو الأداء</strong>
+            <p style="font-size:0.82rem; margin:0; color:var(--ink-soft);">المطربون والممثلون والعازفون.</p>
+          </div>
+          <div class="mini-feature-box">
+            <div class="mini-icon">🎙️</div>
+            <strong>منتجو التسجيلات</strong>
+            <p style="font-size:0.82rem; margin:0; color:var(--ink-soft);">حماية التسجيلات الصوتية الحديثة.</p>
+          </div>
+          <div class="mini-feature-box">
+            <div class="mini-icon">📡</div>
+            <strong>هيئات البث</strong>
+            <p style="font-size:0.82rem; margin:0; color:var(--ink-soft);">الإذاعة والتلفزيون وإشارات البث.</p>
+          </div>
+        </div>
+      </div>`
     ],
     takeaway: "حق المؤلف ينشأ تلقائياً بمجرد الابتكار (عدم الشكلية) ⬝ الحقوق المعنوية أبدية لا تسقط ⬝ الحقوق المالية تنتهي بعد ٥٠ أو ٧٠ عاماً من وفاة المبدع ⬝ وأداء المصنفات القديمة يخضع للحقوق المجاورة.",
     funFact: "إذا سجلت سيمفونية لموزارت عزفها عازف بيانو معاصر، فموزارت مصنفه حر في الملكية العامة، ولكن تسجيل العازف محمي بالحقوق المجاورة ولا يمكنك نسخه دون إذنه!",
@@ -167,11 +386,47 @@ const LECT2_STAGES_AR = [
     visualCaption: "ميزان العدالة الثقافية: الموازنة بين حماية حقوق المؤلفين وتشجيع التعليم والبحث عبر استثناءات الاستخدام العادل والاقتباس المنضبط.",
     interactiveType: "quotation_validator",
     story: [
-      "الهدف الأسمى لقوانين حق المؤلف ليس احتكار المعرفة، بل تحقيق التوازن بين: <strong>[1] الاستخدام العادل للمصنفات لتطوير الثقافة</strong>، و<strong>[2] حماية الحقوق المشروعة للمبدعين</strong>.",
-      "لذا، وضع المشرّع <strong>استثناءات محددة</strong> يُسمح فيها باستخدام المصنفات دون ترخيص من المؤلف ودون دفع مقابل:",
-      "• <em>الاستخدام الشخصي والخاص:</em> كنسخ مقطع في دفترك أو تسجيل أسطوانة اشتريتها على هاتفك الخاص (لكن توزيع نسخ على أصدقائك أو بيعها يُعد جريمة قرصنة!).<br>• <em>المؤسسات التعليمية:</em> توزيع أوراق ومقتطفات في الفصول المدرسية لأغراض التدريس والشرح.<br>• <em>العروض غير الربحية:</em> تقديم مسرحية أو فقرة في مهرجان مدرسي شريطة عدم تقاضي أي رسوم دخول وعدم دفع أجر للممثلين.",
-      "<strong>القواعد الذهبية الخمس للاقتباس القانوني (Quotation Rules):</strong>",
-      "١. <strong>التبعية (Subordination):</strong> عملك أنت هو الأصل والأساس، والمادة المقتبسة تابعة ومكملة وليست الأساسية.<br>٢. <strong>وجود ضرورة ملحة (Necessity):</strong> يجب أن يكون هناك سبب منطقي للاقتباس لدعم فكرة أو نقد علمي.<br>٣. <strong>التمييز البصري الصريح (Clear Identification):</strong> يجب وضع المقتبس بين علامات تنصيص « » أو في فقرة مميزة.<br>٤. <strong>التحديد الدقيق للمصدر والمؤلف (Source Attribution):</strong> ذكر اسم الكاتب، عنوان الكتاب، وسنة النشر بوضوح.<br>٥. <strong>عدم التحريف أو التعديل (No Alteration):</strong> يُحظر تماماً تغيير كلمات النص المقتبس أو تشويه سياقه."
+      `<p class="story-lead">الهدف الأسمى لقوانين حق المؤلف ليس احتكار المعرفة، بل إقامة توازن عادل بين: <strong>[1] إتاحة المصنفات لنشر الثقافة والتعليم</strong>، و<strong>[2] صيانة حقوق المبدعين المادية والأدبية</strong>.</p>`,
+      `<div class="story-card card-green-accent">
+        <div class="card-header-row">
+          <h4 class="card-title"><span>⚖️</span> استثناءات الاستخدام الحر والمشروع (Fair Use)</h4>
+          <span class="card-badge badge-green">دون إذن ودون مقابل</span>
+        </div>
+        <p class="card-desc">حالات حصرية يجوز فيها استغلال المصنفات المحمية قانوناً دون ترخيص مسبق:</p>
+        <ul class="structured-list">
+          <li><span class="list-bullet-icon">🏠</span> <strong>الاستخدام الشخصي والخاص:</strong> كنسخ مقطع في دفترك الخاص أو حفظه على هاتفك (توزيع النسخ على أصدقائك أو بيعها جريمة قرصنة!).</li>
+          <li><span class="list-bullet-icon">🏫</span> <strong>المؤسسات التعليمية:</strong> توزيع أوراق ومقتطفات في الفصول الدراسية للشرح والتدريس.</li>
+          <li><span class="list-bullet-icon">🎪</span> <strong>العروض غير الربحية:</strong> تقديم مسرحية مدرسية مجانية دون تحصيل أي تذاكر ودون دفع أجر للممثلين.</li>
+        </ul>
+      </div>`,
+      `<div class="story-card card-blue-accent" style="margin-top:1.2rem;">
+        <div class="card-header-row">
+          <h4 class="card-title"><span>📝</span> القواعد الذهبية الخمس للاقتباس القانوني (Quotation Rules)</h4>
+          <span class="card-badge badge-blue">شروط إلزامية معاً</span>
+        </div>
+        <div class="rule-checklist">
+          <div class="checklist-step">
+            <div class="step-number">١</div>
+            <div><strong>التبعية (Subordination):</strong> عملك أنت هو الأصل والأساس، والمادة المقتبسة تابعة ومكملة وليست الأساسية.</div>
+          </div>
+          <div class="checklist-step">
+            <div class="step-number">٢</div>
+            <div><strong>الضرورة الملحة (Necessity):</strong> وجود مبرر علمي أو نقدي صريح يدعو للاستشهاد بالنص لدعم الفكرة.</div>
+          </div>
+          <div class="checklist-step">
+            <div class="step-number">٣</div>
+            <div><strong>التمييز البصري الصريح (Clear Demarcation):</strong> حصر النص المقتبس بين علامات تنصيص « » أو في فقرة مستقلة ومميزة.</div>
+          </div>
+          <div class="checklist-step">
+            <div class="step-number">٤</div>
+            <div><strong>عزو المصدر بدقة (Attribution):</strong> ذكر اسم المؤلف، عنوان المصنف، ورقم الصفحة أو سنة النشر بوضوح.</div>
+          </div>
+          <div class="checklist-step">
+            <div class="step-number">٥</div>
+            <div><strong>الامتناع التام عن التحريف (No Alteration):</strong> يُحظر تماماً تعديل كلمات النص أو تحريف سياقه الأصلي.</div>
+          </div>
+        </div>
+      </div>`
     ],
     takeaway: "الاستثناءات تشمل التعليم والاستخدام الشخصي غير التجاري ⬝ الاقتباس له ٥ شروط: التبعية، الضرورة، علامات التنصيص، ذكر المصدر، والامتناع التام عن التحريف.",
     funFact: "أشهر قضايا السرقات الأدبية في الجامعات سببها نسيان علامات التنصيص؛ فحتى لو ذكرت المصدر في الهامش، إذا نقلت النص حرفياً دون أقواس اقتباس يعتبر ذلك سرقة فكرية!",
@@ -197,10 +452,52 @@ const LECT2_STAGES_AR = [
     visualCaption: "رموز المشاع الإبداعي: لغة الترخيص الرقمية الموحدة — الإسناد (BY)، غير تجاري (NC)، منع الاشتقاق (ND)، والترخيص بالمثل (SA).",
     interactiveType: "cc_license_builder",
     story: [
-      "في العالم الرقمي المفتوح، أراد المبدعون وسيلة مرنة تجمع بين حماية حقوقهم وتشجيع الناس على تداول أعمالهم، فظهرت <strong>رخص المشاع الإبداعي (Creative Commons - CC)</strong>.",
-      "رخصة CC هي إعلان موثق يضعه صاحب العمل يوضح فيه مسبقاً الشروط التي يسمح بموجبها للآخرين باستخدام مصنفه دون الحاجة لمراسلته لطلب الإذن. وتقوم هذه المنظومة على <strong>أربعة رموز شرطية أساسية</strong>:",
-      "• <strong>١. إسناد العمل / ذكر المصدر (Attribution - BY):</strong> شرط إلزامي في كل رخص CC، يفرض عرض اسم المبدع وعنوان المصنف ورابط العمل الأصلي.<br>• <strong>٢. الاستخدام غير التجاري (Non-Commercial - NC):</strong> يمنع استخدام المصنف أو مشتقاته لأغراض تجارية أو لتحقيق ربح مالي.<br>• <strong>٣. منع الاشتقاق والتعديل (No Derivatives - ND):</strong> يسمح بنسخ وتوزيع المصنف كما هو فقط، ويحظر إعادة مزجه أو تعديله أو ترجمته أو بناء عمل جديد عليه.<br>• <strong>٤. الترخيص بالمثل (Share-Alike - SA):</strong> في حال قمت بالتعديل على العمل الأصلي أو اشتقاق عمل منه، يجب عليك نشر مصنفك الجديد تحت نفس باقة الترخيص الأصلية تماماً.",
-      "تتجمع هذه الرموز لتشكل ٦ رخص قياسية، مثل <em>CC BY-NC</em> (مسموح بالتعديل والمشاركة لكن بشرط ذكر المؤلف وعدم استخدامه تجارياً)."
+      `<p class="story-lead">في الفضاء الرقمي المفتوح، ابتكر المبدعون <strong>رخص المشاع الإبداعي (Creative Commons - CC)</strong>؛ كإعلان مسبق ومرن يحدد الشروط التي يسمح بموجبها للآخرين باستخدام العمل ومشاركته دون الحاجة لمراسلة المؤلف في كل مرة، وتقوم على <strong>أربعة رموز شرطية أساسية</strong>:</p>`,
+      `<div class="content-grid-2">
+        <div class="story-card card-blue-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>👤</span> BY: إسناد المصدر (Attribution)</h4>
+            <span class="card-badge badge-blue">شرط إلزامي دائماً</span>
+          </div>
+          <p class="card-desc">يفرض على أي مستخدم ذكر اسم المبدع الأصلي، وعنوان العمل، ورابط المصدر عند مشاركة أو اقتباس المصنف.</p>
+        </div>
+
+        <div class="story-card card-red-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🚫💰</span> NC: غير تجاري (Non-Commercial)</h4>
+            <span class="card-badge badge-red">حظر التربح المالي</span>
+          </div>
+          <p class="card-desc">يمنع منعاً باتاً استغلال المصنف أو أي عمل مشتق منه في أنشطة تجارية أو بيعه لجني أموال.</p>
+        </div>
+
+        <div class="story-card card-amber-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🟰</span> ND: منع الاشتقاق (No Derivatives)</h4>
+            <span class="card-badge badge-amber">كما هو دون تعديل</span>
+          </div>
+          <p class="card-desc">يسمح بنسخ وتداول العمل بحالته الأصلية فقط، ويحظر إعادة مزجه أو تعديله أو ترجمته أو البناء عليه.</p>
+        </div>
+
+        <div class="story-card card-green-accent">
+          <div class="card-header-row">
+            <h4 class="card-title"><span>🔄</span> SA: الترخيص بالمثل (Share-Alike)</h4>
+            <span class="card-badge badge-green">رخصة ويكيبيديا</span>
+          </div>
+          <p class="card-desc">إذا قمت بتعديل المصنف أو البناء عليه، فأنت ملزم قانوناً بنشر عملك الجديد تحت نفس حزمة الرخصة الأصلية تماماً.</p>
+        </div>
+      </div>`,
+      `<div class="story-card" style="margin-top:1.2rem;">
+        <div class="card-header-row">
+          <h4 class="card-title"><span>🌐</span> باقات رخص CC القياسية الشائعة</h4>
+          <span class="card-badge">٦ رخص رئيسية</span>
+        </div>
+        <div class="pill-cloud">
+          <span class="pill-item"><strong>CC BY:</strong> الأكثر حرية (مشاركة وتعديل وتربح مع ذكر المصدر)</span>
+          <span class="pill-item"><strong>CC BY-NC:</strong> حر للأغراض غير التجارية</span>
+          <span class="pill-item"><strong>CC BY-SA:</strong> رخصة المشتق بالمثل (موسوعة ويكيبيديا)</span>
+          <span class="pill-item"><strong>CC BY-NC-ND:</strong> الأكثر تقييداً (توزيع كما هو، بلا تعديل ولا تجارة)</span>
+        </div>
+      </div>`
     ],
     takeaway: "المشاع الإبداعي يبسط شروط الاستخدام ⬝ الرموز الأربعة: BY (ذكر المؤلف) ⬝ NC (غير تجاري) ⬝ ND (ممنوع التعديل) ⬝ SA (الترخيص بالمثل لنفس الشروط).",
     funFact: "أكثر من ملياري مصنف رقمي حول العالم — بما فيها كل مقالات موسوعة ويكيبيديا وملايين الصور والبرمجيات — منشورة تحت رخص المشاع الإبداعي!",

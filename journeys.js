@@ -20,8 +20,8 @@ const journeys = [
       ar: '~٢٠ دقيقة'
     },
     tag: {
-      en: 'Unit 1 · 1st Secondary',
-      ar: 'الوحدة الأولى · أولى ثانوي'
+      en: 'Chapter 1 · 1st Secondary',
+      ar: 'الفصل الأول · أولى ثانوي'
     }
   },
   {
@@ -45,8 +45,8 @@ const journeys = [
       ar: '~٢٥ دقيقة'
     },
     tag: {
-      en: 'Unit 1 · 1st Secondary',
-      ar: 'الوحدة الأولى · أولى ثانوي'
+      en: 'Chapter 2 · 1st Secondary',
+      ar: 'الفصل الثاني · أولى ثانوي'
     }
   },
   {
