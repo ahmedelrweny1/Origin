@@ -30,10 +30,12 @@ const runnerState = {
 const STORE_EXAM_KEY = (id) => `origin-exam-${id}`;
 const STORE_UNLOCK_KEY = (id) => `origin-unlock-${id}`;
 
+const ASSET_V = 'v=3';
+
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = src;
+    s.src = src + (src.includes('?') ? '&' : '?') + ASSET_V;
     s.onload = resolve;
     s.onerror = reject;
     document.head.appendChild(s);
