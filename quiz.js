@@ -30,7 +30,7 @@ const runnerState = {
 const STORE_EXAM_KEY = (id) => `origin-exam-${id}`;
 const STORE_UNLOCK_KEY = (id) => `origin-unlock-${id}`;
 
-const ASSET_V = 'v=3';
+const ASSET_V = 'v=4';
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {

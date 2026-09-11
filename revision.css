@@ -41,6 +41,40 @@
   transform: translate(-2px, -2px);
 }
 
+/* ---------- Category headers inside keyword grid ---------- */
+.rev-cat-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+  margin: 1.2rem 0 0.2rem;
+  padding-top: 1.2rem;
+  border-top: var(--rule-medium) solid var(--rule);
+}
+
+.rev-cat-head:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.rev-cat-bar {
+  display: inline-block;
+  width: 10px;
+  height: 26px;
+  background: var(--c-blue);
+  flex: 0 0 auto;
+}
+
+.rev-cat-head .mono {
+  margin-inline-start: auto;
+  color: var(--ink-faint);
+}
+
 /* ---------- Keyword cards ---------- */
 .rev-kw-grid {
   display: grid;
@@ -122,6 +156,134 @@
 .diff-badge.src-lect1 { border-color: var(--c-green); color: var(--c-green); }
 .diff-badge.src-lect2 { border-color: var(--c-amber); color: var(--c-amber); }
 .diff-badge.src-combined { border-color: var(--c-blue); color: var(--c-blue); }
+
+/* ---------- Question-type badges ---------- */
+.diff-badge.qtype-mcq { border-color: var(--c-green); color: var(--c-green); }
+.diff-badge.qtype-tf { border-color: var(--c-amber); color: var(--c-amber); }
+.diff-badge.qtype-complete { border-color: var(--c-blue); color: var(--c-blue); }
+
+.result-stat.qtype-mcq .mono { color: var(--c-green); }
+.result-stat.qtype-tf .mono { color: var(--c-amber); }
+.result-stat.qtype-complete .mono { color: var(--c-blue); }
+
+.rev-blank {
+  display: inline-block;
+  min-width: 90px;
+  border-bottom: var(--rule-thick) solid var(--c-red);
+  color: var(--c-red);
+  font-style: normal;
+  text-align: center;
+}
+
+.rev-tf-btn {
+  font-size: 1.15rem;
+}
+
+/* ---------- Tech words grid ---------- */
+.rev-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+@media (min-width: 700px) {
+  .rev-tech-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .rev-tech-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.rev-tech-card {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--paper-deep);
+  border: var(--rule-medium) solid var(--ink);
+  border-inline-start: var(--rule-thick) solid var(--c-amber);
+}
+
+.rev-tech-en {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.rev-tech-ar {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Written questions ---------- */
+.rev-written-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.rev-written-card {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  border-inline-start: var(--rule-thick) solid var(--c-blue);
+  padding: 1.2rem 1.4rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.rev-written-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.rev-written-top .mono { color: var(--c-blue); }
+
+.rev-written-q {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.rev-written-area {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.8rem 1rem;
+  background: var(--paper-deep);
+  border: var(--rule-medium) dashed var(--ink-soft);
+  color: var(--ink);
+  border-radius: 0;
+  width: 100%;
+  resize: vertical;
+}
+
+.rev-written-area:focus {
+  outline: none;
+  border-style: solid;
+  border-color: var(--c-blue);
+}
+
+.rev-model {
+  background: var(--paper-deep);
+  border: var(--rule-hair) solid var(--rule-soft);
+  border-inline-start: var(--rule-thick) solid var(--c-green);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.rev-model strong { color: var(--c-green); }
+
+.btn-sm {
+  font-size: 0.72rem;
+  padding: 0.55rem 0.9rem;
+  justify-self: start;
+}
 
 .result-stat.src-lect1 .mono { color: var(--c-green); }
 .result-stat.src-lect2 .mono { color: var(--c-amber); }

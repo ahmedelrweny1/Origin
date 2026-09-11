@@ -134,7 +134,48 @@ const REVISION_CROSS_EN = [
   }
 ];
 
+/* ============================================================
+   True / False bank
+   ============================================================ */
+const REVISION_TF_EN = [
+  { id: 'tf-1', src: 'lect1', difficulty: 'easy', statement: 'Deleting a post from your account removes it from the internet completely.', answer: false, explain: 'Persistence: server logs, search caches, archives, and screenshots keep copies.' },
+  { id: 'tf-2', src: 'lect1', difficulty: 'easy', statement: 'A USB flash drive is a transmission medium.', answer: false, explain: 'A USB drive stores data, so it is recording (storage) media — transmission media carry data, like the internet or TV.' },
+  { id: 'tf-3', src: 'lect1', difficulty: 'medium', statement: 'Information becomes knowledge when it leads to a decision or an action.', answer: true, explain: 'That leap — from meaningful facts to "what to do" — is exactly what knowledge means.' },
+  { id: 'tf-4', src: 'lect2', difficulty: 'easy', statement: 'A trademark lasts 10 years and can be renewed again and again with no end.', answer: true, explain: 'Trademarks renew every 10 years indefinitely — the only industrial right that can live forever.' },
+  { id: 'tf-5', src: 'lect2', difficulty: 'medium', statement: 'You must register your story at the patent office before copyright protects it.', answer: false, explain: 'Non-formality: copyright starts automatically at creation. Only industrial property needs registration.' },
+  { id: 'tf-6', src: 'lect2', difficulty: 'easy', statement: 'In an opt-out system, nothing is collected until you actively agree first.', answer: false, explain: 'That describes opt-in. Opt-out is active by default until you object.' },
+  { id: 'tf-7', src: 'combined', difficulty: 'medium', statement: 'Sharing a classmate\'s photo without permission is fine as long as your account is private.', answer: false, explain: 'Image rights need explicit consent regardless of account privacy — and forwarding still spreads it.' },
+  { id: 'tf-8', src: 'combined', difficulty: 'hard', statement: 'A CC BY-NC photo may be used in a paid online course as long as you credit the photographer.', answer: false, explain: 'NC bans commercial use. Credit (BY) is not enough — a paid course needs a license that allows commercial use.' }
+];
+
+/* ============================================================
+   Complete-the-sentence bank (choose the missing word)
+   ============================================================ */
+const REVISION_COMPLETE_EN = [
+  { id: 'cp-1', src: 'lect1', difficulty: 'easy', sentence: 'Raw facts without any context are called ___.', options: ['knowledge', 'wisdom', 'data', 'rumors'], answer: 2, explain: 'Data = raw facts. Meaning turns it into information; action turns that into knowledge.' },
+  { id: 'cp-2', src: 'lect1', difficulty: 'medium', sentence: 'Checking a claim against independent reputable sources is called ___.', options: ['propagation', 'encryption', 'cross-checking', 'geotagging'], answer: 2, explain: 'Cross-checking means comparing independent sources before trusting or sharing.' },
+  { id: 'cp-3', src: 'lect2', difficulty: 'medium', sentence: 'A patent lasts ___ from the filing date.', options: ['10 years', '7 years', '50 years', '20 years'], answer: 3, explain: 'Patents: 20 years. Utility models: 7. Trademarks: 10, renewable forever.' },
+  { id: 'cp-4', src: 'lect2', difficulty: 'medium', sentence: 'The Creative Commons badge that bans commercial use is ___.', options: ['BY', 'SA', 'ND', 'NC'], answer: 3, explain: 'NC = non-commercial. BY = credit, ND = no changes, SA = same license.' },
+  { id: 'cp-5', src: 'combined', difficulty: 'hard', sentence: 'Posting someone\'s photo without permission violates their ___.', options: ['patent rights', 'neighboring rights', 'image rights', 'trademark'], answer: 2, explain: 'Image rights: no photo or publishing of a person without explicit consent.' },
+  { id: 'cp-6', src: 'combined', difficulty: 'hard', sentence: 'Translating a novel and selling it without permission is ___.', options: ['fair use', 'lawful quotation', 'public domain', 'copyright infringement'], answer: 3, explain: 'Translation is an exclusive economic right of the original author.' }
+];
+
+/* ============================================================
+   Written questions (self-check with model answers)
+   ============================================================ */
+const REVISION_WRITTEN_EN = [
+  { id: 'wr-1', topics: 'DIKW', prompt: 'Your school tracks attendance %, assignment scores, sleep hours, and screen time. Explain what is data, what is information, and what becomes knowledge here — with one concrete action the school should take.', model: 'Numbers alone (attendance %, scores) are data. "Average is 78%" is information. "Sleep one extra hour to lift Physics" is knowledge — and that advice is the action.' },
+  { id: 'wr-2', topics: 'Privacy + Geotagging', prompt: 'Before posting a photo taken at home, list the exact checks you would do (technical + visual + consent).', model: 'Turn off camera location permission; strip EXIF before uploading; check the frame for house numbers, street signs, school uniforms; get consent from everyone visible.' },
+  { id: 'wr-3', topics: 'Opt-in vs Opt-out', prompt: 'A game asks for contacts + microphone + always-on location for a discount. Explain the problem using both information ethics and opt-in rules, then describe the correct design.', model: 'Coercive consent is unethical; each permission needs a clear "why" and must be optional. Correct design: ask per feature, explain why, work fully without unrelated permissions.' },
+  { id: 'wr-4', topics: 'Industrial property', prompt: 'You invented a new bottle cap mechanism, designed a unique bottle shape, and created a brand logo. Which right protects each part, and what must you do first?', model: 'Mechanism idea may suit a patent or utility model; the shape is an industrial design; the logo is a trademark. First step for all three: file and register (formality principle) — no filing, no rights.' },
+  { id: 'wr-5', topics: 'Verification + CC', prompt: 'You found an image online for the school magazine. Write the full workflow: how do you verify it, and how do you use it legally?', model: 'Verify: cross-check the source, author, and claim. License: read the CC badge (BY/NC/ND/SA) and obey it — credit always, no commercial use under NC, no edits under ND, same license under SA.' },
+  { id: 'wr-6', topics: 'Disinformation + Bullying', prompt: 'A rumor names a specific student as a hacker and classmates start mocking them. Write your response plan combining both chapters.', model: 'Do not amplify; verify with school administration; support the targeted student privately; report the original post; refuse to forward or laugh along.' }
+];
+
 if (typeof window !== 'undefined') {
   window.REVISION_KEYWORDS_EN = REVISION_KEYWORDS_EN;
   window.REVISION_CROSS_EN = REVISION_CROSS_EN;
+  window.REVISION_TF_EN = REVISION_TF_EN;
+  window.REVISION_COMPLETE_EN = REVISION_COMPLETE_EN;
+  window.REVISION_WRITTEN_EN = REVISION_WRITTEN_EN;
 }

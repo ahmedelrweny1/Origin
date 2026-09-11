@@ -7,11 +7,11 @@
   <meta name="description" content="Combined revision of the first two lectures: key terms with brief explanations plus a mixed quiz. AR / EN bilingual.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="atlas.css?v=3">
-  <link rel="stylesheet" href="quiz.css?v=3">
-  <link rel="stylesheet" href="revision.css?v=3">
-  <link rel="stylesheet" href="rtl.css?v=3">
-  <script src="i18n.js?v=3"></script>
+  <link rel="stylesheet" href="atlas.css?v=4">
+  <link rel="stylesheet" href="quiz.css?v=4">
+  <link rel="stylesheet" href="revision.css?v=4">
+  <link rel="stylesheet" href="rtl.css?v=4">
+  <script src="i18n.js?v=4"></script>
 </head>
 <body>
 
@@ -59,20 +59,31 @@
       <div class="rev-kw-grid" id="revKwGrid"></div>
     </section>
 
+    <!-- Tech words -->
+    <section class="rev-section" id="revTechSection">
+      <div class="section-head">
+        <span class="mono" data-i18n="revTechLabel">Key technical English</span>
+        <h2 data-i18n="revTechTitle">English words, Arabic meanings</h2>
+        <span class="mono faint" id="revTechCount">—</span>
+      </div>
+      <p class="muted" data-i18n="revTechDesc" style="margin-bottom:1.2rem;">The must-know English terms and what each one means in Arabic.</p>
+      <div class="rev-tech-grid" id="revTechGrid"></div>
+    </section>
+
     <!-- Part 2: Combined quiz -->
     <section class="rev-section" id="revQuizSection">
       <div class="section-head">
         <span class="mono" data-i18n="revQuizLabel">Part 2 · Combined quiz</span>
-        <h2 data-i18n="revQuizTitle">20 questions, both lectures</h2>
-        <span class="mono faint">07 + 07 + 06</span>
+        <h2 data-i18n="revQuizTitle">26 questions, both lectures</h2>
+        <span class="mono faint">16 + 06 + 04</span>
       </div>
 
       <div id="revPicker">
-        <p class="muted" data-i18n="revQuizDesc" style="margin-bottom:1.2rem;">7 questions from Lecture 1, 7 from Lecture 2, plus 6 new questions that combine both. Shuffled every run.</p>
+        <p class="muted" data-i18n="revQuizDesc" style="margin-bottom:1.2rem;">Multiple-choice, true/false, and complete-the-sentence — sampled from both lectures plus combined questions. Shuffled every run.</p>
         <div class="rev-mix">
-          <span class="diff-mini diff-mini-easy">L1 · 07</span>
-          <span class="diff-mini diff-mini-medium">L2 · 07</span>
-          <span class="diff-mini diff-mini-creative" data-i18n="revMixCombined">Combined · 06</span>
+          <span class="diff-mini diff-mini-easy" data-i18n="revMixMCQ">MCQ · 16</span>
+          <span class="diff-mini diff-mini-medium" data-i18n="revMixTF">True/False · 06</span>
+          <span class="diff-mini diff-mini-creative" data-i18n="revMixComplete">Complete · 04</span>
         </div>
         <div class="exam-actions" style="margin-top:1.4rem;">
           <button class="btn btn-primary btn-arrow" id="revStartBtn" data-i18n="revStart">Start revision quiz</button>
@@ -120,12 +131,22 @@
             <strong id="revSkipped">0</strong>
           </div>
         </div>
-        <div class="result-breakdown" id="revBreakdown"></div>
-        <div class="result-actions">
-          <button class="btn btn-ghost" id="revRetryBtn" data-i18n="qzRetry">Try again</button>
-          <a class="btn btn-primary btn-arrow" href="quizzes.html" data-i18n="qzBackToList">← All quizzes</a>
-        </div>
+      <div class="result-breakdown" id="revBreakdown"></div>
+      <div class="result-actions">
+        <button class="btn btn-ghost" id="revRetryBtn" data-i18n="qzRetry">Try again</button>
+        <a class="btn btn-primary btn-arrow" href="quizzes.html" data-i18n="qzBackToList">← All quizzes</a>
       </div>
+    </section>
+
+    <!-- Part 3: Written questions -->
+    <section class="rev-section" id="revWrittenSection">
+      <div class="section-head">
+        <span class="mono" data-i18n="revWrittenLabel">Part 3 · Written answers</span>
+        <h2 data-i18n="revWrittenTitle">Write it in your own words</h2>
+        <span class="mono faint" id="revWrittenCount">—</span>
+      </div>
+      <p class="muted" data-i18n="revWrittenDesc" style="margin-bottom:1.2rem;">Answer in writing first, then reveal the model answer and compare. These are self-checked, not scored.</p>
+      <div class="rev-written-list" id="revWrittenList"></div>
     </section>
 
   </main>
@@ -134,7 +155,7 @@
     <span class="mono" data-i18n="footerText">Made for curious minds · Intro to Computer Science</span>
   </footer>
 
-  <script src="journeys.js?v=3"></script>
-  <script src="revision.js?v=3"></script>
+  <script src="journeys.js?v=4"></script>
+  <script src="revision.js?v=4"></script>
 </body>
 </html>
