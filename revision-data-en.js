@@ -59,10 +59,10 @@ const REVISION_CROSS_EN = [
     difficulty: 'medium',
     question: 'A classmate photographs your national ID card and shares it in the class group "as a joke". Which TWO violations from the two lectures apply?',
     options: [
-      'Only a joke — no violation at all.',
-      'It breaks publicity rights only.',
+      'It only breaks information ethics (Lect 1) for sharing a joke, but ID numbers are not sensitive data (Lect 2).',
+      'It only breaks publicity rights (Lect 2) because your photo is on the card, not privacy rules (Lect 1).',
       'It exposes a Personal ID code (Lect 2) and violates privacy + information ethics (Lect 1).',
-      'It violates trademark law.'
+      'It only exposes secondary information (Lect 1) so cross-checking the number makes sharing it acceptable.'
     ],
     answer: 2,
     explain: 'An ID card holds Personal ID codes and sensitive data (Lect 2), and sharing it without consent breaches privacy and ethics (Lect 1).'
@@ -72,10 +72,10 @@ const REVISION_CROSS_EN = [
     difficulty: 'hard',
     question: 'You want to use a classmate\'s photo in a school magazine. Combining both lectures, what is the fully correct procedure?',
     options: [
-      'Just download it — it is on social media.',
-      'Crop it so no one recognizes them.',
+      'Get the classmate\'s consent (Lect 2) but skip credit since school magazines always count as fair use (Lect 2).',
+      'Credit the photographer (Lect 1) but skip consent since the photo is already on social media (Lect 2).',
       'Get the classmate\'s explicit consent (image rights, Lect 2) AND credit the photographer (copyright attribution, Lect 1).',
-      'Use it only if the magazine is printed in color.'
+      'Get consent from the magazine editor (Lect 1) and add the school trademark logo (Lect 2) to make it legal.'
     ],
     answer: 2,
     explain: 'Two rights, two duties: the depicted person\'s consent (image rights) plus the photographer\'s credit (copyright).'
@@ -85,10 +85,10 @@ const REVISION_CROSS_EN = [
     difficulty: 'hard',
     question: 'A vacation photo shows your house number in the background AND carries GPS coordinates. Which risks from both lectures combine here?',
     options: [
-      'Only low photo quality.',
+      'House-number exposure only (Lect 2) — the embedded GPS coordinates (Lect 1) are harmless metadata.',
       'Geotagging exposure (Lect 1) plus sensitive location-data leak (Lect 2) — anyone can pinpoint your home.',
-      'A copyright violation.',
-      'An opt-out system error.'
+      'Geotagging exposure only (Lect 1) — a visible house number (Lect 2) is not sensitive personal data.',
+      'A copyright problem with the camera (Lect 1) plus a missing privacy-mark seal (Lect 2) on the photo file.'
     ],
     answer: 1,
     explain: 'Technical risk (embedded GPS) plus visual risk (house number) equals a full sensitive-data leak: strip EXIF and check the frame.'
@@ -98,10 +98,10 @@ const REVISION_CROSS_EN = [
     difficulty: 'creative',
     question: 'A viral ad uses a celebrity\'s photo with a fake health claim to sell a product. Which TWO violations combine?',
     options: [
-      'Bad graphic design only.',
+      'Disinformation only (Lect 1) — using a celebrity face in ads is allowed without consent (Lect 2).',
       'Disinformation — a deliberately false claim (Lect 1) — plus publicity-rights violation for commercial use of the celebrity\'s face (Lect 2).',
-      'A patent infringement.',
-      'An opt-in system bug.'
+      'Publicity-rights violation only (Lect 2) — a viral health claim needs no cross-checking (Lect 1).',
+      'Identity theft of the seller (Lect 1) plus trademark protection of the product name (Lect 2).'
     ],
     answer: 1,
     explain: 'Fake claim = disinformation; unpaid celebrity face in an ad = publicity-rights breach. Report it and never amplify it.'
@@ -111,10 +111,10 @@ const REVISION_CROSS_EN = [
     difficulty: 'creative',
     question: 'You found a perfect image online for the school magazine. Combining media literacy (Lect 1) with CC licenses (Lect 2), what is the correct workflow?',
     options: [
-      'Download and publish — online means free.',
+      'Cross-check the source and claim (Lect 1) but skip the license badge since school use is always fair use (Lect 2).',
       'Verify the source and claim (cross-checking), check the license badge, follow it (credit + non-commercial + no-changes as required).',
-      'Only use it if it has many likes.',
-      'Screenshot it so the license does not apply.'
+      'Follow the CC badge rules (Lect 2) but skip cross-checking since a licensed image must be truthful (Lect 1).',
+      'Treat it as public domain (Lect 2) once saved, since persistence (Lect 1) removes the license.'
     ],
     answer: 1,
     explain: 'Verify first (is it true? who made it?), then license second (BY/NC/ND/SA) — both lenses must pass.'
@@ -124,10 +124,10 @@ const REVISION_CROSS_EN = [
     difficulty: 'medium',
     question: 'A free game demands your contacts, microphone, and always-on location for a 10% coupon. Which TWO concepts explain why this is wrong?',
     options: [
-      'The discount is simply too small.',
+      'An ethics problem only (Lect 1) — any permission is fine if the privacy policy mentions it (Lect 2).',
       'Information ethics — coercive consent (Lect 1) — plus opt-in rules: unrelated permissions need clear justification (Lect 2).',
-      'Patent law forbids all permissions.',
-      'There is nothing wrong — users agreed.'
+      'An opt-in problem only for location (Lect 2) — contacts and microphone need no justification (Lect 1).',
+      'No violation if the game shows a privacy-mark seal (Lect 2) and the coupon proves fair exchange (Lect 1).'
     ],
     answer: 1,
     explain: 'Forced "agree or lose out" consent is unethical, and opt-in requires each permission to be justified and optional.'

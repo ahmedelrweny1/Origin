@@ -12,10 +12,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'medium',
     question: 'A school form asks for your name, address, date of birth, and gender. Why these four specifically?',
     options: [
-      'They are just random questions.',
+      'They are sensitive health data that need special written consent.',
       'They are the "Four Basic Items" the law uses to verify identity.',
-      'They are needed for the school canteen menu.',
-      'They replace the need for any passwords.'
+      'They are government ID codes like a national ID or passport number.',
+      'They are optional marketing details companies may share freely.'
     ],
     answer: 1,
     explain: 'Name, address, date of birth, and gender are the four basic identity items recognized by data-protection law.'
@@ -26,9 +26,9 @@ const LECT2_EXAM_EN = [
     difficulty: 'hard',
     question: 'A clinic posts a patient\'s diagnosis and national ID number on a public notice board "by mistake". What makes this especially serious?',
     options: [
-      'Nothing — clinic boards are public anyway.',
-      'Typos are always forgiven.',
-      'It violates trademark law.',
+      'It only exposes the Four Basic Items, which are low-risk identity details.',
+      'It is allowed as an emergency exception to protect the patient’s health.',
+      'It only breaks industrial-property rules about filing medical patents.',
       'It exposes sensitive data (health + ID code) that can cause discrimination and harm.'
     ],
     answer: 3,
@@ -41,9 +41,9 @@ const LECT2_EXAM_EN = [
     question: 'Your fingerprint unlocks your phone. Legally, your fingerprint is:',
     options: [
       'Sensitive biometric data needing the strictest protection.',
-      'A public number anyone can share.',
-      'A trademark of the phone company.',
-      'A Creative Commons work.'
+      'The Four Basic Items used for everyday identity checks like name and address.',
+      'A government ID code that can be cancelled and reissued if it leaks.',
+      'Ordinary personal data with only basic protection like a shopping preference.'
     ],
     answer: 0,
     explain: 'Biometrics (fingerprints, iris, DNA) are irreplaceable sensitive identifiers with supreme safeguards.'
@@ -54,10 +54,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'medium',
     question: 'You photograph a famous actor eating at a private restaurant and sell the photo to a company for a product ad, without permission. What did you violate?',
     options: [
-      'A patent filing rule.',
-      'Fair use for education.',
+      'Privacy rights only, because the dinner was private and no ad sale happened.',
+      'Copyright infringement only, because the actor owns the rights in his own face.',
       'Image rights (photo without consent) and publicity rights (commercial use of a celebrity\'s likeness).',
-      'The opt-in email system.'
+      'No violation at all, because famous people lose all image rights in public life.'
     ],
     answer: 2,
     explain: 'Taking the photo without consent breaks image rights; selling a celebrity\'s face for ads breaks publicity rights.'
@@ -68,9 +68,9 @@ const LECT2_EXAM_EN = [
     difficulty: 'medium',
     question: 'When can a hospital share your medical file with emergency doctors without asking you first?',
     options: [
-      'Whenever it wants more funding.',
-      'To send you birthday greetings.',
-      'To boost its social media followers.',
+      'When the hospital updates its privacy policy and posts it on its website.',
+      'When researchers want to study patient files for a new medical paper.',
+      'When the patient’s family asks for details because they are worried.',
       'When it is necessary to save your life or health in an emergency.'
     ],
     answer: 3,
@@ -82,10 +82,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'easy',
     question: 'What must every company publish so you know how it collects, stores, and protects your data?',
     options: [
-      'A patent certificate.',
+      'A patent registration certificate filed with the patent office.',
       'A privacy policy.',
-      'A moral-rights waiver.',
-      'A concert ticket.'
+      'A cookie consent banner asking you to accept website tracking.',
+      'A copyright notice claiming ownership of the website’s text.'
     ],
     answer: 1,
     explain: 'The privacy policy is the binding public document explaining data collection, purpose, retention, and security.'
@@ -96,10 +96,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'hard',
     question: 'A shopping site emails you promos you never asked for, with a tiny "click here to unsubscribe" at the bottom. Which system is this?',
     options: [
-      'The copyright non-formality principle.',
-      'Creative Commons Share-Alike.',
+      'The opt-in system: it counts your silence as prior consent to promos.',
+      'A privacy-policy exception where advertising emails are not personal data.',
       'The opt-out system: active by default until you object.',
-      'The opt-in system: blocked until you agree.'
+      'The opt-in system: fully blocked until you actively tick agree first.'
     ],
     answer: 2,
     explain: 'Default-on tracking with an unsubscribe link is the textbook opt-out (objection) model.'
@@ -111,9 +111,9 @@ const LECT2_EXAM_EN = [
     question: 'What does the "formality principle" mean for industrial property?',
     options: [
       'No protection exists until you file an application and register with the patent office.',
-      'Rights start automatically the moment you think of an idea.',
-      'Only university graduates can manufacture products.',
-      'Inventors must give all profits to the state.'
+      'Rights start automatically when you get the idea, with no filing needed.',
+      'Filing is optional and only helps if you plan to sell the product abroad.',
+      'Publishing the idea on social media automatically registers your ownership.'
     ],
     answer: 0,
     explain: 'Patents, designs, utility models, and trademarks need formal filing, examination, and registration first.'
@@ -124,9 +124,9 @@ const LECT2_EXAM_EN = [
     difficulty: 'hard',
     question: 'How long do patents and trademarks last?',
     options: [
-      'Patents 50 years; trademarks 2 years.',
-      'Patents last the inventor\'s lifetime; trademarks 7 years.',
-      'Both exactly 15 years, no renewal.',
+      'Patents 7 years from filing; trademarks 20 years with no renewal.',
+      'Patents 10 years renewable forever; trademarks 20 years from filing.',
+      'Both last 20 years from filing, then both enter the public domain.',
       'Patents 20 years from filing; trademarks 10 years, renewable forever.'
     ],
     answer: 3,
@@ -138,10 +138,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'medium',
     question: 'A carmaker designs a stunning new body shape for its electric car. Which right protects that look?',
     options: [
-      'Utility model rights.',
-      'Publicity rights.',
+      'Patent rights for the electric motor.',
+      'Trademark rights for the brand logo.',
       'Industrial design rights.',
-      'Broadcasting neighboring rights.'
+      'Utility model rights for a small improvement.'
     ],
     answer: 2,
     explain: 'Industrial designs protect the aesthetic exterior: contours, lines, shapes, and patterns.'
@@ -152,10 +152,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'medium',
     question: 'A 15-year-old writes an original game and shares it with classmates. Which statement about copyright is true?',
     options: [
-      'No copyright without patent-office fees.',
+      'No copyright exists until it is registered and official fees are paid.',
       'Protection starts automatically at creation (non-formality) — even for a minor amateur.',
-      'Only commercial rights exist; moral rights are lost.',
-      'Minors get zero rights before age 18.'
+      'Only economic rights exist at first; moral rights need a separate filing.',
+      'Minors hold no copyright until they turn 18 and re-register the work.'
     ],
     answer: 1,
     explain: 'Copyright needs no registration and no minimum age: it vests the instant the work is created.'
@@ -167,9 +167,9 @@ const LECT2_EXAM_EN = [
     question: 'What is the key difference between an author\'s moral rights and economic rights?',
     options: [
       'Moral rights are eternal and inalienable (attribution + integrity); economic rights are temporary and transferable.',
-      'Moral rights can be auctioned; economic rights end at creation.',
-      'Economic rights end the day the author dies.',
-      'Moral rights cover hardware; economic rights cover poetry.'
+      'Moral rights last 20 years like patents; economic rights renew forever.',
+      'Both rights end when the author dies and cannot pass to any heir.',
+      'Economic rights are eternal and inalienable; moral rights can be sold.'
     ],
     answer: 0,
     explain: 'Moral rights (credit + no distortion) last forever and cannot be sold; economic rights can be licensed and expire.'
@@ -180,10 +180,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'creative',
     question: 'You want to use a famous old radio show recording in your school project. The script is 80 years old, but the recording was made last year by a modern station. What do you need?',
     options: [
-      'A 20-year mechanical patent.',
-      'A utility model from the commerce department.',
+      'No permission is needed because the script’s age puts every version in the public domain.',
+      'Only the writer’s moral rights still apply here, so giving credit alone is enough.',
       'The script may be public domain, but the modern recording has neighboring rights — get permission or use a free alternative.',
-      'Nothing — old means free for everything.'
+      'Nothing extra is needed because a non-profit school project counts as fair use.'
     ],
     answer: 2,
     explain: 'Old texts can be free while new performances of them stay protected for performers, producers, and broadcasters.'
@@ -194,9 +194,9 @@ const LECT2_EXAM_EN = [
     difficulty: 'creative',
     question: 'You quote a full paragraph word-for-word in your research, list the book in the bibliography, but forget the quotation marks. What is the verdict?',
     options: [
-      'Perfect fair use.',
-      'Covered by Share-Alike automatically.',
-      'An opt-in system violation.',
+      'Proper quotation, because listing the book in the bibliography is enough.',
+      'Fair use for research, because school projects never need quotation marks.',
+      'Allowed sharing under Creative Commons because the book was legally published.',
       'A quotation-rule violation and plagiarism — without visible demarcation, readers are misled.'
     ],
     answer: 3,
@@ -208,10 +208,10 @@ const LECT2_EXAM_EN = [
     difficulty: 'creative',
     question: 'You publish your photo as "CC BY-NC-ND" and a classmate wants to use it. What does your license allow them to do?',
     options: [
-      'Sell prints of it for profit.',
+      'Sell printed copies for profit as long as your name is clearly mentioned.',
       'Share it as-is with your credit, non-commercially, with zero changes.',
-      'Skip crediting you since it is online.',
-      'Crop it, add filters, and repost as their own.'
+      'Share it freely online without credit since it was posted on the internet.',
+      'Crop it, add filters, and repost it as a new original work of their own.'
     ],
     answer: 1,
     explain: 'BY-NC-ND = credit you (BY) + no money-making (NC) + no derivatives (ND). Share verbatim only.'

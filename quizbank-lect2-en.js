@@ -15,10 +15,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'Which of these best describes "personal information"?',
     options: [
-      'Any public poster or flyer on a school wall.',
-      'Computer programs registered at a patent office.',
+      'Information about a living person that counts only if it includes an official ID number.',
+      'Only sensitive data like religion or health that is already published online.',
       'Information about a living person that can identify them directly or when combined with other data.',
-      'Daily weather temperatures in big cities.'
+      'Anonymous statistics that can never identify anyone even when combined.'
     ],
     answer: 2,
     explain: 'Personal information is any data about a living person that identifies them alone or in combination with other data.'
@@ -30,9 +30,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'Which item belongs to the "Four Basic Items" used to verify identity?',
     options: [
       'Date of birth.',
-      'Bank account number.',
-      'Work email address.',
-      'Blood type.'
+      'Phone number.',
+      'Fingerprint scan.',
+      'Passport number.'
     ],
     answer: 0,
     explain: 'The Four Basic Items are: name, address, date of birth, and gender.'
@@ -43,9 +43,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'Passport numbers, driver\'s license numbers, and national ID numbers are classified as:',
     options: [
-      'Public numbers anyone can share freely.',
-      'Registered trademarks.',
-      'Creative Commons license codes.',
+      'General personal data that needs only basic protection measures.',
+      'Sensitive data like religion or health that needs special consent.',
+      'Biometric data such as fingerprints that can never be replaced.',
       'Personal Identification Codes — unique numbers that point to one specific person.'
     ],
     answer: 3,
@@ -57,10 +57,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'Why does the law demand extra-strict protection for sensitive data like religion, health, or criminal records?',
     options: [
-      'Because companies want to buy it for ads.',
+      'Because sensitive data is harder to store on school computers.',
       'Because leaking it can cause discrimination, harm, or danger to the person.',
-      'Because it enters the public domain after 50 years.',
-      'Because it follows patent-office rules.'
+      'Because companies pay higher prices for sensitive data files.',
+      'Because sensitive data loses legal protection after a few years.'
     ],
     answer: 1,
     explain: 'Sensitive data needs the highest protection because exposure can lead to discrimination and serious personal harm.'
@@ -71,10 +71,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'You use a random nickname in a gaming forum that cannot be linked to your real identity in any way. Is it personal information?',
     options: [
-      'Yes, every nickname counts as sensitive personal data.',
-      'It is automatically an international patent.',
+      'Yes — every nickname and avatar always counts as personal data.',
+      'Yes — it counts as sensitive data because it shows your hobbies.',
       'No — a nickname that cannot identify a real living person is not personal data.',
-      'It falls under trademark law.'
+      'Only if you have used the same nickname for over a year.'
     ],
     answer: 2,
     explain: 'If a pseudonym cannot be linked to a real person, directly or by combination, it does not meet the definition of personal data.'
@@ -86,9 +86,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'Which of these is biometric data of the highest sensitivity?',
     options: [
       'Iris scans, fingerprints, and DNA profiles.',
-      'Your home zip code.',
-      'The color of your bicycle.',
-      'The location of a city park.'
+      'Home address, phone number, and email address.',
+      'Full name, gender, and date of birth.',
+      'School grades, attendance dates, and class number.'
     ],
     answer: 0,
     explain: 'Biometrics like fingerprints, face geometry, and iris scans are irreplaceable high-sensitivity identifiers.'
@@ -99,9 +99,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'Your school builds a fitness app that tracks students\' health data. What is the most responsible way to handle it?',
     options: [
-      'Post all measurements on the school board for competition.',
-      'Sell the data to sportswear companies.',
-      'Store everything in plain unencrypted files.',
+      'Keep health data in a shared sheet, limit access to coaches, and inform students.',
+      'Store names together with health data under one password for office staff.',
+      'Collect only weight data, delete names monthly, and skip parental consent.',
       'Encrypt health fields, separate names from medical records, and get parents\' permission.'
     ],
     answer: 3,
@@ -117,10 +117,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'Which article of the Egyptian Constitution protects the privacy of citizens\' private lives?',
     options: [
-      'Article 1 of the maritime code.',
+      'Article 56.',
       'Article 57.',
-      'Article 20 of the traffic law.',
-      'Article 70 of Creative Commons.'
+      'Article 58.',
+      'Article 59.'
     ],
     answer: 1,
     explain: 'Article 57 explicitly affirms that private life is inviolable and protected.'
@@ -131,10 +131,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'Your right to stop others from photographing you or publishing your photo without permission is called:',
     options: [
-      'Industrial invention rights.',
-      'Creative Commons attribution.',
+      'Publicity rights (commercial value of fame).',
+      'Privacy rights (protection of private life).',
       'Image Rights (portrait rights).',
-      'The formality doctrine.'
+      'Copyright in photographic works.'
     ],
     answer: 2,
     explain: 'Image rights protect you against unauthorized photography or publishing of your likeness.'
@@ -146,9 +146,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'A student films a classmate in the school yard and posts it on TikTok as a prank, without asking. What is the legal view?',
     options: [
       'It violates the classmate\'s image rights and privacy because there was no consent.',
-      'Fully fine — classmates are assumed to agree.',
-      'It counts as an educational fair-use demo.',
-      'It is automatically Creative Commons licensed.'
+      'Allowed because filming at school counts as classroom fair use.',
+      'Allowed if the video gets few views and is deleted in a week.',
+      'Allowed because friendship implies consent to share photos.'
     ],
     answer: 0,
     explain: 'Friendship does not waive rights. Publishing someone\'s likeness without consent violates their image rights.'
@@ -159,9 +159,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'What right protects the money value of a celebrity\'s fame and face in ads?',
     options: [
-      'Utility model rights.',
-      'The non-formality doctrine.',
-      'Moral rights.',
+      'Image rights (control over one\'s likeness).',
+      'Moral rights (attribution and integrity).',
+      'Neighboring rights (performers and broadcasters).',
       'Publicity rights.'
     ],
     answer: 3,
@@ -173,10 +173,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'Someone spreads a rumor that a person stole something, then posts their address, photo, and phone number "to warn the public". This is:',
     options: [
-      'A great civic duty helping the police.',
+      'Lawful because warning the public justifies sharing private details.',
       'Unlawful — a serious privacy violation and possible criminal defamation.',
-      'A correct use of the opt-in system.',
-      'Legal protection for nearby shops.'
+      'A minor school violation that needs only a quick apology.',
+      'Lawful consent because the address was already partly known.'
     ],
     answer: 1,
     explain: 'Posting private details based on rumors (doxxing) is a grave privacy violation with criminal liability.'
@@ -187,10 +187,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'When is an organization legally allowed to share your personal data with others without your consent?',
     options: [
-      'To send you seasonal sale catalogs.',
-      'When a coworker is just curious about your address.',
+      'When a company wants to improve ads or offer seasonal discounts.',
+      'When a relative or coworker asks out of curiosity or concern.',
       'When the law requires it, to protect national security, or to save a life in an emergency.',
-      'To sell your data in a public auction.'
+      'When the data was already posted once on social media.'
     ],
     answer: 2,
     explain: 'Exceptions are strictly limited to legal mandates, life-threatening emergencies, national security, and court orders.'
@@ -202,9 +202,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'You are writing a school newspaper profile of a star athlete. How do you respect privacy and image rights?',
     options: [
       'Get prior written consent from the athlete and their guardian before photos and publishing.',
-      'Take secret photos at an off-campus gym and publish as a scoop.',
-      'Publish their full report card and medical file.',
-      'Edit their face with AI filters without asking.'
+      'Photograph the athlete in public and publish quickly without asking.',
+      'Publish the athlete\'s grades and health file to complete the profile.',
+      'Reuse last year\'s photos with AI edits and no new permission.'
     ],
     answer: 0,
     explain: 'Ethical journalism needs affirmative written consent before taking and publishing someone\'s portrait.'
@@ -219,9 +219,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'What document do companies publish to explain how they collect, use, and protect your data?',
     options: [
-      'A patent specification.',
-      'A Creative Commons certificate.',
-      'A trademark deed.',
+      'A terms-of-service agreement.',
+      'A cookie consent notice.',
+      'A data-breach notification letter.',
       'A privacy policy.'
     ],
     answer: 3,
@@ -233,10 +233,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'A seal given by regulators to companies that prove they protect personal data properly is called:',
     options: [
-      'A utility model patent.',
+      'A trademark registration certificate.',
       'A privacy mark / data-protection license.',
-      'A Creative Commons emblem.',
-      'A non-commercial seal.'
+      'A Creative Commons license badge.',
+      'An ISO quality management certificate.'
     ],
     answer: 1,
     explain: 'A privacy mark shows the company passed audited data-protection checks.'
@@ -247,10 +247,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'In an "opt-in" system, when can a service start sending you promos or profiling your data?',
     options: [
-      'Right when you install the app, no questions asked.',
-      'Fifty years after you register.',
+      'As soon as you install the app, with consent assumed by default.',
+      'After you receive the first promo, unless you complain quickly.',
       'Only after you actively give explicit prior consent, like ticking an unchecked box.',
-      'Whenever the promo contains a celebrity photo.'
+      'Whenever you leave a pre-ticked box unchanged at signup.'
     ],
     answer: 2,
     explain: 'Opt-in means: nothing happens until you actively say yes first.'
@@ -262,9 +262,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'How does an "opt-out" system work?',
     options: [
       'Data collection and promos run by default until you actively object and unsubscribe.',
-      'All data collection is banned forever.',
-      'You need a patent before opening an account.',
-      'You must pay per page view.'
+      'Nothing is collected until you tick a box to allow it first.',
+      'Promos stop permanently after you ignore the first message.',
+      'You need court approval before any data can be stored.'
     ],
     answer: 0,
     explain: 'Opt-out is active by default — it continues until you expressly object.'
@@ -275,9 +275,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'A school keeps parents\' phone numbers in an encrypted database and refuses to share them with advertisers. This is:',
     options: [
-      'A violation of the formality principle.',
-      'An infringement of parents\' publicity rights.',
-      'Blocking fair use for advertising.',
+      'Violating advertisers\' right to fair use of school data.',
+      'Breaching parents\' publicity rights by hiding their names.',
+      'Ignoring the formality rule for registering phone numbers.',
       'Fulfilling its legal duty to protect data and block unlawful sharing.'
     ],
     answer: 3,
@@ -289,10 +289,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'You are building an online store checkout. How do you implement a true opt-in for the newsletter?',
     options: [
-      'Pre-tick the box and force it to complete the purchase.',
+      'Pre-tick the newsletter box but add a small unsubscribe link.',
       'Leave the newsletter box unticked by default and let the buyer choose freely.',
-      'Hide the privacy policy on a broken page.',
-      'Send daily promos with no unsubscribe link.'
+      'Require newsletter signup as a mandatory step to finish purchase.',
+      'Subscribe the buyer automatically until they actively object.'
     ],
     answer: 1,
     explain: 'Real opt-in = unchecked box, consent left entirely to the user\'s free choice.'
@@ -307,10 +307,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'Intellectual property splits into which two main branches?',
     options: [
-      'Graphic design and video editing rights.',
-      'Amateur and professional monopolies.',
+      'Patent rights and trademark rights.',
+      'Moral rights and economic rights.',
       'Industrial property rights and copyrights.',
-      'Open-data and server licenses.'
+      'Public domain and open-license collections.'
     ],
     answer: 2,
     explain: 'IP = industrial property (patents, designs, trademarks) + copyright (literature, art, software).'
@@ -322,9 +322,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'Which office examines and grants patents in Egypt?',
     options: [
       'The Egyptian Patent Office (Academy of Scientific Research).',
-      'The Ministry of Tourism.',
-      'The national postal authority.',
-      'The food safety authority.'
+      'The Egyptian Trademark Office (Commercial Registry).',
+      'The National Library and Archives Authority.',
+      'The Consumer Protection Agency for Markets.'
     ],
     answer: 0,
     explain: 'The Egyptian Patent Office is the authority that examines and grants patents.'
@@ -335,9 +335,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'Which right protects a brand-new, non-obvious industrial invention, and for how long?',
     options: [
-      'Trademarks, 5 years non-renewable.',
-      'Copyrights, 10 years from publication.',
-      'Moral rights, 7 years.',
+      'Patent rights, 10 years from the application date.',
+      'Patent rights, life plus 50 years after death.',
+      'Trademark rights, 10 years renewable indefinitely.',
       'Patent rights, 20 years from the application date.'
     ],
     answer: 3,
@@ -349,10 +349,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'Utility model rights protect:',
     options: [
-      'Brand names and logos.',
+      'Brand names and logos that distinguish a company.',
       'Practical structural ideas and shape tweaks that improve how a product works.',
-      'Theater scripts and poems.',
-      'Songs and radio shows.'
+      'Novels and songs as original artistic works.',
+      'New chemical processes as breakthrough inventions.'
     ],
     answer: 1,
     explain: 'Utility models (petty patents) cover practical mechanical and structural improvements.'
@@ -363,10 +363,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'How long does a utility model last under Egyptian law?',
     options: [
-      '20 years like a full patent.',
-      '50 years after death.',
+      '20 years from application, like a full patent.',
+      '10 years renewable forever in 10-year blocks.',
       '7 years from application (up to 10 in countries like Japan).',
-      'One year, renewed weekly.'
+      'Life plus 50 years after the inventor\'s death.'
     ],
     answer: 2,
     explain: 'Utility models last 7 years in Egypt, versus 10 in Japan and some other systems.'
@@ -378,9 +378,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'A carmaker creates: a new hydrogen engine, a sculpted body shape, a silver star logo, and a better anti-slip pedal shape. What is the correct mapping?',
     options: [
       'Engine: patent | Body: industrial design | Logo: trademark | Pedal: utility model.',
-      'Engine: copyright | Body: CC | Logo: patent | Pedal: trademark.',
-      'All four in one inseparable patent.',
-      'Engine: trademark | Body: patent | Logo: utility model | Pedal: copyright.'
+      'Engine: utility model | Body: trademark | Logo: patent | Pedal: design.',
+      'Engine: trademark | Body: patent | Logo: design | Pedal: copyright.',
+      'Engine: design | Body: patent | Logo: utility model | Pedal: trademark.'
     ],
     answer: 0,
     explain: 'Invention = patent; styling = design; logo = trademark; functional shape tweak = utility model.'
@@ -391,9 +391,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'Why are trademarks special when it comes to duration?',
     options: [
-      'They expire after 2 years into the public domain.',
-      'They follow the founder\'s lifetime.',
-      'They need no registration (non-formality).',
+      'They last 20 years from filing and then expire permanently.',
+      'They last for the founder\'s life plus 50 years.',
+      'They need no registration and start automatically at first use.',
       'They last 10 years but can be renewed forever in 10-year blocks.'
     ],
     answer: 3,
@@ -405,10 +405,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'You design a phone accessory with a clever folding stand plus your own brand badge. How do you protect it?',
     options: [
-      'Post a photo saying "do not steal".',
+      'Post photos online with a watermark and rely on automatic rights.',
       'File a utility model / design for the stand mechanism and register a trademark for the badge.',
-      'Rely on non-formality for hardware.',
-      'Give ownership to the first factory you contact.'
+      'Keep the design secret and trust the first factory to respect it.',
+      'Register only a trademark and assume it covers the mechanism too.'
     ],
     answer: 1,
     explain: 'Industrial property needs the formality principle: file and register, or you have no rights.'
@@ -419,10 +419,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'What is the core difference between the formality principle (industrial property) and non-formality (copyright)?',
     options: [
-      'Industrial property starts automatically; copyright needs parliament approval.',
-      'Both need a cash deposit in the central bank.',
+      'Both rights need formal registration before any protection starts.',
+      'Both rights start automatically with no paperwork at all.',
       'Industrial property needs a formal application and registration; copyright starts automatically at creation.',
-      'There is no legal difference at all.'
+      'Copyright needs a patent filing while industrial rights are automatic.'
     ],
     answer: 2,
     explain: 'Formality = file and register first. Non-formality = rights exist from the moment of creation.'
@@ -438,9 +438,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'What rule decides when copyright protection starts?',
     options: [
       'Non-formality: protection starts automatically at creation.',
-      'The formality principle (must file first).',
-      'Yearly fees to the chamber of commerce.',
-      'Assignment to the ministry of education.'
+      'Formality: protection starts only after official registration.',
+      'Renewal: protection needs yearly fees to stay valid.',
+      'Deposit: protection starts after submitting copies to a bank.'
     ],
     answer: 0,
     explain: 'Copyright vests automatically the instant an original work is fixed — no filing needed.'
@@ -451,9 +451,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'Which of these does copyright protect?',
     options: [
-      'Bulk sugar, rice, and grain.',
-      'Random phone numbers.',
-      'Daily temperature forecasts.',
+      'Ideas, facts, procedures, and official news.',
+      'Names, slogans, logos, and brand colors.',
+      'Phone numbers, temperatures, scores, and zip codes.',
       'Novels, paintings, music, and software.'
     ],
     answer: 3,
@@ -465,10 +465,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'What are an author\'s "moral rights" and how long do they last?',
     options: [
-      'The right to sell paperbacks for profit.',
+      'Commercial exploitation rights; transferable, lasting life plus 50 years.',
       'Attribution plus integrity; perpetual, inalienable, cannot be sold or waived.',
-      'Free use of municipal printing presses.',
-      'Commercial rights expiring one year after publication.'
+      'Neighboring rights for performers; lasting 50 years from performance.',
+      'Trademark renewal rights; lasting 10 years with indefinite renewal.'
     ],
     answer: 1,
     explain: 'Moral rights stay with the creator forever and can never be transferred.'
@@ -479,10 +479,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'How long do economic rights last under Egyptian copyright law?',
     options: [
-      'Exactly 20 years from release.',
-      '10 years, renewable once.',
+      '20 years from the filing date, like a patent.',
+      '10 years renewable forever, like a trademark.',
       'The author\'s life plus 50 years after death (70 internationally).',
-      'They end the day the author dies.'
+      '7 years from creation, like a utility model.'
     ],
     answer: 2,
     explain: 'In Egypt: life + 50 years for heirs. Internationally often life + 70.'
@@ -494,9 +494,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'Taha Hussein died in 1973. What is the status of his books in Egypt today (50+ years later)?',
     options: [
       'Economic rights expired into the public domain — free to reprint — while moral attribution stays forever.',
-      'Still under exclusive publisher monopoly for 200 years.',
-      'Transferred to the patent bureau.',
-      'Only readable with a Creative Commons paid permit.'
+      'Still under exclusive protection for heirs because Egypt uses 70 years, not 50.',
+      'Moved to the patent office for a fresh 20-year term after copyright ends.',
+      'Locked behind a paid Creative Commons permit before anyone may reprint it.'
     ],
     answer: 0,
     explain: 'After 50 years post-mortem in Egypt, works enter the public domain; moral credit remains.'
@@ -507,9 +507,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'Who holds "neighboring rights"?',
     options: [
-      'Neighbors living next to the author.',
-      'Shopkeepers near publishing houses.',
-      'Only OS programmers.',
+      'Authors, poets, painters, and novelists.',
+      'Heirs, publishers, printers, and booksellers.',
+      'Trademark owners, patent holders, and designers.',
       'Performers (actors, singers, musicians), record producers, and broadcasters.'
     ],
     answer: 3,
@@ -521,10 +521,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'Your school drama club wants to perform Shakespeare with a modern orchestra recording. How do you handle rights?',
     options: [
-      'Shakespeare is patented; orchestra music is always free.',
+      'Both the old text and the new recording are free because Shakespeare died long ago.',
       'Shakespeare\'s text is public domain and free, but the modern recording has neighboring rights — get a license or use a royalty-free version.',
-      'Both are banned from school performances.',
-      'Sell tickets commercially without asking anyone.'
+      'Both need the heirs\' permission because any use of classics stays restricted.',
+      'The text is free and you may sell the orchestra recording commercially without limits.'
     ],
     answer: 1,
     explain: 'Old texts are free; new performances of them are separately protected.'
@@ -535,10 +535,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'Why is downloading pirated music for "personal listening only" still infringement?',
     options: [
-      'Personal downloads are only allowed on holidays.',
-      'Slow internet makes it illegal.',
+      'Because private listening always allows any download source.',
+      'Because buying one original allows sharing copies with friends.',
       'Because the law bans downloading commercial works you know were uploaded illegally.',
-      'The law punishes people who buy originals.'
+      'Because only uploading pirated files is banned, not downloading them.'
     ],
     answer: 2,
     explain: 'Private-use exceptions do not cover knowingly downloading pirated uploads.'
@@ -554,9 +554,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'What is the main goal of copyright law?',
     options: [
       'Balancing fair use for education and culture with protecting authors.',
-      'Stopping students from reading books.',
-      'Letting governments seize all art for free.',
-      'Forcing writers into factory work.'
+      'Giving publishers permanent control over all reading and lending.',
+      'Blocking schools from quoting any text without paying fees.',
+      'Letting the state use any artwork for free without credit.'
     ],
     answer: 0,
     explain: 'Copyright balances two things: creators earn a living, and culture and education keep growing.'
@@ -567,9 +567,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'Which of these is allowed fair use with no license needed?',
     options: [
-      'Printing 1,000 pirate novels for the black market.',
-      'Downloading a paid film from a piracy site.',
-      'Selling bootleg concert discs.',
+      'Copying a full textbook for every student to avoid buying it.',
+      'Downloading a pirated film to show for weekend entertainment.',
+      'Selling printed song lyrics at the school festival for profit.',
       'Photocopying a textbook chapter for classroom teaching.'
     ],
     answer: 3,
@@ -581,10 +581,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'You buy a music CD, burn copies, and hand them to classmates as gifts. Is this "private use"?',
     options: [
-      'Yes, gifts are always fine.',
+      'Yes — buying the original allows gifts to any number of friends.',
       'No — handing copies to classmates goes beyond personal domestic use and infringes copyright.',
-      'Yes, because you bought the original.',
-      'Yes, same school means same household.'
+      'Yes — classmates count as household for private-use rules.',
+      'Yes — gifts without profit are always exempt from copyright.'
     ],
     answer: 1,
     explain: 'Private use is strictly you + your household. Distributing to friends breaks that limit.'
@@ -595,10 +595,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'What does "subordination" mean in quotation rules?',
     options: [
-      'Copying a whole book and adding your name.',
-      'Paying all the author\'s heirs first.',
+      'Your quote must dominate and your own words stay minimal for proof.',
+      'You must copy long passages to prove you really read the source.',
       'Your own writing stays primary; the quote is secondary support, not the main content.',
-      'Needing every classmate\'s approval.'
+      'You must place long quotes first and add comments only at the end.'
     ],
     answer: 2,
     explain: 'Your work leads; the quote only supports it as evidence.'
@@ -610,9 +610,9 @@ const LECT2_QUIZBANK_EN = [
     question: 'Someone translates a Spanish novel into Arabic and sells it without permission, claiming "different language = new work". Verdict?',
     options: [
       'Direct infringement — translation rights belong exclusively to the original author.',
-      'Fair use — translation is a brand-new creation.',
-      'Covered by Creative Commons education rules.',
-      'Legal because the author lives abroad.'
+      'Fair use — changing language creates a brand-new independent work.',
+      'Legal after 7 years because translation rights expire quickly.',
+      'Legal if the author lives abroad and sells in another language.'
     ],
     answer: 0,
     explain: 'Translation is an exclusive economic right. Translating + publishing without permission is piracy.'
@@ -623,9 +623,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'Which of these belongs to the 5 mandatory quotation rules?',
     options: [
-      'Changing words to hide the source.',
-      'Making quotes at least 95% of your paper.',
-      'Quoting only pages with no author name.',
+      'Copying long passages without marks as long as you list the source.',
+      'Translating freely and claiming the translation as your own words.',
+      'Quoting anonymous pages without author or title to stay neutral.',
       'Not altering the text, putting it in quotes, and citing author + source.'
     ],
     answer: 3,
@@ -637,10 +637,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'When can your school festival legally perform a commercial play script for free, with no royalties?',
     options: [
-      'When tickets fund teacher vacations.',
+      'When tickets are cheap and profits fund school activities.',
       'When entry is completely free and student actors get zero pay.',
-      'When it is recorded and sold to TV.',
-      'When the audience pays a small fee to actors.'
+      'When actors get small fees but entry stays free for students.',
+      'When the play is recorded and shared only within the school.'
     ],
     answer: 1,
     explain: 'Non-profit performance exception needs two zeros: zero admission, zero performer pay.'
@@ -655,10 +655,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'easy',
     question: 'What is Creative Commons mainly for?',
     options: [
-      'Removing constitutional privacy rights.',
-      'Fining companies in court.',
+      'Automatic waivers that send every work straight to the public domain.',
+      'Paid permits for commercial broadcasting of music and films.',
       'Standard licenses letting creators share work while stating reuse terms up front.',
-      'Blocking books on the internet.'
+      'Privacy seals for companies that handle personal data safely.'
     ],
     answer: 2,
     explain: 'CC is a flexible licensing system that makes sharing and reuse simple and clear.'
@@ -683,9 +683,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'What does the "NC" (non-commercial) condition forbid?',
     options: [
-      'Mentioning the author\'s name.',
-      'Adapting while selling in stores.',
-      'Print-only magazine publication.',
+      'Crediting the author by name in publications.',
+      'Sharing copies verbatim for classroom teaching.',
+      'Adapting the work for non-profit school projects.',
       'Using the work or derivatives for commercial profit.'
     ],
     answer: 3,
@@ -697,10 +697,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'medium',
     question: 'The "ND" (no derivatives) badge means users must:',
     options: [
-      'Change the work freely with new author names.',
+      'Translate and adapt it freely with proper credit.',
       'Share it verbatim only — no remixes, edits, or adaptations.',
-      'Translate it into ten languages for sale.',
-      'Delete the photographer\'s name first.'
+      'Remix it for commercial ads once the author is credited.',
+      'Share adaptations under the same license terms.'
     ],
     answer: 1,
     explain: 'ND = as-is sharing only. No derivatives whatsoever.'
@@ -711,10 +711,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'hard',
     question: 'You remix a work licensed "Share-Alike" (SA). What must you do with your remix?',
     options: [
-      'Register it as an industrial patent.',
-      'Sell it only to corporations.',
+      'Release it under any looser license you prefer.',
+      'Credit the author once and keep your remix all rights reserved.',
       'Release it under the exact same CC license combination.',
-      'Block everyone else from seeing it.'
+      'Ask for payment before allowing others to view it.'
     ],
     answer: 2,
     explain: 'SA is viral: derivatives must carry identical license terms.'
@@ -739,9 +739,9 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'An artist posts an infographic as "CC BY-SA". You add school branding and publish it in the newsletter. What must you do?',
     options: [
-      'Register it as your own trademark.',
-      'Erase the artist\'s signature.',
-      'Block the school from distributing it.',
+      'Credit the artist once but keep your version all rights reserved.',
+      'Pay the artist a fee and drop the share-alike requirement.',
+      'Use the poster in print only and forbid digital copies.',
       'Credit the artist and release your version under the same CC BY-SA license.'
     ],
     answer: 3,
@@ -753,10 +753,10 @@ const LECT2_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'What single principle connects data protection, IP, and cyber ethics in a student\'s daily life?',
     options: [
-      'Post everything online unless someone complains.',
+      'Post photos freely online and delete only if someone complains.',
       'Respect people\'s privacy and data, never share photos without consent, credit creators, and follow license terms.',
-      'Ignore IP rights — tech belongs to everyone.',
-      'Ignore passwords and privacy policies.'
+      'Reuse any text without credit because school use covers everything.',
+      'Skip passwords and privacy settings to save time and effort.'
     ],
     answer: 1,
     explain: 'One foundation: respect human dignity, honor creativity, and practice responsible digital citizenship.'
