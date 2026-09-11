@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revision — Lectures 1 + 2 | Origin Atlas</title>
+  <meta name="description" content="Combined revision of the first two lectures: key terms with brief explanations plus a mixed quiz. AR / EN bilingual.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=3">
+  <link rel="stylesheet" href="quiz.css?v=3">
+  <link rel="stylesheet" href="revision.css?v=3">
+  <link rel="stylesheet" href="rtl.css?v=3">
+  <script src="i18n.js?v=3"></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="topbar-meta" data-i18n="revEdition">Revision · Lectures 1 + 2</span>
+      <a class="brand" href="index.html">Origin <span>Atlas</span></a>
+      <div class="top-controls">
+        <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="qzBackToList">← All quizzes</a>
+        <button id="themeToggle" class="control-btn">🌙</button>
+        <button id="langToggle" class="control-btn">AR / EN</button>
+      </div>
+    </div>
+    <div class="progress-row">
+      <div class="progress-bar"><div class="progress-fill" id="revProgressFill"></div></div>
+      <span class="progress-label" id="revProgressLabel">00 / 20</span>
+    </div>
+  </header>
+
+  <main class="quiz-main">
+
+    <section class="picker-head" style="margin-bottom:2rem;">
+      <span class="mono" data-i18n="revEyebrow">Combined revision session</span>
+      <h1 data-i18n="revTitle">Lectures 1 + 2, in one place.</h1>
+      <p class="muted" data-i18n="revSubtitle">First revise the key terms with their brief explanations, then test yourself with 20 mixed questions from both lectures.</p>
+    </section>
+
+    <!-- Part 1: Keywords -->
+    <section class="rev-section" id="revKeywordsSection">
+      <div class="section-head">
+        <span class="mono" data-i18n="revKwLabel">Part 1 · Key terms</span>
+        <h2 data-i18n="revKwTitle">Words that matter</h2>
+        <span class="mono faint" id="revKwCount">—</span>
+      </div>
+
+      <div class="rev-filters">
+        <div class="difficulty-chips" id="revFilterChips">
+          <button class="diff-chip active" data-filter="all"><span data-i18n="diff_all">All</span></button>
+          <button class="diff-chip" data-filter="lect1"><span data-i18n="revFilterL1">Lecture 1</span></button>
+          <button class="diff-chip" data-filter="lect2"><span data-i18n="revFilterL2">Lecture 2</span></button>
+        </div>
+        <input type="search" id="revSearch" class="rev-search" data-i18n-ph="revSearchPh" placeholder="Search terms…">
+      </div>
+
+      <div class="rev-kw-grid" id="revKwGrid"></div>
+    </section>
+
+    <!-- Part 2: Combined quiz -->
+    <section class="rev-section" id="revQuizSection">
+      <div class="section-head">
+        <span class="mono" data-i18n="revQuizLabel">Part 2 · Combined quiz</span>
+        <h2 data-i18n="revQuizTitle">20 questions, both lectures</h2>
+        <span class="mono faint">07 + 07 + 06</span>
+      </div>
+
+      <div id="revPicker">
+        <p class="muted" data-i18n="revQuizDesc" style="margin-bottom:1.2rem;">7 questions from Lecture 1, 7 from Lecture 2, plus 6 new questions that combine both. Shuffled every run.</p>
+        <div class="rev-mix">
+          <span class="diff-mini diff-mini-easy">L1 · 07</span>
+          <span class="diff-mini diff-mini-medium">L2 · 07</span>
+          <span class="diff-mini diff-mini-creative" data-i18n="revMixCombined">Combined · 06</span>
+        </div>
+        <div class="exam-actions" style="margin-top:1.4rem;">
+          <button class="btn btn-primary btn-arrow" id="revStartBtn" data-i18n="revStart">Start revision quiz</button>
+        </div>
+      </div>
+
+      <div class="quiz-runner hidden" id="revRunner">
+        <div class="quiz-card-stage">
+          <div class="quiz-card-eyebrow">
+            <span class="mono" id="revStageLabel">Question 01</span>
+            <span class="mono faint" id="revScore">0 / 0 correct</span>
+          </div>
+          <div class="quiz-card-head">
+            <h2 class="quiz-card-title" id="revStageTitle">—</h2>
+            <span class="diff-badge" id="revSource">—</span>
+          </div>
+          <p class="quiz-card-q" id="revQuestion">—</p>
+          <div class="quiz-card-options" id="revOptions"></div>
+          <div class="quiz-card-feedback hidden" id="revFeedback"></div>
+          <div class="quiz-card-actions">
+            <button class="btn btn-ghost" id="revSkipBtn" data-i18n="qzSkip">Skip</button>
+            <button class="btn btn-primary btn-arrow hidden" id="revNextBtn" data-i18n="qzNext">Next question</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-result hidden" id="revResult">
+        <div class="result-head">
+          <span class="mono" data-i18n="qzResultEyebrow">Completed</span>
+          <h1 id="revResultTitle">—</h1>
+          <p class="muted" id="revResultSub">—</p>
+        </div>
+        <div class="result-score" id="revResultScore">—</div>
+        <div class="result-grid">
+          <div class="result-stat">
+            <span class="mono" data-i18n="qzStatCorrect">Correct</span>
+            <strong id="revCorrect">0</strong>
+          </div>
+          <div class="result-stat">
+            <span class="mono" data-i18n="qzStatWrong">Wrong</span>
+            <strong id="revWrong">0</strong>
+          </div>
+          <div class="result-stat">
+            <span class="mono" data-i18n="qzStatSkipped">Skipped</span>
+            <strong id="revSkipped">0</strong>
+          </div>
+        </div>
+        <div class="result-breakdown" id="revBreakdown"></div>
+        <div class="result-actions">
+          <button class="btn btn-ghost" id="revRetryBtn" data-i18n="qzRetry">Try again</button>
+          <a class="btn btn-primary btn-arrow" href="quizzes.html" data-i18n="qzBackToList">← All quizzes</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span class="mono" data-i18n="footerText">Made for curious minds · Intro to Computer Science</span>
+  </footer>
+
+  <script src="journeys.js?v=3"></script>
+  <script src="revision.js?v=3"></script>
+</body>
+</html>

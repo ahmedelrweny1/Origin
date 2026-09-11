@@ -902,6 +902,13 @@ html[dir="rtl"] .quiz-card:hover {
   background: rgba(20, 17, 15, 0.6);
 }
 
+/* Featured revision banner on landing */
+.quiz-card-revision::before {
+  background: var(--c-blue);
+}
+.quiz-card-revision:hover::before { width: 6px; }
+.quiz-card-revision .journey-index { color: var(--c-blue); }
+
 /* Difficulty breakdown strip on the landing card */
 .quiz-card-diff {
   display: flex;

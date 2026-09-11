@@ -163,7 +163,30 @@ const translations = {
     examPassedMsg: "The full practice bank is now unlocked for you.",
     examFailedMsg: "Review the explanations and try again.",
     examGoPractice: "Open practice bank →",
-    examRetry: "Try the exam again"
+    examRetry: "Try the exam again",
+
+    // Revision session (Lectures 1 + 2)
+    revEdition: "Revision · Lectures 1 + 2",
+    revEyebrow: "Combined revision session",
+    revTitle: "Lectures 1 + 2, in one place.",
+    revSubtitle: "First revise the key terms with their brief explanations, then test yourself with 20 mixed questions from both lectures.",
+    revKwLabel: "Part 1 · Key terms",
+    revKwTitle: "Words that matter",
+    revFilterL1: "Lecture 1",
+    revFilterL2: "Lecture 2",
+    revSearchPh: "Search terms…",
+    revNoMatch: "No terms match your search.",
+    revQuizLabel: "Part 2 · Combined quiz",
+    revQuizTitle: "20 questions, both lectures",
+    revQuizDesc: "7 questions from Lecture 1, 7 from Lecture 2, plus 6 new questions that combine both. Shuffled every run.",
+    revMixCombined: "Combined · 06",
+    revStart: "Start revision quiz",
+    revSrcL1: "Lecture 1",
+    revSrcL2: "Lecture 2",
+    revSrcCombined: "Combined",
+    revBannerTag: "Revision · L1 + L2",
+    revBannerTitle: "Combined revision: keywords + mixed quiz",
+    revBannerDesc: "Key terms with brief explanations from both lectures, plus a 20-question mixed quiz."
   },
   ar: {
     mastheadEdition: "العدد ١ · أول إصدار",
@@ -329,7 +352,30 @@ const translations = {
     examPassedMsg: "بنك الأسئلة الكامل بقى متاحلك دلوقتي.",
     examFailedMsg: "راجع التوضيحات وجرب تاني.",
     examGoPractice: "افتح بنك الأسئلة ←",
-    examRetry: "حاول تاني"
+    examRetry: "حاول تاني",
+
+    // Revision session (Lectures 1 + 2)
+    revEdition: "مراجعة · المحاضرة الأولى + التانية",
+    revEyebrow: "حصة مراجعة شاملة",
+    revTitle: "المحاضرتين الأولى والتانية في مكان واحد.",
+    revSubtitle: "الأول راجع الكلمات المهمة بشرحها المختصر، وبعدين اختبر نفسك بـ ٢٠ سؤال مخلوط من المحاضرتين.",
+    revKwLabel: "الجزء الأول · الكلمات المهمة",
+    revKwTitle: "الكلمات اللي تفرق",
+    revFilterL1: "المحاضرة الأولى",
+    revFilterL2: "المحاضرة التانية",
+    revSearchPh: "دوّر على مصطلح…",
+    revNoMatch: "مفيش مصطلحات مطابقة لبحثك.",
+    revQuizLabel: "الجزء التاني · اختبار شامل",
+    revQuizTitle: "٢٠ سؤال من المحاضرتين",
+    revQuizDesc: "٧ أسئلة من الأولى و٧ من التانية، + ٦ أسئلة جديدة بتجمع بينهم. متلخبطين كل مرة.",
+    revMixCombined: "مشترك · ٠٦",
+    revStart: "ابدأ اختبار المراجعة",
+    revSrcL1: "المحاضرة الأولى",
+    revSrcL2: "المحاضرة التانية",
+    revSrcCombined: "مشتركة",
+    revBannerTag: "مراجعة · الأولى + التانية",
+    revBannerTitle: "مراجعة شاملة: كلمات + اختبار مخلوط",
+    revBannerDesc: "الكلمات المهمة بشرحها من المحاضرتين، + اختبار ٢٠ سؤال مخلوط."
   }
 };
 

@@ -1,0 +1,128 @@
+/* ============================================================
+   Revision session — keywords glossary + combined quiz
+   ============================================================ */
+
+.rev-section {
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
+  border-bottom: var(--rule-thick) solid var(--rule);
+}
+
+.rev-section:last-child {
+  border-bottom: none;
+}
+
+/* ---------- Filters ---------- */
+.rev-filters {
+  display: grid;
+  gap: 0.8rem;
+  margin-bottom: 1.6rem;
+}
+
+.rev-search {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 0.85rem 1.1rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  color: var(--ink);
+  border-radius: 0;
+  width: 100%;
+  max-width: 420px;
+}
+
+.rev-search::placeholder {
+  color: var(--ink-faint);
+  font-style: italic;
+}
+
+.rev-search:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: translate(-2px, -2px);
+}
+
+/* ---------- Keyword cards ---------- */
+.rev-kw-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.7rem;
+}
+
+@media (min-width: 700px) {
+  .rev-kw-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .rev-kw-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.rev-kw-card {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.1rem 1.2rem;
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rev-kw-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.rev-kw-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.rev-kw-term {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  background: var(--c-red);
+  padding: 0.15rem 0.6rem;
+  display: inline-block;
+}
+
+.rev-kw-tag {
+  font-size: 0.65rem;
+}
+
+.rev-kw-brief {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0;
+}
+
+.rev-kw-brief strong {
+  color: var(--c-blue);
+  font-weight: 800;
+}
+
+[data-theme="light"] .rev-kw-term {
+  color: #fff;
+}
+
+/* ---------- Mix strip ---------- */
+.rev-mix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+/* ---------- Source badges ---------- */
+.diff-badge.src-lect1 { border-color: var(--c-green); color: var(--c-green); }
+.diff-badge.src-lect2 { border-color: var(--c-amber); color: var(--c-amber); }
+.diff-badge.src-combined { border-color: var(--c-blue); color: var(--c-blue); }
+
+.result-stat.src-lect1 .mono { color: var(--c-green); }
+.result-stat.src-lect2 .mono { color: var(--c-amber); }
+.result-stat.src-combined .mono { color: var(--c-blue); }
