@@ -41,25 +41,102 @@
   transform: translate(-2px, -2px);
 }
 
-/* ---------- Category headers inside keyword grid ---------- */
+/* ---------- Collapsible main sections ---------- */
+.rev-section > .section-head {
+  position: relative;
+  cursor: pointer;
+  padding-inline-end: 2.8rem;
+  user-select: none;
+}
+
+.sec-chev {
+  position: absolute;
+  inset-inline-end: 0.4rem;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-inline-end: var(--rule-thick) solid var(--c-red);
+  border-bottom: var(--rule-thick) solid var(--c-red);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.25s ease;
+  pointer-events: none;
+}
+
+.rev-section.collapsed > .section-head .sec-chev {
+  transform: translateY(-30%) rotate(-45deg);
+}
+
+.rev-section.collapsed > .sec-body {
+  display: none;
+}
+
+.sec-body > * {
+  animation: secIn 0.28s ease;
+}
+
+@keyframes secIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Tools row (search + expand/collapse) ---------- */
+.rev-tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.rev-tools-row .rev-search {
+  flex: 1 1 220px;
+}
+
+.rev-collapse-btns {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Category groups inside keyword grid ---------- */
+.rev-kw-grid {
+  display: block;
+}
+
+.rev-cat-group {
+  margin-bottom: 0.4rem;
+}
+
 .rev-cat-head {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  width: 100%;
+  text-align: start;
   font-family: var(--font-display);
   font-weight: 800;
   font-size: 1.3rem;
   letter-spacing: -0.02em;
-  margin: 1.2rem 0 0.2rem;
-  padding-top: 1.2rem;
+  color: var(--ink);
+  background: transparent;
+  border: none;
   border-top: var(--rule-medium) solid var(--rule);
+  margin: 1.2rem 0 0;
+  padding: 1.2rem 2.2rem 0.9rem 0;
+  cursor: pointer;
 }
 
-.rev-cat-head:first-child {
+html[dir="rtl"] .rev-cat-head {
+  padding: 1.2rem 0 0.9rem 2.2rem;
+}
+
+.rev-cat-group:first-child .rev-cat-head {
   margin-top: 0;
   padding-top: 0;
   border-top: none;
+}
+
+.rev-cat-head:hover .rev-cat-label {
+  color: var(--c-blue);
 }
 
 .rev-cat-bar {
@@ -75,19 +152,40 @@
   color: var(--ink-faint);
 }
 
-/* ---------- Keyword cards ---------- */
-.rev-kw-grid {
+.rev-cat-head .chev {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  border-inline-end: var(--rule-thick) solid var(--c-red);
+  border-bottom: var(--rule-thick) solid var(--c-red);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.25s ease;
+}
+
+.rev-cat-group.collapsed > .rev-cat-head .chev {
+  transform: translateY(2px) rotate(-45deg);
+}
+
+.rev-cat-cards {
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.7rem;
 }
 
 @media (min-width: 700px) {
-  .rev-kw-grid { grid-template-columns: repeat(2, 1fr); }
+  .rev-cat-cards { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (min-width: 1100px) {
-  .rev-kw-grid { grid-template-columns: repeat(3, 1fr); }
+  .rev-cat-cards { grid-template-columns: repeat(3, 1fr); }
+}
+
+.rev-cat-group.collapsed > .rev-cat-cards {
+  display: none;
+}
+
+.rev-cat-cards > * {
+  animation: secIn 0.25s ease;
 }
 
 .rev-kw-card {

@@ -7,11 +7,11 @@
   <meta name="description" content="Combined revision of the first two lectures: key terms with brief explanations plus a mixed quiz. AR / EN bilingual.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="atlas.css?v=4">
-  <link rel="stylesheet" href="quiz.css?v=4">
-  <link rel="stylesheet" href="revision.css?v=4">
-  <link rel="stylesheet" href="rtl.css?v=4">
-  <script src="i18n.js?v=4"></script>
+  <link rel="stylesheet" href="atlas.css?v=5">
+  <link rel="stylesheet" href="quiz.css?v=5">
+  <link rel="stylesheet" href="revision.css?v=5">
+  <link rel="stylesheet" href="rtl.css?v=5">
+  <script src="i18n.js?v=5"></script>
 </head>
 <body>
 
@@ -53,10 +53,16 @@
           <button class="diff-chip" data-filter="lect1"><span data-i18n="revFilterL1">Lecture 1</span></button>
           <button class="diff-chip" data-filter="lect2"><span data-i18n="revFilterL2">Lecture 2</span></button>
         </div>
-        <input type="search" id="revSearch" class="rev-search" data-i18n-ph="revSearchPh" placeholder="Search terms…">
+        <div class="rev-tools-row">
+          <input type="search" id="revSearch" class="rev-search" data-i18n-ph="revSearchPh" placeholder="Search terms…">
+          <div class="rev-collapse-btns">
+            <button class="control-btn" id="revExpandAll" data-i18n="revExpandAll">Expand all</button>
+            <button class="control-btn" id="revCollapseAll" data-i18n="revCollapseAll">Collapse all</button>
+          </div>
+        </div>
       </div>
 
-      <div class="rev-kw-grid" id="revKwGrid"></div>
+      <div class="sec-body"><div class="rev-kw-grid" id="revKwGrid"></div></div>
     </section>
 
     <!-- Tech words -->
@@ -66,8 +72,10 @@
         <h2 data-i18n="revTechTitle">English words, Arabic meanings</h2>
         <span class="mono faint" id="revTechCount">—</span>
       </div>
+      <div class="sec-body">
       <p class="muted" data-i18n="revTechDesc" style="margin-bottom:1.2rem;">The must-know English terms and what each one means in Arabic.</p>
       <div class="rev-tech-grid" id="revTechGrid"></div>
+      </div>
     </section>
 
     <!-- Part 2: Combined quiz -->
@@ -78,6 +86,7 @@
         <span class="mono faint">16 + 06 + 04</span>
       </div>
 
+      <div class="sec-body">
       <div id="revPicker">
         <p class="muted" data-i18n="revQuizDesc" style="margin-bottom:1.2rem;">Multiple-choice, true/false, and complete-the-sentence — sampled from both lectures plus combined questions. Shuffled every run.</p>
         <div class="rev-mix">
@@ -136,6 +145,7 @@
         <button class="btn btn-ghost" id="revRetryBtn" data-i18n="qzRetry">Try again</button>
         <a class="btn btn-primary btn-arrow" href="quizzes.html" data-i18n="qzBackToList">← All quizzes</a>
       </div>
+      </div>
     </section>
 
     <!-- Part 3: Written questions -->
@@ -145,8 +155,10 @@
         <h2 data-i18n="revWrittenTitle">Write it in your own words</h2>
         <span class="mono faint" id="revWrittenCount">—</span>
       </div>
+      <div class="sec-body">
       <p class="muted" data-i18n="revWrittenDesc" style="margin-bottom:1.2rem;">Answer in writing first, then reveal the model answer and compare. These are self-checked, not scored.</p>
       <div class="rev-written-list" id="revWrittenList"></div>
+      </div>
     </section>
 
   </main>
@@ -155,7 +167,7 @@
     <span class="mono" data-i18n="footerText">Made for curious minds · Intro to Computer Science</span>
   </footer>
 
-  <script src="journeys.js?v=4"></script>
-  <script src="revision.js?v=4"></script>
+  <script src="journeys.js?v=5"></script>
+  <script src="revision.js?v=5"></script>
 </body>
 </html>

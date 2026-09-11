@@ -6,7 +6,7 @@ const loadedLectureData = {};
 const EXAM_STORE_KEY = (id) => `origin-exam-${id}`;
 const UNLOCK_STORE_KEY = (id) => `origin-unlock-${id}`;
 
-const ASSET_V = 'v=4';
+const ASSET_V = 'v=5';
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {

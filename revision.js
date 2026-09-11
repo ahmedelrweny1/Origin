@@ -5,7 +5,7 @@
    Part 3: written self-check questions
    ============================================================ */
 
-const ASSET_V = 'v=4';
+const ASSET_V = 'v=5';
 
 /* Category of each keyword id (language-independent) */
 const KW_CATS = {
@@ -43,7 +43,8 @@ const revState = {
   skipped: 0,
   answered: false,
   perSource: { lect1: { c: 0, t: 0 }, lect2: { c: 0, t: 0 }, combined: { c: 0, t: 0 } },
-  perType: { mcq: { c: 0, t: 0 }, tf: { c: 0, t: 0 }, complete: { c: 0, t: 0 } }
+  perType: { mcq: { c: 0, t: 0 }, tf: { c: 0, t: 0 }, complete: { c: 0, t: 0 } },
+  collapsedCats: new Set()
 };
 
 function loadScript(src) {
@@ -158,11 +159,25 @@ function renderKeywords() {
     if (!items.length) return;
     total += items.length;
 
-    const h = document.createElement('h3');
-    h.className = 'rev-cat-head';
-    h.innerHTML = `<span class="rev-cat-bar"></span><span>${catLabel(cat)}</span><span class="mono faint">${items.length}</span>`;
-    grid.appendChild(h);
+    const group = document.createElement('div');
+    group.className = 'rev-cat-group' + (revState.collapsedCats.has(cat) ? ' collapsed' : '');
+    group.dataset.cat = cat;
 
+    const headBtn = document.createElement('button');
+    headBtn.type = 'button';
+    headBtn.className = 'rev-cat-head';
+    headBtn.setAttribute('aria-expanded', revState.collapsedCats.has(cat) ? 'false' : 'true');
+    headBtn.innerHTML = `<span class="rev-cat-bar"></span><span class="rev-cat-label">${catLabel(cat)}</span><span class="mono faint">${items.length}</span><span class="chev" aria-hidden="true"></span>`;
+    headBtn.addEventListener('click', () => {
+      const collapsed = group.classList.toggle('collapsed');
+      headBtn.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      if (collapsed) revState.collapsedCats.add(cat);
+      else revState.collapsedCats.delete(cat);
+    });
+    group.appendChild(headBtn);
+
+    const cardsWrap = document.createElement('div');
+    cardsWrap.className = 'rev-cat-cards';
     items.forEach(k => {
       const card = document.createElement('div');
       card.className = 'rev-kw-card';
@@ -174,8 +189,10 @@ function renderKeywords() {
         </div>
         <p class="rev-kw-brief">${k.brief}</p>
       `;
-      grid.appendChild(card);
+      cardsWrap.appendChild(card);
     });
+    group.appendChild(cardsWrap);
+    grid.appendChild(group);
   });
 
   const countEl = document.getElementById('revKwCount');
@@ -289,6 +306,7 @@ function srcLabel(src) {
 }
 
 function startRevQuiz() {
+  expandSection('revQuizSection');
   const pool = [
     ...sample(revState.bank1, 6).map(q => ({ ...q, src: 'lect1', qtype: 'mcq' })),
     ...sample(revState.bank2, 6).map(q => ({ ...q, src: 'lect2', qtype: 'mcq' })),
@@ -491,10 +509,55 @@ function finishRevQuiz() {
 }
 
 /* ------------------------------------------------------------------
+   Collapsibles — main sections + expand/collapse all
+------------------------------------------------------------------ */
+function initCollapsibles() {
+  document.querySelectorAll('.rev-section').forEach(sec => {
+    const head = sec.querySelector(':scope > .section-head');
+    if (!head || head.querySelector('.sec-chev')) return;
+    const chev = document.createElement('span');
+    chev.className = 'sec-chev';
+    chev.setAttribute('aria-hidden', 'true');
+    head.appendChild(chev);
+    head.setAttribute('role', 'button');
+    head.setAttribute('tabindex', '0');
+    head.setAttribute('aria-expanded', 'true');
+    const toggle = () => {
+      const collapsed = sec.classList.toggle('collapsed');
+      head.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+    };
+    head.addEventListener('click', toggle);
+    head.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        toggle();
+      }
+    });
+  });
+
+  document.getElementById('revExpandAll')?.addEventListener('click', () => {
+    revState.collapsedCats.clear();
+    renderKeywords();
+  });
+  document.getElementById('revCollapseAll')?.addEventListener('click', () => {
+    CAT_ORDER.forEach(c => revState.collapsedCats.add(c));
+    renderKeywords();
+  });
+}
+
+function expandSection(id) {
+  const sec = document.getElementById(id);
+  if (!sec) return;
+  sec.classList.remove('collapsed');
+  sec.querySelector(':scope > .section-head')?.setAttribute('aria-expanded', 'true');
+}
+
+/* ------------------------------------------------------------------
    Lifecycle
 ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
   wireFilters();
+  initCollapsibles();
   init();
 });
 
