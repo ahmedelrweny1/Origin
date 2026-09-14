@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Exam Settings</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=6">
+  <link rel="stylesheet" href="exam.css?v=6">
+  <link rel="stylesheet" href="rtl.css?v=6">
+  <script src="i18n.js?v=6"></script>
+</head>
+<body>
+
+  <header class="topbar" style="position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:var(--rule-thick) solid var(--rule);">
+    <div class="topbar-inner" style="display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:1rem clamp(1rem,4vw,2rem);max-width:960px;margin-inline:auto;">
+      <a class="brand" href="index.html" style="font-family:var(--font-display);font-weight:800;">Origin <span style="color:var(--c-red);">Atlas</span></a>
+      <div style="display:flex;gap:0.5rem;">
+        <button id="themeToggle" class="control-btn">🌙</button>
+        <button id="langToggle" class="control-btn">AR / EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div>
+      <span class="mono" data-i18n="adEyebrow">Admin · Exam settings</span>
+      <h1 data-i18n="adTitle">Exam timer control.</h1>
+      <p class="muted" data-i18n="adSub">Set the exam duration. It applies to new attempts. Running attempts keep their original deadline.</p>
+    </div>
+
+    <div class="admin-card hidden" id="lockCard">
+      <label><span data-i18n="adPassLabel">Admin passcode</span>
+        <input type="password" id="passInput" inputmode="numeric" autocomplete="off" placeholder="••••">
+      </label>
+      <button class="btn btn-primary" id="unlockBtn" data-i18n="adUnlock">Unlock</button>
+      <p class="admin-note" data-i18n="adPassHint">Default passcode is shown in the setup note. Change it after first login.</p>
+      <p class="admin-note" id="lockErr" style="color:var(--c-red);"></p>
+    </div>
+
+    <div class="admin-card hidden" id="settingsCard">
+      <label><span data-i18n="adDuration">Exam duration (minutes, 5–180)</span>
+        <input type="number" id="durationInput" min="5" max="180" step="1" value="45">
+      </label>
+      <label><span data-i18n="adPassMark">Pass mark (correct answers out of 50)</span>
+        <input type="number" id="passInput" min="1" max="50" step="1" value="25">
+      </label>
+      <label class="admin-check"><input type="checkbox" id="windowEnable"> <span data-i18n="adWindowEnable">Only open at a specific date & time</span></label>
+      <label><span data-i18n="adWindowStart">Opens at (date + time)</span>
+        <input type="datetime-local" id="windowStartInput">
+      </label>
+      <label><span data-i18n="adWindowEnd">Closes at (date + time)</span>
+        <input type="datetime-local" id="windowEndInput">
+      </label>
+      <label><span data-i18n="adAttempts">Attempts per student</span>
+        <select id="attemptInput">
+          <option value="1" data-i18n="adOneAttempt">1 attempt only</option>
+          <option value="0" data-i18n="adUnlimited">Unlimited</option>
+        </select>
+      </label>
+      <label><span data-i18n="adChangePass">Change admin passcode</span>
+        <input type="password" id="newPassInput" autocomplete="new-password" placeholder="••••">
+      </label>
+      <div class="texam-actions">
+        <button class="btn btn-primary" id="saveBtn" data-i18n="adSave">Save settings</button>
+        <button class="btn btn-ghost" id="lockBtn" data-i18n="adLock">Lock</button>
+      </div>
+      <p class="admin-ok hidden" id="saveOk"></p>
+      <p class="admin-note" data-i18n="adWarn">Changing the timer does not affect an exam already in progress — only new attempts.</p>
+    </div>
+
+    <div class="admin-card hidden" id="dangerCard">
+      <label><span data-i18n="adDanger">Danger zone</span></label>
+      <div class="texam-actions">
+        <button class="btn btn-ghost" id="clearAttemptsBtn" data-i18n="adClear">Clear saved attempts + reports</button>
+      </div>
+    </div>
+
+    <div class="admin-card hidden" id="loginCard">
+      <label><span data-i18n="adTeacherLogin">Teacher sign-in (online roster)</span></label>
+      <p class="admin-note" id="loginState"></p>
+      <div id="loginForm" style="display:grid;gap:1rem;">
+        <label><span data-i18n="adEmail">Email</span>
+          <input type="email" id="teacherEmail" autocomplete="email" dir="ltr" style="text-align:left;">
+        </label>
+        <label><span data-i18n="adPassword">Password</span>
+          <input type="password" id="teacherPass" autocomplete="current-password">
+        </label>
+        <div class="texam-actions">
+          <button class="btn btn-primary" id="loginBtn" data-i18n="adLogin">Sign in</button>
+        </div>
+      </div>
+      <div class="texam-actions">
+        <button class="btn btn-ghost hidden" id="logoutBtn" data-i18n="adLogout">Sign out</button>
+      </div>
+    </div>
+
+    <div class="admin-card hidden" id="rosterCard">
+      <label><span data-i18n="roTitle">Who took the exam.</span></label>
+      <p class="admin-note" data-i18n="roSub">Every submitted attempt on this device, newest first.</p>
+      <div class="texam-meta" id="rosterSummary"></div>
+      <div class="texam-actions">
+        <button class="btn btn-ghost" id="exportCsvBtn" data-i18n="roExport">Export CSV</button>
+        <button class="btn btn-ghost" id="clearLogBtn" data-i18n="roClearLog">Clear results log</button>
+        <button class="btn btn-ghost" id="clearRemoteBtn" data-i18n="adClearRemote">Clear server log</button>
+      </div>
+      <p class="admin-ok hidden" id="logMsg"></p>
+      <div id="rosterList" style="display:grid;gap:0.7rem;"></div>
+    </div>
+
+    <p><a href="exams.html" class="btn btn-ghost" data-i18n="exBack">← Exams</a></p>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js?v=6"></script>
+  <script src="remote.js?v=6"></script>
+  <script src="admin.js?v=6"></script>
+</body>
+</html>

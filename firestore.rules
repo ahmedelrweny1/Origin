@@ -1,0 +1,79 @@
+rules_version = '2';
+
+// ============================================================
+// Firestore rules for the timed-exam backend (student accounts).
+// Paste into Firebase console → Firestore Database → Rules.
+// 1. Replace TEACHER@EXAMPLE.COM with YOUR teacher email
+//    (create that user FIRST in Authentication → Users, so no
+//    student can register it afterwards).
+// 2. Publish.
+//
+// What this enforces on the SERVER (cannot be bypassed by
+// editing page code):
+// - Accounts: anyone signed in can create ONLY their own
+//   profile (uid must match, email must match the login).
+// - One attempt per account: attempt docs are bound to the
+//   owner's uid (doc id ends with it) and only `create` is
+//   allowed — a second submit is rejected automatically.
+// - Only email+password accounts (students/teacher) can
+//   submit. Anonymous visitors can only read the exam config.
+// - Students can read ONLY their own attempt; they can NEVER
+//   list the roster, change config, or delete anything.
+// - Only the signed-in teacher can read the roster, change
+//   config, or delete attempts.
+// - Submitted scores are range-validated (0..total).
+// ============================================================
+
+service cloud.firestore {
+  match /databases/{db}/documents {
+
+    function isTeacher() {
+      return request.auth != null
+        && request.auth.token.email == 'TEACHER@EXAMPLE.COM';
+    }
+
+    function isAccount() {
+      return request.auth != null
+        && request.auth.token.firebase.sign_in_provider == 'password';
+    }
+
+    function validAttempt(docId) {
+      let d = request.resource.data;
+      return d.owner is string
+        && d.owner == request.auth.uid
+        && docId.endsWith('_' + request.auth.uid)
+        && d.name is string && d.name.size() >= 2 && d.name.size() <= 60
+        && d.score is int && d.total is int
+        && d.score >= 0 && d.score <= d.total
+        && d.pct is int && d.pct >= 0 && d.pct <= 100
+        && d.items is list && d.items.size() <= 60;
+    }
+
+    // Student profiles: owner creates, teacher reads.
+    match /users/{uid} {
+      allow read: if isTeacher();
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 60;
+      allow update, delete: if isTeacher();
+    }
+
+    // Shared exam config: everyone reads, teacher writes.
+    match /config/{examId} {
+      allow read: if true;
+      allow write: if isTeacher();
+    }
+
+    // Attempts: one per account, self-read, teacher roster.
+    match /attempts/{docId} {
+      allow get: if isTeacher()
+        || (request.auth != null && resource.data.owner == request.auth.uid);
+      allow list: if isTeacher();
+      allow create: if isAccount() && validAttempt(docId);
+      allow update, delete: if isTeacher();
+    }
+  }
+}

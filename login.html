@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account — Origin Atlas</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=6">
+  <link rel="stylesheet" href="exam.css?v=6">
+  <link rel="stylesheet" href="rtl.css?v=6">
+  <script src="i18n.js?v=6"></script>
+</head>
+<body>
+
+  <header class="topbar" style="position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:var(--rule-thick) solid var(--rule);">
+    <div class="topbar-inner" style="display:flex;gap:1rem;align-items:center;justify-content:space-between;padding:1rem clamp(1rem,4vw,2rem);max-width:960px;margin-inline:auto;">
+      <a class="brand" href="index.html" style="font-family:var(--font-display);font-weight:800;">Origin <span style="color:var(--c-red);">Atlas</span></a>
+      <div style="display:flex;gap:0.5rem;">
+        <a href="exams.html" class="control-btn" style="text-decoration:none;min-height:44px;display:inline-flex;align-items:center;" data-i18n="exBack">← Exams</a>
+        <button id="themeToggle" class="control-btn">🌙</button>
+        <button id="langToggle" class="control-btn">AR / EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div>
+      <span class="mono" data-i18n="authEyebrow">Student account</span>
+      <h1 data-i18n="authTitle">Your account.</h1>
+      <p class="muted" data-i18n="authSub">One account per student — it locks your single exam attempt to you and lets the teacher see your result.</p>
+    </div>
+
+    <div class="admin-card hidden" id="offlineCard">
+      <p class="admin-note" data-i18n="authOffline">Accounts need internet and setup. For now just type your name on the Exams page.</p>
+      <div class="texam-actions">
+        <a class="btn btn-ghost" href="exams.html" data-i18n="exBack">← Exams</a>
+      </div>
+    </div>
+
+    <div class="admin-card hidden" id="authCard">
+      <div class="report-filters" style="margin:0;">
+        <button class="filter-chip active" id="tabLogin" data-i18n="tabLogin">Log in</button>
+        <button class="filter-chip" id="tabSignup" data-i18n="tabSignup">Sign up</button>
+      </div>
+      <div id="loginForm" style="display:grid;gap:1rem;">
+        <label><span data-i18n="fEmail">Email</span>
+          <input type="email" id="loginEmail" autocomplete="email" dir="ltr" style="text-align:left;">
+        </label>
+        <label><span data-i18n="fPass">Password (6+ characters)</span>
+          <input type="password" id="loginPass" autocomplete="current-password">
+        </label>
+        <div class="texam-actions">
+          <button class="btn btn-primary" id="doLoginBtn" data-i18n="tabLogin">Log in</button>
+        </div>
+      </div>
+      <div id="signupForm" class="hidden" style="display:grid;gap:1rem;">
+        <label><span data-i18n="fName">Full name</span>
+          <input type="text" id="suName" maxlength="60" autocomplete="name">
+        </label>
+        <label><span data-i18n="fEmail">Email</span>
+          <input type="email" id="suEmail" autocomplete="email" dir="ltr" style="text-align:left;">
+        </label>
+        <label><span data-i18n="fPass">Password (6+ characters)</span>
+          <input type="password" id="suPass" autocomplete="new-password">
+        </label>
+        <div class="texam-actions">
+          <button class="btn btn-primary" id="doSignupBtn" data-i18n="btnSignup">Create account</button>
+        </div>
+      </div>
+      <p class="admin-note" id="authErr" style="color:var(--c-red);"></p>
+    </div>
+
+    <div class="admin-card hidden" id="meCard">
+      <span class="mono" data-i18n="authHi">Signed in as</span>
+      <h2 id="meName">—</h2>
+      <p class="muted" id="meEmail" dir="ltr" style="text-align:start;">—</p>
+      <div class="texam-actions">
+        <a class="btn btn-primary btn-arrow" id="goExams" href="exams.html" data-i18n="authGoExams">Go to exams →</a>
+        <button class="btn btn-ghost" id="doLogoutBtn" data-i18n="authLogout">Log out</button>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js?v=6"></script>
+  <script src="remote.js?v=6"></script>
+  <script src="auth.js?v=6"></script>
+</body>
+</html>

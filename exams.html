@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exams — Origin Atlas</title>
+  <meta name="description" content="Timed exams covering the lectures. AR / EN bilingual.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=6">
+  <link rel="stylesheet" href="portal.css?v=6">
+  <link rel="stylesheet" href="quiz.css?v=6">
+  <link rel="stylesheet" href="exam.css?v=6">
+  <link rel="stylesheet" href="rtl.css?v=6">
+  <script src="i18n.js?v=6"></script>
+</head>
+<body>
+
+  <div class="mesh-bg">
+    <div class="mesh-blob blob-1"></div>
+    <div class="mesh-blob blob-2"></div>
+    <div class="mesh-blob blob-3"></div>
+  </div>
+
+  <div class="particles" id="particles"></div>
+
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <div class="masthead-meta">
+        <span data-i18n="txEdition">Section 03 · Exam Room</span>
+      </div>
+      <a href="index.html" class="wordmark">Origin <span>Atlas</span></a>
+      <div class="controls">
+        <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadQuizzes">🧠 Quizzes</a>
+        <a href="login.html" class="control-btn" style="text-decoration:none;" data-i18n="navAccount">👤 Account</a>
+        <button id="themeToggle" class="control-btn" aria-label="Toggle theme">🌙</button>
+        <button id="langToggle" class="control-btn" aria-label="Toggle language">AR / EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <span class="shape shape-1"></span>
+      <span class="shape shape-2"></span>
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <div class="hero-eyebrow">
+            <span class="bar"></span>
+            <span class="mono" data-i18n="txEyebrow">Timed Exams</span>
+          </div>
+          <h1>
+            <span data-i18n="txTitle1">Prove what</span><br>
+            <span class="accent" data-i18n="txTitle2">you</span>
+            <span class="strike" data-i18n="txTitle3">know</span>.
+          </h1>
+          <p class="hero-lede" data-i18n="txLede">
+            Real exam conditions: a running timer, free navigation, and a full mistake report at the end. Your progress is saved if the page closes.
+          </p>
+        </div>
+        <aside class="hero-side">
+          <ul class="dossier-list">
+            <li><span class="num">01</span><span class="label" data-i18n="txNote1">Timer set by admin</span></li>
+            <li><span class="num">02</span><span class="label" data-i18n="txNote2">Flag + jump freely</span></li>
+            <li><span class="num">03</span><span class="label" data-i18n="txNote3">No hints during exam</span></li>
+            <li><span class="num">04</span><span class="label" data-i18n="txNote4">Mistake report after</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="journeys-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="mono" data-i18n="txTocLabel">Available Exams</span>
+          <h2 data-i18n="txTocTitle">Exam Room</h2>
+          <span class="mono faint" id="txTocCount">—</span>
+        </div>
+        <div class="exams-main" style="padding:0;max-width:none;">
+          <div id="examList" style="display:grid;gap:1.2rem;"></div>
+          <div id="examReport" class="hidden" style="display:grid;gap:1.2rem;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="mono" data-i18n="footerLeft">Origin Atlas</span>
+      <span class="mono credit" data-i18n="txFooterCenter">Exam Room</span>
+      <span class="mono colophon" data-i18n="footerRight">Intro to Computer Science</span>
+    </div>
+  </footer>
+
+  <script src="journeys.js?v=6"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js?v=6"></script>
+  <script src="remote.js?v=6"></script>
+  <script src="exams.js?v=6"></script>
+</body>
+</html>
