@@ -17,12 +17,12 @@
    ============================================================ */
 
 window.FIREBASE_CONFIG = {
-  apiKey: 'PASTE_ME',
-  authDomain: 'PASTE_ME',
-  projectId: 'PASTE_ME',
-  appId: 'PASTE_ME'
+  apiKey: 'AIzaSyD-hvgwlOXaloYQo0sSiYdVReYkr0hRCgI',
+  authDomain: 'origin-42563.firebaseapp.com',
+  projectId: 'origin-42563',
+  appId: '1:480849955001:web:7777d4e41bdae2355cf368'
 };
 
 /* Must be identical to the teacher email created in step 3
    AND to the email inside firestore.rules. */
-window.TEACHER_EMAIL = 'teacher@example.com';
+window.TEACHER_EMAIL = 'elrwenyahmed05@gmail.com';
