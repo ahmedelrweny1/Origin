@@ -225,6 +225,9 @@ html[dir="rtl"] .btn-arrow:hover::after { transform: translateX(-4px); }
   color: var(--paper);
 }
 
+/* Nav + control buttons never wrap their label mid-word */
+.control-btn { white-space: nowrap; }
+
 /* --- Decorative geometric shapes (Bauhaus signature) --- */
 .shape {
   position: absolute;

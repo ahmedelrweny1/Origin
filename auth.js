@@ -23,6 +23,9 @@ function friendly(code) {
     'auth/invalid-email': 'errBadEmail',
     'auth/weak-password': 'errPassShort',
     'auth/network-request-failed': 'errNet',
+    'auth/popup-blocked': 'errGoogleFail',
+    'auth/cancelled-popup-request': 'errGoogleFail',
+    'auth/account-exists-with-different-credential': 'errEmailUsed',
     'offline': 'errNet'
   };
   return t(map[code] || 'errUnknown');
@@ -69,6 +72,11 @@ async function boot() {
   }
   $('offlineCard').classList.add('hidden');
   $('authCard').classList.remove('hidden');
+  // Back from a Google redirect?
+  try {
+    const back = await Remote.handleGoogleRedirect().catch(() => null);
+    if (back) { window.location.href = nextUrl(); return; }
+  } catch (e) {}
   try { Remote.onAuth(() => paint()); } catch (e) {}
   paint();
 }
@@ -111,6 +119,18 @@ document.addEventListener('DOMContentLoaded', () => {
       window.location.href = nextUrl();
     } catch (e) {
       showCode(e && e.code);
+    }
+    b.disabled = false;
+  });
+
+  $('googleBtn').addEventListener('click', async () => {
+    const b = $('googleBtn');
+    b.disabled = true;
+    try {
+      await Remote.googleLogin();
+      // Redirects to Google; continues in handleGoogleRedirect().
+    } catch (e) {
+      showCode((e && e.code) || 'errGoogleFail');
     }
     b.disabled = false;
   });

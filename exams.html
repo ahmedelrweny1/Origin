@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="exam.css?v=6">
   <link rel="stylesheet" href="rtl.css?v=6">
   <script src="i18n.js?v=6"></script>
+  <script src="nav.js?v=6"></script>
 </head>
 <body>
 
@@ -32,9 +33,12 @@
       </div>
       <a href="index.html" class="wordmark">Origin <span>Atlas</span></a>
       <div class="controls">
-        <a href="lectures.html" class="control-btn" style="text-decoration:none;" data-i18n="navLectures">📚 Lectures</a>
-        <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadQuizzes">🧠 Quizzes</a>
-        <a href="login.html" class="control-btn" style="text-decoration:none;" data-i18n="navAccount">👤 Account</a>
+        <button id="navBurger" class="control-btn nav-burger" aria-label="Menu" aria-expanded="false">☰</button>
+        <nav class="mast-nav" id="mastNav" aria-label="Sections">
+          <a href="lectures.html" class="control-btn" style="text-decoration:none;" data-i18n="navLectures">📚 Lectures</a>
+          <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadQuizzes">🧠 Quizzes</a>
+          <a href="login.html" class="control-btn" style="text-decoration:none;" data-i18n="navAccount">👤 Account</a>
+        </nav>
         <button id="themeToggle" class="control-btn" aria-label="Toggle theme">🌙</button>
         <button id="langToggle" class="control-btn" aria-label="Toggle language">AR / EN</button>
       </div>

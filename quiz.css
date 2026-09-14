@@ -937,3 +937,31 @@ html[dir="rtl"] .quiz-card:hover {
 .diff-mini-medium   { color: var(--c-amber); }
 .diff-mini-hard     { color: var(--c-red); }
 .diff-mini-creative { color: var(--c-blue); }
+
+/* ============================================================
+   QUIZ MOBILE
+   ============================================================ */
+@media (max-width: 640px) {
+  .topbar-inner { padding: 0.8rem 1rem; gap: 0.6rem; }
+  .top-controls { gap: 0.4rem; }
+  .topbar .control-btn { font-size: 0.62rem; padding: 0.5rem 0.6rem; }
+
+  /* Stat cells become horizontal rows instead of tall blanks */
+  .exam-stat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    padding: 0.85rem 1rem;
+    text-align: start;
+  }
+  html[dir="rtl"] .exam-stat { text-align: end; }
+  .exam-stat strong { font-size: 1.35rem; }
+
+  .quiz-card-stage { scroll-margin-top: 90px; padding: 1.2rem 1rem; }
+  .quiz-card, .quiz-card.journey-card { grid-template-columns: auto 1fr; gap: 0.9rem; }
+  .quiz-card:hover { padding-left: 0; padding-right: 0; }
+  html[dir="rtl"] .quiz-card:hover { padding-left: 0; padding-right: 0; }
+  .quiz-card .journey-arrow { display: none; }
+  .quiz-card .journey-meta { font-size: 0.68rem; }
+}

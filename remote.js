@@ -228,10 +228,51 @@ const Remote = {
       if (!u || u.isAnonymous) return null;
       const snap = await this._timeout(this.db.collection('users').doc(u.uid).get(), 8000);
       const d = snap.exists ? (snap.data() || {}) : {};
-      const p = { uid: u.uid, email: u.email, name: d.name || '' };
+      let nm = d.name || '';
+      if (nm.length < 2 && u.email) nm = u.email.split('@')[0];
+      const p = { uid: u.uid, email: u.email, name: nm };
       try { localStorage.setItem('origin-profile', JSON.stringify(p)); } catch (e) {}
       return p;
     } catch (e) { return null; }
+  },
+
+  /* ---- Google sign-in (redirect flow — mobile friendly) ---- */
+  async googleLogin() {
+    if (!this.enabled && !(await this.init())) throw this._err('offline');
+    const provider = new firebase.auth.GoogleAuthProvider();
+    try { provider.setCustomParameters({ prompt: 'select_account' }); } catch (e) {}
+    await this.auth.signInWithRedirect(provider);
+    // Page reloads; the result is picked up by handleGoogleRedirect().
+  },
+
+  async handleGoogleRedirect() {
+    if (!this.enabled && !(await this.init())) return null;
+    let cred = null;
+    try {
+      cred = await this._timeout(this.auth.getRedirectResult(), 10000);
+    } catch (e) {
+      if (e && (e.code === 'auth/no-auth-event' || e.code === 'auth/redirect-cancelled')) return null;
+      throw e;
+    }
+    if (!cred || !cred.user) return null;
+    const u = cred.user;
+    // First Google sign-in: create the profile doc (rules bind it to uid+email).
+    try {
+      const ref = this.db.collection('users').doc(u.uid);
+      const snap = await this._timeout(ref.get(), 8000);
+      if (!snap.exists) {
+        const nm = ((u.displayName || (u.email ? u.email.split('@')[0] : 'Student')) + '').slice(0, 60);
+        try {
+          await this._timeout(ref.set({
+            name: nm,
+            email: u.email || '',
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          }), 9000);
+        } catch (e) {}
+      }
+    } catch (e) {}
+    await this.refreshProfile();
+    return u;
   },
 
   async getOwnAttempt(examId) {

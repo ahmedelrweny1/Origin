@@ -622,10 +622,6 @@ function renderMatching(q, optsEl, picked) {
 
   const leftCol = document.createElement('div');
   leftCol.className = 'q-match-col';
-  const lh = document.createElement('span');
-  lh.className = 'q-match-head';
-  lh.textContent = '①';
-  leftCol.appendChild(lh);
 
   q.lefts.forEach((lt, li) => {
     const linked = links[li] !== undefined && links[li] !== null;
@@ -653,10 +649,6 @@ function renderMatching(q, optsEl, picked) {
 
   const rightCol = document.createElement('div');
   rightCol.className = 'q-match-col';
-  const rh = document.createElement('span');
-  rh.className = 'q-match-head';
-  rh.textContent = '②';
-  rightCol.appendChild(rh);
 
   // which left is linked to each right pos?
   const rev = {};

@@ -3,10 +3,11 @@ rules_version = '2';
 // ============================================================
 // Firestore rules for the timed-exam backend (student accounts).
 // Paste into Firebase console → Firestore Database → Rules.
-// 1. Replace TEACHER@EXAMPLE.COM with YOUR teacher email
+// 1. Replace elrwenyahmed05@gmail.com with YOUR teacher email
 //    (create that user FIRST in Authentication → Users, so no
 //    student can register it afterwards).
-// 2. Publish.
+// 2. Publish. Also enable Google provider in
+//    Authentication → Sign-in method.
 //
 // What this enforces on the SERVER (cannot be bypassed by
 // editing page code):
@@ -15,7 +16,7 @@ rules_version = '2';
 // - One attempt per account: attempt docs are bound to the
 //   owner's uid (doc id ends with it) and only `create` is
 //   allowed — a second submit is rejected automatically.
-// - Only email+password accounts (students/teacher) can
+// - Only email+password or Google accounts (students/teacher) can
 //   submit. Anonymous visitors can only read the exam config.
 // - Students can read ONLY their own attempt; they can NEVER
 //   list the roster, change config, or delete anything.
@@ -29,29 +30,38 @@ service cloud.firestore {
 
     function isTeacher() {
       return request.auth != null
-        && request.auth.token.email == 'TEACHER@EXAMPLE.COM';
+        && request.auth.token.email == 'elrwenyahmed05@gmail.com';
     }
 
     function isAccount() {
       return request.auth != null
-        && request.auth.token.firebase.sign_in_provider == 'password';
+        && (request.auth.token.firebase.sign_in_provider == 'password'
+          || request.auth.token.firebase.sign_in_provider == 'google.com');
     }
 
     function validAttempt(docId) {
-      let d = request.resource.data;
-      return d.owner is string
-        && d.owner == request.auth.uid
-        && docId.endsWith('_' + request.auth.uid)
-        && d.name is string && d.name.size() >= 2 && d.name.size() <= 60
-        && d.score is int && d.total is int
-        && d.score >= 0 && d.score <= d.total
-        && d.pct is int && d.pct >= 0 && d.pct <= 100
-        && d.items is list && d.items.size() <= 60;
+      return request.resource.data.owner is string
+        && request.resource.data.owner == request.auth.uid
+        && docId.matches('.*_' + request.auth.uid)
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 2
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.score is int
+        && request.resource.data.total is int
+        && request.resource.data.score >= 0
+        && request.resource.data.score <= request.resource.data.total
+        && request.resource.data.pct is int
+        && request.resource.data.pct >= 0
+        && request.resource.data.pct <= 100
+        && request.resource.data.items is list
+        && request.resource.data.items.size() <= 60;
     }
 
-    // Student profiles: owner creates, teacher reads.
+    // Student profiles: owner creates + reads own, teacher reads.
     match /users/{uid} {
-      allow read: if isTeacher();
+      allow get: if isTeacher()
+        || (request.auth != null && request.auth.uid == uid);
+      allow list: if isTeacher();
       allow create: if request.auth != null
         && request.auth.uid == uid
         && request.resource.data.email == request.auth.token.email
