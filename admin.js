@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') $('unlockBtn').click();
   });
 
-  $('saveBtn').addEventListener('click', () => {
+  $('saveBtn').addEventListener('click', async () => {
     const durationMin = Math.min(180, Math.max(5, parseInt($('durationInput').value, 10) || 45));
     const passMark = Math.min(50, Math.max(1, parseInt($('passInput').value, 10) || 25));
     const attemptLimit = $('attemptInput').value === '0' ? 0 : 1;
@@ -249,16 +249,26 @@ document.addEventListener('DOMContentLoaded', () => {
     try { all = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); } catch (e) {}
     all[EXAM_ID] = { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd };
     try { localStorage.setItem(CONFIG_KEY, JSON.stringify(all)); } catch (e) {}
-    publishConfig(all[EXAM_ID]);
     const np = $('newPassInput').value.trim();
     if (np.length >= 4) {
       try { localStorage.setItem(PASS_KEY, np); } catch (e) {}
       $('newPassInput').value = '';
     }
-    $('saveOk').classList.remove('hidden');
-    $('saveOk').style.color = '';
-    $('saveOk').textContent = tOrEn('adSaved') + ` · ${durationMin} min · ${passMark}/50`;
-    setTimeout(() => $('saveOk').classList.add('hidden'), 3500);
+    // Push to students (Firestore). This ONLY reaches student devices
+    // when signed in as the teacher — otherwise it stays local.
+    const pub = await publishConfig(all[EXAM_ID]);
+    ok.classList.remove('hidden');
+    if (pub === 'ok') {
+      ok.style.color = '';
+      ok.textContent = tOrEn('adPublished') + ` · ${durationMin} min · ${passMark}/50`;
+    } else if (pub === 'noteacher') {
+      ok.style.color = 'var(--c-red)';
+      ok.textContent = tOrEn('adLocalOnly');
+    } else {
+      ok.style.color = 'var(--c-red)';
+      ok.textContent = tOrEn('errNet');
+    }
+    setTimeout(() => ok.classList.add('hidden'), 5000);
   });
 
   $('lockBtn').addEventListener('click', () => {
@@ -352,15 +362,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function publishConfig(cfg) {
+  // Pushes the config to Firestore so ALL student devices pick it up.
+  // Returns 'ok' | 'noteacher' | 'fail'. Never throws.
   try {
-    if (typeof Remote === 'undefined' || !Remote.enabled || !Remote.teacher) return;
+    if (typeof Remote === 'undefined' || !Remote.enabled || !Remote.teacher) return 'noteacher';
     await Remote.saveConfig(EXAM_ID, cfg);
-    const ok = $('saveOk');
-    ok.classList.remove('hidden');
-    ok.style.color = '';
-    ok.textContent = tOrEn('adPublished');
-    setTimeout(() => ok.classList.add('hidden'), 3500);
-  } catch (e) {}
+    return 'ok';
+  } catch (e) { return 'fail'; }
 }
 
 function refreshLoginUI() {
