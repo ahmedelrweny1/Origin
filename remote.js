@@ -27,6 +27,10 @@ const Remote = {
           u.email.toLowerCase() === String(window.TEACHER_EMAIL).toLowerCase());
         this.teacherEmail = (u && u.email) || null;
         this._authCbs.forEach((cb) => { try { cb(this.teacher); } catch (err) {} });
+        try {
+          if (u && !u.isAnonymous && u.email) localStorage.setItem('origin-authed', '1');
+          else localStorage.removeItem('origin-authed');
+        } catch (e) {}
       });
       // Respect an existing session (e.g. persisted teacher login) —
       // only fall back to anonymous when nobody is signed in.
