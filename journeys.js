@@ -50,6 +50,31 @@ const journeys = [
     }
   },
   {
+    id: 'security-and-safety',
+    title: {
+      en: 'Information Security & Safety Tech',
+      ar: 'أمن المعلومات وتقنيات السلامة'
+    },
+    description: {
+      en: 'Master the CIA triad, passwords and authentication, fraud and social engineering, encryption, signatures and SSL/TLS.',
+      ar: 'احترف الأركان الأمنية الثلاثة، كلمات المرور والمصادقة، الاحتيال والهندسة الاجتماعية، التشفير والتوقيع الرقمي و SSL/TLS.'
+    },
+    url: 'lecture3.html',
+    quizUrl: 'quiz.html?lecture=security-and-safety',
+    examUrl: 'quiz.html?lecture=security-and-safety&mode=exam',
+    hasQuizzes: true,
+    status: 'active',
+    icon: '🔐',
+    duration: {
+      en: '~25 min',
+      ar: '~٢٥ دقيقة'
+    },
+    tag: {
+      en: 'Chapter 3 · 1st Secondary',
+      ar: 'الفصل الثالث · أولى ثانوي'
+    }
+  },
+  {
     id: 'abacus-to-ai',
     title: {
       en: 'From Abacus to AI',
@@ -105,6 +130,22 @@ const LECTURE_DATA_MAP = {
     examEn: 'exam-lect2-en.js',
     examArVar: 'LECT2_EXAM_AR',
     examEnVar: 'LECT2_EXAM_EN',
+    passThreshold: 7
+  },
+  'security-and-safety': {
+    stagesVar: 'LECT3_STAGES',
+    stagesAr: 'LECT3_STAGES_AR',
+    stagesEn: 'LECT3_STAGES_EN',
+    scriptAr: 'data-lect3-ar.js',
+    scriptEn: 'data-lect3-en.js',
+    bankAr: 'quizbank-lect3-ar.js',
+    bankEn: 'quizbank-lect3-en.js',
+    bankArVar: 'LECT3_QUIZBANK_AR',
+    bankEnVar: 'LECT3_QUIZBANK_EN',
+    examAr: 'exam-lect3-ar.js',
+    examEn: 'exam-lect3-en.js',
+    examArVar: 'LECT3_EXAM_AR',
+    examEnVar: 'LECT3_EXAM_EN',
     passThreshold: 7
   }
 };

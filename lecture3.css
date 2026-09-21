@@ -1,0 +1,456 @@
+/* ============================================================
+   LECTURE 3 — Security & Safety Tech CSS
+   Reuses lecture1.css + lecture2.css; adds 5 widget styles
+   ============================================================ */
+
+/* CIA sorter */
+.cia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+.cia-bucket {
+  background: var(--paper);
+  border: var(--rule-medium) dashed var(--ink);
+  padding: 1rem;
+  min-height: 120px;
+  text-align: center;
+}
+.cia-bucket h5 {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.cia-tray {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.cia-chip {
+  padding: 0.5rem 0.85rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cia-chip.assigned {
+  background: var(--c-green);
+  color: #fff;
+  border-color: var(--c-green);
+  cursor: default;
+}
+.cia-chip.wrong-placement {
+  background: var(--c-red);
+  color: #fff;
+  animation: shake 0.3s ease;
+}
+
+/* Auth lab */
+.auth-meter-box {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.2rem;
+  margin: 1rem 0;
+}
+.auth-meter-bar {
+  height: 14px;
+  background: var(--paper-deep);
+  border: var(--rule-hair) solid var(--ink);
+  margin: 0.6rem 0;
+  overflow: hidden;
+}
+.auth-meter-fill {
+  height: 100%;
+  width: 10%;
+  background: var(--c-red);
+  transition: width 0.25s ease, background 0.25s ease;
+}
+.auth-checklist {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.8rem 0;
+  font-size: 0.9rem;
+}
+.auth-factor-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+.auth-factor-card {
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper-deep);
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.auth-factor-card.picked {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Fraud identifier */
+.fraud-options {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+.fraud-opt {
+  text-align: start;
+  padding: 0.9rem 1rem;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  cursor: pointer;
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+.fraud-opt.correct { border-color: var(--c-green); background: rgba(40,167,69,0.1); }
+.fraud-opt.wrong { border-color: var(--c-red); background: rgba(220,53,69,0.1); }
+
+/* Encryption lab */
+.enc-toggle-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin: 1rem 0;
+}
+@media (max-width: 640px) { .enc-toggle-row { grid-template-columns: 1fr; } }
+.enc-mode-card {
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper);
+  padding: 1rem;
+  cursor: pointer;
+}
+.enc-mode-card.active {
+  box-shadow: 4px 4px 0 var(--c-blue);
+  border-color: var(--c-blue);
+}
+.enc-flow-box {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--paper-deep);
+  border: var(--rule-hair) solid var(--rule);
+  padding: 1rem;
+  margin-top: 0.8rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* Signature lab */
+.sig-steps {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.sig-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 0.7rem 0.9rem;
+  cursor: pointer;
+  opacity: 0.55;
+  font-size: 0.9rem;
+}
+.sig-step.lit { opacity: 1; border-color: var(--c-green); }
+.sig-step .step-number {
+  width: 24px; height: 24px;
+  background: var(--ink); color: var(--paper);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-weight: 800; font-size: 0.8rem;
+}
+.sig-step.lit .step-number { background: var(--c-green); }
+.sig-compare-box {
+  text-align: center;
+  font-weight: 800;
+  padding: 0.9rem;
+  border: var(--rule-medium) dashed var(--ink);
+  margin-top: 0.8rem;
+  display: none;
+}
+.sig-compare-box.show { display: block; }
+
+/* ============================================================
+   L3 VISUAL SYSTEM — mind-maps, flow diagrams, pyramid,
+   browser mockup, photo strips (offline, pure CSS)
+   ============================================================ */
+.l3-figure {
+  background: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 1.1rem 1.2rem;
+  margin: 1.2rem 0;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.l3-figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-align: center;
+  margin-top: 0.8rem;
+  line-height: 1.6;
+}
+.l3-figure-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  margin: 0 0 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline-start: 0.7rem;
+  border-inline-start: 5px solid var(--c-blue);
+}
+.l3-flow + .l3-figure-title,
+.l3-mindmap + .l3-figure-title,
+.l3-fw + .l3-flow + .l3-figure-title { margin-top: 1.2rem; }
+
+/* Mind-map: center + branches */
+.l3-mindmap { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
+.l3-mind-center {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  text-align: center;
+  max-width: 100%;
+}
+.l3-mind-branches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  width: 100%;
+}
+.l3-mind-branch {
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper-deep);
+  padding: 0.7rem 0.8rem;
+  text-align: center;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  position: relative;
+}
+.l3-mind-branch strong { display: block; font-size: 0.92rem; margin-bottom: 0.2rem; }
+.l3-mind-branch small { color: var(--ink-soft); }
+.l3-mind-branch.b-blue { border-top: 5px solid var(--c-blue); }
+.l3-mind-branch.b-amber { border-top: 5px solid var(--c-amber); }
+.l3-mind-branch.b-green { border-top: 5px solid var(--c-green); }
+.l3-mind-branch.b-red { border-top: 5px solid var(--c-red); }
+
+/* Horizontal flow with arrows */
+.l3-flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin: 0.4rem 0;
+}
+.l3-flow-node {
+  background: var(--paper-deep);
+  border: var(--rule-medium) solid var(--ink);
+  border-top-width: 5px;
+  padding: 0.6rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.5;
+  flex: 1 1 110px;
+  min-width: 100px;
+  color: var(--ink);
+}
+.l3-flow-node.key { border-top-color: var(--c-amber); }
+.l3-flow-node.lock { border-top-color: var(--c-red); }
+.l3-flow-node.open { border-top-color: var(--c-green); }
+.l3-flow-node small { display: block; font-weight: 400; color: var(--ink-soft); font-size: 0.74rem; }
+.l3-flow-arrow {
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--c-blue);
+  flex: 0 0 auto;
+}
+.l3-flow-arrow.danger { color: var(--c-red); }
+.l3-flow-arrow.ok { color: var(--c-green); }
+
+/* Firewall diagram */
+.l3-fw {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0.4rem 0;
+}
+.l3-fw-side {
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper-deep);
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+.l3-fw-side small { display: block; font-weight: 400; color: var(--ink-soft); }
+.l3-fw-wall {
+  background: repeating-linear-gradient(45deg, var(--c-red), var(--c-red) 8px, transparent 8px, transparent 16px);
+  background-color: var(--paper-deep);
+  border: var(--rule-medium) solid var(--ink);
+  padding: 0.8rem 0.6rem;
+  font-weight: 900;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.l3-fw-wall span { background: var(--paper); color: var(--ink); padding: 0.15rem 0.5rem; border: 2px solid var(--ink); }
+@media (max-width: 560px) {
+  .l3-fw { grid-template-columns: 1fr; }
+  .l3-fw-wall { padding: 0.5rem; }
+}
+
+/* Policy pyramid */
+.l3-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; margin: 0.4rem 0; }
+.l3-pyramid-tier {
+  text-align: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 0.55rem 1rem;
+  border: var(--rule-medium) solid var(--ink);
+  border-top-width: 5px;
+  background: var(--paper-deep);
+  color: var(--ink);
+  line-height: 1.5;
+}
+.l3-pyramid-tier small { display: block; font-weight: 400; font-size: 0.76rem; color: var(--ink-soft); }
+.l3-pyramid-tier.t1 { width: 46%; border-top-color: var(--c-blue); }
+.l3-pyramid-tier.t2 { width: 68%; border-top-color: var(--c-amber); }
+.l3-pyramid-tier.t3 { width: 90%; border-top-color: var(--c-green); }
+
+/* Browser https bar mockup */
+.l3-browser {
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper-deep);
+  overflow: hidden;
+}
+.l3-browser-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--paper-deep);
+  color: var(--ink);
+  border-bottom: var(--rule-medium) solid var(--ink);
+  padding: 0.55rem 0.8rem;
+  font-family: monospace;
+  font-size: 0.82rem;
+  direction: ltr;
+}
+.l3-browser-bar .lock { font-size: 1rem; }
+.l3-browser-bar .https { color: var(--c-green); font-weight: 800; }
+.l3-browser-body {
+  padding: 0.7rem 0.9rem;
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+/* Photo strip: 3 tiles reusing local assets */
+.l3-photos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+@media (max-width: 560px) { .l3-photos { grid-template-columns: 1fr 1fr; } }
+.l3-photo {
+  border: var(--rule-medium) solid var(--ink);
+  background: var(--paper-deep);
+  overflow: hidden;
+}
+.l3-photo img { width: 100%; height: 92px; object-fit: cover; display: block; }
+.l3-photo span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.35rem 0.5rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Comparison mini-table inside figure */
+.l3-mini-table { width: 100%; border-collapse: collapse; font-size: 0.84rem; margin-top: 0.6rem; }
+.l3-mini-table th, .l3-mini-table td {
+  border: 1px solid var(--rule);
+  padding: 0.5rem 0.6rem;
+  text-align: start;
+  line-height: 1.6;
+}
+.l3-mini-table th { background: var(--ink); color: var(--paper); font-size: 0.76rem; }
+.l3-mini-table tr:nth-child(even) td { background: rgba(127, 127, 127, 0.12); }
+.l3-mini-table td strong { white-space: nowrap; }
+
+/* Scenario example lines inside story cards */
+.card-example {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  background: var(--paper-deep);
+  border-inline-start: 3px solid var(--c-amber);
+  padding: 0.45rem 0.75rem;
+  margin: 0.5rem 0 0;
+}
+.card-example em { font-style: normal; }
+.card-example strong { color: var(--ink); }
+
+/* Full-width reference zone below the 2-col grid (figures, callouts).
+   Keeps long tables/diagrams from stretching one column and leaving
+   an empty void beside the visual sidebar. */
+.stage-wide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 1.6rem;
+}
+.stage-wide .l3-figure { margin: 0; }
+.stage-wide .editorial-callout { margin: 0; }
+
+/* Keep the visual sidebar pinned while the text column scrolls */
+@media (min-width: 800px) {
+  .stage-visual-container {
+    position: sticky;
+    top: 185px;
+  }
+}
+
+/* ---------- Arabic readability for Lec3 ---------- */html[dir="rtl"] .l3-figure,
+html[dir="rtl"] .l3-mind-branch,
+html[dir="rtl"] .l3-flow-node,
+html[dir="rtl"] .l3-pyramid-tier,
+html[dir="rtl"] .card-desc,
+html[dir="rtl"] .story-lead,
+html[dir="rtl"] .pill-item,
+html[dir="rtl"] .quiz-btn,
+html[dir="rtl"] .fraud-opt,
+html[dir="rtl"] .cia-chip,
+html[dir="rtl"] .auth-factor-card,
+html[dir="rtl"] .sig-step {
+  line-height: 1.9;
+  letter-spacing: 0 !important;
+  word-spacing: 0.02em;
+}
+html[dir="rtl"] .l3-figure-title,
+html[dir="rtl"] .widget-title,
+html[dir="rtl"] .card-title { line-height: 1.8; }
+html[dir="rtl"] .pill-cloud { gap: 0.55rem; }
+html[dir="rtl"] .pill-item { font-size: 0.9rem; padding: 0.4rem 0.85rem; }
+html[dir="rtl"] .l3-browser-bar { direction: ltr; text-align: left; }
+html[dir="rtl"] .l3-flow { direction: rtl; }
+html[dir="rtl"] .quiz-options-list .quiz-btn { text-align: start; }

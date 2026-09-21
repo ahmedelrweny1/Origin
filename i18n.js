@@ -13,7 +13,7 @@ const translations = {
     dossier4: "Save your progress",
     tocLabel: "Table of Contents",
     tocTitle: "The Journeys",
-    tocCount: "03 entries",
+    tocCount: "04 entries",
     footerLeft: "Origin Atlas",
     footerCenter: "Made for curious minds",
     footerRight: "Intro to Computer Science",
@@ -89,6 +89,20 @@ const translations = {
     lect2Final: "Match challenge",
     lect2ChallengeTitle: "Chapter 2 Concept Matching Challenge",
     lect2ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Personal Data and Intellectual Property.",
+
+    // Lecture 3 (Chapter 3: Information Security & Safety Tech)
+    lect3Edition: "Chapter 03 · 1st Secondary",
+    lect3Brand: "Information Security & Safety Tech",
+    lect3HeroBadge: "🔐 Chapter 3 · 1st Secondary",
+    lect3HeroTitle: "Information Security <br><span class=\"text-gradient\">+ Safety Tech & Encryption</span>",
+    lect3HeroDesc: "An editorial journey through the CIA triad, passwords and authentication, fraud and social engineering, encryption, signatures and SSL/TLS.",
+    lect3StartBtn: "Start Interactive Journey",
+    lect3UnitName: "Security & Safety Tech",
+    lect3Level: "1st Secondary",
+    lect3Stops: "5 chapters",
+    lect3Final: "Match challenge",
+    lect3ChallengeTitle: "Chapter 3 Concept Matching Challenge",
+    lect3ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Security and Safety Technology.",
 
     // Quizzes landing
     qzEdition: "Section 02 · Exam Hall",
@@ -418,7 +432,7 @@ const translations = {
     dossier4: "تقدر تحفظ تقدمك",
     tocLabel: "فهرس الرحلات",
     tocTitle: "الرحلات",
-    tocCount: "٣ رحلات",
+    tocCount: "٤ رحلات",
     footerLeft: "أطلس الأصل",
     footerCenter: "للعقول اللي بتسأل",
     footerRight: "مقدمة في علوم الكمبيوتر",
@@ -494,6 +508,20 @@ const translations = {
     lect2Final: "تحدي المطابقة",
     lect2ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الثاني",
     lect2ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات الرسمية لتثبيت فهمك لقواعد حماية البيانات وحقوق الملكية الصناعية والمؤلف.",
+
+    // Lecture 3 (Chapter 3: Information Security & Safety Tech)
+    lect3Edition: "الفصل ٣ · أولى ثانوي",
+    lect3Brand: "أمن المعلومات وتقنيات السلامة",
+    lect3HeroBadge: "🔐 الفصل الثالث · أولى ثانوي",
+    lect3HeroTitle: "أمن المعلومات <br><span class=\"text-gradient\">+ تقنيات السلامة والتشفير</span>",
+    lect3HeroDesc: "رحلة بصرية تفاعلية تحترف فيها الأركان الأمنية الثلاثة، كلمات المرور والمصادقة، كشف الاحتيال والهندسة الاجتماعية، وأسرار التشفير والتوقيع الرقمي و SSL/TLS.",
+    lect3StartBtn: "يلا نبدأ الاستكشاف",
+    lect3UnitName: "الأمن وتقنيات السلامة",
+    lect3Level: "أولى ثانوي",
+    lect3Stops: "٥ محطات",
+    lect3Final: "تحدي المطابقة",
+    lect3ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الثالث",
+    lect3ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات الرسمية لتثبيت فهمك لأمن المعلومات وتقنيات السلامة.",
 
     // Quizzes landing
     qzEdition: "القسم ٢ · قاعة الاختبارات",

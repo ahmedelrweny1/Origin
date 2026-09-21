@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <script src="gate.js?v=6"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفصل الثالث: أمن المعلومات وتقنيات السلامة | Origin Atlas</title>
+  <meta name="description" content="رحلة تفاعلية بصرية في تهديدات أمن المعلومات، كلمات المرور والمصادقة، الاحتيال والهندسة الاجتماعية، التشفير والتوقيع الرقمي و SSL/TLS.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=5">
+  <link rel="stylesheet" href="lecture1.css?v=5">
+  <link rel="stylesheet" href="lecture2.css?v=5">
+  <link rel="stylesheet" href="lecture3.css?v=5">
+  <link rel="stylesheet" href="rtl.css?v=5">
+  <script src="i18n.js?v=5"></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="header-inner">
+      <div class="header-top">
+        <span class="topbar-meta" data-i18n="lect3Edition">Chapter 03 · 1st Secondary</span>
+        <a class="brand" href="index.html">Origin <span>Atlas</span></a>
+        <div class="controls-group">
+          <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadQuizzes">🧠 Quizzes</a>
+          <button id="themeToggle" class="control-btn" aria-label="Toggle Theme">🌙</button>
+          <button id="langToggle" class="control-btn" aria-label="Toggle Language">AR / EN</button>
+        </div>
+      </div>
+
+      <div class="nav-progress-row">
+        <nav class="topics-scroll" id="topicNodes" aria-label="Lecture Stages Navigation"></nav>
+        <div class="progress-container">
+          <div class="progress-track">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-text" id="progressLabel">00%</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section class="hero-section" id="heroSection">
+      <div class="hero-main">
+        <span class="badge-tag" data-i18n="lect3HeroBadge">🔐 الفصل الثالث · أولى ثانوي</span>
+        <h1 class="hero-title" data-i18n="lect3HeroTitle">
+          أمن المعلومات<br><span class="text-gradient">+ تقنيات السلامة والتشفير</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="lect3HeroDesc">
+          رحلة بصرية تحترف فيها ثالوث CIA، كلمات المرور والمصادقة، كشف الاحتيال والهندسة الاجتماعية، وأسرار التشفير والتوقيع الرقمي و SSL/TLS.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-arrow" id="startLectureBtn" data-i18n="lect3StartBtn">
+            ابدأ الاستكشاف التفاعلي
+          </button>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <ul class="unit-meta">
+          <li><span class="label">UNIT</span><span class="value" data-i18n="lect3UnitName">Security & Safety Tech</span></li>
+          <li><span class="label">LEVEL</span><span class="value" data-i18n="lect3Level">1st Secondary</span></li>
+          <li><span class="label">STOPS</span><span class="value" data-i18n="lect3Stops">5 chapters</span></li>
+          <li><span class="label">FINAL</span><span class="value" data-i18n="lect3Final">Match challenge</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="stage-experience hidden" id="lectureExperience">
+      <article class="stage-card" id="stagePanel" aria-live="polite"></article>
+
+      <div class="stage-navigation">
+        <button class="btn btn-ghost" id="prevBtn" data-i18n="btnPrev">&larr; المحطة السابقة</button>
+        <button class="btn btn-primary btn-arrow" id="nextBtn" data-i18n="btnNext">المحطة التالية &rarr;</button>
+      </div>
+    </section>
+
+    <section class="final-challenge-card hidden" id="finalChallengeSection">
+      <span class="badge-tag" data-i18n="finalChallengeBadge">🏁 Final Challenge</span>
+      <h2 data-i18n="lect3ChallengeTitle">تحدي مطابقة مفاهيم الأمن والتشفير</h2>
+      <p class="muted" data-i18n="lect3ChallengeDesc">
+        وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات الرسمية لتثبيت فهمك لأمن المعلومات وتقنيات السلامة.
+      </p>
+      <div class="match-game-grid" id="matchBoard"></div>
+      <div id="matchResult" class="hidden"></div>
+      <button class="btn btn-ghost" id="resetMatchBtn" data-i18n="btnResetMatch">🔄 إعادة الترتيب والمحاولة</button>
+    </section>
+
+  </main>
+
+  <script src="data-lect3-ar.js?v=5"></script>
+  <script src="data-lect3-en.js?v=5"></script>
+  <script src="lecture3.js?v=5"></script>
+</body>
+</html>
