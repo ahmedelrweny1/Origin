@@ -5,11 +5,43 @@
 
 const PASS_KEY = 'origin-admin-passcode';
 const CONFIG_KEY = 'origin-admin-exam-config';
-const EXAM_ID = 'final-l1l2';
-const ATT_KEY = `origin-timed-exam-${EXAM_ID}-attempts`;
-const LOG_KEY = `origin-timed-exam-${EXAM_ID}-log`;
+const EXAMS = {
+  'final-l1l2': {
+    total: 50,
+    seed: {
+      durationMin: 45,
+      passMark: 25,
+      attemptLimit: 1,
+      windowEnabled: true,
+      windowStart: new Date(2026, 8, 15, 10, 0, 0).getTime(),
+      windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime()
+    }
+  },
+  'mid-l1l2': {
+    total: 40,
+    seed: {
+      durationMin: 60,
+      passMark: 20,
+      attemptLimit: 1,
+      windowEnabled: false,
+      windowStart: 0,
+      windowEnd: 0
+    }
+  }
+};
+const ATT_KEY = (id) => `origin-timed-exam-${id}-attempts`;
+const LOG_KEY = (id) => `origin-timed-exam-${id}-log`;
 const DEFAULT_PASS = '1234';
 const SESSION_KEY = 'origin-admin-unlocked';
+
+function currentExamId() {
+  try {
+    const v = ($('examSelect') && $('examSelect').value) || 'final-l1l2';
+    if (EXAMS[v]) return v;
+  } catch (e) {}
+  return 'final-l1l2';
+}
+function currentTotal() { return EXAMS[currentExamId()].total; }
 
 const $ = (id) => document.getElementById(id);
 
@@ -33,22 +65,16 @@ function isUnlocked() {
   try { return sessionStorage.getItem(SESSION_KEY) === '1'; }
   catch (e) { return false; }
 }
-/* Default seed: 15 Sep 2026, 10:00–12:00, 45 min, one attempt.
-   Applies until the admin saves different settings. */
+/* Default seeds per exam (see EXAMS above).
+   Apply until the admin saves different settings. */
 function seedConfig() {
-  return {
-    durationMin: 45,
-    passMark: 25,
-    attemptLimit: 1,
-    windowEnabled: true,
-    windowStart: new Date(2026, 8, 15, 10, 0, 0).getTime(),
-    windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime()
-  };
+  return Object.assign({}, EXAMS[currentExamId()].seed);
 }
 function normConfig(c) {
   const s = seedConfig();
+  const total = currentTotal();
   const durationMin = Math.min(180, Math.max(5, parseInt(c.durationMin, 10) || s.durationMin));
-  const passMark = Math.min(50, Math.max(1, parseInt(c.passMark, 10) || s.passMark));
+  const passMark = Math.min(total, Math.max(1, parseInt(c.passMark, 10) || s.passMark));
   let attemptLimit = parseInt(c.attemptLimit, 10);
   if (!(attemptLimit >= 0)) attemptLimit = s.attemptLimit;
   const windowEnabled = !!c.windowEnabled;
@@ -59,7 +85,7 @@ function normConfig(c) {
 function getConfig() {
   try {
     const all = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}');
-    if (all && all[EXAM_ID]) return normConfig(all[EXAM_ID]);
+    if (all && all[currentExamId()]) return normConfig(all[currentExamId()]);
   } catch (e) {}
   return seedConfig();
 }
@@ -81,8 +107,18 @@ function showUnlocked() {
   $('dangerCard').classList.remove('hidden');
   $('rosterCard').classList.remove('hidden');
   const c = getConfig();
+  const total = currentTotal();
+  if ($('examSelect')) $('examSelect').value = currentExamId();
+  const passLabel = $('passMarkLabel');
+  if (passLabel) {
+    passLabel.textContent = currentLang === 'ar'
+      ? `درجة النجاح (إجابات صحيحة من ${total})`
+      : `Pass mark (correct answers out of ${total})`;
+  }
   $('durationInput').value = c.durationMin;
-  $('passInput').value = c.passMark;
+  const passInput = $('passInput');
+  passInput.value = c.passMark;
+  passInput.max = String(total);
   $('windowEnable').checked = c.windowEnabled;
   $('windowStartInput').value = c.windowStart > 0 ? toLocalInput(c.windowStart) : toLocalInput(seedConfig().windowStart);
   $('windowEndInput').value = c.windowEnd > 0 ? toLocalInput(c.windowEnd) : toLocalInput(seedConfig().windowEnd);
@@ -93,7 +129,7 @@ function showUnlocked() {
 
 function readLog() {
   try {
-    const l = JSON.parse(localStorage.getItem(LOG_KEY) || '[]');
+    const l = JSON.parse(localStorage.getItem(LOG_KEY(currentExamId())) || '[]');
     return Array.isArray(l) ? l : [];
   } catch (e) { return []; }
 }
@@ -218,22 +254,24 @@ document.addEventListener('DOMContentLoaded', () => {
   else showLocked();
 
   $('unlockBtn').addEventListener('click', () => {
-    if ($('passInput').value === getPass()) {
+    if ($('lockPassInput').value === getPass()) {
       try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
       $('lockErr').textContent = '';
-      $('passInput').value = '';
+      $('lockPassInput').value = '';
       showUnlocked();
     } else {
       $('lockErr').textContent = tOrEn('adWrong');
     }
   });
-  $('passInput').addEventListener('keydown', (e) => {
+  $('lockPassInput').addEventListener('keydown', (e) => {
     if (e.key === 'Enter') $('unlockBtn').click();
   });
 
   $('saveBtn').addEventListener('click', async () => {
+    const examId = currentExamId();
+    const total = currentTotal();
     const durationMin = Math.min(180, Math.max(5, parseInt($('durationInput').value, 10) || 45));
-    const passMark = Math.min(50, Math.max(1, parseInt($('passInput').value, 10) || 25));
+    const passMark = Math.min(total, Math.max(1, parseInt($('passInput').value, 10) || 25));
     const attemptLimit = $('attemptInput').value === '0' ? 0 : 1;
     const windowEnabled = $('windowEnable').checked;
     const windowStart = new Date($('windowStartInput').value).getTime();
@@ -247,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     let all = {};
     try { all = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); } catch (e) {}
-    all[EXAM_ID] = { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd };
+    all[examId] = { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd };
     try { localStorage.setItem(CONFIG_KEY, JSON.stringify(all)); } catch (e) {}
     const np = $('newPassInput').value.trim();
     if (np.length >= 4) {
@@ -256,11 +294,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Push to students (Firestore). This ONLY reaches student devices
     // when signed in as the teacher — otherwise it stays local.
-    const pub = await publishConfig(all[EXAM_ID]);
+    const pub = await publishConfig(examId, all[examId]);
     ok.classList.remove('hidden');
     if (pub === 'ok') {
       ok.style.color = '';
-      ok.textContent = tOrEn('adPublished') + ` · ${durationMin} min · ${passMark}/50`;
+      ok.textContent = tOrEn('adPublished') + ` · ${durationMin} min · ${passMark}/${total}`;
     } else if (pub === 'noteacher') {
       ok.style.color = 'var(--c-red)';
       ok.textContent = tOrEn('adLocalOnly');
@@ -276,12 +314,18 @@ document.addEventListener('DOMContentLoaded', () => {
     showLocked();
   });
 
+  const examSel = $('examSelect');
+  if (examSel) examSel.addEventListener('change', () => {
+    if (isUnlocked()) showUnlocked();
+  });
+
   $('clearAttemptsBtn').addEventListener('click', () => {
     if (!confirm(tOrEn('adClearConfirm'))) return;
     try {
-      localStorage.removeItem(`origin-timed-exam-${EXAM_ID}-state`);
-      localStorage.removeItem(`origin-timed-exam-${EXAM_ID}-report`);
-      localStorage.removeItem(ATT_KEY);
+      const examId = currentExamId();
+      localStorage.removeItem(`origin-timed-exam-${examId}-state`);
+      localStorage.removeItem(`origin-timed-exam-${examId}-report`);
+      localStorage.removeItem(ATT_KEY(examId));
     } catch (e) {}
     $('saveOk').classList.remove('hidden');
     $('saveOk').textContent = tOrEn('adCleared');
@@ -301,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'exam-results.csv';
+    a.download = `exam-results-${currentExamId()}.csv`;
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
@@ -309,7 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('clearLogBtn').addEventListener('click', () => {
     if (!confirm(tOrEn('roClearConfirm'))) return;
-    try { localStorage.removeItem(LOG_KEY); } catch (e) {}
+    try { localStorage.removeItem(LOG_KEY(currentExamId())); } catch (e) {}
     renderRoster();
     const m = $('logMsg');
     m.classList.remove('hidden');
@@ -321,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!confirm(tOrEn('adClearRemoteConfirm'))) return;
     try {
       if ((typeof Remote !== 'undefined') && Remote.teacher) {
-        await Remote.clearRoster(EXAM_ID);
+        await Remote.clearRoster(currentExamId());
         rosterRows = [];
         paintRoster();
         flashLog(tOrEn('roLogCleared'));
@@ -361,12 +405,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-async function publishConfig(cfg) {
+async function publishConfig(examId, cfg) {
   // Pushes the config to Firestore so ALL student devices pick it up.
   // Returns 'ok' | 'noteacher' | 'fail'. Never throws.
   try {
     if (typeof Remote === 'undefined' || !Remote.enabled || !Remote.teacher) return 'noteacher';
-    await Remote.saveConfig(EXAM_ID, cfg);
+    await Remote.saveConfig(examId, cfg);
     return 'ok';
   } catch (e) { return 'fail'; }
 }
@@ -398,7 +442,7 @@ function refreshLoginUI() {
 }
 
 async function loadRemoteRoster() {
-  const rows = await Remote.fetchRoster(EXAM_ID);
+  const rows = await Remote.fetchRoster(currentExamId());
   rosterRows = rows.map((r) => toRow(r, r.id));
   rosterRemote = true;
   lastRemoteFetch = Date.now();

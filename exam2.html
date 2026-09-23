@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="gate.js?v=6"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Exam 2 — Origin Atlas</title>
+  <meta name="description" content="Tricky timed exam covering Lectures 1 and 2. AR / EN bilingual.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=6">
+  <link rel="stylesheet" href="quiz.css?v=6">
+  <link rel="stylesheet" href="exam.css?v=6">
+  <link rel="stylesheet" href="rtl.css?v=6">
+  <script src="i18n.js?v=6"></script>
+</head>
+<body>
+
+  <div class="exam-timerbar" id="timerBar">
+    <div class="exam-timerbar-inner">
+      <a href="exams.html" class="control-btn" style="text-decoration:none;min-height:44px;display:inline-flex;align-items:center;" data-i18n="exBack">← Exams</a>
+      <span class="timer-chip" id="timerChip" role="timer" aria-live="off" aria-label="Time remaining">⏱ --:--</span>
+      <span class="exam-progress-mini" id="examProgressMini">01 / 40</span>
+      <button id="themeToggle" class="control-btn" aria-label="Toggle theme">🌙</button>
+      <button id="langToggle" class="control-btn" aria-label="Toggle language">AR / EN</button>
+    </div>
+  </div>
+
+  <main class="exam-shell">
+    <div class="palette-backdrop hidden" id="paletteBackdrop"></div>
+    <aside class="palette closed" id="palette" aria-label="Question navigation">
+      <div class="palette-head">
+        <span class="mono" data-i18n="exPaletteTitle">Questions</span>
+        <button class="control-btn" id="paletteCloseBtn" aria-label="Close navigation">✕</button>
+      </div>
+      <div class="palette-legend">
+        <span><span class="legend-dot red"></span><span data-i18n="exLegendUnanswered">Unanswered</span></span>
+        <span><span class="legend-dot green"></span><span data-i18n="exLegendAnswered">Answered</span></span>
+        <span><span class="legend-dot yellow"></span><span data-i18n="exLegendFlagged">Flagged</span></span>
+      </div>
+      <div class="palette-grid" id="paletteGrid"></div>
+      <div class="palette-foot">
+        <button class="btn btn-ghost" id="paletteSubmitBtn" data-i18n="exSubmit">Submit exam</button>
+      </div>
+    </aside>
+
+    <section id="examGate" class="exam-gate">
+      <div class="picker-head">
+        <span class="mono" data-i18n="ex2GateEyebrow">Timed exam · L1 + L2 · Tricky</span>
+        <h1 data-i18n="ex2GateTitle">Tricky exam: both lectures, new questions.</h1>
+        <p class="muted" data-i18n="ex2GateSub">40 new questions in fixed order. The timer starts when you press Start and keeps running even if you close the page.</p>
+      </div>
+      <div class="exam-overview">
+        <div class="exam-stat"><span class="mono" data-i18n="exCount">Questions</span><strong id="gateCount">40</strong></div>
+        <div class="exam-stat"><span class="mono" data-i18n="exTime">Time</span><strong id="gateTime">60:00</strong></div>
+        <div class="exam-stat"><span class="mono" data-i18n="exPassMark">Pass mark</span><strong id="gatePass">20 / 40</strong></div>
+      </div>
+      <p class="muted" id="gateWindow"></p>
+      <p class="muted hidden" id="gateWarn" style="color:var(--c-amber);font-weight:700;"></p>
+      <div class="exam-rules">
+        <h3 class="mono" data-i18n="exRulesH">Rules</h3>
+        <ul>
+          <li data-i18n="exRule1">No instant feedback — your choice is saved silently so you keep thinking.</li>
+          <li data-i18n="exRule2">You can flag questions and jump freely with Prev / Next or the palette.</li>
+          <li data-i18n="exRule3">When time ends the exam submits automatically and your report appears.</li>
+        </ul>
+      </div>
+      <label class="gate-name" id="gateNameRow"><span data-i18n="exNameLabel">Your name (required to start)</span>
+        <input type="text" id="studentName" maxlength="60" autocomplete="name" placeholder="Ahmed / أحمد">
+      </label>
+      <p class="muted hidden" id="nameHint" data-i18n="exNameNeed">Write your name first to start.</p>
+      <div class="exam-actions">
+        <a id="gateLoginLink" href="login.html?next=exam2.html" class="btn btn-primary btn-arrow hidden" data-i18n="adLogin">Sign in</a>
+        <button class="btn btn-primary btn-arrow" id="startExamBtn" data-i18n="exStart">Start exam</button>
+        <a class="btn btn-ghost" href="exams.html" data-i18n="exBack">← Exams</a>
+      </div>
+      <p class="muted hidden" id="resumeNote"></p>
+      <div class="exam-actions hidden" id="resumeActions">
+        <button class="btn btn-primary btn-arrow" id="resumeExamBtn" data-i18n="exResume">Resume exam</button>
+        <button class="btn btn-ghost" id="restartExamBtn" data-i18n="exRestart">Restart from Q1</button>
+      </div>
+      <p class="muted hidden" id="gateBlocked" style="color:var(--c-red);font-weight:700;"></p>
+    </section>
+
+    <section id="examRunner" class="hidden" aria-live="polite">
+      <div class="q-card">
+        <div class="q-eyebrow">
+          <span class="q-num" id="qNum">Q 01 / 40</span>
+          <span class="type-badge" id="qType">MCQ</span>
+        </div>
+        <p class="q-text" id="qText">—</p>
+        <div class="q-options" id="qOptions"></div>
+        <div class="q-flagrow">
+          <button class="flag-btn" id="flagBtn" aria-pressed="false">🚩 <span data-i18n="exFlag">Flag</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="exam-bottombar hidden" id="bottomBar">
+    <div class="exam-bottombar-inner">
+      <button class="btn btn-ghost" id="prevBtn" data-i18n="exPrev">← Prev</button>
+      <button class="btn btn-ghost" id="paletteToggleBtn" data-i18n="exPaletteBtn">Palette</button>
+      <button class="btn btn-primary" id="nextBtn" data-i18n="exNext">Next →</button>
+    </div>
+  </div>
+
+  <div class="exam-modal-backdrop hidden" id="submitModal">
+    <div class="exam-modal" role="dialog" aria-modal="true" aria-labelledby="submitModalTitle">
+      <h3 id="submitModalTitle" data-i18n="exSubmitTitle">Submit exam?</h3>
+      <div class="exam-modal-stats">
+        <div><span class="mono" data-i18n="exStAnswered">Answered</span><strong id="mAnswered">0</strong></div>
+        <div><span class="mono" data-i18n="exStFlagged">Flagged</span><strong id="mFlagged">0</strong></div>
+        <div><span class="mono" data-i18n="exStLeft">Left</span><strong id="mLeft">0</strong></div>
+      </div>
+      <p class="muted" data-i18n="exSubmitHint">Unanswered questions count as wrong. You cannot change answers after submitting.</p>
+      <div class="texam-actions">
+        <button class="btn btn-primary" id="confirmSubmitBtn" data-i18n="exConfirm">Submit now</button>
+        <button class="btn btn-ghost" id="cancelSubmitBtn" data-i18n="exCancel">Keep answering</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="exam-mid-l1l2-en.js?v=6"></script>
+  <script src="exam-mid-l1l2-ar.js?v=6"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js?v=6"></script>
+  <script src="remote.js?v=6"></script>
+  <script src="exam2.js?v=6"></script>
+</body>
+</html>

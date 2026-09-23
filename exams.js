@@ -1,28 +1,53 @@
 /* ============================================================
-   Exams list + last-report view.
+   Exams list + last-report view (supports N timed exams).
    Name-aware: status/CTA computed for the typed student name.
    Reads admin config, timed-exam state, attempt map, last report.
    ============================================================ */
 
-const TEXAM_ID = 'final-l1l2';
-const T_STATE_KEY = `origin-timed-exam-${TEXAM_ID}-state`;
-const T_REPORT_KEY = `origin-timed-exam-${TEXAM_ID}-report`;
-const T_CONFIG_KEY = 'origin-admin-exam-config';
-const T_ATT_KEY = `origin-timed-exam-${TEXAM_ID}-attempts`;
-const T_NAME_KEY = 'origin-student-name';
-const T_DEFAULTS = { titleEn: 'Final Exam · Lectures 1 + 2', titleAr: 'الامتحان النهائي · المحاضرة الأولى + التانية' };
+const EXAMS = [
+  {
+    id: 'final-l1l2',
+    total: 50,
+    runUrl: 'exam.html',
+    tag: 'L1 + L2',
+    titleEn: 'Final Exam · Lectures 1 + 2',
+    titleAr: 'الامتحان النهائي · المحاضرة الأولى + التانية',
+    descKey: 'txCardDesc',
+    seed: {
+      durationMin: 45,
+      passMark: 25,
+      attemptLimit: 1,
+      windowEnabled: true,
+      windowStart: new Date(2026, 8, 15, 10, 0, 0).getTime(),
+      windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime()
+    }
+  },
+  {
+    id: 'mid-l1l2',
+    total: 40,
+    runUrl: 'exam2.html',
+    tag: 'L1 + L2 · Tricky',
+    titleEn: 'Tricky Exam · Lectures 1 + 2',
+    titleAr: 'امتحان الخداع · الأولى + التانية',
+    descKey: 'tx2CardDesc',
+    seed: {
+      durationMin: 60,
+      passMark: 20,
+      attemptLimit: 1,
+      windowEnabled: false,
+      windowStart: 0,
+      windowEnd: 0
+    }
+  }
+];
 
-/* Default seed: 15 Sep 2026, 10:00–12:00, 45 min, one attempt. */
-function seedTConfig() {
-  return {
-    durationMin: 45,
-    passMark: 25,
-    attemptLimit: 1,
-    windowEnabled: true,
-    windowStart: new Date(2026, 8, 15, 10, 0, 0).getTime(),
-    windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime()
-  };
-}
+const T_CONFIG_KEY = 'origin-admin-exam-config';
+const T_NAME_KEY = 'origin-student-name';
+const EXAM_STORE_KEY = (id) => `origin-exam-${id}`;
+const UNLOCK_STORE_KEY = (id) => `origin-unlock-${id}`;
+const stateKeyOf = (id) => `origin-timed-exam-${id}-state`;
+const reportKeyOf = (id) => `origin-timed-exam-${id}-report`;
+const attKeyOf = (id) => `origin-timed-exam-${id}-attempts`;
 
 function tOrEn(key) {
   return (translations[currentLang] && translations[currentLang][key])
@@ -48,17 +73,19 @@ function readJSON(key) {
   catch (e) { return null; }
 }
 
-function getTConfig() {
+function seedOf(exam) { return exam.seed; }
+
+function getTConfig(exam) {
   try {
     const all = readJSON(T_CONFIG_KEY) || {};
-    if (all[TEXAM_ID]) {
-      const c = all[TEXAM_ID];
-      const s = seedTConfig();
+    if (all[exam.id]) {
+      const c = all[exam.id];
+      const s = seedOf(exam);
       let attemptLimit = parseInt(c.attemptLimit, 10);
       if (!(attemptLimit >= 0)) attemptLimit = s.attemptLimit;
       return {
         durationMin: Math.min(180, Math.max(5, parseInt(c.durationMin, 10) || s.durationMin)),
-        passMark: Math.min(50, Math.max(1, parseInt(c.passMark, 10) || s.passMark)),
+        passMark: Math.min(exam.total, Math.max(1, parseInt(c.passMark, 10) || s.passMark)),
         attemptLimit,
         windowEnabled: !!c.windowEnabled,
         windowStart: Number(c.windowStart) || 0,
@@ -66,31 +93,27 @@ function getTConfig() {
       };
     }
   } catch (e) {}
-  return seedTConfig();
+  return Object.assign({}, seedOf(exam));
 }
 
-function usedMapT() {
+function usedMapT(exam) {
   try {
-    const m = JSON.parse(localStorage.getItem(T_ATT_KEY) || '{}');
+    const m = JSON.parse(localStorage.getItem(attKeyOf(exam.id)) || '{}');
     if (m && typeof m === 'object' && !Array.isArray(m)) return m;
   } catch (e) {}
   return {};
 }
-function usedBy(name) {
-  const m = usedMapT();
+function usedBy(exam, name) {
+  const m = usedMapT(exam);
   return Math.max(0, parseInt(m[normName(name)] || 0, 10) || 0);
 }
-function usedBySlot(slot) {
-  const m = usedMapT();
+function usedBySlot(exam, slot) {
+  const m = usedMapT(exam);
   return Math.max(0, parseInt(m[slot] || 0, 10) || 0);
 }
-function leftFor(cfg, name) {
+function leftForSlot(cfg, exam, slot) {
   if (cfg.attemptLimit === 0) return Infinity;
-  return cfg.attemptLimit - usedBy(name);
-}
-function leftForSlot(cfg, slot) {
-  if (cfg.attemptLimit === 0) return Infinity;
-  return cfg.attemptLimit - usedBySlot(slot);
+  return cfg.attemptLimit - usedBySlot(exam, slot);
 }
 function onlineUserL() {
   try {
@@ -163,58 +186,108 @@ function readNameInput() {
 
 function renderList() {
   stopWinTick();
-  const cfg = getTConfig();
-  const report = readJSON(T_REPORT_KEY);
   const list = document.getElementById('examList');
   const isAr = currentLang === 'ar';
 
-  document.getElementById('txTocCount').textContent = isAr ? 'امتحان واحد' : '01 exam';
+  document.getElementById('txTocCount').textContent = isAr
+    ? (EXAMS.length === 1 ? 'امتحان واحد' : EXAMS.length === 2 ? 'امتحانان' : `${EXAMS.length} امتحانات`)
+    : (EXAMS.length === 1 ? '01 exam' : `0${EXAMS.length} exams`);
 
-  const winMeta = winValidT(cfg) ? `<span>· 🗓 ${winLineT(cfg)}</span>` : '';
-  const attMeta = cfg.attemptLimit === 1 ? `<span>· 🎲 ${tOrEn('txOneAttempt')}</span>` : '';
-
-  list.innerHTML = `
-    <article class="texam-card" id="texamCard">
+  list.innerHTML = EXAMS.map((exam) => {
+    const cfg = getTConfig(exam);
+    const winMeta = winValidT(cfg) ? `<span>· 🗓 ${winLineT(cfg)}</span>` : '';
+    const attMeta = cfg.attemptLimit === 1 ? `<span>· 🎲 ${tOrEn('txOneAttempt')}</span>` : '';
+    const title = isAr ? exam.titleAr : exam.titleEn;
+    return `
+    <article class="texam-card" id="texamCard-${exam.id}">
       <div class="texam-card-head">
         <span class="chip chip-solid">⏱ ${tOrEn('txTimed')}</span>
-        <span class="chip">L1 + L2</span>
-        <span id="cardStatus"></span>
+        <span class="chip">${esc(exam.tag)}</span>
+        <span id="cardStatus-${exam.id}"></span>
       </div>
-      <h2>${isAr ? T_DEFAULTS.titleAr : T_DEFAULTS.titleEn}</h2>
-      <p class="muted">${tOrEn('txCardDesc')}</p>
+      <h2>${esc(title)}</h2>
+      <p class="muted">${tOrEn(exam.descKey)}</p>
       <div class="texam-meta">
-        <span>❓ 50 ${isAr ? 'سؤال' : 'questions'}</span>
+        <span>❓ ${exam.total} ${isAr ? 'سؤال' : 'questions'}</span>
         <span>· ⏱ ${cfg.durationMin} ${isAr ? 'دقيقة' : 'min'}</span>
-        <span>· 🎯 ${cfg.passMark} / 50 ${isAr ? 'للنجاح' : 'to pass'}</span>
+        <span>· 🎯 ${cfg.passMark} / ${exam.total} ${isAr ? 'للنجاح' : 'to pass'}</span>
         ${winMeta}
         ${attMeta}
       </div>
-      <label class="gate-name"><span>${tOrEn('exNameLabel')}</span>
-        <input type="text" id="stName" maxlength="60" autocomplete="name" value="${esc(savedName())}" placeholder="Ahmed / أحمد">
-      </label>
-      <div class="texam-actions" id="cardCta"></div>
+      <div class="texam-actions" id="cardCta-${exam.id}"></div>
     </article>`;
+  }).join('') + `
+    <label class="gate-name"><span>${tOrEn('exNameLabel')}</span>
+      <input type="text" id="stName" maxlength="60" autocomplete="name" value="${esc(savedName())}" placeholder="Ahmed / أحمد">
+    </label>`;
 
   let deb = null;
   document.getElementById('stName').addEventListener('input', (e) => {
     try { localStorage.setItem(T_NAME_KEY, e.target.value); } catch (err) {}
     if (deb) clearTimeout(deb);
-    deb = setTimeout(updateForName, 250);
+    deb = setTimeout(updateAllForName, 250);
   });
 
-  updateForName();
+  updateAllForName();
 
-  // Report section (after auto-submit redirect or last attempt)
+  // Report section: param match wins, else newest existing report
   const params = new URLSearchParams(window.location.search);
-  const showReport = params.get('report') === TEXAM_ID || !!report;
-  if (showReport && report) renderReport(report, cfg, true);
+  const wantId = params.get('report');
+  let shown = null;
+  if (wantId && EXAMS.some((e) => e.id === wantId)) {
+    const rep = readJSON(reportKeyOf(wantId));
+    if (rep) shown = { exam: EXAMS.find((e) => e.id === wantId), report: rep };
+  }
+  if (!shown) {
+    let best = null;
+    EXAMS.forEach((exam) => {
+      const rep = readJSON(reportKeyOf(exam.id));
+      if (rep && (!best || (rep.submittedAt || 0) > (best.report.submittedAt || 0))) {
+        best = { exam, report: rep };
+      }
+    });
+    shown = best;
+  }
+  if (shown) renderReport(shown.exam, shown.report, getTConfig(shown.exam), true);
   else document.getElementById('examReport').classList.add('hidden');
+
+  // Live 1s tick: refresh countdown + in-progress timers without re-render
+  stopWinTick();
+  winTickId = setInterval(() => {
+    let alive = false;
+    EXAMS.forEach((exam) => {
+      const cfg = getTConfig(exam);
+      const now = Date.now();
+      const cd = document.getElementById(`winCountdown-${exam.id}`);
+      if (cd && winStateT(cfg, now) === 'upcoming') {
+        const leftMs = cfg.windowStart - now;
+        if (leftMs <= 0) { updateAllForName(); return; }
+        cd.textContent = fmtCountdown(leftMs);
+        alive = true;
+      }
+      const ip = document.getElementById(`inprogLeft-${exam.id}`);
+      if (ip) {
+        const state = readJSON(stateKeyOf(exam.id));
+        if (state && state.deadlineEpoch > now) {
+          ip.textContent = fmtMs(state.deadlineEpoch - now);
+          alive = true;
+        } else {
+          updateAllForName();
+        }
+      }
+    });
+    if (!alive) { /* keep ticking cheaply; cards re-render on input/lang only */ }
+  }, 1000);
 }
 
-function updateForName() {
-  const cfg = getTConfig();
-  const state = readJSON(T_STATE_KEY);
-  const report = readJSON(T_REPORT_KEY);
+function updateAllForName() {
+  EXAMS.forEach((exam) => updateForName(exam));
+}
+
+function updateForName(exam) {
+  const cfg = getTConfig(exam);
+  const state = readJSON(stateKeyOf(exam.id));
+  const report = readJSON(reportKeyOf(exam.id));
   const online = (typeof Remote !== 'undefined') && !!Remote.enabled;
   const authUser = onlineUserL();
   const nameEl = document.getElementById('stName');
@@ -231,21 +304,21 @@ function updateForName() {
   const slot = (online && authUser && authUser.uid) ? ('uid:' + authUser.uid) : normName(name);
   const now = Date.now();
   const ws = winStateT(cfg, now);
-  const left = okName ? leftForSlot(cfg, slot) : Infinity;
+  const left = okName ? leftForSlot(cfg, exam, slot) : Infinity;
   const samePerson = (a, b) => normName(a) === normName(b);
   const ownReport = !!(report && (online
     ? (authUser && report.uid && report.uid === authUser.uid)
     : (okName && samePerson(report.name, name))));
 
   const ownState = online
-    ? !!(authUser && state && state.total === 50 && state.uid && state.uid === authUser.uid)
-    : !!(state && state.total === 50 && okName && samePerson(state.studentName, name));
+    ? !!(authUser && state && state.total === exam.total && state.uid && state.uid === authUser.uid)
+    : !!(state && state.total === exam.total && okName && samePerson(state.studentName, name));
   const inProgress = !!(ownState && state.deadlineEpoch > now && ws === 'open' && left > 0);
   const orphaned = !!(ownState && state.deadlineEpoch > now && (ws !== 'open' || left <= 0));
 
-  const card = document.getElementById('texamCard');
-  const statusEl = document.getElementById('cardStatus');
-  const ctaEl = document.getElementById('cardCta');
+  const card = document.getElementById(`texamCard-${exam.id}`);
+  const statusEl = document.getElementById(`cardStatus-${exam.id}`);
+  const ctaEl = document.getElementById(`cardCta-${exam.id}`);
   if (!card || !statusEl || !ctaEl) return;
 
   card.classList.toggle('resume', inProgress);
@@ -254,9 +327,9 @@ function updateForName() {
   if (!okName) {
     statusHtml = `<span class="texam-status st-new">✦ ${tOrEn('exNameNeed')}</span>`;
   } else if (inProgress) {
-    statusHtml = `<span class="texam-status st-inprogress">⏳ ${tOrEn('txInProgress')} · ${fmtMs(state.deadlineEpoch - now)} ${tOrEn('txLeft')}</span>`;
+    statusHtml = `<span class="texam-status st-inprogress">⏳ ${tOrEn('txInProgress')} · <span id="inprogLeft-${exam.id}">${fmtMs(state.deadlineEpoch - now)}</span> ${tOrEn('txLeft')}</span>`;
   } else if (ws === 'upcoming') {
-    statusHtml = `<span class="texam-status st-new">🗓 ${tOrEn('txNotOpenYet')} · ${tOrEn('txOpensIn')} <span id="winCountdown">${fmtCountdown(cfg.windowStart - now)}</span></span>`;
+    statusHtml = `<span class="texam-status st-new">🗓 ${tOrEn('txNotOpenYet')} · ${tOrEn('txOpensIn')} <span id="winCountdown-${exam.id}">${fmtCountdown(cfg.windowStart - now)}</span></span>`;
   } else if (ws === 'ended') {
     statusHtml = `<span class="texam-status st-done">🔒 ${tOrEn('txWindowEnded')}</span>`;
   } else if (left <= 0) {
@@ -269,37 +342,23 @@ function updateForName() {
   statusEl.innerHTML = statusHtml;
 
   const canStart = okName && ws === 'open' && left > 0 && !inProgress && !orphaned;
+  const runHref = `${exam.runUrl}?n=${encodeURIComponent(name)}`;
   let cta;
   if (!okName) {
     cta = online
       ? `<a class="btn btn-primary btn-arrow" href="login.html?next=${encodeURIComponent('exams.html')}">${tOrEn('tabLogin')}</a>`
       : `<button class="btn btn-primary" disabled>${tOrEn('exStart')}</button>`;
   } else if (inProgress || orphaned) {
-    cta = `<a class="btn btn-primary btn-arrow" href="exam.html?n=${encodeURIComponent(name)}">${tOrEn('exResume')}</a>`;
+    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exResume')}</a>`;
   } else if (canStart) {
-    cta = `<a class="btn btn-primary btn-arrow" href="exam.html?n=${encodeURIComponent(name)}">${ownReport ? tOrEn('exRetake') : tOrEn('exStart')}</a>`;
+    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${ownReport ? tOrEn('exRetake') : tOrEn('exStart')}</a>`;
   } else {
     cta = `<a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>`;
   }
   ctaEl.innerHTML = cta;
-
-  // Live countdown to opening
-  stopWinTick();
-  if (okName && ws === 'upcoming') {
-    winTickId = setInterval(() => {
-      const el = document.getElementById('winCountdown');
-      const leftMs = cfg.windowStart - Date.now();
-      if (!el || leftMs <= 0) {
-        stopWinTick();
-        updateForName();
-        return;
-      }
-      el.textContent = fmtCountdown(leftMs);
-    }, 1000);
-  }
 }
 
-function renderReport(report, cfg, canStart) {
+function renderReport(exam, report, cfg, canStart) {
   const box = document.getElementById('examReport');
   box.classList.remove('hidden');
   const isAr = currentLang === 'ar';
@@ -346,14 +405,14 @@ function renderReport(report, cfg, canStart) {
     </div>
     <div id="mistakeList">${itemsHtml}</div>
     <div class="texam-actions">
-      ${canStart ? `<a class="btn btn-primary btn-arrow" href="exam.html">${tOrEn('exRetake')}</a>` : ''}
+      ${canStart ? `<a class="btn btn-primary btn-arrow" href="${exam.runUrl}">${tOrEn('exRetake')}</a>` : ''}
       <a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>
     </div>`;
 
   box.querySelectorAll('.filter-chip').forEach((btn) => {
     btn.addEventListener('click', () => {
       reportFilter = btn.dataset.f;
-      renderReport(report, cfg, canStart);
+      renderReport(exam, report, cfg, canStart);
     });
   });
   box.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -378,15 +437,20 @@ function createParticles() {
 }
 
 function updateSyncNote() {
-  const n = (typeof Remote !== 'undefined') ? Remote.outboxCount(TEXAM_ID) : 0;
+  let pending = 0;
+  try {
+    if (typeof Remote !== 'undefined') {
+      EXAMS.forEach((exam) => { pending += Remote.outboxCount(exam.id) || 0; });
+    }
+  } catch (e) {}
   let el = document.getElementById('syncNote');
-  if (n > 0) {
+  if (pending > 0) {
     if (!el) {
       el = document.createElement('p');
       el.id = 'syncNote';
       el.className = 'muted';
-      const card = document.getElementById('texamCard');
-      if (card) card.appendChild(el);
+      const list = document.getElementById('examList');
+      if (list) list.appendChild(el);
     }
     if (el) el.textContent = '⏳ ' + tOrEn('syncPending');
   } else if (el) {
@@ -406,19 +470,30 @@ async function bootRemoteList() {
     } catch (e) {}
     renderList();
     try {
-      const rc = await Remote.syncConfig(TEXAM_ID);
-      if (rc) {
-        const before = localStorage.getItem(T_CONFIG_KEY);
-        let all = {};
-        try { all = JSON.parse(before || '{}'); } catch (e) {}
-        all[TEXAM_ID] = rc;
+      let changed = false;
+      const before = localStorage.getItem(T_CONFIG_KEY);
+      let all = {};
+      try { all = JSON.parse(before || '{}'); } catch (e) {}
+      for (const exam of EXAMS) {
+        try {
+          const rc = await Remote.syncConfig(exam.id);
+          if (rc) { all[exam.id] = rc; changed = true; }
+        } catch (e) {}
+      }
+      if (changed) {
         try { localStorage.setItem(T_CONFIG_KEY, JSON.stringify(all)); } catch (e) {}
         if (localStorage.getItem(T_CONFIG_KEY) !== before) renderList();
       }
     } catch (e) {}
     try {
-      const r = await Remote.retryOutbox(TEXAM_ID, () => {});
-      if (r.synced) renderList();
+      let synced = false;
+      for (const exam of EXAMS) {
+        try {
+          const r = await Remote.retryOutbox(exam.id, () => {});
+          if (r.synced) synced = true;
+        } catch (e) {}
+      }
+      if (synced) renderList();
     } catch (e) {}
   } catch (e) {}
   updateSyncNote();

@@ -34,7 +34,7 @@
 
     <div class="admin-card hidden" id="lockCard">
       <label><span data-i18n="adPassLabel">Admin passcode</span>
-        <input type="password" id="passInput" inputmode="numeric" autocomplete="off" placeholder="••••">
+        <input type="password" id="lockPassInput" inputmode="numeric" autocomplete="off" placeholder="••••">
       </label>
       <button class="btn btn-primary" id="unlockBtn" data-i18n="adUnlock">Unlock</button>
       <p class="admin-note" data-i18n="adPassHint">Default passcode is shown in the setup note. Change it after first login.</p>
@@ -42,10 +42,16 @@
     </div>
 
     <div class="admin-card hidden" id="settingsCard">
+      <label><span data-i18n="adExamSel">Exam to configure</span>
+        <select id="examSelect">
+          <option value="final-l1l2" data-i18n="adExamOpt1">Final exam · L1 + L2 (50 Q)</option>
+          <option value="mid-l1l2" data-i18n="adExamOpt2">Tricky exam · L1 + L2 (40 Q)</option>
+        </select>
+      </label>
       <label><span data-i18n="adDuration">Exam duration (minutes, 5–180)</span>
         <input type="number" id="durationInput" min="5" max="180" step="1" value="45">
       </label>
-      <label><span data-i18n="adPassMark">Pass mark (correct answers out of 50)</span>
+      <label><span id="passMarkLabel" data-i18n="adPassMark">Pass mark (correct answers out of 50)</span>
         <input type="number" id="passInput" min="1" max="50" step="1" value="25">
       </label>
       <label class="admin-check"><input type="checkbox" id="windowEnable"> <span data-i18n="adWindowEnable">Only open at a specific date & time</span></label>
