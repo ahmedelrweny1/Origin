@@ -1,5 +1,5 @@
 /* ============================================================
-   Timed Exam 2 — Lectures 1 + 2, TRICKY SET (all-new scenarios)
+   Second timed exam — Lectures 1 + 2 (all-new scenarios)
    40 questions, fixed order, 7 types:
    mcq / tf / complete (choose) + typing / multi /
    ordering / matching (do).

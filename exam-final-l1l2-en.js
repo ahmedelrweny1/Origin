@@ -1,5 +1,5 @@
 /* ============================================================
-   Timed Final Exam — Lectures 1 + 2 Combined
+   First timed exam — Lectures 1 + 2 Combined
    50 questions, fixed order, 7 types:
    mcq / tf / complete (choose) + typing / multi /
    ordering / matching (do).

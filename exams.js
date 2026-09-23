@@ -10,8 +10,8 @@ const EXAMS = [
     total: 50,
     runUrl: 'exam.html',
     tag: 'L1 + L2',
-    titleEn: 'Final Exam · Lectures 1 + 2',
-    titleAr: 'الامتحان النهائي · المحاضرة الأولى + التانية',
+    titleEn: 'First Exam · Lectures 1 + 2',
+    titleAr: 'الامتحان الأول · المحاضرة الأولى + التانية',
     descKey: 'txCardDesc',
     seed: {
       durationMin: 45,
@@ -26,9 +26,9 @@ const EXAMS = [
     id: 'mid-l1l2',
     total: 40,
     runUrl: 'exam2.html',
-    tag: 'L1 + L2 · Tricky',
-    titleEn: 'Tricky Exam · Lectures 1 + 2',
-    titleAr: 'امتحان الخداع · الأولى + التانية',
+    tag: 'L1 + L2',
+    titleEn: 'Second Exam · Lectures 1 + 2',
+    titleAr: 'الامتحان الثاني · الأولى + التانية',
     descKey: 'tx2CardDesc',
     seed: {
       durationMin: 60,
