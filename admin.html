@@ -107,6 +107,13 @@
     <div class="admin-card hidden" id="rosterCard">
       <label><span data-i18n="roTitle">Who took the exam.</span></label>
       <p class="admin-note" data-i18n="roSub">Every submitted attempt on this device, newest first.</p>
+      <label><span data-i18n="roView">Roster view</span>
+        <select id="rosterView">
+          <option value="all" data-i18n="roShowAll">Both exams</option>
+          <option value="final-l1l2" data-i18n="roShowFirst">First exam only</option>
+          <option value="mid-l1l2" data-i18n="roShowSecond">Second exam only</option>
+        </select>
+      </label>
       <div class="texam-meta" id="rosterSummary"></div>
       <div class="texam-actions">
         <button class="btn btn-ghost" id="exportCsvBtn" data-i18n="roExport">Export CSV</button>

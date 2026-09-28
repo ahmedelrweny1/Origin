@@ -306,7 +306,9 @@ const Remote = {
       const r = d.data() || {};
       rows.push({
         id: d.id,
+        examId,
         name: r.name || '',
+        owner: r.owner || null,
         score: r.score | 0,
         total: r.total | 0,
         pct: r.pct | 0,

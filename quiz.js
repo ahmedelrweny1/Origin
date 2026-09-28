@@ -270,6 +270,7 @@ function renderExamQuestion() {
   feedback.className = 'quiz-card-feedback hidden';
   feedback.innerHTML = '';
 
+  document.getElementById('runnerPrevBtn').classList.toggle('hidden', runnerState.cursor === 0);
   document.getElementById('runnerSkipBtn').classList.remove('hidden');
   document.getElementById('runnerNextBtn').classList.add('hidden');
   document.getElementById('runnerNextBtn').textContent = tOrEn('qzNext');
@@ -526,6 +527,7 @@ function renderCurrent() {
   feedback.className = 'quiz-card-feedback hidden';
   feedback.innerHTML = '';
 
+  document.getElementById('runnerPrevBtn').classList.toggle('hidden', runnerState.cursor === 0);
   document.getElementById('runnerSkipBtn').classList.remove('hidden');
   document.getElementById('runnerNextBtn').classList.add('hidden');
   document.getElementById('runnerNextBtn').textContent = tOrEn('qzNext');
@@ -595,6 +597,13 @@ function goNext() {
   else renderCurrent();
 }
 
+function goPrev() {
+  if (runnerState.cursor <= 0) return;
+  runnerState.cursor--;
+  if (runnerState.mode === 'exam') renderExamQuestion();
+  else renderCurrent();
+}
+
 function finishQuiz() {
   document.getElementById('quizRunner').classList.add('hidden');
   const resultEl = document.getElementById('quizResult');
@@ -653,6 +662,7 @@ function finishQuiz() {
 ------------------------------------------------------------------ */
 document.addEventListener('DOMContentLoaded', () => {
   init();
+  document.getElementById('runnerPrevBtn').addEventListener('click', goPrev);
   document.getElementById('runnerSkipBtn').addEventListener('click', handleSkip);
   document.getElementById('runnerNextBtn').addEventListener('click', goNext);
   document.getElementById('resultRetryBtn').addEventListener('click', () => {

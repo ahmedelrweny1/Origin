@@ -31,8 +31,35 @@ const EXAMS = {
 };
 const ATT_KEY = (id) => `origin-timed-exam-${id}-attempts`;
 const LOG_KEY = (id) => `origin-timed-exam-${id}-log`;
+const EXAM_ORDER = ['final-l1l2', 'mid-l1l2'];
 const DEFAULT_PASS = '1234';
 const SESSION_KEY = 'origin-admin-unlocked';
+
+function normName(s) {
+  return String(s || '').trim().toLowerCase()
+    .replace(/[ً-ٰٟ]/g, '').replace(/ـ/g, '')
+    .replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+    .replace(/\s+/g, ' ');
+}
+
+function rosterView() {
+  try {
+    const v = ($('rosterView') && $('rosterView').value) || 'all';
+    if (v === 'all' || EXAMS[v]) return v;
+  } catch (e) {}
+  return 'all';
+}
+
+function examShort(id) {
+  if (id === 'final-l1l2') return tOrEn('roFirst');
+  if (id === 'mid-l1l2') return tOrEn('roSecond');
+  return id;
+}
+
+function mergeKey(r) {
+  if (r.owner) return 'uid:' + r.owner;
+  return 'name:' + normName(r.name);
+}
 
 function currentExamId() {
   try {
@@ -127,9 +154,10 @@ function showUnlocked() {
   syncAdminRemote();
 }
 
-function readLog() {
+function readLog(examId) {
+  const id = (examId && EXAMS[examId]) ? examId : currentExamId();
   try {
-    const l = JSON.parse(localStorage.getItem(LOG_KEY(currentExamId())) || '[]');
+    const l = JSON.parse(localStorage.getItem(LOG_KEY(id)) || '[]');
     return Array.isArray(l) ? l : [];
   } catch (e) { return []; }
 }
@@ -143,13 +171,17 @@ function fmtDateTime(ms) {
 }
 
 let rosterRows = [];
+let combinedRows = [];
 let rosterRemote = false;
 let lastRemoteFetch = 0;
+let lastRemoteView = '';
 
-function toRow(r, docId) {
+function toRow(r, docId, examId) {
   return {
     docId: docId || null,
+    examId: examId || r.examId || currentExamId(),
     name: r.name || '',
+    owner: r.owner || null,
     score: r.score | 0,
     total: r.total | 0,
     pct: (r.pct !== undefined && r.pct !== null) ? (r.pct | 0) : (r.total ? Math.round(((r.score | 0) / r.total) * 100) : 0),
@@ -172,10 +204,49 @@ function flashLog(msg) {
   setTimeout(() => m.classList.add('hidden'), 3500);
 }
 
+function mergeRows(firstRows, secondRows) {
+  const byKey = new Map();
+  const put = (row, slot) => {
+    const key = mergeKey(row);
+    let entry = byKey.get(key);
+    if (!entry) {
+      entry = { key, name: row.name || '', first: null, second: null, latest: 0 };
+      byKey.set(key, entry);
+    }
+    const cur = slot === 'first' ? entry.first : entry.second;
+    if (!cur || (row.submittedAt || 0) >= (cur.submittedAt || 0)) {
+      if (slot === 'first') entry.first = row;
+      else entry.second = row;
+    }
+    if ((row.submittedAt || 0) >= entry.latest) {
+      entry.latest = row.submittedAt || 0;
+      if (row.name) entry.name = row.name;
+    }
+  };
+  (firstRows || []).forEach((r) => put(r, 'first'));
+  (secondRows || []).forEach((r) => put(r, 'second'));
+  return [...byKey.values()].sort((a, b) => (b.latest || 0) - (a.latest || 0));
+}
+
 function renderRoster() {
-  rosterRows = readLog().slice().reverse().map((r) => toRow(r, null));
+  const view = rosterView();
+  if (view === 'all') {
+    renderCombinedLocal();
+    return;
+  }
+  rosterRows = readLog(view).slice().reverse().map((r) => toRow(r, null, view));
+  combinedRows = [];
   rosterRemote = false;
   paintRoster();
+}
+
+function renderCombinedLocal() {
+  const first = readLog('final-l1l2').map((r) => toRow(r, null, 'final-l1l2'));
+  const second = readLog('mid-l1l2').map((r) => toRow(r, null, 'mid-l1l2'));
+  combinedRows = mergeRows(first, second);
+  rosterRows = [];
+  rosterRemote = false;
+  paintCombined();
 }
 
 function remoteCanDelete() {
@@ -245,6 +316,78 @@ function paintRoster() {
         paintRoster();
         flashLog(tOrEn('adDeleted'));
       } catch (e) {}
+    });
+  });
+}
+
+function paintCombined() {
+  const list = $('rosterList');
+  const sum = $('rosterSummary');
+  if (!list || !sum) return;
+  if (!combinedRows.length) {
+    sum.innerHTML = '';
+    list.innerHTML = `<p class="admin-note">${tOrEn('roEmpty')}</p>`;
+    return;
+  }
+  const tookFirst = combinedRows.filter((e) => e.first).length;
+  const tookSecond = combinedRows.filter((e) => e.second).length;
+  const tookBoth = combinedRows.filter((e) => e.first && e.second).length;
+  const avgOf = (rows) => rows.length
+    ? Math.round(rows.reduce((a, r) => a + (r.pct || 0), 0) / rows.length)
+    : 0;
+  const avgFirst = avgOf(combinedRows.map((e) => e.first).filter(Boolean));
+  const avgSecond = avgOf(combinedRows.map((e) => e.second).filter(Boolean));
+  sum.innerHTML = `
+    <span>👥 ${combinedRows.length} ${tOrEn('roAttempts')}</span>
+    <span>· ${esc(examShort('final-l1l2'))}: ${tookFirst} · 📊 ${avgFirst}%</span>
+    <span>· ${esc(examShort('mid-l1l2'))}: ${tookSecond} · 📊 ${avgSecond}%</span>
+    <span>· ✅ ${esc(tOrEn('roBoth'))}: ${tookBoth}</span>
+    <span>· ${rosterRemote ? '🌐 ' + tOrEn('adOnlineRoster') : '📱 ' + tOrEn('adLocalRoster')}</span>`;
+
+  const detailLine = (row, examId) => {
+    if (!row) return `<p class="admin-note">${esc(examShort(examId))}: ${esc(tOrEn('roMissing'))}</p>`;
+    const del = (row.docId && remoteCanDelete())
+      ? `<div class="texam-actions"><button class="btn btn-ghost" data-del="${esc(row.docId)}" data-exam="${examId}">${tOrEn('roDelete')} · ${esc(examShort(examId))}</button></div>`
+      : '';
+    return `<div>
+      <p class="mono">${esc(examShort(examId))} · ${row.score} / ${row.total} · ${row.pct}% ${row.passed ? '✓' : '✗'} · ${fmtDateTime(row.submittedAt)}</p>
+      ${del}
+    </div>`;
+  };
+
+  list.innerHTML = combinedRows.map((e) => {
+    const f = e.first;
+    const s = e.second;
+    const badge = (f && s) ? tOrEn('roBoth') : (f ? tOrEn('roFirstOnly') : tOrEn('roSecondOnly'));
+    const deg = (row) => row ? `${row.score}/${row.total} ${row.passed ? '✓' : '✗'}` : tOrEn('roMissing');
+    return `
+      <details class="roster-row">
+        <summary>
+          <strong>${esc(e.name || '—')}</strong>
+          <span class="roster-score">${esc(examShort('final-l1l2'))}: ${esc(deg(f))} · ${esc(examShort('mid-l1l2'))}: ${esc(deg(s))}</span>
+          <span class="texam-status ${(f && s) ? 'st-done' : ''}">${esc(badge)}</span>
+        </summary>
+        <div class="roster-det">
+          ${detailLine(f, 'final-l1l2')}
+          ${detailLine(s, 'mid-l1l2')}
+        </div>
+      </details>`;
+  }).join('');
+
+  list.querySelectorAll('[data-del]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (!confirm(tOrEn('adDeleteAsk'))) return;
+      try {
+        await Remote.deleteAttempt(btn.dataset.del);
+        const examId = btn.dataset.exam;
+        combinedRows = combinedRows.map((e) => {
+          if (examId === 'final-l1l2' && e.first && e.first.docId === btn.dataset.del) return Object.assign({}, e, { first: null });
+          if (examId === 'mid-l1l2' && e.second && e.second.docId === btn.dataset.del) return Object.assign({}, e, { second: null });
+          return e;
+        }).filter((e) => e.first || e.second);
+        paintCombined();
+        flashLog(tOrEn('adDeleted'));
+      } catch (err) {}
     });
   });
 }
@@ -319,6 +462,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (isUnlocked()) showUnlocked();
   });
 
+  const rosterSel = $('rosterView');
+  if (rosterSel) rosterSel.addEventListener('change', () => {
+    if (!isUnlocked()) return;
+    lastRemoteView = '';
+    lastRemoteFetch = 0;
+    renderRoster();
+    syncAdminRemote();
+  });
+
   $('clearAttemptsBtn').addEventListener('click', () => {
     if (!confirm(tOrEn('adClearConfirm'))) return;
     try {
@@ -333,6 +485,33 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   $('exportCsvBtn').addEventListener('click', () => {
+    const view = rosterView();
+    if (view === 'all') {
+      if (!combinedRows.length) return;
+      const head = ['name',
+        'first_score', 'first_total', 'first_pct', 'first_passed', 'first_submitted_at',
+        'second_score', 'second_total', 'second_pct', 'second_passed', 'second_submitted_at'];
+      const rows = combinedRows.map((e) => {
+        const c = (v) => v === null || v === undefined ? '' : v;
+        const d = (ms) => ms ? new Date(ms).toISOString() : '';
+        return [
+          `"${String(e.name || '').replace(/"/g, '""')}"`,
+          c(e.first && e.first.score), c(e.first && e.first.total), c(e.first && e.first.pct),
+          e.first ? (e.first.passed ? 1 : 0) : '', d(e.first && e.first.submittedAt),
+          c(e.second && e.second.score), c(e.second && e.second.total), c(e.second && e.second.pct),
+          e.second ? (e.second.passed ? 1 : 0) : '', d(e.second && e.second.submittedAt)
+        ].join(',');
+      });
+      const csv = '﻿' + head.join(',') + '\n' + rows.join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'exam-results-both.csv';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+      return;
+    }
     if (!rosterRows.length) return;
     const head = ['name', 'score', 'total', 'pct', 'passed', 'wrong', 'unanswered', 'time_used_sec', 'expired', 'submitted_at'];
     const rows = rosterRows.map((r) => [
@@ -345,16 +524,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `exam-results-${currentExamId()}.csv`;
+    a.download = `exam-results-${view}.csv`;
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   });
 
   $('clearLogBtn').addEventListener('click', () => {
-    if (!confirm(tOrEn('roClearConfirm'))) return;
-    try { localStorage.removeItem(LOG_KEY(currentExamId())); } catch (e) {}
-    renderRoster();
+    const view = rosterView();
+    if (view === 'all') {
+      if (!confirm(tOrEn('roClearBothConfirm'))) return;
+      try {
+        EXAM_ORDER.forEach((id) => localStorage.removeItem(LOG_KEY(id)));
+      } catch (e) {}
+      renderRoster();
+    } else {
+      if (!confirm(tOrEn('roClearConfirm'))) return;
+      try { localStorage.removeItem(LOG_KEY(view)); } catch (e) {}
+      renderRoster();
+    }
     const m = $('logMsg');
     m.classList.remove('hidden');
     m.textContent = tOrEn('roLogCleared');
@@ -362,10 +550,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   $('clearRemoteBtn').addEventListener('click', async () => {
+    const view = rosterView();
+    if (view === 'all') {
+      if (!confirm(tOrEn('roClearRemoteBothConfirm'))) return;
+      try {
+        if ((typeof Remote !== 'undefined') && Remote.teacher) {
+          await Remote.clearRoster('final-l1l2');
+          await Remote.clearRoster('mid-l1l2');
+          combinedRows = [];
+          rosterRows = [];
+          paintCombined();
+          flashLog(tOrEn('roLogCleared'));
+        }
+      } catch (e) {}
+      return;
+    }
     if (!confirm(tOrEn('adClearRemoteConfirm'))) return;
     try {
       if ((typeof Remote !== 'undefined') && Remote.teacher) {
-        await Remote.clearRoster(currentExamId());
+        await Remote.clearRoster(view);
         rosterRows = [];
         paintRoster();
         flashLog(tOrEn('roLogCleared'));
@@ -442,10 +645,29 @@ function refreshLoginUI() {
 }
 
 async function loadRemoteRoster() {
-  const rows = await Remote.fetchRoster(currentExamId());
-  rosterRows = rows.map((r) => toRow(r, r.id));
+  const view = rosterView();
+  if (view === 'all') {
+    const [firstRows, secondRows] = await Promise.all([
+      Remote.fetchRoster('final-l1l2'),
+      Remote.fetchRoster('mid-l1l2')
+    ]);
+    combinedRows = mergeRows(
+      firstRows.map((r) => toRow(r, r.id, 'final-l1l2')),
+      secondRows.map((r) => toRow(r, r.id, 'mid-l1l2'))
+    );
+    rosterRows = [];
+    rosterRemote = true;
+    lastRemoteFetch = Date.now();
+    lastRemoteView = 'all';
+    paintCombined();
+    return;
+  }
+  const rows = await Remote.fetchRoster(view);
+  rosterRows = rows.map((r) => toRow(r, r.id, view));
+  combinedRows = [];
   rosterRemote = true;
   lastRemoteFetch = Date.now();
+  lastRemoteView = view;
   paintRoster();
 }
 
@@ -455,8 +677,12 @@ async function syncAdminRemote() {
     if (typeof Remote === 'undefined') return;
     if (!Remote.enabled) await Remote.init();
     refreshLoginUI();
+    const view = rosterView();
     if (Remote.teacher) {
-      if (rosterRemote && Date.now() - lastRemoteFetch < 60000) paintRoster();
+      if (rosterRemote && view === lastRemoteView && Date.now() - lastRemoteFetch < 60000) {
+        if (view === 'all') paintCombined();
+        else paintRoster();
+      }
       else await loadRemoteRoster();
     } else if (rosterRemote) {
       renderRoster(); // signed out → back to local

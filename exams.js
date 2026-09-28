@@ -168,7 +168,9 @@ function fmtCountdown(ms) {
   return currentLang === 'ar' ? `${d} يوم ${core}` : `${d}d ${core}`;
 }
 
-let reportFilter = 'all';
+let reportFilters = {};
+function getReportFilter(examId) { return reportFilters[examId] || 'all'; }
+function setReportFilter(examId, v) { reportFilters[examId] = v; }
 let winTickId = null;
 function stopWinTick() {
   if (winTickId) clearInterval(winTickId);
@@ -230,25 +232,26 @@ function renderList() {
 
   updateAllForName();
 
-  // Report section: param match wins, else newest existing report
+  // Report section: show ALL saved reports (first + second exam).
+  // ?report=<id> (just-submitted exam) is shown first, the other below it.
   const params = new URLSearchParams(window.location.search);
   const wantId = params.get('report');
-  let shown = null;
-  if (wantId && EXAMS.some((e) => e.id === wantId)) {
-    const rep = readJSON(reportKeyOf(wantId));
-    if (rep) shown = { exam: EXAMS.find((e) => e.id === wantId), report: rep };
+  const reportsToShow = [];
+  EXAMS.forEach((exam) => {
+    const rep = readJSON(reportKeyOf(exam.id));
+    if (rep) reportsToShow.push({ exam, report: rep });
+  });
+  reportsToShow.sort((a, b) => {
+    if (wantId) {
+      if (a.exam.id === wantId && b.exam.id !== wantId) return -1;
+      if (b.exam.id === wantId && a.exam.id !== wantId) return 1;
+    }
+    return (b.report.submittedAt || 0) - (a.report.submittedAt || 0);
+  });
+  if (reportsToShow.length) {
+    renderReports(reportsToShow);
+    document.getElementById('examReport').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  if (!shown) {
-    let best = null;
-    EXAMS.forEach((exam) => {
-      const rep = readJSON(reportKeyOf(exam.id));
-      if (rep && (!best || (rep.submittedAt || 0) > (best.report.submittedAt || 0))) {
-        best = { exam, report: rep };
-      }
-    });
-    shown = best;
-  }
-  if (shown) renderReport(shown.exam, shown.report, getTConfig(shown.exam), true);
   else document.getElementById('examReport').classList.add('hidden');
 
   // Live 1s tick: refresh countdown + in-progress timers without re-render
@@ -358,33 +361,42 @@ function updateForName(exam) {
   ctaEl.innerHTML = cta;
 }
 
-function renderReport(exam, report, cfg, canStart) {
-  const box = document.getElementById('examReport');
-  box.classList.remove('hidden');
-  const isAr = currentLang === 'ar';
-  const pct = Math.round((report.score / report.total) * 100);
-
-  const perTypeHtml = Object.keys(report.perType || {}).map((k) => {
-    const s = report.perType[k];
+function perTypeGridHtml(perType) {
+  return Object.keys(perType || {}).map((k) => {
+    const s = perType[k];
     return `<div class="report-stat"><span class="mono">${typeName(k)}</span><strong>${s.c}<span class="result-stat-of">/${s.t}</span></strong></div>`;
   }).join('');
+}
 
+function mistakesHtml(report, filter, isAr) {
   const items = (report.items || []).filter((it) => {
-    if (reportFilter === 'wrong') return !it.good;
-    if (reportFilter === 'correct') return it.good;
+    if (filter === 'wrong') return !it.good;
+    if (filter === 'correct') return it.good;
     return true;
   });
-
-  const typeTag = (it) => typeName(it.type);
-  const itemsHtml = items.map((it) => `
+  return items.map((it) => `
     <div class="mistake-card${it.good ? ' ok' : ''}">
-      <span class="mistake-tag">Q${it.n} · ${typeTag(it)} · ${it.good ? (isAr ? 'صح' : 'Correct') : (isAr ? 'غلط' : 'Wrong')}</span>
+      <span class="mistake-tag">Q${it.n} · ${typeName(it.type)} · ${it.good ? (isAr ? 'صح' : 'Correct') : (isAr ? 'غلط' : 'Wrong')}</span>
       <p class="mistake-q">${it.question}</p>
       <p class="mistake-your">${isAr ? 'إجابتك كانت: ' : 'Your answer: '}${it.your === null ? (isAr ? '— سيبته فاضي' : '— no answer') : esc(it.your)}</p>
       ${it.explain ? `<p class="mistake-why">${it.explain}</p>` : ''}
     </div>`).join('') || `<p class="muted">${tOrEn('txNoItems')}</p>`;
+}
 
-  box.innerHTML = `
+function reportCardHtml(exam, report, cfg) {
+  const isAr = currentLang === 'ar';
+  const pct = Math.round((report.score / report.total) * 100);
+  const filter = getReportFilter(exam.id);
+  const examTitle = isAr ? exam.titleAr : exam.titleEn;
+  const perTypeHtml = perTypeGridHtml(report.perType);
+  const itemsHtml = mistakesHtml(report, filter, isAr);
+
+  return `
+  <article class="texam-card" id="reportCard-${exam.id}">
+    <div class="texam-card-head">
+      <span class="chip chip-solid">📝 ${esc(examTitle)}</span>
+      <span class="chip">${esc(exam.tag)} · ${report.total} ${isAr ? 'سؤال' : 'questions'}</span>
+    </div>
     <div class="report-head">
       <span class="mono">${report.expired ? tOrEn('txAutoSubmitted') : tOrEn('txSubmitted')}</span>
       <h2>${report.passed ? tOrEn('txPassedTitle') : tOrEn('txFailedTitle')}</h2>
@@ -399,23 +411,31 @@ function renderReport(exam, report, cfg, canStart) {
     </div>
     ${perTypeHtml ? `<div class="report-grid" style="margin-top:1rem;">${perTypeHtml}</div>` : ''}
     <div class="report-filters">
-      <button class="filter-chip${reportFilter === 'all' ? ' active' : ''}" data-f="all">${tOrEn('txFAll')}</button>
-      <button class="filter-chip${reportFilter === 'wrong' ? ' active' : ''}" data-f="wrong">${tOrEn('txFWrong')}</button>
-      <button class="filter-chip${reportFilter === 'correct' ? ' active' : ''}" data-f="correct">${tOrEn('txFCorrect')}</button>
+      <button class="filter-chip${filter === 'all' ? ' active' : ''}" data-exam="${exam.id}" data-f="all">${tOrEn('txFAll')}</button>
+      <button class="filter-chip${filter === 'wrong' ? ' active' : ''}" data-exam="${exam.id}" data-f="wrong">${tOrEn('txFWrong')}</button>
+      <button class="filter-chip${filter === 'correct' ? ' active' : ''}" data-exam="${exam.id}" data-f="correct">${tOrEn('txFCorrect')}</button>
     </div>
-    <div id="mistakeList">${itemsHtml}</div>
+    <div id="mistakeList-${exam.id}">${itemsHtml}</div>
     <div class="texam-actions">
-      ${canStart ? `<a class="btn btn-primary btn-arrow" href="${exam.runUrl}">${tOrEn('exRetake')}</a>` : ''}
+      <a class="btn btn-primary btn-arrow" href="${exam.runUrl}">${tOrEn('exRetake')}</a>
       <a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>
-    </div>`;
+    </div>
+  </article>`;
+}
+
+function renderReports(reportsToShow) {
+  const box = document.getElementById('examReport');
+  box.classList.remove('hidden');
+  box.innerHTML = reportsToShow.map(({ exam, report }) =>
+    reportCardHtml(exam, report, getTConfig(exam))
+  ).join('');
 
   box.querySelectorAll('.filter-chip').forEach((btn) => {
     btn.addEventListener('click', () => {
-      reportFilter = btn.dataset.f;
-      renderReport(exam, report, cfg, canStart);
+      setReportFilter(btn.dataset.exam, btn.dataset.f);
+      renderReports(reportsToShow);
     });
   });
-  box.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function createParticles() {
