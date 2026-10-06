@@ -104,6 +104,19 @@ const translations = {
     lect3ChallengeTitle: "Chapter 3 Concept Matching Challenge",
     lect3ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Security and Safety Technology.",
 
+    // Lecture 4 (Chapter 4: Digital Data Representation & Multimedia)
+    lect4Edition: "Chapter 04 · 1st Secondary",
+    lect4HeroBadge: "💾 Chapter 4 · 1st Secondary",
+    lect4HeroTitle: "Digital Data Representation <br><span class=\"text-gradient\">& Multimedia</span>",
+    lect4HeroDesc: "An interactive visual journey through analog vs digital, binary & hexadecimal systems, character encoding, sound/image/video digitization, compression algorithms, and information design principles.",
+    lect4StartBtn: "Start Interactive Journey",
+    lect4UnitName: "Digital Data Representation",
+    lect4Level: "1st Secondary",
+    lect4Stops: "10 chapters",
+    lect4Final: "Match challenge",
+    lect4ChallengeTitle: "Chapter 4 Concept Matching Challenge",
+    lect4ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Digital Data Representation and Multimedia.",
+
     // Quizzes landing
     qzEdition: "Section 02 · Exam Hall",
     qzEyebrow: "Quizzes & Questions",
@@ -541,6 +554,19 @@ const translations = {
     lect3Final: "تحدي المطابقة",
     lect3ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الثالث",
     lect3ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات الرسمية لتثبيت فهمك لأمن المعلومات وتقنيات السلامة.",
+
+    // Lecture 4 (Chapter 4: Digital Data Representation & Multimedia)
+    lect4Edition: "الفصل ٤ · أولى ثانوي",
+    lect4HeroBadge: "💾 الفصل الرابع · أولى ثانوي",
+    lect4HeroTitle: "التمثيل الرقمي<br><span class=\"text-gradient\">للبيانات والوسائط المتعددة</span>",
+    lect4HeroDesc: "رحلة بصرية تفاعلية في التناظرية والرقمية، النظام الثنائي والسادس عشر، ترميز الحروف، رقمنة الصوت والصور والفيديو، خوارزميات الضغط، ومبادئ تصميم المعلومات.",
+    lect4StartBtn: "ابدأ الاستكشاف التفاعلي",
+    lect4UnitName: "التمثيل الرقمي للبيانات",
+    lect4Level: "أولى ثانوي",
+    lect4Stops: "١٠ فصول",
+    lect4Final: "تحدي المطابقة",
+    lect4ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الرابع",
+    lect4ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك للتمثيل الرقمي للبيانات والوسائط.",
 
     // Quizzes landing
     qzEdition: "القسم ٢ · قاعة الاختبارات",
