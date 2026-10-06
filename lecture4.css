@@ -1,0 +1,348 @@
+/* ============================================================
+   Lecture 4: Digital Data Representation & Multimedia
+   Custom styles for interactive widgets
+   ============================================================ */
+
+/* Analog/Digital Simulator */
+.ad-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ad-tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.ad-tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.ad-screen {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 200px;
+}
+
+/* Bits & Bytes Calculator */
+.bb-calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bb-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bb-input-group label {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.bb-result {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--card);
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.bb-result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.bb-result-item:last-child {
+  border-bottom: none;
+}
+
+.bb-result-item strong {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+/* Base Converter */
+.converter-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.conv-tab-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.conv-tab-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.converter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.conv-result {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  min-height: 60px;
+}
+
+/* Hex Converter */
+.hex-table {
+  overflow-x: auto;
+}
+
+.hex-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hex-table th,
+.hex-table td {
+  padding: 8px 12px;
+  text-align: center;
+  border: 1px solid var(--line);
+}
+
+.hex-table th {
+  background: var(--card);
+  font-weight: 700;
+}
+
+/* Character Code Explorer */
+.char-code-demo {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.char-demo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.char-demo-row:last-child {
+  border-bottom: none;
+}
+
+.char-demo-label {
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.char-demo-char {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.char-demo-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.char-code-note {
+  margin-top: 12px;
+  padding: 12px;
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 8px;
+  border-right: 3px solid var(--accent);
+}
+
+/* Binary Calculator */
+.binary-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.calc-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.calc-result {
+  background: var(--card);
+  padding: 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Complement Calculator */
+.complement-calc {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* PCM Visualizer */
+.pcm-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pcm-wave {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.pcm-steps {
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.pcm-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.pcm-step-num {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+/* Pixel Grid */
+.pixel-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.pixel-cell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.pixel-cell:hover {
+  transform: scale(1.1);
+}
+
+/* Compression Demo */
+.compression-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comp-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: var(--card);
+  border-radius: 8px;
+}
+
+.comp-label {
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.comp-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Design Principles */
+.design-principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.principle-card {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+}
+
+.principle-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.principle-card strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ink);
+}
+
+.principle-card p {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .design-principles {
+    grid-template-columns: 1fr;
+  }
+
+  .pcm-steps {
+    flex-direction: column;
+  }
+
+  .calc-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

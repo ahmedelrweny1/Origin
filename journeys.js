@@ -96,6 +96,31 @@ const journeys = [
       en: 'Introductory Journey',
       ar: 'محاضرة تمهيدية'
     }
+  },
+  {
+    id: 'digital-data-representation',
+    title: {
+      en: 'Digital Data Representation & Multimedia',
+      ar: 'التمثيل الرقمي للبيانات والوسائط المتعددة'
+    },
+    description: {
+      en: 'Master analog vs digital, binary & hexadecimal systems, character encoding, sound/image/video digitization, compression, and information design.',
+      ar: 'احترف التناظري والرقمي، النظام الثنائي والسادس عشر، ترميز الحروف، رقمنة الصوت والصور والفيديو، ضغط البيانات، وتصميم المعلومات.'
+    },
+    url: 'lecture4.html',
+    quizUrl: 'quiz.html?lecture=digital-data-representation',
+    examUrl: 'quiz.html?lecture=digital-data-representation&mode=exam',
+    hasQuizzes: true,
+    status: 'active',
+    icon: '💾',
+    duration: {
+      en: '~30 min',
+      ar: '~٣٠ دقيقة'
+    },
+    tag: {
+      en: 'Chapter 4 · 1st Secondary',
+      ar: 'الفصل الرابع · أولى ثانوي'
+    }
   }
 ];
 
@@ -146,6 +171,22 @@ const LECTURE_DATA_MAP = {
     examEn: 'exam-lect3-en.js',
     examArVar: 'LECT3_EXAM_AR',
     examEnVar: 'LECT3_EXAM_EN',
+    passThreshold: 7
+  },
+  'digital-data-representation': {
+    stagesVar: 'LECT4_STAGES',
+    stagesAr: 'LECT4_STAGES_AR',
+    stagesEn: 'LECT4_STAGES_EN',
+    scriptAr: 'data-lect4-ar.js',
+    scriptEn: 'data-lect4-en.js',
+    bankAr: 'quizbank-lect4-ar.js',
+    bankEn: 'quizbank-lect4-en.js',
+    bankArVar: 'LECT4_QUIZBANK_AR',
+    bankEnVar: 'LECT4_QUIZBANK_EN',
+    examAr: 'exam-lect4-ar.js',
+    examEn: 'exam-lect4-en.js',
+    examArVar: 'LECT4_EXAM_AR',
+    examEnVar: 'LECT4_EXAM_EN',
     passThreshold: 7
   }
 };
