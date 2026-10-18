@@ -9,20 +9,20 @@ const LECT4_STAGES_AR = [
     id: "analog-digital",
     category: "القسم الأول: أساسيات التمثيل الرقمي",
     title: "التناظري والرقمي",
-    tagline: "من العالم المستمر إلى العالم المنفصل: كيف يتحول الصوت والصورة إلى أصفار وآحاد؟",
+    tagline: "إزاي الكمبيوتر بيحول الأصوات والصور والأرقام لأصفار وآحاد؟",
     glyph: "🔄",
     image: "assets/images/data_info_knowledge.jpg",
-    visualCaption: "التناظري يتغير باستمرار مثل درجة الحرارة، بينما الرقمي يتغير في خطوات منفصلة مثل عداد الكهرباء.",
+    visualCaption: "التناظري بيتغير باستمرار زي درجة الحرارة، بينما الرقمي بيقيسها على خطوات منتظمة زي عداد الكهرباء.",
     interactiveType: "analog_digital_sim",
     story: [
-      `<p class="story-lead">في عالمنا الحقيقي، الأشياء بتتغير <strong>بشكل مستمر</strong> — درجة الحرارة بترتفع وتنزل بسلاسة، والوقت بيجري من غير ما يقف. لكن الكمبيوتر مش بيفهم إلا <strong>خطوات منفصلة</strong>. هنا يجي دور التمثيل الرقمي:</p>`,
+      `<p class="story-lead">في حياتنا، الأشياء بترتفع وبتنزل <strong>بشكل مستمر</strong> — زي درجة الحرارة والوقت. لكن الكمبيوتر بيشتغل بأرقام بتقف عند خطوات. هنا بييجي دور التمثيل الرقمي:</p>`,
       `<div class="content-cards-stack">
         <div class="story-card card-blue-accent">
           <div class="card-header-row">
             <h4 class="card-title"><strong>📊</strong> ١. التناظري (Analog)</h4>
             <span class="card-badge badge-blue">كميات مستمرة</span>
           </div>
-          <p class="card-desc">كميات بتتغير <strong>تدريجياً وبشكل مستمر</strong> وقابلة للقياس بدقة فائقة، زي: الكتلة، الوقت، درجة الحرارة.</p>
+          <p class="card-desc">كميات بتتغير <strong>بشكل مستمر</strong> وتقدر تقيسها بدقة عالية جداً — زي الكتلة والوقت ودرجة الحرارة.</p>
           <p class="card-example">🔍 <em>مثال:</em> مقياس الحرارة الزئبقي — عمود الزئبق بيتحرك بسلاسة من غير قفزات.</p>
         </div>
         <div class="story-card card-amber-accent">
@@ -30,7 +30,7 @@ const LECT4_STAGES_AR = [
             <h4 class="card-title"><strong>💻</strong> ٢. الرقمي (Digital)</h4>
             <span class="card-badge badge-amber">كميات منفصلة</span>
           </div>
-          <p class="card-desc">كميات بتتغير في <strong>خطوات محددة ومنفصلة</strong> وبتتمثل رقمياً بتقسيمها لفترات منتظمة.</p>
+          <p class="card-desc">كميات بنمثلها بأرقام عن طريق <strong>تقسيمها لفترات منتظمة</strong> — يعني بدل التغيير المستمر بنقيسها على خطوات.</p>
           <p class="card-example">🔍 <em>مثال:</em> عداد الكهرباء — بيعد بوحدات منفصلة من غير كسور.</p>
         </div>
       </div>`,
@@ -49,12 +49,12 @@ const LECT4_STAGES_AR = [
           <h4 class="card-title"><strong>✨</strong> مزايا البيانات الرقمية</h4>
           <span class="card-badge badge-green">ليه الرقمي أفضل؟</span>
         </div>
-        <div class="pill-cloud">
-          <span class="pill-item">📋 يمكن استنساخها دون إهدار تجميع البيانات</span>
-          <span class="pill-item">✏️ من السهل تعديل وتحرير البيانات</span>
-          <span class="pill-item">🚀 من الممكن نقل البيانات بكفاءة</span>
-          <span class="pill-item">🎨 من الممكن دمج أنواع مختلفة من الوسائط</span>
-        </div>
+        <ul class="structured-list">
+          <li><span class="list-bullet-icon">📋</span> ممكن تجميع البيانات ونسخها في أي وقت <strong>من غير ما تنقص جودتها</strong></li>
+          <li><span class="list-bullet-icon">✏️</span> من <strong>السهل</strong> تعديل البيانات وتحريرها</li>
+          <li><span class="list-bullet-icon">🚀</span> من الممكن نقل البيانات <strong>بكفاءة</strong></li>
+          <li><span class="list-bullet-icon">🎨</span> من الممكن دمج <strong>أنواع مختلفة من الوسائط</strong> مع بعض</li>
+        </ul>
       </div>`
     ],
     takeaway: "التناظري = كميات مستمرة ⬝ الرقمي = كميات منفصلة ⬝ A/D تحويل من تناظري لرقمي ⬝ D/A العكس ⬝ الرقمي أسهل في التعديل والنقل والدمج.",
@@ -98,8 +98,8 @@ const LECT4_STAGES_AR = [
       </div>`,
       `<div class="story-card card-blue-accent">
         <div class="card-header-row">
-          <h4 class="card-title"><strong>📦</strong> البايت (Byte): وحدة العملية</h4>
-          <span class="card-badge badge-blue">1 بايت = 8 بت</span>
+          <h4 class="card-title"><strong>📦</strong> البايت (Byte): 8 بت مع بعض</h4>
+          <span class="card-badge badge-blue">الوحدة الأساسية للبيانات</span>
         </div>
         <p class="card-desc">البايت هو الوحدة الأساسية اللي بيتعامل معاها الكمبيوتر. بيتكون من <strong>8 بت</strong> وبيقدر يمثل <strong>256 قيمة مختلفة</strong> (2⁸).</p>
         <p class="card-example">🔍 <em>مثال:</em> الحرف "A" في الكمبيوتر بيتخزن كبايت واحد: 01000001</p>
@@ -270,11 +270,11 @@ const LECT4_STAGES_AR = [
         <div class="story-card card-blue-accent">
           <div class="card-header-row">
             <h4 class="card-title"><strong>🔤</strong> كود ASCII</h4>
-            <span class="card-badge badge-blue">128 حرف (1 بايت)</span>
+            <span class="card-badge badge-blue">حرف واحد كل بايت</span>
           </div>
-          <p class="card-desc">نظام ترميز بيمثل <strong>الحروف الإنجليزية والأرقام والرموز</strong> وحروف التحكم. كل حرف = 1 بايت (8 بت) = 256 قيمة ممكنة.</p>
+          <p class="card-desc">نظام ترميز بيمثل <strong>الحروف الإنجليزية والأرقام والرموز</strong> وحروف التحكم (رموز خاصة للتحكم في الكمبيوتر). كل حرف بياخد <strong>1 بايت</strong> — يعني 1 بايت ممكن يمثل <strong>256 نوع حرف</strong>.</p>
           <p class="card-example">🔍 <em>مثال:</em> الحرف "A" = 65 عشري = 01000001 ثنائي = 41 ست عشري</p>
-          <p class="card-example">⚠️ <em>عيبه:</em> مش بيدعم لغات غير الإنجليزية (زي العربية واليابانية)</p>
+          <p class="card-example">⚠️ <em>نقطة ضعفه:</em> مش بيدعم اللغات الأخرى غير الإنجليزية (زي العربية واليابانية)</p>
         </div>
         <div class="story-card card-amber-accent">
           <div class="card-header-row">
@@ -309,7 +309,7 @@ const LECT4_STAGES_AR = [
         </div>
       </div>`
     ],
-    takeaway: "كل حرف ليه رقم كودي فريد ⬝ ASCII = 128 حرف إنجليزي (1 بايت) ⬝ يونيكود = كل لغات العالم ⬝ التشفير وفك التشفير لازم يكونوا متطابقين ⬝ الخط هو شكل الحرف الظاهر.",
+    takeaway: "كل حرف ليه رقم كودي فريد ⬝ ASCII = حروف وأرقام ورموز إنجليزية (1 بايت لكل حرف) ⬝ يونيكود = كل لغات العالم ⬝ التشفير وفك التشفير لازم يكونوا متطابقين ⬝ الخط هو شكل الحرف الظاهر.",
     funFact: "رسالة «Hello» في الكمبيوتر بتتخزن كالأرقام التالية: 72-101-108-108-111 — وكل رقم ده كود ASCII لحرف من الحروف!",
     quiz: {
       question: "في نظام ASCII، الحرف «A» بيمثل بأي رقم عشري؟",
@@ -347,19 +347,19 @@ const LECT4_STAGES_AR = [
             <tr><td>1 + 1</td><td>10</td><td>0 مع حمل 1 للخانة الجاية</td></tr>
             <tr><td>1 + 1 + 1</td><td>11</td><td>1 مع حمل 1 للخانة الجاية</td></tr>
           </table>
-          <p class="card-example">🔍 <em>مثال:</em> 0101(2) + 1001(2) = 1100(2) — نفس فكرة 5 + 9 = 14 في العشري</p>
+          <p class="card-example">🔍 <em>مثال:</em> 0101(2) + 1001(2) = 1110(2) — نفس فكرة 5 + 9 = 14 في العشري</p>
         </div>
         <div class="story-card card-amber-accent">
           <div class="card-header-row">
             <h4 class="card-title"><strong>➖</strong> الطرح الثنائي</h4>
-            <span class="card-badge badge-amber">الاستيعار</span>
+            <span class="card-badge badge-amber">الاستعارة</span>
           </div>
           <table class="l3-mini-table">
             <tr><th>العملية</th><th>النتيجة</th><th>ملاحظة</th></tr>
             <tr><td>0 - 0</td><td>0</td><td>من غير استيعار</td></tr>
             <tr><td>1 - 0</td><td>1</td><td>من غير استيعار</td></tr>
             <tr><td>1 - 1</td><td>0</td><td>من غير استيعار</td></tr>
-            <tr><td>0 - 1</td><td>1</td><td>مع استيعار 1 من الخانة الجاية</td></tr>
+            <tr><td>0 - 1</td><td>1</td><td>مع استعارة 1 من الخانة الجاية</td></tr>
           </table>
           <p class="card-example">🔍 <em>مثال:</em> 1010(2) - 0110(2) = 0100(2) — نفس فكرة 10 - 6 = 4 في العشري</p>
         </div>
@@ -367,15 +367,15 @@ const LECT4_STAGES_AR = [
       `<div class="editorial-callout callout-red">
         <div class="callout-header">
           <span class="callout-icon">⚠️</span>
-          <h4 class="callout-title">قاعدة مهمة: الحمل والاستيعار</h4>
+          <h4 class="callout-title">قاعدة مهمة: الحمل والاستعارة</h4>
         </div>
         <ul class="structured-list">
           <li><span class="list-bullet-icon">⬆️</span> <strong>الحمل (Carry):</strong> لما 1 + 1 = 10، بنحمل 1 للخانة الجاية — زي "معانا الواحد" في الجمع العشري</li>
-          <li><span class="list-bullet-icon">⬇️</span> <strong>الاستيعار (Borrow):</strong> لما نطرح 1 من 0، بنستعير 1 من الخانة الجاية وبتبقى 2 — زي الاستيعار في الطرح العشري</li>
+          <li><span class="list-bullet-icon">⬇️</span> <strong>الاستعارة (Borrow):</strong> لما نطرح 1 من 0، بنستعير 1 من الخانة الجاية وتبقى عندنا 2 — زي الاستعارة في الطرح العشري</li>
         </ul>
       </div>`
     ],
-    takeaway: "1+1=10 في الثنائي (مش 2!) ⬝ الحمل زي «معانا الواحد» ⬝ الاستيعار بنستعير من الخانة الجاية ⬝ نفس قواعد العشري بس بأرقام أقل.",
+    takeaway: "1+1=10 في الثنائي (مش 2!) ⬝ الحمل زي «معانا الواحد» ⬝ الاستعارة بنستعير من الخانة الجاية ⬝ نفس قواعد العشري بس بأرقام أقل.",
     funFact: "معالج الكمبيوتر فيه ملايين الترانزستورات بتعمل عمليات جمع وطرح ثنائية في الثانية الواحدة — وده أساس كل حاجة بتعملها على الجهاز!",
     quiz: {
       question: "ما نتيجة الجمع الثنائي: 1010(2) + 0101(2)؟",
@@ -396,7 +396,7 @@ const LECT4_STAGES_AR = [
     tagline: "الكمبيوتر معندوش علامة ناقص! إزاي بيمثل الأرقام السالبة؟ بطريقة المتممات الذكية",
     glyph: "🔄",
     image: "assets/images/info_characteristics.jpg",
-    visualCaption: "المتمم الثنائي: عكس كل بت (0→1 و 1→0) ثم أضف 1 — ده بيمثل نفس الرقم  but سالب.",
+    visualCaption: "المتمم الثنائي: عكس كل بت (0→1 و 1→0) ثم أضف 1 — النتيجة بتمثل -5 سالب.",
     interactiveType: "complement_calculator",
     story: [
       `<p class="story-lead">الكمبيوتر معندوش علامة "ناقص" — بيمثل الأرقام السالبة بطريقة ذكية اسمها <strong>المتممات (Complements)</strong>. الفكرة إننا بنحول الطرح لجمع!</p>`,
@@ -436,7 +436,7 @@ const LECT4_STAGES_AR = [
       </div>`
     ],
     takeaway: "المتمم الثنائي = عكس كل بت + 1 ⬝ الطرح بالمتممات: اجمع مع متمم المطروح وتجاهل الحمل ⬝ نفس الدوائر بتعمل جمع وطرح.",
-    funFact: "في نظام 8 بت، الأرقام من -128 لـ +127 ممكن تتمثل — وده لأن أول بت بيكون علامة (0 موجب، 1 سالب) والباقي بيمثل القيمة!",
+    funFact: "في نظام 8 بت، تقدر تمثل أرقام السالبة من -128 لحد +127 باستخدام المتممات — من غير حاجة لعلامة سالب منفصلة!",
     quiz: {
       question: "ما هو المتمم الثنائي (2's Complement) للرقم 0101(2)؟",
       options: [
@@ -588,13 +588,13 @@ const LECT4_STAGES_AR = [
     id: "video-compression",
     category: "القسم الثالث: رقمنة الوسائط",
     title: "التمثيل الرقمي وضغط الفيديو",
-    tagline: "الفيديو = صور سريعة + ضغط ذكي — إزاي بنوفر 90% من الحجم من غير ما نحس؟",
+    tagline: "الفيديو = صور سريعة واحدة ورا التانية + ضغط ذكي — إزاي بنقلل الحجم من غير ما ناخد بالنا؟",
     glyph: "🎬",
     image: "assets/images/smartphone.jpg",
     visualCaption: "الفيديو بيتكون من إطارات متتالية، وكل إطار صورة. الضغط بيقلل الحجم عن طريق إزالة التكرار.",
     interactiveType: "compression_demo",
     story: [
-      `<p class="story-lead">الفيديو بيشتغل بعرض <strong>صور ثابتة بسرعة</strong> — عين الإنسان بتروهم إنها بتتحرك (ظاهرة الصورة الباقية). كل صورة اسمها <strong>إطار (Frame)</strong>، وعدد الإطارات في الثانية اسمه <strong>معدل الإطارات (fps)</strong>.</p>`,
+      `<p class="story-lead">الفيديو بيشتغل بعرض <strong>صور ثابتة بسرعة عالية</strong> — فبتبين لينا إنها بتتحرك، ودي اسمها <strong>ظاهرة الصورة الباقية</strong>. كل صورة اسمها <strong>إطار (Frame)</strong>، وعدد الإطارات في الثانية اسمه <strong>معدل الإطارات (fps)</strong>.</p>`,
       `<div class="content-cards-stack">
         <div class="story-card card-blue-accent">
           <div class="card-header-row">
@@ -623,7 +623,7 @@ const LECT4_STAGES_AR = [
         </div>
         <ul class="structured-list">
           <li><span class="list-bullet-icon">🔁</span> <strong>ترميز طول التشغيل (Run-length):</strong> استبدال التكرارات المتتالية بعدد التكرار — زي "AAAAA" تبقى "A5". فعال لما يكون في تكرارات كتير</li>
-          <li><span class="list-bullet-icon">🌳</span> <strong>ترميز هوفمان (Huffman):</strong> إعطاء أكواد أقصر للحروف الأكثر تكراراً وأطول لأقلها — زي شفرة مورس</li>
+          <li><span class="list-bullet-icon">🌳</span> <strong>ترميز هوفمان (Huffman):</strong> بيدي أكواد بتات <strong>أقصر</strong> للحروف اللي بتتكرر كتير، وأكواد <strong>أطول</strong> للحروف اللي بتتكرر قليل</li>
         </ul>
         <p class="card-example">🔍 <em>مثال Run-length:</em> "AAAAABBAAAABBBBBBBBAAAAAA" (25 حرف) → "A5B2A4B8A6" (10 حروف) — نسبة الضغط 40%</p>
       </div>`,
@@ -660,7 +660,7 @@ const LECT4_STAGES_AR = [
     visualCaption: "تصميم المعلومات بيجمع بين التجريد والتصور والهيكلة عشان يوصل الرسالة بوضوح للجمهور المستهدف.",
     interactiveType: "design_principles",
     story: [
-      `<p class="story-lead"><strong>تصميم المعلومات (Information Design)</strong> هو عملية تنظيم وتعبير إبداعي عن البيانات حسب الغرض منها — عشان الرسالة توصل بوضوح للجمهور المستهدف.</p>`,
+      `<p class="story-lead"><strong>تصميم المعلومات (Information Design)</strong> هو تنظيم البيانات وعرضها بطريقة تناسب غرضها — عشان الرسالة توصل صح ومن غير لبس للجمهور المقصود.</p>`,
       `<div class="content-cards-stack">
         <div class="story-card card-blue-accent">
           <div class="card-header-row">
@@ -730,7 +730,7 @@ const LECT4_STAGES_AR = [
 ];
 
 const LECT4_MATCH_ITEMS_AR = [
-  { id: "m1", concept: "التناظري (Analog)", match: "كميات تتغير تدريجياً وبشكل مستمر مثل درجة الحرارة" },
+  { id: "m1", concept: "التناظري (Analog)", match: "كميات بتتغير بشكل مستمر زي درجة الحرارة والوقت" },
   { id: "m2", concept: "البت (Bit)", match: "أصغر وحدة معلومات ليه حالتين فقط: 0 أو 1" },
   { id: "m3", concept: "البايت (Byte)", match: "وحدة تتكون من 8 بت وتمثل 256 قيمة مختلفة" },
   { id: "m4", concept: "النظام السادس عشر (Hex)", match: "نظام عد يستخدم 16 رمز (0-9 + A-F) وكل رقم = 4 بت" },

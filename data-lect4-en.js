@@ -50,7 +50,7 @@ const LECT4_STAGES_EN = [
           <span class="card-badge badge-green">Why digital is better?</span>
         </div>
         <div class="pill-cloud">
-          <span class="pill-item">📋 Can be duplicated without degradation</span>
+          <span class="pill-item">📋 Can be accumulated or duplicated without degradation</span>
           <span class="pill-item">✏️ Easy to modify and edit</span>
           <span class="pill-item">🚀 Efficient to transmit</span>
           <span class="pill-item">🎨 Can combine different media types</span>
@@ -270,9 +270,9 @@ const LECT4_STAGES_EN = [
         <div class="story-card card-blue-accent">
           <div class="card-header-row">
             <h4 class="card-title"><strong>🔤</strong> ASCII Code</h4>
-            <span class="card-badge badge-blue">128 characters (1 byte)</span>
+              <span class="card-badge badge-blue">1 byte per character</span>
           </div>
-          <p class="card-desc">A coding system that represents <strong>English letters, digits, symbols</strong> and control characters. Each character = 1 byte (8 bits) = 256 possible values.</p>
+          <p class="card-desc">A coding system that represents <strong>English letters, digits, symbols</strong> and control characters. Each character takes 1 byte, so 1 byte can represent 256 character types.</p>
           <p class="card-example">🔍 <em>Example:</em> Letter "A" = 65 decimal = 01000001 binary = 41 hex</p>
           <p class="card-example">⚠️ <em>Limitation:</em> Doesn't support non-English languages (like Arabic or Japanese)</p>
         </div>
@@ -309,7 +309,7 @@ const LECT4_STAGES_EN = [
         </div>
       </div>`
     ],
-    takeaway: "Every character has a unique code ⬝ ASCII = 128 English chars (1 byte) ⬝ Unicode = all world languages ⬝ Encoding and decoding must match ⬝ Font is the visible shape of the character.",
+    takeaway: "Every character has a unique code ⬝ English letters, digits, symbols (1 byte each) ⬝ Unicode = all world languages ⬝ Encoding and decoding must match ⬝ Font is the visible shape of the character.",
     funFact: "The word \"Hello\" is stored in the computer as: 72-101-108-108-111 — each number is the ASCII code for one letter!",
     quiz: {
       question: "In ASCII, the letter \"A\" is represented by which decimal number?",
@@ -347,7 +347,7 @@ const LECT4_STAGES_EN = [
             <tr><td>1 + 1</td><td>10</td><td>0 with carry 1 to next position</td></tr>
             <tr><td>1 + 1 + 1</td><td>11</td><td>1 with carry 1 to next position</td></tr>
           </table>
-          <p class="card-example">🔍 <em>Example:</em> 0101(2) + 1001(2) = 1100(2) — same as 5 + 9 = 14 in decimal</p>
+          <p class="card-example">🔍 <em>Example:</em> 0101(2) + 1001(2) = 1110(2) — same as 5 + 9 = 14 in decimal</p>
         </div>
         <div class="story-card card-amber-accent">
           <div class="card-header-row">
