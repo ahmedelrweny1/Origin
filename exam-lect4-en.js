@@ -50,7 +50,7 @@ const LECT4_EXAM_EN = [
       'B7(16)'
     ],
     answer: 0,
-    explain: '11011011(2) → 1101/1011 → D/B → DB(16)'
+    explain: 'Split the number into two groups of 4 bits: 1101 = D and 1011 = B → DB(16)'
   },
   {
     id: 'exam-q5',

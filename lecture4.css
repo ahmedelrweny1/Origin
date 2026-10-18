@@ -265,11 +265,6 @@
 .pixel-cell {
   aspect-ratio: 1;
   border-radius: 4px;
-  transition: all 0.3s;
-}
-
-.pixel-cell:hover {
-  transform: scale(1.1);
 }
 
 /* Compression Demo */
@@ -345,4 +340,22 @@
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+/* ============================================================
+   Motion minimization (this page only)
+   Suppress entrance animations and hover lift/motion.
+   Simple color feedback on buttons is kept.
+   ============================================================ */
+.stage-card {
+  animation: none;
+}
+
+.story-card {
+  transition: none;
+}
+
+.story-card:hover {
+  transform: none;
+  box-shadow: 4px 4px 0 var(--ink);
 }

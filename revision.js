@@ -5,7 +5,7 @@
    Part 3: written self-check questions
    ============================================================ */
 
-const ASSET_V = 'v=5';
+const ASSET_V = 'v=6';
 
 /* Category of each keyword id (language-independent) */
 const KW_CATS = {

@@ -41,15 +41,15 @@ const LECT4_QUIZBANK_EN = [
     id: 'q-ad-hard',
     stageId: 'analog-digital',
     difficulty: 'hard',
-    question: 'Which of the following is an advantage of digital data?',
+    question: 'Which of the following statements is NOT an advantage of digital data?',
     options: [
-      'Changes continuously without jumps',
-      'Can be copied without any loss in quality',
-      'Cannot be modified or edited',
-      'Cannot be transmitted efficiently'
+      'Can be accumulated and copied without losing quality',
+      'Easy to modify and edit',
+      'It expresses quantities that change continuously like time and temperature',
+      'Can be transmitted efficiently'
     ],
-    answer: 1,
-    explain: 'One of the main advantages of digital data is that you can copy it millions of times without any loss in quality — unlike analog.'
+    answer: 2,
+    explain: 'Advantages of digital data: accumulation and copying without loss, easy modification, efficient transmission, and combining media types — expressing continuously changing quantities is the nature of analog data, not digital.'
   },
   {
     id: 'q-ad-creative',
@@ -275,7 +275,7 @@ const LECT4_QUIZBANK_EN = [
       'There is no difference'
     ],
     answer: 0,
-    explain: 'ASCII represents 128 English characters only, while Unicode represents characters from all world languages in one system.'
+    explain: 'ASCII works with English letters, digits, and symbols only, while Unicode consolidates characters from all world languages in one system.'
   },
   {
     id: 'q-cc-hard',
@@ -395,7 +395,7 @@ const LECT4_QUIZBANK_EN = [
       'Fractions are used'
     ],
     answer: 0,
-    explain: 'Computers convert subtraction to addition: A - B = A + (complement of B) — this saves extra circuits.'
+    explain: 'Computers convert subtraction to addition: A - B = A + (complement of B) — so the same addition circuits do both, with no extra subtraction circuits needed.'
   },
   {
     id: 'q-cp-hard',
@@ -409,7 +409,7 @@ const LECT4_QUIZBANK_EN = [
       '01111111(2)'
     ],
     answer: 0,
-    explain: 'In 8-bit system, -1 = 11111111 — first bit is 1 (negative) and the rest represent the value.'
+    explain: 'In an 8-bit system, -1 is computed with complements: +1 is 00000001 → flip the bits = 11111110 → add 1 = 11111111.'
   },
   {
     id: 'q-cp-creative',
@@ -675,13 +675,13 @@ const LECT4_QUIZBANK_EN = [
     difficulty: 'creative',
     question: 'If you have a 1920×1080 image at 24-bit color and convert it to 8-bit color (256 colors), what happens?',
     options: [
-      'Image size reduces by about one third',
+      'Image size reduces to one third of the original',
       'Image size increases by three times',
       'Image size does not change',
       'Image becomes black and white'
     ],
     answer: 0,
-    explain: '24 bits per pixel → 8 bits per pixel = size reduced by one third (8/24 = 1/3).'
+    explain: '24 bits per pixel become 8 bits, so the new size = 8 ÷ 24 = exactly one third of the original.'
   },
   {
     id: 'q-mixed-2',

@@ -136,7 +136,7 @@ const LECT4_STAGES_AR = [
     id: "decimal-binary-conversion",
     category: "القسم الأول: أساسيات التمثيل الرقمي",
     title: "التحويل بين العشري والثنائي",
-    tagline: "إزاي تحول الأرقام العادية (اللي بنستخدمها يومياً) لأرقام الكمبيوتر الثنائية؟",
+    tagline: "إزاي بنحول الأرقام اللي بنستخدمها كل يوم لأرقام الكمبيوتر الثنائية؟",
     glyph: "🔁",
     image: "assets/images/data_info_knowledge.jpg",
     visualCaption: "التحويل من ثنائي لعشري: اضرب كل رقم في قوة 2 واجمع. التحويل من عشري لثنائي: اقسم على 2 واكتب البواقي من الآخر للأول.",
@@ -168,8 +168,8 @@ const LECT4_STAGES_AR = [
         </div>
         <ul class="structured-list">
           <li><span class="list-bullet-icon">🔢</span> قوى العدد 2: 1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024...</li>
-          <li><span class="list-bullet-icon">📝</span> من ثنائي لعشري: اكتب قوى 2 تحت كل رقم، واجمع اللي تحتها 1</li>
-          <li><span class="list-bullet-icon">📝</span> من عشري لثنائي: اقسم على 2 واكتب البواقي من الأسفل للأعلى</li>
+          <li><span class="list-bullet-icon">📝</span> من ثنائي لعشري: اكتب قوى العدد 2 بجانب الخانات من اليمين للشمال، واجمع القيم اللي بيشير لها الأرقام 1</li>
+          <li><span class="list-bullet-icon">📝</span> من عشري لثنائي: اقسم على 2 كذا مرة، واكتب البواقي من آخر قسمة لأول قسمة</li>
         </ul>
       </div>`
     ],
@@ -238,7 +238,7 @@ const LECT4_STAGES_AR = [
           <span class="callout-icon">💡</span>
           <h4 class="callout-title">ليه النظام السادس عشر مهم؟</h4>
         </div>
-        <p class="card-desc">كل رقم ست عشري = <strong>4 بت بالظبط</strong>. يعني بايت واحد (8 بت) = رقمين ست عشرين بس! ده بيخلي قراءة البيانات أسهل بكتير من الثنائي الطويل.</p>
+        <p class="card-desc">كل رقم ست عشري = <strong>4 بت بالظبط</strong>. يعني بايت واحد (8 بت) = رقمين ست عشري بس! ده بيخلي قراءة البيانات أسهل بكتير من الثنائي الطويل.</p>
       </div>`
     ],
     takeaway: "النظام السادس عشر = 16 رمز (0-9 + A-F) ⬝ كل رقم ست عشري = 4 بت ⬝ من ثنائي: اقسم لمجموعات 4 من اليمين ⬝ من ست عشري: حول كل رقم لـ 4 بت.",
@@ -327,7 +327,7 @@ const LECT4_STAGES_AR = [
     id: "binary-arithmetic",
     category: "القسم الثاني: تمثيل البيانات",
     title: "جمع وطرح الأرقام الثنائية",
-    tagline: "الكمبيوتر بيجمع ويطرح بطريقة مختلفة شوية — بس نفس الفكرة اللي بنعملها في العشري",
+    tagline: "الكمبيوتر بيجمع ويطرح بطريقة مختلفة شوية — بس نفس فكرة الجمع والطرح العادي اللي بنعملها",
     glyph: "➕",
     image: "assets/images/data_info_knowledge.jpg",
     visualCaption: "الجمع الثنائي: 1+1=10 (مش 2!). الطرح الثنائي: بنستعير من الخانة اللي قبلها.",
@@ -356,9 +356,9 @@ const LECT4_STAGES_AR = [
           </div>
           <table class="l3-mini-table">
             <tr><th>العملية</th><th>النتيجة</th><th>ملاحظة</th></tr>
-            <tr><td>0 - 0</td><td>0</td><td>من غير استيعار</td></tr>
-            <tr><td>1 - 0</td><td>1</td><td>من غير استيعار</td></tr>
-            <tr><td>1 - 1</td><td>0</td><td>من غير استيعار</td></tr>
+            <tr><td>0 - 0</td><td>0</td><td>من غير استعارة</td></tr>
+            <tr><td>1 - 0</td><td>1</td><td>من غير استعارة</td></tr>
+            <tr><td>1 - 1</td><td>0</td><td>من غير استعارة</td></tr>
             <tr><td>0 - 1</td><td>1</td><td>مع استعارة 1 من الخانة الجاية</td></tr>
           </table>
           <p class="card-example">🔍 <em>مثال:</em> 1010(2) - 0110(2) = 0100(2) — نفس فكرة 10 - 6 = 4 في العشري</p>
@@ -370,13 +370,13 @@ const LECT4_STAGES_AR = [
           <h4 class="callout-title">قاعدة مهمة: الحمل والاستعارة</h4>
         </div>
         <ul class="structured-list">
-          <li><span class="list-bullet-icon">⬆️</span> <strong>الحمل (Carry):</strong> لما 1 + 1 = 10، بنحمل 1 للخانة الجاية — زي "معانا الواحد" في الجمع العشري</li>
-          <li><span class="list-bullet-icon">⬇️</span> <strong>الاستعارة (Borrow):</strong> لما نطرح 1 من 0، بنستعير 1 من الخانة الجاية وتبقى عندنا 2 — زي الاستعارة في الطرح العشري</li>
+          <li><span class="list-bullet-icon">⬆️</span> <strong>الحمل (Carry):</strong> لما 1 + 1 = 10، بنحمل 1 للخانة اللي بعدها — زي ما بنحمل الحمل في الجمع العادي</li>
+          <li><span class="list-bullet-icon">⬇️</span> <strong>الاستعارة (Borrow):</strong> لما نطرح 1 من 0، بنستعير 1 من الخانة اللي بعدها — والخانة بتستحسب 2، فالناتج بيطلع 1</li>
         </ul>
       </div>`
     ],
-    takeaway: "1+1=10 في الثنائي (مش 2!) ⬝ الحمل زي «معانا الواحد» ⬝ الاستعارة بنستعير من الخانة الجاية ⬝ نفس قواعد العشري بس بأرقام أقل.",
-    funFact: "معالج الكمبيوتر فيه ملايين الترانزستورات بتعمل عمليات جمع وطرح ثنائية في الثانية الواحدة — وده أساس كل حاجة بتعملها على الجهاز!",
+    takeaway: "1+1=10 في الثنائي (مش 2!) ⬝ الحمل بنسحب 1 للخانة اللي بعدها ⬝ الاستعارة بنستعير من الخانة اللي بعدها ⬝ نفس قواعد الجمع والطرح العادي.",
+    funFact: "أي عملية حسابية على الكمبيوتر — الضرب أو القسمة أو غيرها — في الآخر بتتم عن طريق جمع وطرح بأصفار وآحاد!",
     quiz: {
       question: "ما نتيجة الجمع الثنائي: 1010(2) + 0101(2)؟",
       options: [
@@ -393,10 +393,10 @@ const LECT4_STAGES_AR = [
     id: "complements",
     category: "القسم الثاني: تمثيل البيانات",
     title: "تمثيل الأرقام السالبة بالمتممات",
-    tagline: "الكمبيوتر معندوش علامة ناقص! إزاي بيمثل الأرقام السالبة؟ بطريقة المتممات الذكية",
+    tagline: "الكمبيوتر معندوش علامة سالب — وبيمثل الأرقام السالبة إزاي؟ بالمتممات",
     glyph: "🔄",
     image: "assets/images/info_characteristics.jpg",
-    visualCaption: "المتمم الثنائي: عكس كل بت (0→1 و 1→0) ثم أضف 1 — النتيجة بتمثل -5 سالب.",
+    visualCaption: "متمم 0101(2): عكس البتات يبقى 1010، وبعدين نضيف 1 يبقى 1011 — والنتيجة دي تمثل الرقم -5.",
     interactiveType: "complement_calculator",
     story: [
       `<p class="story-lead">الكمبيوتر معندوش علامة "ناقص" — بيمثل الأرقام السالبة بطريقة ذكية اسمها <strong>المتممات (Complements)</strong>. الفكرة إننا بنحول الطرح لجمع!</p>`,
@@ -422,7 +422,7 @@ const LECT4_STAGES_AR = [
           <div class="rule-checklist">
             <div class="checklist-step"><div class="step-number">١</div><div>أوجد <strong>متمم</strong> المطروح</div></div>
             <div class="checklist-step"><div class="step-number">٢</div><div>اجمع المطروح منه مع المتمم</div></div>
-            <div class="checklist-step"><div class="step-number">٣</div><div><strong>تجاهل</strong> الخانة الرئيسية (الحمل الزائد)</div></div>
+            <div class="checklist-step"><div class="step-number">٣</div><div><strong>تجاهل</strong> أول خانة على اليسار من الناتج (الحمل الزائد)</div></div>
           </div>
           <p class="card-example">🔍 <em>مثال:</em> 1000(2) - 0111(2) → 1000 + 1001 = 10001 → تجاهل الأول → <strong>0001(2)</strong> = 1</p>
         </div>
@@ -432,7 +432,7 @@ const LECT4_STAGES_AR = [
           <span class="callout-icon">💡</span>
           <h4 class="callout-title">ليه المتممات مهمة؟</h4>
         </div>
-        <p class="card-desc">المتممات بتخلي الكمبيوتر يستخدم <strong>نفس الدوائر</strong> في الجمع والطرح — من غير ما يحتاج دوائر إضافية للطرح. ده بيوفر في التصميم والتكلفة!</p>
+        <p class="card-desc">المتممات بتخلي الكمبيوتر يستخدم <strong>نفس الدوائر</strong> للجمع والطرح — بدل ما يحتاج دوائر إضافية خاصة للطرح. يعني الطرح كل عبارة عن جمع مع المتمم!</p>
       </div>`
     ],
     takeaway: "المتمم الثنائي = عكس كل بت + 1 ⬝ الطرح بالمتممات: اجمع مع متمم المطروح وتجاهل الحمل ⬝ نفس الدوائر بتعمل جمع وطرح.",
@@ -477,7 +477,7 @@ const LECT4_STAGES_AR = [
             <h4 class="card-title"><strong>📈</strong> جودة الصوت وحجم البيانات</h4>
             <span class="card-badge badge-blue">كل ما زادت الجودة زاد الحجم</span>
           </div>
-          <p class="card-desc">كلما زاد <strong>تردد أخذ العينات</strong> و<strong>عمق التحويل الكمي</strong>، الصوت بيبقى أقرب للأصل — بس حجم البيانات بيزيد.</p>
+          <p class="card-desc">كل ما زاد <strong>تردد أخذ العينات</strong> و<strong>عمق التحويل الكمي</strong>، الصوت بيبقى أقرب للأصل — بس حجم البيانات بيزيد.</p>
           <p class="card-example">🔍 <em>مثال:</em> صوت CD جودته 44,100 Hz و 16 bit — يعني 44,100 عينة في الثانية، كل عينة 16 بت</p>
         </div>
         <div class="story-card card-amber-accent">
@@ -554,7 +554,7 @@ const LECT4_STAGES_AR = [
           </div>
           <ul class="structured-list">
             <li><span class="list-bullet-icon">📊</span> <strong>النقطي (Raster):</strong> شبكة بكسلات — بيظهر متعرج (Jaggies) عند التكبير. مناسب للصور الفوتوغرافية. برامج: Photoshop</li>
-            <li><span class="list-bullet-icon">📐</span> <strong>المتجهي (Vector):</strong> معادلات رياضية للنقاط والخطوط — مش بيتمتق عند التكبير. مناسب للشعارات. برامج: Illustrator</li>
+            <li><span class="list-bullet-icon">📐</span> <strong>المتجهي (Vector):</strong> معادلات رياضية للنقاط والخطوط — مش بيتشوه عند التكبير. مناسب للشعارات. برامج: Illustrator</li>
           </ul>
         </div>
       </div>`,
@@ -564,8 +564,8 @@ const LECT4_STAGES_AR = [
           <span class="card-badge badge-green">RGB و CMY</span>
         </div>
         <ul class="structured-list">
-          <li><span class="list-bullet-icon">🔴</span> <strong>الألوان الأساسية للضوء (RGB):</strong> أحمر، أخضر، أزرق — بتتجمع فتقترب من الأبيض. مستخدمة في الشاشات</li>
-          <li><span class="list-bullet-icon">🟡</span> <strong>الألوان الأساسية للصبغة (CMY):</strong> سماوي، أرجواني، أصفر — بتتجمع فتقترب من الأسود. مستخدمة في الطابعات</li>
+            <li><span class="list-bullet-icon">🔴</span> <strong>الألوان الأساسية للضوء (RGB):</strong> أحمر وأخضر وأزرق — لما بنتخلطها بترتفع السطوع وتقرب من الأبيض. مستخدمة في التلفزيون وشاشات الكمبيوتر</li>
+            <li><span class="list-bullet-icon">🟡</span> <strong>الألوان الأساسية للصبغة (CMY):</strong> سماوي وأرجواني وأصفر — لما بنتخلطها بتبقى أغمق وتقرب من الأسود. مستخدمة في الطابعات الملونة</li>
           <li><span class="list-bullet-icon">🎨</span> <strong>24-bit Full Color:</strong> كل لون (R, G, B) = 8 بت = 256 مستوى × 3 = 24 بت = 16.7 مليون لون</li>
         </ul>
       </div>`
@@ -654,7 +654,7 @@ const LECT4_STAGES_AR = [
     id: "information-design",
     category: "القسم الرابع: تصميم المعلومات",
     title: "تصميم المعلومات",
-    tagline: "مش بس بيانات — بيانات منظمة وجميلة ومفهومة — إزاي نصمم المعلومات عشان توصل بوضوح؟",
+    tagline: "مش بس بيانات — لازم تكون بيانات منظمة ومفهومة عشان توصل بوضوح",
     glyph: "🎨",
     image: "assets/images/digital_ethics.jpg",
     visualCaption: "تصميم المعلومات بيجمع بين التجريد والتصور والهيكلة عشان يوصل الرسالة بوضوح للجمهور المستهدف.",
@@ -668,15 +668,15 @@ const LECT4_STAGES_AR = [
             <span class="card-badge badge-blue">٣ طرق رئيسية</span>
           </div>
           <ul class="structured-list">
-            <li><span class="list-bullet-icon">📊</span> <strong>التجريد (Abstraction):</strong> نقل المعلومة المقصودة ببساطة من وسط كمية ضخمة من البيانات — زي الرسم التصويري (Pictogram) والأيقونة (Icon)</li>
-            <li><span class="list-bullet-icon">📈</span> <strong>التصور (Visualization):</strong> تمثيل المعلومات بصرياً عشان تبقى أسهل فهم — زي الجداول والرسوم البيانية</li>
-            <li><span class="list-bullet-icon">🏗️</span> <strong>الهيكلة (Structuring):</strong> تنظيم وترتيب المعلومات حسب العلاقات والمستويات والمراحل — زي القوائم الهرمية في صفحات الويب</li>
+            <li><span class="list-bullet-icon">📊</span> <strong>التجريد (Abstraction):</strong> استخراج المعلومة المهمة وعرضها ببساطة من وسط كمية كبيرة من البيانات — مثال: الرسم التصويري (Pictogram) والأيقونة (Icon)</li>
+            <li><span class="list-bullet-icon">📈</span> <strong>التصور (Visualization):</strong> تمثيل البيانات بصرياً عشان تبقى أسهل فهم — زي الجداول والرسوم البيانية</li>
+            <li><span class="list-bullet-icon">🏗️</span> <strong>الهيكلة (Structuring):</strong> ترتيب المعلومات حسب العلاقات والمستويات والترتيب — زي القوائم الهرمية في صفحات الويب وخريطة الطوابق في المولات الكبيرة</li>
           </ul>
         </div>
         <div class="story-card card-amber-accent">
           <div class="card-header-row">
             <h4 class="card-title"><strong>🖥️</strong> واجهة المستخدم (UI) وتجربة المستخدم (UX)</h4>
-            <span class="card-badge badge-amber">مش بس شكل — تجربة كاملة</span>
+            <span class="card-badge badge-amber">مش بس الشكل — التجربة كمان</span>
           </div>
           <ul class="structured-list">
             <li><span class="list-bullet-icon">⌨️</span> <strong>واجهة سطر الأوامر (CUI):</strong> إدخال أوامر بالحروف من لوحة المفاتيح — زي الشاشة السوداء القديمة</li>
@@ -691,11 +691,11 @@ const LECT4_STAGES_AR = [
           <span class="card-badge badge-green">للجميع</span>
         </div>
         <div class="pill-cloud">
-          <span class="pill-item">🎯 قابلية الاستخدام (Usability): سهل الاستخدام</span>
-          <span class="pill-item">♿ إمكانية الوصول (Accessibility): متاح للجميع</span>
-          <span class="pill-item">🌍 التصميم الشامل (Universal Design): لكل الأعمار والقدرات</span>
-          <span class="pill-item">🔔 الدلالة (Signifier): إشارات تدفع المستخدم يتصرف</span>
-          <span class="pill-item">👆 الإمكانية (Affordance): إمكانية تنفيذ إجراء على كائن</span>
+          <span class="pill-item">🎯 قابلية الاستخدام (Usability): مدى سهولة الاستخدام والفهم للمستخدم</span>
+          <span class="pill-item">♿ إمكانية الوصول (Accessibility): سهولة وصول أكبر قدر من الناس للبيانات والخدمات</span>
+          <span class="pill-item">🌍 التصميم الشامل (Universal Design): تصميم يقدر يستخدمه كل الناس من غير صعوبة</span>
+          <span class="pill-item">🔔 الدلالة (Signifier): إشارات بتدل المستخدم على الإجراء اللي يعمله</span>
+          <span class="pill-item">👆 الإمكانية (Affordance): الإجراءات والعمليات اللي تقدر تنفذها على حاجة</span>
         </div>
       </div>`,
       `<div class="editorial-callout callout-amber">

@@ -47,7 +47,7 @@ const LECT4_STAGES_EN = [
       `<div class="story-card card-green-accent">
         <div class="card-header-row">
           <h4 class="card-title"><strong>✨</strong> Advantages of Digital Data</h4>
-          <span class="card-badge badge-green">Why digital is better?</span>
+            <span class="card-badge badge-green">Why digital wins?</span>
         </div>
         <div class="pill-cloud">
           <span class="pill-item">📋 Can be accumulated or duplicated without degradation</span>
@@ -327,7 +327,7 @@ const LECT4_STAGES_EN = [
     id: "binary-arithmetic",
     category: "Part 2: Data Representation",
     title: "Binary Addition and Subtraction",
-    tagline: "Computers add and subtract differently — but same idea as decimal, just with fewer digits",
+    tagline: "Computers do add and subtract — a little differently, following simple rules for 0s and 1s",
     glyph: "➕",
     image: "assets/images/data_info_knowledge.jpg",
     visualCaption: "Binary addition: 1+1=10 (not 2!). Binary subtraction: borrow from the next position.",
@@ -393,10 +393,10 @@ const LECT4_STAGES_EN = [
     id: "complements",
     category: "Part 2: Data Representation",
     title: "Representing Negative Numbers with Complements",
-    tagline: "Computers don't have a minus sign! How do they represent negative numbers? With smart complements",
+    tagline: "Computers have no minus sign! How do they represent negative numbers? With complements",
     glyph: "🔄",
     image: "assets/images/info_characteristics.jpg",
-    visualCaption: "2's Complement: flip every bit (0→1, 1→0) then add 1 — this represents the same number but negative.",
+    visualCaption: "2's Complement of 0101(2): flip the bits to 1010, then add 1 to get 1011 — this represents -5.",
     interactiveType: "complement_calculator",
     story: [
       `<p class="story-lead">Computers don't have a \"minus\" sign — they represent negative numbers using a clever method called <strong>Complements</strong>. The idea is to turn subtraction into addition!</p>`,
@@ -422,7 +422,7 @@ const LECT4_STAGES_EN = [
           <div class="rule-checklist">
             <div class="checklist-step"><div class="step-number">1</div><div>Find the <strong>complement</strong> of the subtrahend</div></div>
             <div class="checklist-step"><div class="step-number">2</div><div>Add the minuend to the complement</div></div>
-            <div class="checklist-step"><div class="step-number">3</div><div><strong>Ignore</strong> the leading digit (overflow carry)</div></div>
+            <div class="checklist-step"><div class="step-number">3</div><div><strong>Ignore</strong> the leftmost digit of the result (the extra carry)</div></div>
           </div>
           <p class="card-example">🔍 <em>Example:</em> 1000(2) - 0111(2) → 1000 + 1001 = 10001 → ignore first → <strong>0001(2)</strong> = 1</p>
         </div>
@@ -436,7 +436,7 @@ const LECT4_STAGES_EN = [
       </div>`
     ],
     takeaway: "2's complement = flip all bits + 1 ⬝ Subtraction with complements: add with complement of subtrahend and ignore carry ⬝ Same circuits do both addition and subtraction.",
-    funFact: "In 8-bit system, numbers from -128 to +127 can be represented — this is because the first bit is the sign (0 positive, 1 negative) and the rest represent the value!",
+    funFact: "In an 8-bit system you can represent numbers from -128 to +127 using complements — no separate minus sign needed!",
     quiz: {
       question: "What is the 2's complement of 0101(2)?",
       options: [
@@ -588,7 +588,7 @@ const LECT4_STAGES_EN = [
     id: "video-compression",
     category: "Part 3: Media Digitization",
     title: "Digital Video Representation and Compression",
-    tagline: "Video = fast images + smart compression — how we save 90% of size without noticing",
+    tagline: "Video = fast images one after another + smart compression — how we cut the size without noticing",
     glyph: "🎬",
     image: "assets/images/smartphone.jpg",
     visualCaption: "Video consists of sequential frames, each frame is an image. Compression reduces size by removing redundancy.",
@@ -623,7 +623,7 @@ const LECT4_STAGES_EN = [
         </div>
         <ul class="structured-list">
           <li><span class="list-bullet-icon">🔁</span> <strong>Run-length encoding:</strong> Replace consecutive repetitions with count — like "AAAAA" becomes "A5". Effective with many repetitions</li>
-          <li><span class="list-bullet-icon">🌳</span> <strong>Huffman coding:</strong> Assign shorter codes to more frequent characters and longer codes to less frequent — like Morse code</li>
+          <li><span class="list-bullet-icon">🌳</span> <strong>Huffman coding:</strong> Assign shorter codes to more frequent characters and longer codes to less frequent ones</li>
         </ul>
         <p class="card-example">🔍 <em>Run-length example:</em> "AAAAABBAAAABBBBBBBBAAAAAA" (25 chars) → "A5B2A4B8A6" (10 chars) — compression ratio 40%</p>
       </div>`,
@@ -654,7 +654,7 @@ const LECT4_STAGES_EN = [
     id: "information-design",
     category: "Part 4: Information Design",
     title: "Information Design",
-    tagline: "Not just data — organized, beautiful, understandable data — how to design information for clarity",
+    tagline: "Not just data — organized and understandable data, so the message arrives clearly",
     glyph: "🎨",
     image: "assets/images/digital_ethics.jpg",
     visualCaption: "Information design combines abstraction, visualization, and structuring to deliver messages clearly to the target audience.",
@@ -668,15 +668,15 @@ const LECT4_STAGES_EN = [
             <span class="card-badge badge-blue">3 main methods</span>
           </div>
           <ul class="structured-list">
-            <li><span class="list-bullet-icon">📊</span> <strong>Abstraction:</strong> Convey intended information simply from within large data — like Pictograms and Icons</li>
+            <li><span class="list-bullet-icon">📊</span> <strong>Abstraction:</strong> Extract the important information and present it simply from within a large amount of data — like Pictograms and Icons</li>
             <li><span class="list-bullet-icon">📈</span> <strong>Visualization:</strong> Represent information visually for easier understanding — like tables and graphs</li>
-            <li><span class="list-bullet-icon">🏗️</span> <strong>Structuring:</strong> Organize and arrange information by relationships, levels, stages — like hierarchical menus on websites</li>
+            <li><span class="list-bullet-icon">🏗️</span> <strong>Structuring:</strong> Arrange information by relationships, levels, and order — like hierarchical lists on web pages and floor maps in large malls</li>
           </ul>
         </div>
         <div class="story-card card-amber-accent">
           <div class="card-header-row">
             <h4 class="card-title"><strong>🖥️</strong> UI and UX</h4>
-            <span class="card-badge badge-amber">Not just looks — full experience</span>
+            <span class="card-badge badge-amber">Not just looks — the experience too</span>
           </div>
           <ul class="structured-list">
             <li><span class="list-bullet-icon">⌨️</span> <strong>CUI (Command UI):</strong> Text commands from keyboard — like old black screens</li>
@@ -691,11 +691,11 @@ const LECT4_STAGES_EN = [
           <span class="card-badge badge-green">For everyone</span>
         </div>
         <div class="pill-cloud">
-          <span class="pill-item">🎯 Usability: Easy to use</span>
-          <span class="pill-item">♿ Accessibility: Available to all</span>
-          <span class="pill-item">🌍 Universal Design: For all ages and abilities</span>
-          <span class="pill-item">🔔 Signifier: Cues that prompt action</span>
-          <span class="pill-item">👆 Affordance: Possibility of performing an action</span>
+          <span class="pill-item">🎯 Usability: How easy a design is to use and understand</span>
+          <span class="pill-item">♿ Accessibility: How easily the greatest number of people can reach data and services</span>
+          <span class="pill-item">🌍 Universal Design: A design everyone can use without difficulty</span>
+          <span class="pill-item">🔔 Signifier: Cues that tell the user what action to take</span>
+          <span class="pill-item">👆 Affordance: The actions you can perform on something</span>
         </div>
       </div>`,
       `<div class="editorial-callout callout-amber">
