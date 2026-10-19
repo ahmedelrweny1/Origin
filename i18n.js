@@ -126,6 +126,10 @@ const translations = {
     lect4ChallengeTitle: "Chapter 4 Concept Matching Challenge",
     lect4ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Digital Data Representation and Multimedia.",
 
+    ssTitle: "Lecture stops",
+    ssFinal: "Final challenge",
+    ssMenu: "Open stations menu",
+
     // Quizzes landing
     qzEdition: "Section 02 · Exam Hall",
     qzEyebrow: "Quizzes & Questions",
@@ -592,6 +596,10 @@ const translations = {
     lect4Final: "تحدي المطابقة",
     lect4ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الرابع",
     lect4ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك للتمثيل الرقمي للبيانات والوسائط.",
+
+    ssTitle: "محطات المحاضرة",
+    ssFinal: "التحدي النهائي",
+    ssMenu: "افتح قائمة المحطات",
 
     // Quizzes landing
     qzEdition: "القسم ٢ · قاعة الاختبارات",

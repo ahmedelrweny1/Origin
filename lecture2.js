@@ -15,10 +15,11 @@ let lect2State = {
 try {
   const saved = JSON.parse(localStorage.getItem(LECT2_STORE_KEY));
   if (saved && Array.isArray(saved.visited)) lect2State.visited = new Set(saved.visited);
+  if (saved && Number.isInteger(saved.current)) lect2State.current = Math.min(Math.max(saved.current, 0), LECT2_STAGES.length - 1);
 } catch (e) {}
 
 function saveLect2State() {
-  localStorage.setItem(LECT2_STORE_KEY, JSON.stringify({ visited: [...lect2State.visited] }));
+  localStorage.setItem(LECT2_STORE_KEY, JSON.stringify({ visited: [...lect2State.visited], current: lect2State.current }));
 }
 
 const $ = (id) => document.getElementById(id);
@@ -49,6 +50,7 @@ function updateProgressUI() {
   const pct = Math.round((lect2State.visited.size / LECT2_STAGES.length) * 100);
   if ($("progressFill")) $("progressFill").style.width = pct + "%";
   if ($("progressLabel")) $("progressLabel").textContent = pct + "%";
+  LectureShell.sync(LECT2_STAGES, lect2State.current, lect2State.visited);
 }
 
 /* ========================================================
@@ -904,13 +906,30 @@ function renderFinalMatchGame() {
 /* ========================================================
    LIFECYCLE & EVENT LISTENERS
    ======================================================== */
+function openFinalChallenge() {
+  $("finalChallengeSection").classList.remove("hidden");
+  renderFinalMatchGame();
+  document.getElementById("finalChallengeSection").scrollIntoView({ behavior: "smooth" });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  LectureShell.init({ onNavigate: goToStage, onFinal: openFinalChallenge });
   buildTopicNavigation();
   updateProgressUI();
 
+  if (lect2State.visited.size > 0) {
+    $("heroSection").classList.add("hidden");
+    $("lectureExperience").classList.remove("hidden");
+    renderStage(lect2State.current);
+    LectureShell.show();
+  } else {
+    LectureShell.hide();
+  }
+
   $("startLectureBtn")?.addEventListener("click", () => {
     $("lectureExperience").classList.remove("hidden");
-    renderStage(lect2State.visited.size >= LECT2_STAGES.length ? lect2State.current : 0);
+    renderStage(lect2State.current);
+    LectureShell.show();
     document.getElementById("lectureExperience").scrollIntoView({ behavior: "smooth" });
   });
 
@@ -920,9 +939,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   $("nextBtn")?.addEventListener("click", () => {
     if (lect2State.current === LECT2_STAGES.length - 1) {
-      $("finalChallengeSection").classList.remove("hidden");
-      renderFinalMatchGame();
-      document.getElementById("finalChallengeSection").scrollIntoView({ behavior: "smooth" });
+      openFinalChallenge();
     } else {
       goToStage(lect2State.current + 1);
     }

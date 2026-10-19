@@ -10,10 +10,11 @@ let lect4State = {
 try {
   const saved = JSON.parse(localStorage.getItem(LECT4_STORE_KEY));
   if (saved && Array.isArray(saved.visited)) lect4State.visited = new Set(saved.visited);
+  if (saved && Number.isInteger(saved.current)) lect4State.current = Math.min(Math.max(saved.current, 0), LECT4_STAGES.length - 1);
 } catch (e) {}
 
 function saveLect4State() {
-  localStorage.setItem(LECT4_STORE_KEY, JSON.stringify({ visited: [...lect4State.visited] }));
+  localStorage.setItem(LECT4_STORE_KEY, JSON.stringify({ visited: [...lect4State.visited], current: lect4State.current }));
 }
 
 const $ = (id) => document.getElementById(id);
@@ -43,6 +44,7 @@ function updateProgressUI() {
   const pct = Math.round((lect4State.visited.size / LECT4_STAGES.length) * 100);
   $("progressFill").style.width = pct + "%";
   $("progressLabel").textContent = pct + "%";
+  LectureShell.sync(LECT4_STAGES, lect4State.current, lect4State.visited);
 }
 
 /* ========================================================
@@ -666,13 +668,30 @@ function renderFinalMatchGame() {
 /* ========================================================
    INITIALIZATION & LISTENERS
    ======================================================== */
+function openFinalChallenge() {
+  $("finalChallengeSection").classList.remove("hidden");
+  renderFinalMatchGame();
+  document.getElementById("finalChallengeSection").scrollIntoView({ behavior: "smooth" });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  LectureShell.init({ onNavigate: goToStage, onFinal: openFinalChallenge });
   buildTopicNavigation();
   updateProgressUI();
 
+  if (lect4State.visited.size > 0) {
+    $("heroSection").classList.add("hidden");
+    $("lectureExperience").classList.remove("hidden");
+    renderStage(lect4State.current);
+    LectureShell.show();
+  } else {
+    LectureShell.hide();
+  }
+
   $("startLectureBtn")?.addEventListener("click", () => {
     $("lectureExperience").classList.remove("hidden");
-    renderStage(lect4State.visited.size >= LECT4_STAGES.length ? lect4State.current : 0);
+    renderStage(lect4State.current);
+    LectureShell.show();
     document.getElementById("lectureExperience").scrollIntoView({ behavior: "smooth" });
   });
 
@@ -682,9 +701,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   $("nextBtn")?.addEventListener("click", () => {
     if (lect4State.current === LECT4_STAGES.length - 1) {
-      $("finalChallengeSection").classList.remove("hidden");
-      renderFinalMatchGame();
-      document.getElementById("finalChallengeSection").scrollIntoView({ behavior: "smooth" });
+      openFinalChallenge();
     } else {
       goToStage(lect4State.current + 1);
     }

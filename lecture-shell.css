@@ -1,0 +1,204 @@
+html.skip-hero #heroSection {
+  display: none !important;
+}
+
+.stage-sidebar {
+  display: none;
+  position: fixed;
+  inset-inline-end: 0;
+  bottom: 0;
+  width: 300px;
+  z-index: 60;
+  flex-direction: column;
+  background: var(--paper-deep);
+  border-inline-start: var(--rule-medium) solid var(--rule);
+  padding: 1rem 0 0.9rem;
+}
+
+.ss-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0 1.25rem 0.8rem;
+  border-bottom: var(--rule-hair) solid var(--rule-soft);
+}
+
+.ss-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c-red);
+}
+
+.ss-close {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: transparent;
+  border: var(--rule-hair) solid var(--rule);
+  color: var(--ink);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.ss-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.4rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-faint) transparent;
+}
+
+.ss-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.8rem;
+  align-items: baseline;
+  width: 100%;
+  text-align: start;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding: 0.6rem 1.25rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.ss-item:hover {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.ss-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+}
+
+.ss-item.visited {
+  color: var(--ink);
+}
+
+.ss-item.visited .ss-num {
+  color: var(--c-green);
+}
+
+.ss-item.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.ss-item.active .ss-num {
+  color: var(--paper);
+  opacity: 0.55;
+}
+
+.ss-item.active.visited .ss-num {
+  color: var(--paper);
+}
+
+.ss-final {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0.6rem 1.25rem 0;
+  padding: 0.65rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: transparent;
+  border: var(--rule-medium) solid var(--ink);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ss-final:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.ss-scrim {
+  display: none;
+}
+
+.ss-toggle {
+  display: none;
+}
+
+@media (min-width: 1081px) {
+  body.ss-active .stage-sidebar {
+    display: flex;
+  }
+  body.ss-active .main-content {
+    padding-inline-end: 320px;
+  }
+}
+
+@media (max-width: 1080px) {
+  body.ss-active .ss-toggle {
+    display: inline-flex;
+    position: fixed;
+    bottom: 1.25rem;
+    inset-inline-end: 1.25rem;
+    z-index: 95;
+    width: 3.2rem;
+    height: 3.2rem;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: var(--rule-medium) solid var(--ink);
+    cursor: pointer;
+  }
+  body.ss-active .stage-sidebar {
+    display: flex;
+    z-index: 120;
+    width: min(320px, 86vw);
+    border-inline-start: none;
+    border-inline-end: var(--rule-medium) solid var(--rule);
+    transition: transform 0.25s ease;
+  }
+  html[dir="ltr"] body.ss-active .stage-sidebar {
+    transform: translateX(105%);
+  }
+  html[dir="rtl"] body.ss-active .stage-sidebar {
+    transform: translateX(-105%);
+  }
+  body.ss-active.ss-drawer .stage-sidebar {
+    transform: translateX(0) !important;
+  }
+  body.ss-active .ss-close {
+    display: inline-flex;
+  }
+  body.ss-active.ss-drawer .ss-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 110;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stage-sidebar,
+  .ss-item,
+  .ss-final {
+    transition: none;
+  }
+}
