@@ -1,7 +1,9 @@
 /* ============================================================
-   Site gate — login required before any page (except login).
-   - Instant: hides content unless a cached login flag exists.
-   - Verifies with Firebase when reachable; sends signed-out
+   Site gate — account check on exam/admin surfaces only.
+   - Portals (home, lectures, quizzes, revision, account) stay
+     open: the homepage is the first classroom.
+   - Gated pages hide content until a cached login flag exists,
+     then verify with Firebase when reachable and send signed-out
      visitors to login (returning them afterwards).
    - Fail-open: no Firebase setup, or no connection → allow.
      Real enforcement (attempts, roster) stays server-side.
@@ -11,8 +13,7 @@
 
   var FLAG = 'origin-authed';
   var LOGIN_PAGE = 'login.html';
-  var SDK = 'https://www.gstatic.com/firebasejs/10.12.0/';
-  var V = '?v=6';
+  var GATED = ['exams.html', 'exam.html', 'exam2.html', 'admin.html'];
 
   function here() {
     try {
@@ -21,10 +22,10 @@
     } catch (e) { return 'index.html'; }
   }
 
-  // Never gate the login page itself.
-  try {
-    if (here().split('?')[0] === LOGIN_PAGE) return;
-  } catch (e) { return; }
+  var base = '';
+  try { base = here().split('?')[0]; } catch (e) {}
+  // Only exam/admin surfaces require the account check.
+  if (GATED.indexOf(base) === -1 || base === LOGIN_PAGE) return;
 
   // 1. Hide immediately unless a cached login exists.
   var cached = false;
@@ -46,29 +47,9 @@
       location.replace(LOGIN_PAGE + '?next=' + encodeURIComponent(here()));
     } catch (e) { unlock(); }
   }
-  function load(src, done, fail) {
-    try {
-      var s = document.createElement('script');
-      s.src = src;
-      s.onload = function () { done(); };
-      s.onerror = function () { fail(); };
-      document.head.appendChild(s);
-    } catch (e) { fail(); }
-  }
 
-  // 2. Load the stack, then verify (any failure → allow).
-  var stack = [
-    SDK + 'firebase-app-compat.js',
-    SDK + 'firebase-auth-compat.js',
-    SDK + 'firebase-firestore-compat.js',
-    'firebase-config.js' + V,
-    'remote.js' + V
-  ];
-  (function next(i) {
-    if (i >= stack.length) { verify(); return; }
-    load(stack[i], function () { next(i + 1); }, unlock);
-  })(0);
-
+  // 2. Verify using the runtime already loaded by the page itself
+  //    (each gated page includes the Firebase stack + remote.js).
   function verify() {
     try {
       if (typeof Remote === 'undefined') { unlock(); return; }
@@ -85,5 +66,11 @@
         }
       }).catch(unlock);
     } catch (e) { unlock(); }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', verify);
+  } else {
+    verify();
   }
 })();

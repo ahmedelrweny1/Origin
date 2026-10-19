@@ -50,7 +50,46 @@ const REVISION_KEYWORDS_EN = [
   { id: 'k-neighbor', lecture: 'lect2', term: 'Neighboring rights', brief: 'Rights of <strong>performers, producers, broadcasters</strong> who bring works to the public.' },
   { id: 'k-fairuse', lecture: 'lect2', term: 'Fair use', brief: 'Limited <strong>free uses</strong> — classroom teaching, private study, non-profit shows.' },
   { id: 'k-quote', lecture: 'lect2', term: 'Quotation rules (5)', brief: 'Subordination, necessity, <strong>quotation marks</strong>, attribution, <strong>no alteration</strong>.' },
-  { id: 'k-cc', lecture: 'lect2', term: 'Creative Commons', brief: 'Standard sharing licenses: <strong>BY</strong> (credit) · <strong>NC</strong> (non-commercial) · <strong>ND</strong> (no changes) · <strong>SA</strong> (same license).' }
+  { id: 'k-cc', lecture: 'lect2', term: 'Creative Commons', brief: 'Standard sharing licenses: <strong>BY</strong> (credit) · <strong>NC</strong> (non-commercial) · <strong>ND</strong> (no changes) · <strong>SA</strong> (same license).' },
+  // ---------- Lecture 3 ----------
+  { id: 'k-cia', lecture: 'lect3', term: 'CIA triad', brief: 'Three pillars that must stand together: <strong>Confidentiality + Integrity + Availability</strong>. One pillar falls, the system is weak.' },
+  { id: 'k-cia-i', lecture: 'lect3', term: 'Confidentiality', brief: 'Only <strong>authorized people</strong> can see the data — encryption and permissions guard it.' },
+  { id: 'k-cia-c', lecture: 'lect3', term: 'Integrity', brief: 'Nobody <strong>changed</strong> the data without approval — the digital signature proves it is untouched.' },
+  { id: 'k-cia-a', lecture: 'lect3', term: 'Availability', brief: 'The service is <strong>working when you need it</strong> — backups and redundancy protect it from outages.' },
+  { id: 'k-password', lecture: 'lect3', term: 'Strong password', brief: 'Long, <strong>mixed (cases, digits, symbols)</strong>, and different for every account. The worst habit: reusing one password.' },
+  { id: 'k-mfa', lecture: 'lect3', term: 'Multi-factor auth', brief: 'Password <strong>plus a second proof</strong> (code, fingerprint) — a huge wall even if the password leaks.' },
+  { id: 'k-phish', lecture: 'lect3', term: 'Phishing', brief: 'A message or site <strong>pretending to be official</strong> to steal your password — check sender and link before clicking.' },
+  { id: 'k-soceng', lecture: 'lect3', term: 'Social engineering', brief: 'They hack <strong>the person, not the device</strong> — urgency, fear, and trust are the doors they walk through.' },
+  { id: 'k-encrypt', lecture: 'lect3', term: 'Encryption', brief: 'Scramble data <strong>with a key</strong> — without the key it is just meaningless noise.' },
+  { id: 'k-sig', lecture: 'lect3', term: 'Digital signature', brief: 'A fingerprint signed with your private key — it proves <strong>who sent it and that nothing changed</strong>.' },
+  { id: 'k-tls', lecture: 'lect3', term: 'SSL/TLS', brief: 'It encrypts <strong>the path between you and the site</strong> — its badge is the padlock and HTTPS in the address bar.' },
+  { id: 'k-firewall', lecture: 'lect3', term: 'Firewall', brief: 'The gatekeeper of your device/network — it <strong>filters what comes in and out</strong> by rules.' },
+  { id: 'k-malware', lecture: 'lect3', term: 'Malware', brief: 'Viruses, worms, trojans, spyware — <strong>their sources: links, downloads, unknown flash drives</strong>.' },
+  { id: 'k-ransom', lecture: 'lect3', term: 'Ransomware', brief: 'It encrypts your files and demands money — what saves you: <strong>a backup</strong>; paying is not a guarantee.' },
+  { id: 'k-backup', lecture: 'lect3', term: 'Backup (3-2-1)', brief: 'Rule 3-2-1: <strong>3 copies on 2 different media, one outside the place</strong> — the last line of defense.' },
+  { id: 'k-update', lecture: 'lect3', term: 'Security updates', brief: 'Updates close the holes — <strong>delaying helps the hacker, not you</strong>; turn on auto-update.' },
+  { id: 'k-firstaid', lecture: 'lect3', term: 'Digital first aid', brief: 'Breach? <strong>Disconnect, change passwords, report</strong> — in that order, and fast.' },
+  // ---------- Lecture 4 ----------
+  { id: 'k-analog', lecture: 'lect4', term: 'Analog signal', brief: 'Values that are <strong>connected, with no steps</strong> — like the real wave of your voice.' },
+  { id: 'k-digit', lecture: 'lect4', term: 'Digital signal', brief: 'Values that are <strong>stepped (0 and 1)</strong> — easy to copy, fix, and encrypt. That is the power of the digital world.' },
+  { id: 'k-bit', lecture: 'lect4', term: 'Bit', brief: 'Smallest unit: <strong>0 or 1</strong> — the atom of every image, sound, and text in your device.' },
+  { id: 'k-byte', lecture: 'lect4', term: 'Byte', brief: '<strong>8 bits</strong> ≈ one English character — 2^8 = 256 different combinations.' },
+  { id: 'k-bin', lecture: 'lect4', term: 'Binary system', brief: 'Base 2 — <strong>every place has a power (128, 64, 32…)</strong>: 1010 in binary = 10.' },
+  { id: 'k-hex', lecture: 'lect4', term: 'Hexadecimal', brief: 'Digits 0-9 and A-F — a <strong>tidy shorthand for binary: each hex digit = 4 bits</strong> (A2 = 10100010).' },
+  { id: 'k-ascii', lecture: 'lect4', term: 'ASCII', brief: 'A code table of <strong>7 bits = 128 symbols</strong> (letters, digits, signs) — "A" = 65, "a" = 97.' },
+  { id: 'k-unicode', lecture: 'lect4', term: 'Unicode', brief: 'A universal code <strong>for all languages (Arabic/Chinese/emoji)</strong> — UTF-8 is the most used; without it Arabic text breaks on another device.' },
+  { id: 'k-pixel', lecture: 'lect4', term: 'Pixel', brief: 'The smallest light dot of an image — <strong>each dot has red/green/blue values</strong> stored bit by bit.' },
+  { id: 'k-rgb', lecture: 'lect4', term: 'RGB', brief: 'Colors by light: <strong>red + green + blue</strong> — full mix gives white. This is the world of screens.' },
+  { id: 'k-cmy', lecture: 'lect4', term: 'CMY', brief: 'Colors by ink: <strong>cyan + magenta + yellow</strong> — mixing gives near-black. This is the world of printing.' },
+  { id: 'k-res', lecture: 'lect4', term: 'Resolution', brief: 'The number of pixels in an image — <strong>more = finer detail</strong>, but a bigger file.' },
+  { id: 'k-sample', lecture: 'lect4', term: 'Sampling', brief: 'Reading the sound value <strong>many times per second</strong> — higher rate = more detail and bigger file.' },
+  { id: 'k-rate', lecture: 'lect4', term: 'Sample rate', brief: 'Nyquist rule: <strong>more than double the highest frequency</strong> to rebuild the sound correctly (CD: 44.1 kHz).' },
+  { id: 'k-quant', lecture: 'lect4', term: 'Quantization', brief: 'Rounding each sample <strong>to the nearest stored value</strong> — 16-bit depth is more realistic than 8-bit.' },
+  { id: 'k-bandwidth', lecture: 'lect4', term: 'Bitrate (bandwidth)', brief: 'How many bits per second for audio/video — <strong>higher quality = bigger file = more data use</strong>.' },
+  { id: 'k-lossless', lecture: 'lect4', term: 'Lossless compression', brief: 'Unpacking gives back <strong>the exact original</strong> — required for texts and important files.' },
+  { id: 'k-lossy', lecture: 'lect4', term: 'Lossy compression', brief: 'It throws away <strong>details the eye and ear barely notice</strong> — JPG/MP3: smaller size at acceptable quality.' },
+  { id: 'k-huffman', lecture: 'lect4', term: 'Huffman coding', brief: '<strong>Short codes for common symbols, long for rare</strong> — and no code is the start of a longer one.' },
+  { id: 'k-idesign', lecture: 'lect4', term: 'Information design', brief: 'Organizing data <strong>so the reader gets the message fast</strong> — contrast, size, and logical order that respect the eye.' }
 ];
 
 const REVISION_CROSS_EN = [
@@ -131,6 +170,45 @@ const REVISION_CROSS_EN = [
     ],
     answer: 1,
     explain: 'Forced "agree or lose out" consent is unethical, and opt-in requires each permission to be justified and optional.'
+  },
+  {
+    id: 'rev-7',
+    difficulty: 'medium',
+    question: 'You get a text: "Your account closes in 24 hours - re-login here" with a link. Combine security thinking (L3) with information verification (L1): what is the right response?',
+    options: [
+      'Log in from the link immediately so the account is not closed - verification matters only later.',
+      'Notice that urgency is a manipulation tool, inspect sender and link critically, and open the site yourself without the link if in doubt.',
+      'Type your password into the reply assuming the bank stores it safely - HTTPS makes any message safe.',
+      'Share the message in the school group saying "definitely phishing" without any inspection - sharing is the fastest protection.'
+    ],
+    answer: 1,
+    explain: 'The same verification rules apply to messages: urgency = manipulation, inspect the source, and log in directly on the official site, never via the link.'
+  },
+  {
+    id: 'rev-8',
+    difficulty: 'hard',
+    question: 'Someone calls claiming to be from the bank: "We are stopping a theft on your account - send me the verification code you received". What attack is this, and what is the right response?',
+    options: [
+      'An official procedure - send the code quickly so the account is secured.',
+      'Social engineering - hang up, call the bank yourself from an official number; nobody ever asks for your verification code.',
+      'Ransomware - the device encrypts everything on its own from the system.',
+      'A system notice - the code is sent to the authorities automatically without you.'
+    ],
+    answer: 1,
+    explain: 'Banks never ask for your verification code on a call. Urgency and fear are social engineering tools: stop, and call an official number from the bank site.'
+  },
+  {
+    id: 'rev-9',
+    difficulty: 'medium',
+    question: 'You have a weekly backup on a flash drive that stays plugged into the computer. How safe is this against ransomware?',
+    options: [
+      'Ready - a weekly copy is enough, and a plugged drive protects it even more.',
+      'Not ready - ransomware encrypts the plugged drive same as the machine; you need a disconnected copy outside the place (3-2-1).',
+      'Not needed - ransomware has nothing to do with backups at all.',
+      'Almost ready - double the copies to twice a day and everything is guaranteed.'
+    ],
+    answer: 1,
+    explain: 'Ransomware encrypts every available connected medium. The only confirmed protection: a copy that is disconnected, not plugged in, and stored elsewhere.'
   }
 ];
 
@@ -145,7 +223,15 @@ const REVISION_TF_EN = [
   { id: 'tf-5', src: 'lect2', difficulty: 'medium', statement: 'You must register your story at the patent office before copyright protects it.', answer: false, explain: 'Non-formality: copyright starts automatically at creation. Only industrial property needs registration.' },
   { id: 'tf-6', src: 'lect2', difficulty: 'easy', statement: 'In an opt-out system, nothing is collected until you actively agree first.', answer: false, explain: 'That describes opt-in. Opt-out is active by default until you object.' },
   { id: 'tf-7', src: 'combined', difficulty: 'medium', statement: 'Sharing a classmate\'s photo without permission is fine as long as your account is private.', answer: false, explain: 'Image rights need explicit consent regardless of account privacy — and forwarding still spreads it.' },
-  { id: 'tf-8', src: 'combined', difficulty: 'hard', statement: 'A CC BY-NC photo may be used in a paid online course as long as you credit the photographer.', answer: false, explain: 'NC bans commercial use. Credit (BY) is not enough — a paid course needs a license that allows commercial use.' }
+  { id: 'tf-8', src: 'combined', difficulty: 'hard', statement: 'A CC BY-NC photo may be used in a paid online course as long as you credit the photographer.', answer: false, explain: 'NC bans commercial use. Credit (BY) is not enough — a paid course needs a license that allows commercial use.' },
+  { id: 'tf-9', src: 'lect3', difficulty: 'medium', statement: 'Any site with HTTPS means the site itself is trustworthy and safe.', answer: false, explain: 'HTTPS encrypts the path only - the site itself can be phishing. The padlock is not a trust badge.' },
+  { id: 'tf-10', src: 'lect3', difficulty: 'easy', statement: 'If support staff call and ask for your verification code, it is fine to give it.', answer: false, explain: 'The verification code is secret - neither banks nor official staff ever ask for it on a call.' },
+  { id: 'tf-11', src: 'lect3', difficulty: 'medium', statement: 'Rule 3-2-1 means: 3 copies on 2 different media and 1 copy outside the place.', answer: true, explain: 'It is the golden backup rule - you need one copy that is separated and not connected to protect you from ransomware too.' },
+  { id: 'tf-12', src: 'lect3', difficulty: 'easy', statement: 'It is better to postpone device updates so the device stays as it is.', answer: false, explain: 'Updates close the security holes - turn on auto-update and stop delaying.' },
+  { id: 'tf-13', src: 'lect4', difficulty: 'easy', statement: 'A byte = 8 bits, and 8 bits give 256 different combinations.', answer: true, explain: '2^8 = 256 - the base rule behind storing letters and symbols in every device.' },
+  { id: 'tf-14', src: 'lect4', difficulty: 'medium', statement: 'RGB is used in printing, and CMY in screens.', answer: false, explain: 'It is the other way around: RGB for screens (light), CMY for printing (ink).' },
+  { id: 'tf-15', src: 'lect4', difficulty: 'medium', statement: 'Lossless compression discards details the eye and ear barely notice.', answer: false, explain: 'That describes lossy compression. Lossless returns the exact original - required for texts and important files.' },
+  { id: 'tf-16', src: 'lect4', difficulty: 'medium', statement: 'ASCII supports only 128 symbols, while Unicode supports all world languages.', answer: true, explain: 'ASCII covers Latin letters, digits, and signs - Unicode extends encoding to every language, like Arabic.' }
 ];
 
 /* ============================================================
@@ -157,7 +243,12 @@ const REVISION_COMPLETE_EN = [
   { id: 'cp-3', src: 'lect2', difficulty: 'medium', sentence: 'A patent lasts ___ from the filing date.', options: ['10 years', '7 years', '50 years', '20 years'], answer: 3, explain: 'Patents: 20 years. Utility models: 7. Trademarks: 10, renewable forever.' },
   { id: 'cp-4', src: 'lect2', difficulty: 'medium', sentence: 'The Creative Commons badge that bans commercial use is ___.', options: ['BY', 'SA', 'ND', 'NC'], answer: 3, explain: 'NC = non-commercial. BY = credit, ND = no changes, SA = same license.' },
   { id: 'cp-5', src: 'combined', difficulty: 'hard', sentence: 'Posting someone\'s photo without permission violates their ___.', options: ['patent rights', 'neighboring rights', 'image rights', 'trademark'], answer: 2, explain: 'Image rights: no photo or publishing of a person without explicit consent.' },
-  { id: 'cp-6', src: 'combined', difficulty: 'hard', sentence: 'Translating a novel and selling it without permission is ___.', options: ['fair use', 'lawful quotation', 'public domain', 'copyright infringement'], answer: 3, explain: 'Translation is an exclusive economic right of the original author.' }
+  { id: 'cp-6', src: 'combined', difficulty: 'hard', sentence: 'Translating a novel and selling it without permission is ___.', options: ['fair use', 'lawful quotation', 'public domain', 'copyright infringement'], answer: 3, explain: 'Translation is an exclusive economic right of the original author.' },
+  { id: 'cp-7', src: 'lect3', difficulty: 'medium', sentence: 'The security pillar saying nobody changes data without permission is ___.', options: ['confidentiality', 'integrity', 'availability', 'encoding'], answer: 1, explain: 'Confidentiality: not seen. Integrity: not changed. Availability: keeps working.' },
+  { id: 'cp-8', src: 'lect3', difficulty: 'medium', sentence: 'The biggest sign of social engineering in messages is ___.', options: ['urgency and fear', 'long links', 'typos', 'attached videos'], answer: 0, explain: 'Urgency and fear shut down your thinking - exactly the environment an attacker wants.' },
+  { id: 'cp-9', src: 'lect4', difficulty: 'easy', sentence: 'The smallest storage unit in any device is the ___.', options: ['byte', 'bit', 'pixel', 'hertz'], answer: 1, explain: 'A bit = 0 or 1. A byte = 8 bits, enough for one letter.' },
+  { id: 'cp-10', src: 'lect4', difficulty: 'medium', sentence: 'The encoding system that supports all world languages is ___.', options: ['ASCII', 'Unicode', 'Huffman', 'Morse'], answer: 1, explain: 'ASCII is Latin-only, 128 symbols - Unicode covers Arabic and much more.' },
+  { id: 'cp-11', src: 'combined', difficulty: 'hard', sentence: 'Encoding an Arabic caption and the color values of a poster uses ___ together.', options: ['ASCII and RGB', 'Unicode and RGB', 'Morse and CMY', 'Huffman and ASCII'], answer: 1, explain: 'Unicode encodes the Arabic text, RGB encodes the colors - the code system depends on the data type.' }
 ];
 
 /* ============================================================
@@ -169,7 +260,9 @@ const REVISION_WRITTEN_EN = [
   { id: 'wr-3', topics: 'Opt-in vs Opt-out', prompt: 'A game asks for contacts + microphone + always-on location for a discount. Explain the problem using both information ethics and opt-in rules, then describe the correct design.', model: 'Coercive consent is unethical; each permission needs a clear "why" and must be optional. Correct design: ask per feature, explain why, work fully without unrelated permissions.' },
   { id: 'wr-4', topics: 'Industrial property', prompt: 'You invented a new bottle cap mechanism, designed a unique bottle shape, and created a brand logo. Which right protects each part, and what must you do first?', model: 'Mechanism idea may suit a patent or utility model; the shape is an industrial design; the logo is a trademark. First step for all three: file and register (formality principle) — no filing, no rights.' },
   { id: 'wr-5', topics: 'Verification + CC', prompt: 'You found an image online for the school magazine. Write the full workflow: how do you verify it, and how do you use it legally?', model: 'Verify: cross-check the source, author, and claim. License: read the CC badge (BY/NC/ND/SA) and obey it — credit always, no commercial use under NC, no edits under ND, same license under SA.' },
-  { id: 'wr-6', topics: 'Disinformation + Bullying', prompt: 'A rumor names a specific student as a hacker and classmates start mocking them. Write your response plan combining both chapters.', model: 'Do not amplify; verify with school administration; support the targeted student privately; report the original post; refuse to forward or laugh along.' }
+  { id: 'wr-6', topics: 'Disinformation + Bullying', prompt: 'A rumor names a specific student as a hacker and classmates start mocking them. Write your response plan combining both chapters.', model: 'Do not amplify; verify with school administration; support the targeted student privately; report the original post; refuse to forward or laugh along.' },
+  { id: 'wr-7', topics: 'Digital security', prompt: 'A school computer stores grades and runs class software. Design a simple security plan: passwords, updates, backups, and suspicious messages.', model: 'A different password for every account plus multi-factor authentication. Auto-updates on. Backups on rule 3-2-1: 3 copies, 2 media, one outside the place and disconnected. Any message pushing urgency or asking for a code: stop and call the official number from the organization site.' },
+  { id: 'wr-8', topics: 'Information design', prompt: 'You are making an infographic of exam results in the school magazine: explain how raw data becomes readable through grouping and design.', model: 'Numbers are raw data. Grouping them per class builds information. Design turns it into instant knowledge: a clear visual comparison, consistent color, and logical order that respects the reader eye.' }
 ];
 
 if (typeof window !== 'undefined') {

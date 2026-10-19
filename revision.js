@@ -9,21 +9,35 @@ const ASSET_V = 'v=6';
 
 /* Category of each keyword id (language-independent) */
 const KW_CATS = {
+  // Lecture 1 — information & ethics
   'k-data': 'data', 'k-info': 'data', 'k-know': 'data',
   'k-persist': 'traits', 'k-repro': 'traits', 'k-propa': 'traits',
   'k-primary': 'sources', 'k-secondary': 'sources', 'k-cross': 'sources',
   'k-expr': 'media', 'k-trans': 'media', 'k-rec': 'media', 'k-medialit': 'media',
   'k-ethics': 'ethics', 'k-copyright': 'ethics', 'k-bully': 'ethics', 'k-geo': 'ethics',
   'k-disinfo': 'ethics', 'k-idtheft': 'ethics', 'k-addict': 'ethics',
+  // Lecture 2 — privacy & IP
   'k-four': 'privacy', 'k-idcode': 'privacy', 'k-sensitive': 'privacy', 'k-privacy': 'privacy',
   'k-image': 'privacy', 'k-publicity': 'privacy', 'k-policy': 'privacy', 'k-mark': 'privacy',
   'k-optin': 'privacy', 'k-optout': 'privacy',
   'k-indprop': 'ip', 'k-formality': 'ip', 'k-patent': 'ip', 'k-utility': 'ip',
   'k-design': 'ip', 'k-trademark': 'ip',
   'k-nonform': 'copy', 'k-moral': 'copy', 'k-economic': 'copy', 'k-pubdom': 'copy',
-  'k-neighbor': 'copy', 'k-fairuse': 'copy', 'k-quote': 'copy', 'k-cc': 'copy'
+  'k-neighbor': 'copy', 'k-fairuse': 'copy', 'k-quote': 'copy', 'k-cc': 'copy',
+  // Lecture 3 — security & safety
+  'k-cia': 'security', 'k-cia-i': 'security', 'k-cia-c': 'security', 'k-cia-a': 'security',
+  'k-password': 'security', 'k-mfa': 'security', 'k-phish': 'security',
+  'k-soceng': 'security', 'k-encrypt': 'security', 'k-sig': 'security', 'k-tls': 'security',
+  'k-firewall': 'security', 'k-malware': 'security', 'k-ransom': 'security',
+  'k-backup': 'security', 'k-update': 'security', 'k-firstaid': 'security',
+  // Lecture 4 — digital representation
+  'k-analog': 'digital', 'k-digit': 'digital', 'k-bit': 'digital', 'k-byte': 'digital',
+  'k-bin': 'digital', 'k-hex': 'digital', 'k-ascii': 'digital', 'k-unicode': 'digital',
+  'k-pixel': 'nmedia', 'k-rgb': 'nmedia', 'k-cmy': 'nmedia', 'k-res': 'nmedia',
+  'k-sample': 'nmedia', 'k-rate': 'nmedia', 'k-quant': 'nmedia', 'k-bandwidth': 'nmedia',
+  'k-lossless': 'nmedia', 'k-lossy': 'nmedia', 'k-huffman': 'nmedia', 'k-idesign': 'nmedia'
 };
-const CAT_ORDER = ['data', 'traits', 'sources', 'media', 'ethics', 'privacy', 'ip', 'copy'];
+const CAT_ORDER = ['data', 'traits', 'sources', 'media', 'ethics', 'privacy', 'ip', 'copy', 'security', 'digital', 'nmedia'];
 
 const revState = {
   keywords: [],
@@ -34,6 +48,8 @@ const revState = {
   complete: [],
   bank1: [],
   bank2: [],
+  bank3: [],
+  bank4: [],
   filter: 'all',
   search: '',
   questions: [],
@@ -42,7 +58,7 @@ const revState = {
   wrong: 0,
   skipped: 0,
   answered: false,
-  perSource: { lect1: { c: 0, t: 0 }, lect2: { c: 0, t: 0 }, combined: { c: 0, t: 0 } },
+  perSource: { lect1: { c: 0, t: 0 }, lect2: { c: 0, t: 0 }, lect3: { c: 0, t: 0 }, lect4: { c: 0, t: 0 }, combined: { c: 0, t: 0 } },
   perType: { mcq: { c: 0, t: 0 }, tf: { c: 0, t: 0 }, complete: { c: 0, t: 0 } },
   collapsedCats: new Set()
 };
@@ -66,6 +82,10 @@ async function ensureRevLoaded() {
     ['LECT1_QUIZBANK_EN', 'quizbank-lect1-en.js'],
     ['LECT2_QUIZBANK_AR', 'quizbank-lect2-ar.js'],
     ['LECT2_QUIZBANK_EN', 'quizbank-lect2-en.js'],
+    ['LECT3_QUIZBANK_AR', 'quizbank-lect3-ar.js'],
+    ['LECT3_QUIZBANK_EN', 'quizbank-lect3-en.js'],
+    ['LECT4_QUIZBANK_AR', 'quizbank-lect4-ar.js'],
+    ['LECT4_QUIZBANK_EN', 'quizbank-lect4-en.js'],
     ['REVISION_TECH', 'revision-tech.js']
   ];
   for (const [varName, file] of jobs) {
@@ -127,6 +147,8 @@ function reloadLangData() {
   revState.written = ar ? (g.REVISION_WRITTEN_AR || []) : (g.REVISION_WRITTEN_EN || []);
   revState.bank1 = ar ? (g.LECT1_QUIZBANK_AR || []) : (g.LECT1_QUIZBANK_EN || []);
   revState.bank2 = ar ? (g.LECT2_QUIZBANK_AR || []) : (g.LECT2_QUIZBANK_EN || []);
+  revState.bank3 = ar ? (g.LECT3_QUIZBANK_AR || []) : (g.LECT3_QUIZBANK_EN || []);
+  revState.bank4 = ar ? (g.LECT4_QUIZBANK_AR || []) : (g.LECT4_QUIZBANK_EN || []);
   revState.tech = g.REVISION_TECH || [];
 }
 
@@ -181,11 +203,12 @@ function renderKeywords() {
     items.forEach(k => {
       const card = document.createElement('div');
       card.className = 'rev-kw-card';
-      const tagLabel = k.lecture === 'lect1' ? tOrEn('revSrcL1') : tOrEn('revSrcL2');
+      const isSolid = k.lecture === 'lect2' || k.lecture === 'lect4';
+      const tagLabel = tOrEn('revSrc' + k.lecture.slice(-1).toUpperCase());
       card.innerHTML = `
         <div class="rev-kw-top">
           <strong class="rev-kw-term">${k.term}</strong>
-          <span class="chip ${k.lecture === 'lect1' ? '' : 'chip-solid'} rev-kw-tag">${tagLabel}</span>
+          <span class="chip ${isSolid ? 'chip-solid' : ''} rev-kw-tag">${tagLabel}</span>
         </div>
         <p class="rev-kw-brief">${k.brief}</p>
       `;
@@ -302,14 +325,18 @@ function typeLabel(t) {
 function srcLabel(src) {
   if (src === 'lect1') return tOrEn('revSrcL1');
   if (src === 'lect2') return tOrEn('revSrcL2');
+  if (src === 'lect3') return tOrEn('revSrcL3');
+  if (src === 'lect4') return tOrEn('revSrcL4');
   return tOrEn('revSrcCombined');
 }
 
 function startRevQuiz() {
   expandSection('revQuizSection');
   const pool = [
-    ...sample(revState.bank1, 6).map(q => ({ ...q, src: 'lect1', qtype: 'mcq' })),
-    ...sample(revState.bank2, 6).map(q => ({ ...q, src: 'lect2', qtype: 'mcq' })),
+    ...sample(revState.bank1, 4).map(q => ({ ...q, src: 'lect1', qtype: 'mcq' })),
+    ...sample(revState.bank2, 4).map(q => ({ ...q, src: 'lect2', qtype: 'mcq' })),
+    ...sample(revState.bank3, 4).map(q => ({ ...q, src: 'lect3', qtype: 'mcq' })),
+    ...sample(revState.bank4, 4).map(q => ({ ...q, src: 'lect4', qtype: 'mcq' })),
     ...sample(revState.cross, 4).map(q => ({ ...q, src: 'combined', qtype: 'mcq' })),
     ...sample(revState.tf, 6).map(q => ({ ...q, qtype: 'tf' })),
     ...sample(revState.complete, 4).map(q => ({ ...q, qtype: 'complete' }))
@@ -320,7 +347,7 @@ function startRevQuiz() {
   revState.wrong = 0;
   revState.skipped = 0;
   revState.answered = false;
-  revState.perSource = { lect1: { c: 0, t: 0 }, lect2: { c: 0, t: 0 }, combined: { c: 0, t: 0 } };
+  revState.perSource = { lect1: { c: 0, t: 0 }, lect2: { c: 0, t: 0 }, lect3: { c: 0, t: 0 }, lect4: { c: 0, t: 0 }, combined: { c: 0, t: 0 } };
   revState.perType = { mcq: { c: 0, t: 0 }, tf: { c: 0, t: 0 }, complete: { c: 0, t: 0 } };
 
   document.getElementById('revPicker').classList.add('hidden');
@@ -475,7 +502,7 @@ function finishRevQuiz() {
       ? `${revState.correct} من ${total} صحيحة`
       : `${revState.correct} / ${total} correct`;
   document.getElementById('revResultSub').textContent =
-    currentLang === 'ar' ? 'مراجعة المحاضرتين الأولى والتانية' : 'Lectures 1 + 2 combined revision';
+    currentLang === 'ar' ? 'مراجعة المحاضرات كلها' : 'All-lectures combined revision';
   document.getElementById('revResultScore').textContent = pct + '%';
   document.getElementById('revCorrect').textContent = String(revState.correct).padStart(2, '0');
   document.getElementById('revWrong').textContent = String(revState.wrong).padStart(2, '0');
@@ -483,7 +510,7 @@ function finishRevQuiz() {
 
   const breakdown = document.getElementById('revBreakdown');
   breakdown.innerHTML = '';
-  [['lect1', 6], ['lect2', 6], ['combined', 4]].forEach(([src]) => {
+  [['lect1'], ['lect2'], ['lect3'], ['lect4'], ['combined']].forEach(([src]) => {
     const stat = revState.perSource[src];
     const cell = document.createElement('div');
     cell.className = 'result-stat src-' + src;

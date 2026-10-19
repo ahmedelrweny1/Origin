@@ -195,7 +195,10 @@ function renderList() {
     ? (EXAMS.length === 1 ? 'امتحان واحد' : EXAMS.length === 2 ? 'امتحانان' : `${EXAMS.length} امتحانات`)
     : (EXAMS.length === 1 ? '01 exam' : `0${EXAMS.length} exams`);
 
-  list.innerHTML = EXAMS.map((exam) => {
+  list.innerHTML = `
+    <label class="gate-name" id="examNameRow"><span>${tOrEn('exNameLabel')}</span>
+      <input type="text" id="stName" maxlength="60" autocomplete="name" value="${esc(savedName())}" placeholder="Ahmed / أحمد">
+    </label>` + EXAMS.map((exam) => {
     const cfg = getTConfig(exam);
     const winMeta = winValidT(cfg) ? `<span>· 🗓 ${winLineT(cfg)}</span>` : '';
     const attMeta = cfg.attemptLimit === 1 ? `<span>· 🎲 ${tOrEn('txOneAttempt')}</span>` : '';
@@ -218,10 +221,7 @@ function renderList() {
       </div>
       <div class="texam-actions" id="cardCta-${exam.id}"></div>
     </article>`;
-  }).join('') + `
-    <label class="gate-name"><span>${tOrEn('exNameLabel')}</span>
-      <input type="text" id="stName" maxlength="60" autocomplete="name" value="${esc(savedName())}" placeholder="Ahmed / أحمد">
-    </label>`;
+  }).join('');
 
   let deb = null;
   document.getElementById('stName').addEventListener('input', (e) => {
@@ -327,37 +327,38 @@ function updateForName(exam) {
   card.classList.toggle('resume', inProgress);
 
   let statusHtml;
-  if (!okName) {
-    statusHtml = `<span class="texam-status st-new">✦ ${tOrEn('exNameNeed')}</span>`;
-  } else if (inProgress) {
-    statusHtml = `<span class="texam-status st-inprogress">⏳ ${tOrEn('txInProgress')} · <span id="inprogLeft-${exam.id}">${fmtMs(state.deadlineEpoch - now)}</span> ${tOrEn('txLeft')}</span>`;
+  let cta;
+  const runHref = `${exam.runUrl}?n=${encodeURIComponent(name)}`;
+
+  // Window state comes first — it is true regardless of the typed name.
+  if (ws === 'ended') {
+    statusHtml = `<span class="texam-status st-done">🔒 ${tOrEn('txWindowEnded')}</span>`;
+    cta = `<a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>`;
   } else if (ws === 'upcoming') {
     statusHtml = `<span class="texam-status st-new">🗓 ${tOrEn('txNotOpenYet')} · ${tOrEn('txOpensIn')} <span id="winCountdown-${exam.id}">${fmtCountdown(cfg.windowStart - now)}</span></span>`;
-  } else if (ws === 'ended') {
-    statusHtml = `<span class="texam-status st-done">🔒 ${tOrEn('txWindowEnded')}</span>`;
-  } else if (left <= 0) {
-    statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txNoAttempts')}</span>`;
-  } else if (ownReport) {
-    statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txBest')}: ${report.score} / ${report.total}${report.passed ? ' · ' + tOrEn('txPassed') : ''}</span>`;
-  } else {
-    statusHtml = `<span class="texam-status st-new">✦ ${tOrEn('txNew')}</span>`;
-  }
-  statusEl.innerHTML = statusHtml;
-
-  const canStart = okName && ws === 'open' && left > 0 && !inProgress && !orphaned;
-  const runHref = `${exam.runUrl}?n=${encodeURIComponent(name)}`;
-  let cta;
-  if (!okName) {
+    cta = `<button class="btn btn-primary" disabled>${okName ? tOrEn('exStart') : tOrEn('exStart')}</button>`;
+  } else if (!okName) {
+    statusHtml = `<span class="texam-status st-new">✦ ${tOrEn('exNameNeed')}</span>`;
     cta = online
       ? `<a class="btn btn-primary btn-arrow" href="login.html?next=${encodeURIComponent('exams.html')}">${tOrEn('tabLogin')}</a>`
       : `<button class="btn btn-primary" disabled>${tOrEn('exStart')}</button>`;
-  } else if (inProgress || orphaned) {
+  } else if (inProgress) {
+    statusHtml = `<span class="texam-status st-inprogress">⏳ ${tOrEn('txInProgress')} · <span id="inprogLeft-${exam.id}">${fmtMs(state.deadlineEpoch - now)}</span> ${tOrEn('txLeft')}</span>`;
     cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exResume')}</a>`;
-  } else if (canStart) {
-    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${ownReport ? tOrEn('exRetake') : tOrEn('exStart')}</a>`;
-  } else {
+  } else if (orphaned) {
+    statusHtml = `<span class="texam-status st-inprogress">⏳ ${tOrEn('txInProgress')}</span>`;
+    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exResume')}</a>`;
+  } else if (left <= 0) {
+    statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txNoAttempts')}</span>`;
     cta = `<a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>`;
+  } else if (ownReport) {
+    statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txBest')}: ${report.score} / ${report.total}${report.passed ? ' · ' + tOrEn('txPassed') : ''}</span>`;
+    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exRetake')}</a>`;
+  } else {
+    statusHtml = `<span class="texam-status st-new">✦ ${tOrEn('txNew')}</span>`;
+    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exStart')}</a>`;
   }
+  statusEl.innerHTML = statusHtml;
   ctaEl.innerHTML = cta;
 }
 
@@ -436,27 +437,7 @@ function renderReports(reportsToShow) {
       renderReports(reportsToShow);
     });
   });
-}
-
-function createParticles() {
-  const container = document.getElementById('particles');
-  if (!container) return;
-  container.innerHTML = '';
-  for (let i = 0; i < 40; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random() * 2 + 1;
-    p.style.width = `${size}px`;
-    p.style.height = `${size}px`;
-    p.style.left = `${Math.random() * 100}%`;
-    p.style.top = `${Math.random() * 100}%`;
-    p.style.setProperty('--duration', `${Math.random() * 4 + 3}s`);
-    p.style.setProperty('--delay', `${Math.random() * 5}s`);
-    container.appendChild(p);
-  }
-}
-
-function updateSyncNote() {
+}function updateSyncNote() {
   let pending = 0;
   try {
     if (typeof Remote !== 'undefined') {
@@ -521,7 +502,7 @@ async function bootRemoteList() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderList();
-  createParticles();
+  
   bootRemoteList();
 });
 

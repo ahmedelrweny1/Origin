@@ -438,18 +438,18 @@ html[dir="rtl"] .quiz-card-feedback {
 .result-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: var(--rule-medium);
   border: var(--rule-medium) solid var(--ink);
+  background: var(--ink);
 }
 
 .result-stat {
   display: grid;
   gap: 0.6rem;
   padding: 1.4rem 1rem;
-  border-right: var(--rule-medium) solid var(--ink);
+  background: var(--paper);
+  text-align: center;
 }
-
-.result-stat:last-child { border-right: none; }
 
 .result-stat .mono { color: var(--c-red); }
 .result-stat strong {
@@ -505,8 +505,9 @@ html[dir="rtl"] .quiz-card-feedback {
 .exam-overview {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: var(--rule-medium);
   border: var(--rule-medium) solid var(--ink);
+  background: var(--ink);
   margin: 1.5rem 0;
 }
 
@@ -514,9 +515,9 @@ html[dir="rtl"] .quiz-card-feedback {
   display: grid;
   gap: 0.5rem;
   padding: 1.2rem 1rem;
-  border-right: var(--rule-medium) solid var(--ink);
+  background: var(--paper);
+  text-align: center;
 }
-.exam-stat:last-child { border-right: none; }
 .exam-stat .mono { color: var(--c-red); }
 .exam-stat strong {
   font-family: var(--font-display);
@@ -714,8 +715,9 @@ html[dir="rtl"] .diff-chip { letter-spacing: 0.02em; }
 .result-breakdown {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 0;
+  gap: var(--rule-medium);
   border: var(--rule-medium) solid var(--ink);
+  background: var(--ink);
   margin-top: 0;
 }
 
@@ -723,9 +725,9 @@ html[dir="rtl"] .diff-chip { letter-spacing: 0.02em; }
   display: grid;
   gap: 0.6rem;
   padding: 1.2rem 1rem;
-  border-right: var(--rule-medium) solid var(--ink);
+  background: var(--paper);
+  text-align: center;
 }
-.result-stat:last-child { border-right: none; }
 .result-stat .mono { color: var(--c-red); }
 .result-stat strong {
   font-family: var(--font-display);
@@ -752,9 +754,6 @@ html[dir="rtl"] .diff-chip { letter-spacing: 0.02em; }
   .stage-pick-glyph { display: none; }
   .result-grid,
   .result-breakdown { grid-template-columns: 1fr; }
-  .result-stat,
-  .result-breakdown .result-stat { border-right: none; border-bottom: var(--rule-medium) solid var(--ink); }
-  .result-stat:last-child { border-bottom: none; }
 }
 /* ============================================================
    Quiz cards on landing page (extend journey-card layout)

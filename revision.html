@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="gate.js?v=6"></script>
+  <script src="gate.js?v=7"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Revision — Lectures 1 + 2 | Origin Atlas</title>
   <meta name="description" content="Combined revision of the first two lectures: key terms with brief explanations plus a mixed quiz. AR / EN bilingual.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="atlas.css?v=5">
-  <link rel="stylesheet" href="quiz.css?v=5">
-  <link rel="stylesheet" href="revision.css?v=5">
-  <link rel="stylesheet" href="rtl.css?v=5">
-  <script src="i18n.js?v=5"></script>
+  <link rel="stylesheet" href="atlas.css?v=7">
+  <link rel="stylesheet" href="quiz.css?v=7">
+  <link rel="stylesheet" href="revision.css?v=7">
+  <link rel="stylesheet" href="rtl.css?v=7">
+  <script src="i18n.js?v=7"></script>
 </head>
 <body>
 
@@ -28,7 +28,7 @@
     </div>
     <div class="progress-row">
       <div class="progress-bar"><div class="progress-fill" id="revProgressFill"></div></div>
-      <span class="progress-label" id="revProgressLabel">00 / 20</span>
+      <span class="progress-label" id="revProgressLabel">00 / 30</span>
     </div>
   </header>
 
@@ -36,8 +36,8 @@
 
     <section class="picker-head" style="margin-bottom:2rem;">
       <span class="mono" data-i18n="revEyebrow">Combined revision session</span>
-      <h1 data-i18n="revTitle">Lectures 1 + 2, in one place.</h1>
-      <p class="muted" data-i18n="revSubtitle">First revise the key terms with their brief explanations, then test yourself with 20 mixed questions from both lectures.</p>
+      <h1 data-i18n="revTitle">Every lecture, in one place.</h1>
+      <p class="muted" data-i18n="revSubtitle">First revise the key terms with their brief explanations, then test yourself with 30 mixed questions from all lectures.</p>
     </section>
 
     <!-- Part 1: Keywords -->
@@ -53,6 +53,8 @@
           <button class="diff-chip active" data-filter="all"><span data-i18n="diff_all">All</span></button>
           <button class="diff-chip" data-filter="lect1"><span data-i18n="revFilterL1">Lecture 1</span></button>
           <button class="diff-chip" data-filter="lect2"><span data-i18n="revFilterL2">Lecture 2</span></button>
+          <button class="diff-chip" data-filter="lect3"><span data-i18n="revFilterL3">Lecture 3</span></button>
+          <button class="diff-chip" data-filter="lect4"><span data-i18n="revFilterL4">Lecture 4</span></button>
         </div>
         <div class="rev-tools-row">
           <input type="search" id="revSearch" class="rev-search" data-i18n-ph="revSearchPh" placeholder="Search terms…">
@@ -83,15 +85,15 @@
     <section class="rev-section" id="revQuizSection">
       <div class="section-head">
         <span class="mono" data-i18n="revQuizLabel">Part 2 · Combined quiz</span>
-        <h2 data-i18n="revQuizTitle">26 questions, both lectures</h2>
-        <span class="mono faint">16 + 06 + 04</span>
+        <h2 data-i18n="revQuizTitle">30 questions, all lectures</h2>
+        <span class="mono faint">20 + 06 + 04</span>
       </div>
 
       <div class="sec-body">
       <div id="revPicker">
-        <p class="muted" data-i18n="revQuizDesc" style="margin-bottom:1.2rem;">Multiple-choice, true/false, and complete-the-sentence — sampled from both lectures plus combined questions. Shuffled every run.</p>
+        <p class="muted" data-i18n="revQuizDesc" style="margin-bottom:1.2rem;">Multiple-choice, true/false, and complete-the-sentence — sampled from every lecture plus combined questions. Shuffled every run.</p>
         <div class="rev-mix">
-          <span class="diff-mini diff-mini-easy" data-i18n="revMixMCQ">MCQ · 16</span>
+          <span class="diff-mini diff-mini-easy" data-i18n="revMixMCQ">MCQ · 20</span>
           <span class="diff-mini diff-mini-medium" data-i18n="revMixTF">True/False · 06</span>
           <span class="diff-mini diff-mini-creative" data-i18n="revMixComplete">Complete · 04</span>
         </div>
@@ -168,7 +170,7 @@
     <span class="mono" data-i18n="footerText">Made for curious minds · Intro to Computer Science</span>
   </footer>
 
-  <script src="journeys.js?v=5"></script>
-  <script src="revision.js?v=6"></script>
+  <script src="journeys.js?v=7"></script>
+  <script src="revision.js?v=7"></script>
 </body>
 </html>

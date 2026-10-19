@@ -173,8 +173,8 @@ async function renderQuizCards() {
         </div>
         <h3 class="journey-title">${title} · ${isAr ? 'بنك الأسئلة' : 'Practice Bank'}</h3>
         <p class="journey-desc">${isAr
-          ? '٥٢ سؤال موزعين على كل فصل وبكل المستويات (سهل/ متوسط/ صعب/ إبداعي). اختار فصل أو اعمل الكل مخلوط.'
-          : '52 questions across all chapters and all difficulties (Easy / Medium / Hard / Creative). Pick a chapter or do them all shuffled.'}</p>
+          ? `${quizCount} سؤال موزعين على كل فصل وبكل المستويات (سهل/ متوسط/ صعب/ إبداعي). اختار فصل أو اعمل الكل مخلوط.`
+          : `${quizCount} questions across all chapters and all difficulties (Easy / Medium / Hard / Creative). Pick a chapter or do them all shuffled.`}</p>
         <div class="journey-meta">
           <span>❓ ${quizCount} ${isAr ? 'سؤال' : 'questions'}</span>
           <span>· 🗺 ${stageCount} ${isAr ? 'محطة' : 'stages'}</span>
@@ -195,30 +195,9 @@ async function renderQuizCards() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderQuizCards();
-  createParticles();
+  
 });
 
 window.addEventListener('langChanged', () => {
   renderQuizCards();
 });
-
-function createParticles() {
-  const container = document.getElementById('particles');
-  if (!container) return;
-  container.innerHTML = '';
-  const count = 40;
-  for (let i = 0; i < count; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    const size = Math.random() * 2 + 1;
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.top = `${Math.random() * 100}%`;
-    const duration = Math.random() * 4 + 3;
-    const delay = Math.random() * 5;
-    particle.style.setProperty('--duration', `${duration}s`);
-    particle.style.setProperty('--delay', `${delay}s`);
-    container.appendChild(particle);
-  }
-}

@@ -391,6 +391,137 @@ html[dir="rtl"] .journey-arrow { display: inline-block; transform: rotate(180deg
 .journey-card.coming-soon .journey-arrow { display: none; }
 
 /* ============================================================
+   PROGRESS ROWS + CONTINUE BAND
+   ============================================================ */
+.journey-progress {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: var(--rule-medium) solid var(--rule);
+  display: grid;
+  gap: 0.55rem;
+}
+
+.journey-progress-bar {
+  height: 6px;
+  background: var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+
+.journey-progress-bar span {
+  display: block;
+  height: 100%;
+  background: var(--c-green);
+  transition: width 0.5s ease;
+}
+
+.journey-progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.journey-progress-meta > span:first-child {
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.journey-progress-chips {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.journey-progress-chip {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 0.18rem 0.5rem;
+  border: 1px solid var(--rule);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.journey-progress-chip.ok {
+  border-color: var(--c-green);
+  color: var(--c-green);
+}
+
+.journey-progress-chip.pending {
+  color: var(--ink-faint);
+}
+
+.continue-band {
+  margin: 0 0 2.5rem;
+  border: var(--rule-thick) solid var(--ink);
+  background: var(--paper);
+  display: block;
+}
+
+.continue-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.1rem 1.4rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.continue-card:hover .continue-cta { color: var(--c-green); transform: translateX(4px); }
+html[dir="rtl"] .continue-card:hover .continue-cta { transform: translateX(-4px); }
+
+.continue-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 130px;
+}
+
+.continue-progress .journey-progress-bar {
+  flex: 1;
+  width: 70px;
+}
+
+.continue-progress .mono {
+  font-size: 0.68rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.continue-body {
+  display: grid;
+  gap: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.continue-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.continue-cta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  transition: transform 0.25s ease, color 0.25s ease;
+  white-space: nowrap;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 .footer {
@@ -499,5 +630,8 @@ html[dir="rtl"] .journey-arrow { display: inline-block; transform: rotate(180deg
   .journey-index { min-width: 0; font-size: 1.2rem; padding-top: 0.25rem; }
   .journey-title { font-size: 1.35rem; }
   .journey-meta { color: var(--ink-soft); font-size: 0.68rem; gap: 0.8rem; }
+  .continue-card { flex-wrap: wrap; gap: 0.7rem; padding: 1rem 1.1rem; }
+  .continue-progress { width: 100%; }
+  .continue-title { white-space: normal; font-size: 1.15rem; }
 }
 .journey-card:nth-child(4) { animation-delay: 0.76s; }

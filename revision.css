@@ -253,6 +253,8 @@ html[dir="rtl"] .rev-cat-head {
 /* ---------- Source badges ---------- */
 .diff-badge.src-lect1 { border-color: var(--c-green); color: var(--c-green); }
 .diff-badge.src-lect2 { border-color: var(--c-amber); color: var(--c-amber); }
+.diff-badge.src-lect3 { border-color: var(--c-red); color: var(--c-red); }
+.diff-badge.src-lect4 { border-color: var(--c-red); color: var(--c-red); }
 .diff-badge.src-combined { border-color: var(--c-blue); color: var(--c-blue); }
 
 /* ---------- Question-type badges ---------- */
@@ -385,4 +387,6 @@ html[dir="rtl"] .rev-cat-head {
 
 .result-stat.src-lect1 .mono { color: var(--c-green); }
 .result-stat.src-lect2 .mono { color: var(--c-amber); }
+.result-stat.src-lect3 .mono { color: var(--c-red); }
+.result-stat.src-lect4 .mono { color: var(--c-red); }
 .result-stat.src-combined .mono { color: var(--c-blue); }

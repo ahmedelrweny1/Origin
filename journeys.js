@@ -124,6 +124,47 @@ const journeys = [
   }
 ];
 
+const JOURNEY_TOTALS = {
+  'info-and-ethics': 12,
+  'privacy-and-ip': 7,
+  'security-and-safety': 5,
+  'abacus-to-ai': 11,
+  'digital-data-representation': 11
+};
+
+const JOURNEY_VISITED_KEYS = {
+  'info-and-ethics': 'origin-lect1-progress',
+  'privacy-and-ip': 'origin-lect2-progress',
+  'security-and-safety': 'origin-lect3-progress',
+  'abacus-to-ai': 'origin-progress',
+  'digital-data-representation': 'origin-lect4-progress'
+};
+
+function getJourneyProgress(id) {
+  const total = JOURNEY_TOTALS[id] || 0;
+  let visited = 0;
+  try {
+    const raw = JSON.parse(localStorage.getItem(JOURNEY_VISITED_KEYS[id] || '') || 'null');
+    if (raw && Array.isArray(raw.visited)) visited = raw.visited.length;
+  } catch (e) {}
+  let examBest = 0;
+  let bankOpen = false;
+  try {
+    examBest = parseInt(localStorage.getItem(`origin-exam-${id}`) || '0', 10) || 0;
+    bankOpen = localStorage.getItem(`origin-unlock-${id}`) === '1';
+  } catch (e) {}
+  const started = visited > 0 || examBest > 0;
+  return {
+    visited: Math.min(visited, total),
+    total,
+    pct: total ? Math.round((Math.min(visited, total) / total) * 100) : 0,
+    examBest,
+    examPassed: examBest >= 7,
+    bankOpen,
+    started
+  };
+}
+
 const LECTURE_DATA_MAP = {
   'info-and-ethics': {
     stagesVar: 'LECT1_STAGES',
