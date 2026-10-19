@@ -91,13 +91,7 @@ const LECT3_STAGES_EN = [
           <div class="l3-flow-node">💾 USB<br><small>shared stick</small></div><span class="l3-flow-arrow danger">→</span>
           <div class="l3-flow-node lock">💻 Your PC<br><small>malware inside</small></div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/digital_ethics.jpg" alt="Security basics"><span>🔒 CIA: lock the doors</span></div>
-          <div class="l3-photo"><img src="assets/images/smartphone.jpg" alt="Infection vectors"><span>📲 Infection via web & mail</span></div>
-          <div class="l3-photo"><img src="assets/images/personal_data_vault.jpg" alt="Protect data"><span>🪪 Leaks break confidentiality</span></div>
-        </div>
-        <figcaption>Read the triangle clockwise: who sees → is it true → does it open. Every threat in 3-1 targets one corner.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "CIA = Confidentiality (authorized only) ⬝ Integrity (untampered) ⬝ Availability (accessible anytime) ⬝ Malware: virus, trojan, worm, spyware, ransomware ⬝ Cracker breaks in to steal/destroy.",
     funFact: "The term 'Trojan horse' comes from ancient Greek myth — just like the wooden horse of Troy, the malware pretends to be a gift while hiding attackers inside!",
@@ -202,13 +196,7 @@ const LECT3_STAGES_EN = [
             <div class="l3-mind-branch b-green"><strong>📲 Possession</strong><small>what you HAVE<br>IC card · SMS code</small></div>
           </div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/corporate_data_policy.jpg" alt="Access policy"><span>🚪 Access control first</span></div>
-          <div class="l3-photo"><img src="assets/images/smartphone.jpg" alt="SMS code"><span>📲 SMS = possession</span></div>
-          <div class="l3-photo"><img src="assets/images/info_characteristics.jpg" alt="Updates"><span>🛡️ Update + back up</span></div>
-        </div>
-        <figcaption>Two-factor = two DIFFERENT branches (e.g. knowledge + possession). Two-step = twice on the SAME branch.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "Strong password = long + mixed + no personal info + unique ⬝ Auth = knowledge / biometric / possession ⬝ Two-factor = 2 different factors ⬝ Firewall blocks outside attacks + inside leaks ⬝ Update + antivirus + backup.",
     funFact: "A 3-character password using 36 symbols (0-9 + a-z) has only 36³ = 46,656 combos — a computer cracks it in milliseconds. Add length and each character multiplies security by 36!",
@@ -307,13 +295,7 @@ const LECT3_STAGES_EN = [
           <div class="l3-pyramid-tier t2">📏 Security Standards<small>rules putting policy into practice</small></div>
           <div class="l3-pyramid-tier t3">📋 Procedures & Rules<small>concrete steps per audience</small></div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/smartphone.jpg" alt="Phone fraud"><span>📲 One tap can trap you</span></div>
-          <div class="l3-photo"><img src="assets/images/personal_data_vault.jpg" alt="Stolen data"><span>🪪 Stolen PINs & cards</span></div>
-          <div class="l3-photo"><img src="assets/images/digital_ethics.jpg" alt="Stay alert"><span>👀 Humans are the target</span></div>
-        </div>
-        <figcaption>Urgency + strange link + credential request = phishing. Verify through the official app, never the link.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "One-click = fake contract after 1 tap ⬝ Phishing = fake bank site steals PIN ⬝ Social engineering hacks humans (impersonation, shoulder surfing, dumpster diving) ⬝ Skimming clones cards ⬝ Policy = basic → standards → procedures.",
     funFact: "Dumpster diving is real: attackers reconstruct shredded-adjacent trash — bank statements, IDs, passwords — which is why cross-cut shredders exist!",
@@ -389,13 +371,7 @@ const LECT3_STAGES_EN = [
           <tr><th>Speed</th><td>⚡ Fast</td><td>🐢 Slower</td></tr>
           <tr><th>Key sharing</th><td>❌ Hard per sender</td><td>✅ Easy, public is free</td></tr>
         </table>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/data_info_knowledge.jpg" alt="Locked letter"><span>✉️ Plaintext → ciphertext</span></div>
-          <div class="l3-photo"><img src="assets/images/info_characteristics.jpg" alt="Key exchange"><span>🤝 Session key = hybrid</span></div>
-          <div class="l3-photo"><img src="assets/images/media_types.jpg" alt="Secure channel"><span>📡 Keys decide everything</span></div>
-        </div>
-        <figcaption>Padlock rule: anyone may snap it shut (public), only you hold the opener (private).</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "Plaintext → (key) → ciphertext → (key) → plaintext ⬝ Symmetric = same shared key, fast, hard to distribute ⬝ Public = public locks / private opens, slower, easy management ⬝ Hybrid = session key method.",
     funFact: "Public-key encryption is like a padlock anyone can snap shut but only you can open — you hand out open padlocks (public keys) freely and keep the only key (private key)!",
@@ -469,13 +445,7 @@ const LECT3_STAGES_EN = [
           <div class="l3-browser-bar"><span class="lock">🔒</span><span><span class="https">https://</span>bank.example.com/login</span></div>
           <div class="l3-browser-body">🏛️ <strong>CA</strong> vouched for the public key (digital certificate) → 📡 traffic wrapped in a <strong>session key</strong> → 🎣 fake sites fail the certificate check.</div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/info_characteristics.jpg" alt="Hash fingerprint"><span>#️⃣ Hash = one-way print</span></div>
-          <div class="l3-photo"><img src="assets/images/corporate_data_policy.jpg" alt="Certificate"><span>🏅 CA issues certificates</span></div>
-          <div class="l3-photo"><img src="assets/images/data_info_knowledge.jpg" alt="Secure browsing"><span>🔒 https = session key</span></div>
-        </div>
-        <figcaption>Match = authentic sender + untampered data. Mismatch = stop, do not install, re-fetch from the official source.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "Hash = one-way fingerprint ⬝ Sign = encrypt hash with sender's private key ⬝ Verify = decrypt with sender's public key + compare ⬝ CA issues digital certificates ⬝ SSL/TLS + https protects web traffic.",
     funFact: "That little 🔒 padlock in your browser means a CA vouched for the site's public key AND all traffic is wrapped in a super-fast session key — both Lec3 ideas working together!",

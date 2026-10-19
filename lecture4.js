@@ -488,24 +488,9 @@ function renderStage(i) {
       <p class="stage-tagline">${stage.tagline}</p>
     </div>
 
-    <div class="stage-grid">
-      <div class="stage-text">
-        ${stage.story.map(p => `<p>${p}</p>`).join("")}
-        ${widgetHTML}
-      </div>
-
-      <div class="stage-visual-container">
-        <div class="fact-grid">
-          <div class="fact-item highlight-takeaway">
-            <h4>🎯 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>
-            <p>${stage.takeaway}</p>
-          </div>
-          <div class="fact-item fun-fact">
-            <h4>💡 ${isAr ? "هل تعلم؟" : "Did You Know?"}</h4>
-            <p>${stage.funFact}</p>
-          </div>
-        </div>
-      </div>
+    <div class="stage-text">
+      ${stage.story.map(p => `<p>${p}</p>`).join("")}
+      ${widgetHTML}
     </div>
 
     <div class="stage-quiz">

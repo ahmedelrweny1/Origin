@@ -748,30 +748,15 @@ function renderStage(index) {
       <p class="stage-tagline">${stage.tagline}</p>
     </div>
 
-    <div class="stage-grid">
-      <div class="stage-text">
-        ${stage.story.map(item => {
-          const t = item.trim();
-          if (t.startsWith('<div') || t.startsWith('<ul') || t.startsWith('<ol') || t.startsWith('<blockquote') || t.startsWith('<section') || t.startsWith('<p')) {
-            return t;
-          }
-          return `<p class="story-lead">${t}</p>`;
-        }).join("")}
-        ${widgetHtml}
-      </div>
-
-      <div class="stage-visual-container">
-        <div class="fact-grid">
-          <div class="fact-item highlight-takeaway">
-            <h4>💡 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>
-            <p>${stage.takeaway}</p>
-          </div>
-          <div class="fact-item fun-fact">
-            <h4>🎉 ${isAr ? "معلومة إثرائية" : "Fun Fact"}</h4>
-            <p>${stage.funFact}</p>
-          </div>
-        </div>
-      </div>
+    <div class="stage-text">
+      ${stage.story.map(item => {
+        const t = item.trim();
+        if (t.startsWith('<div') || t.startsWith('<ul') || t.startsWith('<ol') || t.startsWith('<blockquote') || t.startsWith('<section') || t.startsWith('<p')) {
+          return t;
+        }
+        return `<p class="story-lead">${t}</p>`;
+      }).join("")}
+      ${widgetHtml}
     </div>
 
     <div class="stage-quiz" id="stageQuizBox">

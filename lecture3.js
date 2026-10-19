@@ -346,23 +346,9 @@ function renderStage(index) {
       <h2 class="stage-title"><span>${stage.glyph}</span> <span>${stage.title}</span></h2>
       <p class="stage-tagline">${stage.tagline}</p>
     </div>
-    <div class="stage-grid">
-      <div class="stage-text">
-        ${gridItems.map(renderItem).join("")}
-        ${widgetHtml}
-      </div>
-      <div class="stage-visual-container">
-        <div class="fact-grid">
-          <div class="fact-item highlight-takeaway">
-            <h4>💡 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>
-            <p>${stage.takeaway}</p>
-          </div>
-          <div class="fact-item fun-fact">
-            <h4>🎉 ${isAr ? "معلومة إثرائية" : "Fun Fact"}</h4>
-            <p>${stage.funFact}</p>
-          </div>
-        </div>
-      </div>
+    <div class="stage-text">
+      ${gridItems.map(renderItem).join("")}
+      ${widgetHtml}
     </div>
     ${wideItems.length ? `<div class="stage-wide">${wideItems.join("")}</div>` : ""}
     <div class="stage-quiz" id="stageQuizBox">

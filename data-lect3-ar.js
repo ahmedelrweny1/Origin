@@ -91,13 +91,7 @@ const LECT3_STAGES_AR = [
           <div class="l3-flow-node">💾 وحدة USB<br><small>مشتركة وملوثة</small></div><span class="l3-flow-arrow danger">←</span>
           <div class="l3-flow-node lock">💻 حاسوبك<br><small>الإصابة تمت</small></div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/digital_ethics.jpg" alt="أساسيات الأمن"><span>🔒 ثلاثة أركان تحميك</span></div>
-          <div class="l3-photo"><img src="assets/images/smartphone.jpg" alt="طرق العدوى"><span>📲 العدوى عبر الويب والبريد</span></div>
-          <div class="l3-photo"><img src="assets/images/personal_data_vault.jpg" alt="حماية البيانات"><span>🪪 التسريب يكسر السرية</span></div>
-        </div>
-        <figcaption>القاعدة الذهبية: اسأل نفسك عن كل حادثة — هل المشكلة في «من رأى» أم «ماذا تغير» أم «هل يفتح»؟ وستصل للركن الصحيح.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "السرية: لا يراها إلا المصرح لهم ⬝ السلامة: تبقى صحيحة بلا عبث ⬝ التوافرية: تفتح وقت الحاجة ⬝ سبعة أنواع خبيثة لكل منها علامة مميزة ⬝ المخترق يقتحم للعبث أو السرقة.",
     funFact: "سُمي «حصان طروادة» على اسم الحصان الخشبي في الأسطورة الإغريقية: هدية تبدو بريئة من الخارج وتخفي جنودًا في الداخل — تمامًا مثل هذا النوع من البرمجيات!",
@@ -202,13 +196,7 @@ const LECT3_STAGES_AR = [
             <div class="l3-mind-branch b-green"><strong>📲 ما تملكه</strong><small>بطاقة ذكية ورمز الهاتف</small></div>
           </div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/corporate_data_policy.jpg" alt="التحكم في الوصول"><span>🚪 البواب لا يفتح إلا بتصريح</span></div>
-          <div class="l3-photo"><img src="assets/images/smartphone.jpg" alt="رمز التحقق"><span>📲 رمز الهاتف إثبات حيازة</span></div>
-          <div class="l3-photo"><img src="assets/images/info_characteristics.jpg" alt="التحديثات"><span>🛡️ حدّث نظامك واحتفظ بنسخة احتياطية</span></div>
-        </div>
-        <figcaption>احفظها هكذا: كلمة المرور الطويلة المميزة تحميك، والتحقق المزدوج من نوعين مختلفين يحميك أكثر، وجدار الحماية وبرنامج الحماية والنسخ الاحتياطي يكملون الحماية.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "كلمة قوية: طويلة ومتنوعة وغير شخصية وغير مكررة ⬝ إثبات الهوية بطرق ثلاث: معرفة وحيوية وحيازة ⬝ نوعان مختلفان معًا = المصادقة الثنائية ⬝ جدار الحماية يصد هجمات الخارج ويمنع تسرب البيانات إلى الخارج ⬝ حدّث نظامك واحتفظ بنسخ احتياطية دائمًا.",
     funFact: "كلمة من ٣ رموز فقط (من ٣٦ رمزًا) لها ٤٦٬٦٥٦ احتمالًا يكسرها الحاسوب في لحظات، بينما كل حرف تضيفه يضرب الاحتمالات في ٣٦ — لهذا الطول هو أقوى سلاح!",
@@ -307,13 +295,7 @@ const LECT3_STAGES_AR = [
           <div class="l3-pyramid-tier t2">📏 معايير الأمان<small>قواعد ملزمة تطبق السياسة</small></div>
           <div class="l3-pyramid-tier t3">📋 الإجراءات والقواعد<small>خطوات تفصيلية لكل استخدام</small></div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/smartphone.jpg" alt="احتيال الهاتف"><span>📲 الاستعجال أول علامات التصيد</span></div>
-          <div class="l3-photo"><img src="assets/images/personal_data_vault.jpg" alt="بيانات مسروقة"><span>🪪 هدفهم أرقامك وبطاقاتك</span></div>
-          <div class="l3-photo"><img src="assets/images/digital_ethics.jpg" alt="ابق متيقظًا"><span>👀 لا تنقر — تحقق بنفسك</span></div>
-        </div>
-        <figcaption>القاعدة: أي رسالة تستعجلك + رابط غريب + طلب بيانات = تصيد. تجاهل الرابط وتعامل عبر التطبيق الرسمي.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "فاتورة لخدمة وهمية = احتيالية ⬝ عقد مزيف بعد نقرة = نقرة واحدة ⬝ موقع بنك مزيف = تصيد ⬝ نسخ البطاقة = تزوير ⬝ خداع البشر بطرق ثلاث ⬝ والحماية المؤسسية هرم من ثلاث طبقات.",
     funFact: "بعض المحتالين يجمعون كشوف الحسابات وبطاقات الهوية من أكياس القمامة ويعيدون تركيبها — لهذا تنصح البنوك بتمزيق الأوراق المهمة قبل رميها!",
@@ -389,13 +371,7 @@ const LECT3_STAGES_AR = [
           <tr><th>السرعة</th><td>⚡ أسرع</td><td>🐢 أبطأ</td></tr>
           <tr><th>توزيع المفاتيح</th><td>❌ صعب — مفتاح سري لكل مرسل</td><td>✅ سهل — العام معلن للجميع</td></tr>
         </table>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/data_info_knowledge.jpg" alt="الرسالة المغلقة"><span>✉️ من الواضح للغامض</span></div>
-          <div class="l3-photo"><img src="assets/images/info_characteristics.jpg" alt="تبادل المفاتيح"><span>🤝 المؤقت يجمع الحسنيين</span></div>
-          <div class="l3-photo"><img src="assets/images/media_types.jpg" alt="قناة آمنة"><span>📡 من يملك المفتاح يقرأ</span></div>
-        </div>
-        <figcaption>احفظها بصورة الصندوق: المتماثل = مفتاح واحد يفتح ويقفل، والعام = قفل مفتوح للجميع ومفتاح فتح واحد مع صاحبه.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "الواضح يتحول لغامض بالمفتاح ويعود بالفك ⬝ المتماثل: مفتاح واحد مشترك وسريع لكن توزيعه صعب ⬝ العام: قفل معلن ومفتاح خاص وأسهل توزيعًا ⬝ والهجين المؤقت يجمع السرعة والأمان.",
     funFact: "فكرة المفتاح العام تشبه صندوق اقتراع: أي شخص يستطيع إلقاء ورقته في الفتحة، لكن لا أحد يستطيع إخراج الأوراق إلا من يملك مفتاح الصندوق!",
@@ -469,13 +445,7 @@ const LECT3_STAGES_AR = [
           <div class="l3-browser-bar"><span class="lock">🔒</span><span><span class="https">https://</span>bank.example.com/login</span></div>
           <div class="l3-browser-body">🏛️ <strong>جهة التصديق</strong> تشهد أن المفتاح العام لصاحب الموقع فعلًا (شهادة رقمية) ← 📡 كل الحركة بعدها مغلفة بـ<strong>مفتاح جلسة</strong> سريع ← 🎣 أي موقع مزيف يسقط في فحص الشهادة.</div>
         </div>
-        <div class="l3-photos">
-          <div class="l3-photo"><img src="assets/images/info_characteristics.jpg" alt="بصمة التجزئة"><span>#️⃣ البصمة تكشف أي تغيير</span></div>
-          <div class="l3-photo"><img src="assets/images/corporate_data_policy.jpg" alt="الشهادة"><span>🏅 الشهادة هوية الموقع</span></div>
-          <div class="l3-photo"><img src="assets/images/data_info_knowledge.jpg" alt="تصفح آمن"><span>🔒 القفل يعني جلسة مشفرة</span></div>
-        </div>
-        <figcaption>المعادلة: بصمتان متطابقتان = مرسل حقيقي وملف سليم. بصمتان مختلفتان = توقف فورًا وحمّل من المصدر الرسمي.</figcaption>
-      </figure>`
+        </figure>`
     ],
     takeaway: "البصمة تكشف العبث ولا تُعكس ⬝ التوقيع بصمة مشفرة بالمفتاح الخاص للمرسل ⬝ التحقق فك التشفير بالمفتاح العام ثم مقارنة ⬝ جهة التصديق تختم هوية المفاتيح بالشهادات ⬝ والقفل في المتصفح يعني تصفحًا مشفرًا بمفتاح الجلسة.",
     funFact: "علامة القفل 🔒 في متصفحك تعني أن فكرتين من هذا الدرس تعملان معًا الآن: شهادة تثبت هوية الموقع، وجلسة مشفرة تحمي كل ما تكتبه!",

@@ -303,7 +303,7 @@ function renderGeotagWidget() {
       </div>
       <div class="exif-card">
         <div class="exif-preview">
-          <img src="assets/images/digital_ethics.jpg" style="width:100%; height:100%; object-fit:cover; opacity:0.85;" alt="Photo">
+          <div style="font-size:2.6rem; opacity:0.85;">🖼️</div>
           <div style="position:absolute; background:rgba(0,0,0,0.7); padding:4px 10px; border-radius:20px; font-size:0.8rem; color:#fff;">
             📸 photo_home.jpg
           </div>
@@ -387,24 +387,9 @@ function renderStage(i) {
       <p class="stage-tagline">${stage.tagline}</p>
     </div>
 
-    <div class="stage-grid">
-      <div class="stage-text">
-        ${stage.story.map(p => `<p>${p}</p>`).join("")}
-        ${widgetHTML}
-      </div>
-
-      <div class="stage-visual-container">
-        <div class="fact-grid">
-          <div class="fact-item highlight-takeaway">
-            <h4>🎯 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>
-            <p>${stage.takeaway}</p>
-          </div>
-          <div class="fact-item fun-fact">
-            <h4>💡 ${isAr ? "هل تعلم؟" : "Did You Know?"}</h4>
-            <p>${stage.funFact}</p>
-          </div>
-        </div>
-      </div>
+    <div class="stage-text">
+      ${stage.story.map(p => `<p>${p}</p>`).join("")}
+      ${widgetHTML}
     </div>
 
     <div class="stage-quiz">
