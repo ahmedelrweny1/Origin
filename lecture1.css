@@ -39,6 +39,8 @@ body { background: var(--paper); }
 @media (max-width: 640px) {
   .topbar-meta:first-child { display: none; }
   .header-top { grid-template-columns: 1fr auto; }
+  .controls-group { flex-wrap: wrap; justify-content: flex-end; row-gap: 0.4rem; }
+  .control-btn { padding: 0.45rem 0.6rem; letter-spacing: 0.08em; }
 }
 
 .brand {

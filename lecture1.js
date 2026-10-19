@@ -34,6 +34,8 @@ function buildTopicNavigation() {
 }
 
 function updateProgressUI() {
+  LectureShell.sync(LECT1_STAGES, lect1State.current, lect1State.visited);
+  if (!topicNodes) return;
   const chips = topicNodes.children;
   for (let i = 0; i < LECT1_STAGES.length; i++) {
     if (chips[i]) {
@@ -42,9 +44,8 @@ function updateProgressUI() {
     }
   }
   const pct = Math.round((lect1State.visited.size / LECT1_STAGES.length) * 100);
-  $("progressFill").style.width = pct + "%";
-  $("progressLabel").textContent = pct + "%";
-  LectureShell.sync(LECT1_STAGES, lect1State.current, lect1State.visited);
+  if ($("progressFill")) $("progressFill").style.width = pct + "%";
+  if ($("progressLabel")) $("progressLabel").textContent = pct + "%";
 }
 
 /* ========================================================
@@ -393,11 +394,6 @@ function renderStage(i) {
       </div>
 
       <div class="stage-visual-container">
-        <div class="stage-visual-box">
-          <img src="${stage.image}" alt="${stage.title}" class="stage-img">
-          <p class="stage-caption">${stage.visualCaption}</p>
-        </div>
-
         <div class="fact-grid">
           <div class="fact-item highlight-takeaway">
             <h4>🎯 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>

@@ -140,32 +140,40 @@ html.skip-hero #heroSection {
   display: none;
 }
 
+body.ss-active .ss-toggle {
+  display: inline-flex;
+  position: fixed;
+  bottom: 1.25rem;
+  inset-inline-end: 1.25rem;
+  z-index: 95;
+  width: 3.2rem;
+  height: 3.2rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: var(--rule-medium) solid var(--ink);
+  cursor: pointer;
+}
+
+body.ss-active .ss-close {
+  display: inline-flex;
+}
+
 @media (min-width: 1081px) {
-  body.ss-active .stage-sidebar {
+  body.ss-active:not(.ss-collapsed) .stage-sidebar {
     display: flex;
   }
-  body.ss-active .main-content {
+  body.ss-active:not(.ss-collapsed) .main-content {
     padding-inline-end: 320px;
+  }
+  body.ss-active:not(.ss-collapsed) .ss-toggle {
+    display: none;
   }
 }
 
 @media (max-width: 1080px) {
-  body.ss-active .ss-toggle {
-    display: inline-flex;
-    position: fixed;
-    bottom: 1.25rem;
-    inset-inline-end: 1.25rem;
-    z-index: 95;
-    width: 3.2rem;
-    height: 3.2rem;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    background: var(--ink);
-    color: var(--paper);
-    border: var(--rule-medium) solid var(--ink);
-    cursor: pointer;
-  }
   body.ss-active .stage-sidebar {
     display: flex;
     z-index: 120;
@@ -182,9 +190,6 @@ html.skip-hero #heroSection {
   }
   body.ss-active.ss-drawer .stage-sidebar {
     transform: translateX(0) !important;
-  }
-  body.ss-active .ss-close {
-    display: inline-flex;
   }
   body.ss-active.ss-drawer .ss-scrim {
     display: block;

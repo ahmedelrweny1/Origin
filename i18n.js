@@ -129,6 +129,7 @@ const translations = {
     ssTitle: "Lecture stops",
     ssFinal: "Final challenge",
     ssMenu: "Open stations menu",
+    ssClose: "Close sidebar",
 
     // Quizzes landing
     qzEdition: "Section 02 · Exam Hall",
@@ -600,6 +601,7 @@ const translations = {
     ssTitle: "محطات المحاضرة",
     ssFinal: "التحدي النهائي",
     ssMenu: "افتح قائمة المحطات",
+    ssClose: "إغلاق الشريط",
 
     // Quizzes landing
     qzEdition: "القسم ٢ · قاعة الاختبارات",

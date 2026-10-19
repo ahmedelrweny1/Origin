@@ -28,7 +28,7 @@ const LectureShell = (() => {
     aside.innerHTML =
       '<div class="ss-head">' +
       '<span class="ss-kicker" data-i18n="ssTitle">' + t("ssTitle") + "</span>" +
-      '<button class="ss-close" id="ssCloseBtn" aria-label="' + t("ssMenu") + '">✕</button>' +
+      '<button class="ss-close" id="ssCloseBtn" aria-label="' + t("ssClose") + '">✕</button>' +
       "</div>" +
       '<div class="ss-list" id="ssList" role="list"></div>' +
       '<button class="ss-final" id="ssFinalBtn"><span>🏁</span><span data-i18n="ssFinal">' + t("ssFinal") + "</span></button>";
@@ -45,8 +45,14 @@ const LectureShell = (() => {
 
     document.body.append(scrim, aside, toggle);
 
-    toggle.addEventListener("click", () => document.body.classList.add("ss-drawer"));
-    $id("ssCloseBtn").addEventListener("click", closeDrawer);
+    toggle.addEventListener("click", () => {
+      document.body.classList.remove("ss-collapsed");
+      document.body.classList.add("ss-drawer");
+    });
+    $id("ssCloseBtn").addEventListener("click", () => {
+      document.body.classList.remove("ss-drawer");
+      document.body.classList.add("ss-collapsed");
+    });
     scrim.addEventListener("click", closeDrawer);
     $id("ssFinalBtn").addEventListener("click", () => {
       closeDrawer();
@@ -95,7 +101,7 @@ const LectureShell = (() => {
   }
 
   function hide() {
-    document.body.classList.remove("ss-active", "ss-drawer");
+    document.body.classList.remove("ss-active", "ss-drawer", "ss-collapsed");
   }
 
   return { init, sync, show, hide };

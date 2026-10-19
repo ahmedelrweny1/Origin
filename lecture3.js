@@ -37,6 +37,7 @@ function buildTopicNavigation() {
 }
 
 function updateProgressUI() {
+  LectureShell.sync(LECT3_STAGES, lect3State.current, lect3State.visited);
   if (!topicNodes) return;
   const chips = topicNodes.children;
   for (let i = 0; i < LECT3_STAGES.length; i++) {
@@ -48,7 +49,6 @@ function updateProgressUI() {
   const pct = Math.round((lect3State.visited.size / LECT3_STAGES.length) * 100);
   if ($("progressFill")) $("progressFill").style.width = pct + "%";
   if ($("progressLabel")) $("progressLabel").textContent = pct + "%";
-  LectureShell.sync(LECT3_STAGES, lect3State.current, lect3State.visited);
 }
 
 /* ============ WIDGET 1: CIA sorter ============ */
@@ -352,10 +352,6 @@ function renderStage(index) {
         ${widgetHtml}
       </div>
       <div class="stage-visual-container">
-        <div class="stage-visual-box">
-          <img src="${stage.image}" alt="${stage.title}" class="stage-img">
-          <p class="stage-caption">${stage.visualCaption}</p>
-        </div>
         <div class="fact-grid">
           <div class="fact-item highlight-takeaway">
             <h4>💡 ${isAr ? "الخلاصة الذهبية" : "Core Takeaway"}</h4>
