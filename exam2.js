@@ -21,7 +21,8 @@ function seedConfig() {
     attemptLimit: 1,
     windowEnabled: false,
     windowStart: 0,
-    windowEnd: 0
+    windowEnd: 0,
+    hideScores: true
   };
 }
 const DEFAULT_CONFIG = seedConfig();
@@ -43,11 +44,13 @@ function normConfig(c) {
   const passMark = Math.min(40, Math.max(1, parseInt(c.passMark, 10) || s.passMark));
   let attemptLimit = parseInt(c.attemptLimit, 10);
   if (!(attemptLimit >= 0)) attemptLimit = s.attemptLimit;
+  const hideScores = c.hideScores !== undefined ? !!c.hideScores : true;
   return {
     durationMin, passMark, attemptLimit,
     windowEnabled: !!c.windowEnabled,
     windowStart: Number(c.windowStart) || 0,
-    windowEnd: Number(c.windowEnd) || 0
+    windowEnd: Number(c.windowEnd) || 0,
+    hideScores
   };
 }
 function getConfig() {
@@ -864,7 +867,19 @@ async function finishExam(expired) {
     durationUsed,
     submittedAt: Date.now()
   };
-  try { localStorage.setItem(REPORT_KEY, JSON.stringify(report)); } catch (e) {}
+  const studentReport = (exam.config && exam.config.hideScores === false)
+    ? report
+    : {
+        examId: EXAM_ID,
+        name: (exam.state.studentName || ''),
+        uid: (exam.state.uid || null),
+        total,
+        submitted: true,
+        submittedAt: Date.now(),
+        durationUsed,
+        expired: !!expired
+      };
+  try { localStorage.setItem(REPORT_KEY, JSON.stringify(studentReport)); } catch (e) {}
   incUsed();
   // Upload to the shared roster (best effort: 5s cap, else queue for later)
   try {

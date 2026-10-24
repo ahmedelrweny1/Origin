@@ -14,7 +14,8 @@ const EXAMS = {
       attemptLimit: 1,
       windowEnabled: true,
       windowStart: new Date(2026, 8, 15, 10, 0, 0).getTime(),
-      windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime()
+      windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime(),
+      hideScores: true
     }
   },
   'mid-l1l2': {
@@ -25,7 +26,8 @@ const EXAMS = {
       attemptLimit: 1,
       windowEnabled: false,
       windowStart: 0,
-      windowEnd: 0
+      windowEnd: 0,
+      hideScores: true
     }
   },
   'final-l4': {
@@ -36,7 +38,8 @@ const EXAMS = {
       attemptLimit: 1,
       windowEnabled: true,
       windowStart: new Date(2026, 9, 24, 12, 0, 0).getTime(),
-      windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime()
+      windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime(),
+      hideScores: true
     }
   }
 };
@@ -119,7 +122,8 @@ function normConfig(c) {
   const windowEnabled = !!c.windowEnabled;
   const windowStart = Number(c.windowStart) || 0;
   const windowEnd = Number(c.windowEnd) || 0;
-  return { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd };
+  const hideScores = c.hideScores !== undefined ? !!c.hideScores : true;
+  return { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd, hideScores };
 }
 function getConfig() {
   try {
@@ -162,6 +166,7 @@ function showUnlocked() {
   $('windowStartInput').value = c.windowStart > 0 ? toLocalInput(c.windowStart) : toLocalInput(seedConfig().windowStart);
   $('windowEndInput').value = c.windowEnd > 0 ? toLocalInput(c.windowEnd) : toLocalInput(seedConfig().windowEnd);
   $('attemptInput').value = String(c.attemptLimit === 0 ? 0 : 1);
+  if ($('hideScoresCheck')) $('hideScoresCheck').checked = c.hideScores !== false;
   renderRoster();
   syncAdminRemote();
 }
@@ -748,6 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const durationMin = Math.min(180, Math.max(5, parseInt($('durationInput').value, 10) || 45));
     const passMark = Math.min(total, Math.max(1, parseInt($('passInput').value, 10) || 25));
     const attemptLimit = $('attemptInput').value === '0' ? 0 : 1;
+    const hideScores = $('hideScoresCheck') ? $('hideScoresCheck').checked : true;
     const windowEnabled = $('windowEnable').checked;
     const windowStart = new Date($('windowStartInput').value).getTime();
     const windowEnd = new Date($('windowEndInput').value).getTime();
@@ -760,7 +766,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     let all = {};
     try { all = JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); } catch (e) {}
-    all[examId] = { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd };
+    all[examId] = { durationMin, passMark, attemptLimit, windowEnabled, windowStart, windowEnd, hideScores };
     try { localStorage.setItem(CONFIG_KEY, JSON.stringify(all)); } catch (e) {}
     const np = $('newPassInput').value.trim();
     if (np.length >= 4) {

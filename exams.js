@@ -19,7 +19,8 @@ const EXAMS = [
       attemptLimit: 1,
       windowEnabled: true,
       windowStart: new Date(2026, 8, 15, 10, 0, 0).getTime(),
-      windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime()
+      windowEnd: new Date(2026, 8, 15, 12, 0, 0).getTime(),
+      hideScores: true
     }
   },
   {
@@ -36,7 +37,8 @@ const EXAMS = [
       attemptLimit: 1,
       windowEnabled: false,
       windowStart: 0,
-      windowEnd: 0
+      windowEnd: 0,
+      hideScores: true
     }
   },
   {
@@ -53,7 +55,8 @@ const EXAMS = [
       attemptLimit: 1,
       windowEnabled: true,
       windowStart: new Date(2026, 9, 24, 12, 0, 0).getTime(),
-      windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime()
+      windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime(),
+      hideScores: true
     }
   }
 ];
@@ -100,17 +103,19 @@ function getTConfig(exam) {
       const s = seedOf(exam);
       let attemptLimit = parseInt(c.attemptLimit, 10);
       if (!(attemptLimit >= 0)) attemptLimit = s.attemptLimit;
+      const hideScores = c.hideScores !== undefined ? !!c.hideScores : (s.hideScores !== undefined ? !!s.hideScores : true);
       return {
         durationMin: Math.min(180, Math.max(5, parseInt(c.durationMin, 10) || s.durationMin)),
         passMark: Math.min(exam.total, Math.max(1, parseInt(c.passMark, 10) || s.passMark)),
         attemptLimit,
         windowEnabled: !!c.windowEnabled,
         windowStart: Number(c.windowStart) || 0,
-        windowEnd: Number(c.windowEnd) || 0
+        windowEnd: Number(c.windowEnd) || 0,
+        hideScores
       };
     }
   } catch (e) {}
-  return Object.assign({}, seedOf(exam));
+  return Object.assign({ hideScores: true }, seedOf(exam));
 }
 
 function usedMapT(exam) {
@@ -369,8 +374,15 @@ function updateForName(exam) {
     statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txNoAttempts')}</span>`;
     cta = `<a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>`;
   } else if (ownReport) {
-    statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txBest')}: ${report.score} / ${report.total}${report.passed ? ' · ' + tOrEn('txPassed') : ''}</span>`;
-    cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exRetake')}</a>`;
+    if (cfg.hideScores !== false) {
+      statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txSubmitted')}</span>`;
+      cta = (left <= 0 || cfg.attemptLimit === 1)
+        ? `<button class="btn btn-ghost" disabled>✓ ${tOrEn('txCompleted')}</button>`
+        : `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exRetake')}</a>`;
+    } else {
+      statusHtml = `<span class="texam-status st-done">✓ ${tOrEn('txBest')}: ${report.score} / ${report.total}${report.passed ? ' · ' + tOrEn('txPassed') : ''}</span>`;
+      cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exRetake')}</a>`;
+    }
   } else {
     statusHtml = `<span class="texam-status st-new">✦ ${tOrEn('txNew')}</span>`;
     cta = `<a class="btn btn-primary btn-arrow" href="${runHref}">${tOrEn('exStart')}</a>`;
@@ -403,9 +415,40 @@ function mistakesHtml(report, filter, isAr) {
 
 function reportCardHtml(exam, report, cfg) {
   const isAr = currentLang === 'ar';
-  const pct = Math.round((report.score / report.total) * 100);
-  const filter = getReportFilter(exam.id);
   const examTitle = isAr ? exam.titleAr : exam.titleEn;
+
+  if (cfg.hideScores !== false) {
+    return `
+    <article class="texam-card" id="reportCard-${exam.id}">
+      <div class="texam-card-head">
+        <span class="chip chip-solid">📝 ${esc(examTitle)}</span>
+        <span class="chip">${esc(exam.tag)}</span>
+        <span class="texam-status st-done">✓ ${tOrEn('txSubmitted')}</span>
+      </div>
+      <div class="report-head" style="text-align:center;padding:1.6rem 1rem;">
+        <div style="font-size:2.8rem;margin-bottom:0.6rem;">🎉</div>
+        <h2 style="margin:0.2rem 0 0.6rem;">${tOrEn('txSubmittedSuccessTitle')}</h2>
+        <p class="muted" style="font-size:1.02rem;max-width:540px;margin:0 auto 1.2rem;line-height:1.6;">
+          ${tOrEn('txSubmittedNotice')}
+        </p>
+        <div class="texam-meta" style="justify-content:center;margin-bottom:1.2rem;">
+          <span>👤 ${tOrEn('txStudent')}: <strong>${esc(report.name || '—')}</strong></span>
+          <span>· ⏱ ${tOrEn('txTimeUsed')}: <strong>${fmtDurUsed(report.durationUsed || 0)}</strong></span>
+          ${report.submittedAt ? `<span>· 🗓 ${fmtDay(report.submittedAt)} · ${fmtTime(report.submittedAt)}</span>` : ''}
+        </div>
+        <div style="background:var(--paper);border:1px solid var(--rule-soft);border-radius:6px;padding:0.9rem 1.2rem;max-width:480px;margin:0 auto;font-size:0.9rem;opacity:0.85;">
+          🔒 ${tOrEn('txScoresHiddenNotice')}
+        </div>
+      </div>
+      <div class="texam-actions" style="justify-content:center;margin-top:1.2rem;">
+        <a class="btn btn-primary btn-arrow" href="exams.html">${tOrEn('exBack')}</a>
+        <a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>
+      </div>
+    </article>`;
+  }
+
+  const pct = Math.round(((report.score || 0) / (report.total || 1)) * 100);
+  const filter = getReportFilter(exam.id);
   const perTypeHtml = perTypeGridHtml(report.perType);
   const itemsHtml = mistakesHtml(report, filter, isAr);
 
@@ -413,19 +456,19 @@ function reportCardHtml(exam, report, cfg) {
   <article class="texam-card" id="reportCard-${exam.id}">
     <div class="texam-card-head">
       <span class="chip chip-solid">📝 ${esc(examTitle)}</span>
-      <span class="chip">${esc(exam.tag)} · ${report.total} ${isAr ? 'سؤال' : 'questions'}</span>
+      <span class="chip">${esc(exam.tag)} · ${report.total || 0} ${isAr ? 'سؤال' : 'questions'}</span>
     </div>
     <div class="report-head">
       <span class="mono">${report.expired ? tOrEn('txAutoSubmitted') : tOrEn('txSubmitted')}</span>
       <h2>${report.passed ? tOrEn('txPassedTitle') : tOrEn('txFailedTitle')}</h2>
       <p class="muted">${tOrEn('txStudent')}: ${esc(report.name || '—')}</p>
-      <p class="muted">${tOrEn('txTimeUsed')}: ${fmtDurUsed(report.durationUsed || 0)} · ${tOrEn('txPassLine')} ${cfg.passMark} / ${report.total}</p>
+      <p class="muted">${tOrEn('txTimeUsed')}: ${fmtDurUsed(report.durationUsed || 0)} · ${tOrEn('txPassLine')} ${cfg.passMark} / ${report.total || 0}</p>
     </div>
     <div class="report-score${report.passed ? ' pass' : ''}">${pct}%</div>
     <div class="report-grid">
-      <div class="report-stat"><span class="mono">${tOrEn('qzStatCorrect')}</span><strong>${report.score}</strong></div>
-      <div class="report-stat"><span class="mono">${tOrEn('qzStatWrong')}</span><strong>${report.wrong}</strong></div>
-      <div class="report-stat"><span class="mono">${tOrEn('qzStatSkipped')}</span><strong>${report.unanswered}</strong></div>
+      <div class="report-stat"><span class="mono">${tOrEn('qzStatCorrect')}</span><strong>${report.score || 0}</strong></div>
+      <div class="report-stat"><span class="mono">${tOrEn('qzStatWrong')}</span><strong>${report.wrong || 0}</strong></div>
+      <div class="report-stat"><span class="mono">${tOrEn('qzStatSkipped')}</span><strong>${report.unanswered || 0}</strong></div>
     </div>
     ${perTypeHtml ? `<div class="report-grid" style="margin-top:1rem;">${perTypeHtml}</div>` : ''}
     <div class="report-filters">
