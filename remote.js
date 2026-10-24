@@ -99,9 +99,14 @@ const Remote = {
       lang: record.lang === 'ar' ? 'ar' : 'en',
       items: (record.items || []).slice(0, 60).map((it) => ({
         n: it.n | 0,
-        type: String(it.type || 'mcq').slice(0, 12),
+        id: String(it.id || '').slice(0, 30),
+        type: String(it.type || 'mcq').slice(0, 16),
         good: !!it.good,
-        your: it.your === null || it.your === undefined ? null : String(it.your).slice(0, 300)
+        question: it.question ? String(it.question).slice(0, 400) : '',
+        your: it.your === null || it.your === undefined ? null : String(it.your).slice(0, 400),
+        correct: it.correct ? String(it.correct).slice(0, 400) : '',
+        explain: it.explain ? String(it.explain).slice(0, 400) : '',
+        accepted: Array.isArray(it.accepted) ? it.accepted.slice(0, 10).map((s) => String(s).slice(0, 100)) : null
       })),
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };

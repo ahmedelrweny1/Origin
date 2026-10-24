@@ -188,23 +188,139 @@ let rosterRemote = false;
 let lastRemoteFetch = 0;
 let lastRemoteView = '';
 
+function getExamBank(examId, lang) {
+  const isAr = lang ? lang === 'ar' : currentLang === 'ar';
+  const g = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : {});
+  if (examId === 'final-l4') {
+    return isAr
+      ? (g.LECT4_FULL_EXAM_AR || g.LECT4_FULL_EXAM_EN || [])
+      : (g.LECT4_FULL_EXAM_EN || g.LECT4_FULL_EXAM_AR || []);
+  }
+  if (examId === 'mid-l1l2') {
+    return isAr
+      ? (g.LECT_MID_EXAM_AR || g.LECT_MID_EXAM_EN || [])
+      : (g.LECT_MID_EXAM_EN || g.LECT_MID_EXAM_AR || []);
+  }
+  if (examId === 'final-l1l2') {
+    return isAr
+      ? (g.LECT_FINAL_EXAM_AR || g.LECT_FINAL_EXAM_EN || [])
+      : (g.LECT_FINAL_EXAM_EN || g.LECT_FINAL_EXAM_AR || []);
+  }
+  return [];
+}
+
+function isSingle(q) {
+  return !q.type || q.type === 'mcq' || q.type === 'tf';
+}
+
+function getBankCorrectText(q) {
+  if (!q) return '';
+  if (isSingle(q)) {
+    return (q.options && q.options[q.answer] !== undefined)
+      ? q.options[q.answer]
+      : String(q.answer !== undefined ? q.answer : '');
+  }
+  if (q.type === 'typing') {
+    return Array.isArray(q.accepted) ? q.accepted.join(' / ') : String(q.answer || '');
+  }
+  if (q.type === 'multi') {
+    return (q.answers || []).slice().sort((a, b) => a - b)
+      .map((i) => (q.options && q.options[i]) ? q.options[i] : (i + 1))
+      .join(' + ');
+  }
+  if (q.type === 'ordering') {
+    return (q.answers || []).map((oi, k) => `${k + 1}. ${(q.options && q.options[oi]) ? q.options[oi] : oi}`).join('   ');
+  }
+  if (q.type === 'matching') {
+    return (q.pairs || []).map((p) => `${p.left} → ${p.right}`).join('   ');
+  }
+  return String(q.answer !== undefined ? q.answer : '');
+}
+
+function formatStudentAnswer(it, q) {
+  const ans = it.your;
+  if (ans === null || ans === undefined || ans === '') return null; // Unanswered
+  if (q) {
+    if (isSingle(q) && typeof ans === 'number' && q.options && q.options[ans] !== undefined) {
+      return q.options[ans];
+    }
+    if (q.type === 'multi' && Array.isArray(ans)) {
+      if (!ans.length) return null;
+      return ans.slice().sort((a, b) => a - b).map((i) => (q.options && q.options[i]) ? q.options[i] : (i + 1)).join(' + ');
+    }
+    if (q.type === 'ordering' && Array.isArray(ans)) {
+      if (!ans.length) return null;
+      return ans.map((oi, k) => `${k + 1}. ${(q.options && q.options[oi]) ? q.options[oi] : oi}`).join('   ');
+    }
+    if (q.type === 'matching' && typeof ans === 'object' && !Array.isArray(ans)) {
+      const keys = Object.keys(ans);
+      if (!keys.length) return null;
+      return keys.map((k) => `${k} → ${ans[k]}`).join('   ');
+    }
+  }
+  if (typeof ans === 'object') {
+    try { return JSON.stringify(ans); } catch (e) { return String(ans); }
+  }
+  return String(ans);
+}
+
+function enrichItem(it, examId, lang) {
+  const bank = getExamBank(examId, lang || currentLang);
+  let q = null;
+  if (it.id) q = bank.find((x) => x.id === it.id);
+  if (!q && it.n && bank[it.n - 1]) q = bank[it.n - 1];
+
+  const type = it.type || (q ? (q.type || 'mcq') : 'mcq');
+  const good = !!it.good;
+  const question = it.question || (q ? q.question : (currentLang === 'ar' ? `السؤال رقم ${it.n || ''}` : `Question #${it.n || ''}`));
+  const correct = it.correct || (q ? getBankCorrectText(q) : '');
+  const explain = it.explain || (q ? (q.explain || '') : '');
+  const accepted = it.accepted || (q ? q.accepted : null);
+  const yourFormatted = formatStudentAnswer(it, q);
+
+  return {
+    n: it.n || 0,
+    id: it.id || (q ? q.id : ''),
+    type,
+    good,
+    question,
+    your: it.your,
+    yourFormatted,
+    correct,
+    explain,
+    accepted
+  };
+}
+
 function toRow(r, docId, examId) {
+  const exId = examId || r.examId || currentExamId();
+  const rawItems = Array.isArray(r.items) ? r.items : [];
+  const items = rawItems.map((it) => enrichItem(it, exId, r.lang || currentLang));
+  const score = r.score | 0;
+  const total = (r.total | 0) || (EXAMS[exId] ? EXAMS[exId].total : (items.length || 0));
+  const pct = (r.pct !== undefined && r.pct !== null) ? (r.pct | 0) : (total ? Math.round((score / total) * 100) : 0);
+  const wrongCount = r.wrong !== undefined ? (r.wrong | 0) : items.filter((it) => !it.good).length;
+  const unansweredCount = r.unanswered !== undefined ? (r.unanswered | 0) : items.filter((it) => it.yourFormatted === null).length;
+  const typingCount = items.filter((it) => it.type === 'typing').length;
+
   return {
     docId: docId || null,
-    examId: examId || r.examId || currentExamId(),
+    examId: exId,
+    lang: r.lang || currentLang,
     name: r.name || '',
     owner: r.owner || null,
-    score: r.score | 0,
-    total: r.total | 0,
-    pct: (r.pct !== undefined && r.pct !== null) ? (r.pct | 0) : (r.total ? Math.round(((r.score | 0) / r.total) * 100) : 0),
+    score,
+    total,
+    pct,
     passed: !!r.passed,
     perType: r.perType || {},
-    wrong: r.wrong | 0,
-    unanswered: r.unanswered | 0,
+    wrong: wrongCount,
+    unanswered: unansweredCount,
+    typingCount,
     durationUsed: r.durationUsed | 0,
     expired: !!r.expired,
     submittedAt: r.submittedAt || r.clientAt || 0,
-    items: Array.isArray(r.items) ? r.items : []
+    items
   };
 }
 
@@ -216,27 +332,32 @@ function flashLog(msg) {
   setTimeout(() => m.classList.add('hidden'), 3500);
 }
 
-function mergeRows(firstRows, secondRows) {
+function mergeRowsDynamic(rowsByExam) {
   const byKey = new Map();
-  const put = (row, slot) => {
-    const key = mergeKey(row);
-    let entry = byKey.get(key);
-    if (!entry) {
-      entry = { key, name: row.name || '', first: null, second: null, latest: 0 };
-      byKey.set(key, entry);
-    }
-    const cur = slot === 'first' ? entry.first : entry.second;
-    if (!cur || (row.submittedAt || 0) >= (cur.submittedAt || 0)) {
-      if (slot === 'first') entry.first = row;
-      else entry.second = row;
-    }
-    if ((row.submittedAt || 0) >= entry.latest) {
-      entry.latest = row.submittedAt || 0;
-      if (row.name) entry.name = row.name;
-    }
-  };
-  (firstRows || []).forEach((r) => put(r, 'first'));
-  (secondRows || []).forEach((r) => put(r, 'second'));
+  EXAM_ORDER.forEach((examId) => {
+    const list = rowsByExam[examId] || [];
+    list.forEach((row) => {
+      const key = mergeKey(row);
+      let entry = byKey.get(key);
+      if (!entry) {
+        entry = { key, name: row.name || '', exams: {}, latest: 0 };
+        byKey.set(key, entry);
+      }
+      const cur = entry.exams[examId];
+      if (!cur || (row.submittedAt || 0) >= (cur.submittedAt || 0)) {
+        entry.exams[examId] = row;
+      }
+      if ((row.submittedAt || 0) >= entry.latest) {
+        entry.latest = row.submittedAt || 0;
+        if (row.name) entry.name = row.name;
+      }
+    });
+  });
+  for (const entry of byKey.values()) {
+    entry.first = entry.exams['final-l1l2'] || null;
+    entry.second = entry.exams['mid-l1l2'] || null;
+    entry.third = entry.exams['final-l4'] || null;
+  }
   return [...byKey.values()].sort((a, b) => (b.latest || 0) - (a.latest || 0));
 }
 
@@ -253,9 +374,11 @@ function renderRoster() {
 }
 
 function renderCombinedLocal() {
-  const first = readLog('final-l1l2').map((r) => toRow(r, null, 'final-l1l2'));
-  const second = readLog('mid-l1l2').map((r) => toRow(r, null, 'mid-l1l2'));
-  combinedRows = mergeRows(first, second);
+  const rowsByExam = {};
+  EXAM_ORDER.forEach((id) => {
+    rowsByExam[id] = readLog(id).map((r) => toRow(r, null, id));
+  });
+  combinedRows = mergeRowsDynamic(rowsByExam);
   rosterRows = [];
   rosterRemote = false;
   paintCombined();
@@ -263,6 +386,78 @@ function renderCombinedLocal() {
 
 function remoteCanDelete() {
   return (typeof Remote !== 'undefined') && !!Remote.teacher;
+}
+
+function renderQuestionCards(items, filter, isAr) {
+  if (!items || !items.length) {
+    return `<p class="admin-note" style="padding:0.5rem 0;">${isAr ? 'لا توجد تفاصيل مسجلة لأسئلة هذه المحاولة.' : 'No question details recorded for this attempt.'}</p>`;
+  }
+  let list = items;
+  if (filter === 'mistakes') {
+    list = items.filter((it) => !it.good);
+    if (!list.length) {
+      return `<p class="admin-note" style="padding:0.6rem 0;color:var(--c-green);font-weight:600;">✓ ${tOrEn('roNoWrong')}</p>`;
+    }
+  } else if (filter === 'written') {
+    list = items.filter((it) => it.type === 'typing');
+    if (!list.length) {
+      return `<p class="admin-note" style="padding:0.6rem 0;">${tOrEn('roNoWritten')}</p>`;
+    }
+  }
+
+  return list.map((it) => {
+    const isGood = !!it.good;
+    const isTyping = it.type === 'typing';
+    const cardClass = isGood ? 'item-good' : 'item-bad';
+    const badgeText = isGood
+      ? (isAr ? '✓ إجابة صحيحة' : '✓ Correct')
+      : (isAr ? '✗ إجابة غير صحيحة' : '✗ Incorrect');
+
+    const typeBadge = isTyping
+      ? `<span class="roster-q-badge" style="background:rgba(255,160,0,0.15);color:var(--c-amber,#b78103);border:1px solid rgba(255,160,0,0.3);">✍️ ${isAr ? 'سؤال مقالي / كتابي' : 'Written / Typing'}</span>`
+      : `<span class="roster-q-badge" style="opacity:0.8;">${tOrEn('type_' + it.type)}</span>`;
+
+    const ansBoxClass = isGood ? 'ans-good' : 'ans-bad';
+    const yourLabel = isTyping ? tOrEn('roYourWritten') : tOrEn('roYourAns');
+    const yourHtml = it.yourFormatted !== null
+      ? esc(it.yourFormatted)
+      : `<em style="opacity:0.65;font-weight:normal;">${tOrEn('roUnanswered')}</em>`;
+
+    const showCorrect = (!isGood || isTyping) && !!it.correct;
+    const correctBox = showCorrect
+      ? `<div class="roster-ans-box ans-correct">
+           <span class="ans-label">${tOrEn('roCorrectAns')}</span>
+           <div class="ans-val" style="font-weight:600;">${esc(it.correct)}</div>
+         </div>`
+      : '';
+
+    const explainBox = it.explain
+      ? `<div class="roster-q-explain">
+           <span class="ans-label">💡 ${tOrEn('roExplain')}</span>
+           <div class="ans-val">${esc(it.explain)}</div>
+         </div>`
+      : '';
+
+    return `
+      <div class="roster-q-card ${cardClass}">
+        <div class="roster-q-header">
+          <div class="roster-q-num">
+            <span>#${it.n || ''}</span>
+            ${typeBadge}
+          </div>
+          <span class="roster-q-badge ${cardClass}">${badgeText}</span>
+        </div>
+        <p class="roster-q-text">${esc(it.question)}</p>
+        <div class="roster-q-answers">
+          <div class="roster-ans-box ${ansBoxClass}">
+            <span class="ans-label">${yourLabel}</span>
+            <div class="ans-val">${yourHtml}</div>
+          </div>
+          ${correctBox}
+          ${explainBox}
+        </div>
+      </div>`;
+  }).join('');
 }
 
 function paintRoster() {
@@ -288,36 +483,81 @@ function paintRoster() {
 
   list.innerHTML = log.map((r, i) => {
     const wrong = (r.items || []).filter((it) => !it.good);
-    const wrongHtml = wrong.length
-      ? `<div class="roster-wrong">${wrong.map((it) => {
-        const ya = it.your === null || it.your === undefined ? '—' : String(it.your);
-        return `<div>Q${it.n} · ${esc(ya.length > 80 ? ya.slice(0, 80) + '…' : ya)}</div>`;
-      }).join('')}</div>`
-      : `<p class="admin-note">${tOrEn('roNoWrong')}</p>`;
+    const typing = (r.items || []).filter((it) => it.type === 'typing');
+    const totalItems = (r.items || []).length;
+    const defaultTab = wrong.length > 0 ? 'mistakes' : (typing.length > 0 ? 'written' : 'all');
+
     const perType = Object.keys(r.perType || {}).map((k) => {
       const s = r.perType[k];
       return `<span class="chip">${tOrEn('type_' + k)} ${s.c}/${s.t}</span>`;
     }).join('');
+
     const secs = Math.round((r.durationUsed || 0) / 1000);
     const dur = isAr
       ? (secs < 60 ? `${secs} ث` : `${Math.floor(secs / 60)} د ${secs % 60} ث`)
       : (secs < 60 ? `${secs}s` : `${Math.floor(secs / 60)}m ${secs % 60}s`);
+
     return `
-      <details class="roster-row">
+      <details class="roster-row" data-row-idx="${i}">
         <summary>
-          <strong>${esc(r.name || '—')}</strong>
+          <div class="roster-summary-left">
+            <strong>${esc(r.name || '—')}</strong>
+            <span class="roster-meta-mini">${fmtDateTime(r.submittedAt)} · ⏱ ${dur}</span>
+          </div>
           <span class="roster-score">${r.score} / ${r.total} · ${r.pct}%</span>
           <span class="texam-status ${r.passed ? 'st-done' : ''}">${r.passed ? '✓' : '✗'}</span>
         </summary>
         <div class="roster-det">
-          <p class="muted">${fmtDateTime(r.submittedAt)} · ⏱ ${dur}${r.expired ? (isAr ? ' · الوقت خلص عليه' : ' · time ran out') : ''}</p>
+          <p class="muted">${fmtDateTime(r.submittedAt)} · ⏱ ${dur}${r.expired ? (isAr ? ' · انتهى الوقت' : ' · time ran out') : ''}</p>
           <div class="roster-chips">${perType}</div>
-          <p class="mono">${tOrEn('roWrong')} (${wrong.length}) · ${tOrEn('roDetails')}</p>
-          ${wrongHtml}
-          ${(r.docId && remoteCanDelete()) ? `<div class="texam-actions"><button class="btn btn-ghost" data-del="${esc(r.docId)}">${tOrEn('roDelete')}</button></div>` : ''}
+
+          <div style="margin:0.8rem 0 0.4rem;padding-top:0.6rem;border-top:1px dashed var(--rule-soft);">
+            <div class="roster-overview-stats">
+              <span class="chip" style="background:rgba(211,47,47,0.1);color:var(--c-red);font-weight:700;">❌ ${wrong.length} ${tOrEn('roMistakes')}</span>
+              <span class="chip" style="background:rgba(255,160,0,0.15);color:var(--c-amber,#b78103);font-weight:700;">✍️ ${typing.length} ${tOrEn('roWritten')}</span>
+              <span class="chip" style="opacity:0.8;">📋 ${totalItems} ${isAr ? 'سؤال إجمالي' : 'total questions'}</span>
+            </div>
+
+            <div class="roster-filter-tabs">
+              <button type="button" class="roster-tab-btn ${defaultTab === 'mistakes' ? 'active' : ''}" data-tab="mistakes">
+                ❌ ${tOrEn('roTabMistakes')} (${wrong.length})
+              </button>
+              <button type="button" class="roster-tab-btn ${defaultTab === 'written' ? 'active' : ''}" data-tab="written">
+                ✍️ ${tOrEn('roTabWritten')} (${typing.length})
+              </button>
+              <button type="button" class="roster-tab-btn ${defaultTab === 'all' ? 'active' : ''}" data-tab="all">
+                📋 ${tOrEn('roTabAll')} (${totalItems})
+              </button>
+            </div>
+
+            <div class="roster-items-container">
+              ${renderQuestionCards(r.items, defaultTab, isAr)}
+            </div>
+          </div>
+
+          ${(r.docId && remoteCanDelete()) ? `<div class="texam-actions" style="margin-top:0.8rem;"><button class="btn btn-ghost" data-del="${esc(r.docId)}">${tOrEn('roDelete')}</button></div>` : ''}
         </div>
       </details>`;
   }).join('');
+
+  list.querySelectorAll('.roster-tab-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const rowEl = btn.closest('.roster-row');
+      if (!rowEl) return;
+      const rowIdx = parseInt(rowEl.dataset.rowIdx, 10);
+      const row = rosterRows[rowIdx];
+      if (!row) return;
+      const tab = btn.dataset.tab;
+      const parentTabs = btn.closest('.roster-filter-tabs');
+      parentTabs.querySelectorAll('.roster-tab-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const container = rowEl.querySelector('.roster-items-container');
+      if (container) {
+        container.innerHTML = renderQuestionCards(row.items, tab, isAr);
+      }
+    });
+  });
 
   list.querySelectorAll('[data-del]').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -341,50 +581,126 @@ function paintCombined() {
     list.innerHTML = `<p class="admin-note">${tOrEn('roEmpty')}</p>`;
     return;
   }
-  const tookFirst = combinedRows.filter((e) => e.first).length;
-  const tookSecond = combinedRows.filter((e) => e.second).length;
-  const tookBoth = combinedRows.filter((e) => e.first && e.second).length;
+  const isAr = currentLang === 'ar';
   const avgOf = (rows) => rows.length
     ? Math.round(rows.reduce((a, r) => a + (r.pct || 0), 0) / rows.length)
     : 0;
-  const avgFirst = avgOf(combinedRows.map((e) => e.first).filter(Boolean));
-  const avgSecond = avgOf(combinedRows.map((e) => e.second).filter(Boolean));
+
+  const statsHtml = EXAM_ORDER.map((id) => {
+    const taken = combinedRows.map((e) => e.exams && e.exams[id]).filter(Boolean);
+    const avg = avgOf(taken);
+    return `<span>· ${esc(examShort(id))}: ${taken.length} (📊 ${avg}%)</span>`;
+  }).join(' ');
+
   sum.innerHTML = `
     <span>👥 ${combinedRows.length} ${tOrEn('roAttempts')}</span>
-    <span>· ${esc(examShort('final-l1l2'))}: ${tookFirst} · 📊 ${avgFirst}%</span>
-    <span>· ${esc(examShort('mid-l1l2'))}: ${tookSecond} · 📊 ${avgSecond}%</span>
-    <span>· ✅ ${esc(tOrEn('roBoth'))}: ${tookBoth}</span>
+    ${statsHtml}
     <span>· ${rosterRemote ? '🌐 ' + tOrEn('adOnlineRoster') : '📱 ' + tOrEn('adLocalRoster')}</span>`;
 
-  const detailLine = (row, examId) => {
-    if (!row) return `<p class="admin-note">${esc(examShort(examId))}: ${esc(tOrEn('roMissing'))}</p>`;
-    const del = (row.docId && remoteCanDelete())
-      ? `<div class="texam-actions"><button class="btn btn-ghost" data-del="${esc(row.docId)}" data-exam="${examId}">${tOrEn('roDelete')} · ${esc(examShort(examId))}</button></div>`
-      : '';
-    return `<div>
-      <p class="mono">${esc(examShort(examId))} · ${row.score} / ${row.total} · ${row.pct}% ${row.passed ? '✓' : '✗'} · ${fmtDateTime(row.submittedAt)}</p>
-      ${del}
-    </div>`;
-  };
+  list.innerHTML = combinedRows.map((e, rowIdx) => {
+    const takenCount = EXAM_ORDER.filter((id) => e.exams && e.exams[id]).length;
+    const badge = takenCount === EXAM_ORDER.length
+      ? tOrEn('roAllExams')
+      : `${takenCount}/${EXAM_ORDER.length} ${tOrEn('roAttempts')}`;
 
-  list.innerHTML = combinedRows.map((e) => {
-    const f = e.first;
-    const s = e.second;
-    const badge = (f && s) ? tOrEn('roBoth') : (f ? tOrEn('roFirstOnly') : tOrEn('roSecondOnly'));
-    const deg = (row) => row ? `${row.score}/${row.total} ${row.passed ? '✓' : '✗'}` : tOrEn('roMissing');
+    const scorePills = EXAM_ORDER.map((id) => {
+      const row = e.exams && e.exams[id];
+      const deg = row ? `${row.score}/${row.total} ${row.passed ? '✓' : '✗'}` : tOrEn('roMissing');
+      return `${esc(examShort(id))}: ${esc(deg)}`;
+    }).join(' · ');
+
+    const examSectionsHtml = EXAM_ORDER.map((id) => {
+      const row = e.exams && e.exams[id];
+      if (!row) {
+        return `
+          <div class="roster-combined-exam-block" style="margin-bottom:0.75rem;padding:0.5rem 0;border-bottom:1px dashed var(--rule-soft);">
+            <p class="admin-note" style="margin:0.2rem 0;">${esc(examShort(id))}: ${esc(tOrEn('roMissing'))}</p>
+          </div>`;
+      }
+      const wrong = (row.items || []).filter((it) => !it.good);
+      const typing = (row.items || []).filter((it) => it.type === 'typing');
+      const totalItems = (row.items || []).length;
+      const defaultTab = wrong.length > 0 ? 'mistakes' : (typing.length > 0 ? 'written' : 'all');
+      const secs = Math.round((row.durationUsed || 0) / 1000);
+      const dur = isAr
+        ? (secs < 60 ? `${secs} ث` : `${Math.floor(secs / 60)} د ${secs % 60} ث`)
+        : (secs < 60 ? `${secs}s` : `${Math.floor(secs / 60)}m ${secs % 60}s`);
+
+      const perType = Object.keys(row.perType || {}).map((k) => {
+        const s = row.perType[k];
+        return `<span class="chip">${tOrEn('type_' + k)} ${s.c}/${s.t}</span>`;
+      }).join('');
+
+      const delBtn = (row.docId && remoteCanDelete())
+        ? `<div class="texam-actions" style="margin-top:0.6rem;"><button class="btn btn-ghost" data-del="${esc(row.docId)}" data-exam="${id}">${tOrEn('roDelete')} · ${esc(examShort(id))}</button></div>`
+        : '';
+
+      return `
+        <div class="roster-combined-exam-block" data-exam="${id}" style="margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid var(--rule-soft);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.4rem;">
+            <h4 style="margin:0;font-size:0.96rem;">${esc(examShort(id))} · ${row.score} / ${row.total} · ${row.pct}% ${row.passed ? '✓' : '✗'}</h4>
+            <span class="muted" style="font-size:0.82rem;">${fmtDateTime(row.submittedAt)} · ⏱ ${dur}${row.expired ? (isAr ? ' · انتهى الوقت' : ' · expired') : ''}</span>
+          </div>
+          <div class="roster-chips" style="margin-top:0.3rem;">${perType}</div>
+
+          <div class="roster-overview-stats" style="margin-top:0.5rem;">
+            <span class="chip" style="background:rgba(211,47,47,0.1);color:var(--c-red);font-weight:700;">❌ ${wrong.length} ${tOrEn('roMistakes')}</span>
+            <span class="chip" style="background:rgba(255,160,0,0.15);color:var(--c-amber,#b78103);font-weight:700;">✍️ ${typing.length} ${tOrEn('roWritten')}</span>
+            <span class="chip" style="opacity:0.8;">📋 ${totalItems} ${isAr ? 'سؤال إجمالي' : 'total'}</span>
+          </div>
+
+          <div class="roster-filter-tabs">
+            <button type="button" class="roster-tab-btn ${defaultTab === 'mistakes' ? 'active' : ''}" data-tab="mistakes" data-row-idx="${rowIdx}" data-exam="${id}">
+              ❌ ${tOrEn('roTabMistakes')} (${wrong.length})
+            </button>
+            <button type="button" class="roster-tab-btn ${defaultTab === 'written' ? 'active' : ''}" data-tab="written" data-row-idx="${rowIdx}" data-exam="${id}">
+              ✍️ ${tOrEn('roTabWritten')} (${typing.length})
+            </button>
+            <button type="button" class="roster-tab-btn ${defaultTab === 'all' ? 'active' : ''}" data-tab="all" data-row-idx="${rowIdx}" data-exam="${id}">
+              📋 ${tOrEn('roTabAll')} (${totalItems})
+            </button>
+          </div>
+
+          <div class="roster-items-container">
+            ${renderQuestionCards(row.items, defaultTab, isAr)}
+          </div>
+          ${delBtn}
+        </div>`;
+    }).join('');
+
     return `
-      <details class="roster-row">
+      <details class="roster-row" data-row-idx="${rowIdx}">
         <summary>
-          <strong>${esc(e.name || '—')}</strong>
-          <span class="roster-score">${esc(examShort('final-l1l2'))}: ${esc(deg(f))} · ${esc(examShort('mid-l1l2'))}: ${esc(deg(s))}</span>
-          <span class="texam-status ${(f && s) ? 'st-done' : ''}">${esc(badge)}</span>
+          <div class="roster-summary-left">
+            <strong>${esc(e.name || '—')}</strong>
+            <span class="roster-meta-mini">${esc(scorePills)}</span>
+          </div>
+          <span class="texam-status ${takenCount === EXAM_ORDER.length ? 'st-done' : ''}">${esc(badge)}</span>
         </summary>
         <div class="roster-det">
-          ${detailLine(f, 'final-l1l2')}
-          ${detailLine(s, 'mid-l1l2')}
+          ${examSectionsHtml}
         </div>
       </details>`;
   }).join('');
+
+  list.querySelectorAll('.roster-tab-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const rowIdx = parseInt(btn.dataset.rowIdx, 10);
+      const examId = btn.dataset.exam;
+      const entry = combinedRows[rowIdx];
+      if (!entry || !entry.exams || !entry.exams[examId]) return;
+      const examRow = entry.exams[examId];
+      const tab = btn.dataset.tab;
+      const parentTabs = btn.closest('.roster-filter-tabs');
+      parentTabs.querySelectorAll('.roster-tab-btn').forEach((b) => b.classList.remove('active'));
+      btn.classList.add('active');
+      const container = btn.closest('.roster-combined-exam-block').querySelector('.roster-items-container');
+      if (container) {
+        container.innerHTML = renderQuestionCards(examRow.items, tab, isAr);
+      }
+    });
+  });
 
   list.querySelectorAll('[data-del]').forEach((btn) => {
     btn.addEventListener('click', async () => {
@@ -393,10 +709,14 @@ function paintCombined() {
         await Remote.deleteAttempt(btn.dataset.del);
         const examId = btn.dataset.exam;
         combinedRows = combinedRows.map((e) => {
-          if (examId === 'final-l1l2' && e.first && e.first.docId === btn.dataset.del) return Object.assign({}, e, { first: null });
-          if (examId === 'mid-l1l2' && e.second && e.second.docId === btn.dataset.del) return Object.assign({}, e, { second: null });
+          if (e.exams && e.exams[examId] && e.exams[examId].docId === btn.dataset.del) {
+            delete e.exams[examId];
+            e.first = e.exams['final-l1l2'] || null;
+            e.second = e.exams['mid-l1l2'] || null;
+            e.third = e.exams['final-l4'] || null;
+          }
           return e;
-        }).filter((e) => e.first || e.second);
+        }).filter((e) => Object.keys(e.exams || {}).length > 0);
         paintCombined();
         flashLog(tOrEn('adDeleted'));
       } catch (err) {}
@@ -500,39 +820,77 @@ document.addEventListener('DOMContentLoaded', () => {
     const view = rosterView();
     if (view === 'all') {
       if (!combinedRows.length) return;
-      const head = ['name',
-        'first_score', 'first_total', 'first_pct', 'first_passed', 'first_submitted_at',
-        'second_score', 'second_total', 'second_pct', 'second_passed', 'second_submitted_at'];
-      const rows = combinedRows.map((e) => {
-        const c = (v) => v === null || v === undefined ? '' : v;
-        const d = (ms) => ms ? new Date(ms).toISOString() : '';
-        return [
-          `"${String(e.name || '').replace(/"/g, '""')}"`,
-          c(e.first && e.first.score), c(e.first && e.first.total), c(e.first && e.first.pct),
-          e.first ? (e.first.passed ? 1 : 0) : '', d(e.first && e.first.submittedAt),
-          c(e.second && e.second.score), c(e.second && e.second.total), c(e.second && e.second.pct),
-          e.second ? (e.second.passed ? 1 : 0) : '', d(e.second && e.second.submittedAt)
-        ].join(',');
+      const head = ['name'];
+      EXAM_ORDER.forEach((id) => {
+        head.push(
+          `${id}_score`, `${id}_total`, `${id}_pct`, `${id}_passed`,
+          `${id}_wrong_count`, `${id}_written_count`, `${id}_submitted_at`
+        );
       });
-      const csv = '﻿' + head.join(',') + '\n' + rows.join('\n');
+      const rows = combinedRows.map((e) => {
+        const cols = [`"${String(e.name || '').replace(/"/g, '""')}"`];
+        EXAM_ORDER.forEach((id) => {
+          const r = e.exams && e.exams[id];
+          if (!r) {
+            cols.push('', '', '', '', '', '', '');
+          } else {
+            cols.push(
+              r.score,
+              r.total,
+              r.pct,
+              r.passed ? 1 : 0,
+              r.wrong,
+              r.typingCount,
+              r.submittedAt ? new Date(r.submittedAt).toISOString() : ''
+            );
+          }
+        });
+        return cols.join(',');
+      });
+      const csv = '\uFEFF' + head.join(',') + '\n' + rows.join('\n');
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'exam-results-both.csv';
+      a.download = 'exam-results-all.csv';
       document.body.appendChild(a);
       a.click();
       setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
       return;
     }
     if (!rosterRows.length) return;
-    const head = ['name', 'score', 'total', 'pct', 'passed', 'wrong', 'unanswered', 'time_used_sec', 'expired', 'submitted_at'];
-    const rows = rosterRows.map((r) => [
-      `"${String(r.name || '').replace(/"/g, '""')}"`,
-      r.score, r.total, r.pct, r.passed ? 1 : 0, r.wrong, r.unanswered,
-      Math.round((r.durationUsed || 0) / 1000), r.expired ? 1 : 0,
-      new Date(r.submittedAt).toISOString()
-    ].join(','));
-    const csv = '﻿' + head.join(',') + '\n' + rows.join('\n');
+    const head = [
+      'name', 'score', 'total', 'pct', 'passed',
+      'wrong_count', 'unanswered_count', 'written_count',
+      'time_used_sec', 'expired', 'submitted_at',
+      'mistakes_summary', 'written_answers_summary'
+    ];
+    const rows = rosterRows.map((r) => {
+      const wrongList = (r.items || []).filter((it) => !it.good).map((it) => {
+        const yourStr = it.yourFormatted !== null ? it.yourFormatted : 'Unanswered';
+        return `Q${it.n}: [Your: ${yourStr}] -> [Correct: ${it.correct || ''}]`;
+      }).join(' | ');
+      const writtenList = (r.items || []).filter((it) => it.type === 'typing').map((it) => {
+        const yourStr = it.yourFormatted !== null ? it.yourFormatted : 'Empty';
+        return `Q${it.n}: [${yourStr}] (${it.good ? 'PASS' : 'FAIL'}) [Accepted: ${it.correct || ''}]`;
+      }).join(' | ');
+
+      return [
+        `"${String(r.name || '').replace(/"/g, '""')}"`,
+        r.score,
+        r.total,
+        r.pct,
+        r.passed ? 1 : 0,
+        r.wrong,
+        r.unanswered,
+        r.typingCount,
+        Math.round((r.durationUsed || 0) / 1000),
+        r.expired ? 1 : 0,
+        r.submittedAt ? new Date(r.submittedAt).toISOString() : '',
+        `"${wrongList.replace(/"/g, '""')}"`,
+        `"${writtenList.replace(/"/g, '""')}"`
+      ].join(',');
+    });
+    const csv = '\uFEFF' + head.join(',') + '\n' + rows.join('\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -567,8 +925,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!confirm(tOrEn('roClearRemoteBothConfirm'))) return;
       try {
         if ((typeof Remote !== 'undefined') && Remote.teacher) {
-          await Remote.clearRoster('final-l1l2');
-          await Remote.clearRoster('mid-l1l2');
+          for (const id of EXAM_ORDER) {
+            await Remote.clearRoster(id);
+          }
           combinedRows = [];
           rosterRows = [];
           paintCombined();
@@ -659,14 +1018,12 @@ function refreshLoginUI() {
 async function loadRemoteRoster() {
   const view = rosterView();
   if (view === 'all') {
-    const [firstRows, secondRows] = await Promise.all([
-      Remote.fetchRoster('final-l1l2'),
-      Remote.fetchRoster('mid-l1l2')
-    ]);
-    combinedRows = mergeRows(
-      firstRows.map((r) => toRow(r, r.id, 'final-l1l2')),
-      secondRows.map((r) => toRow(r, r.id, 'mid-l1l2'))
-    );
+    const fetched = await Promise.all(EXAM_ORDER.map((id) => Remote.fetchRoster(id)));
+    const rowsByExam = {};
+    EXAM_ORDER.forEach((id, idx) => {
+      rowsByExam[id] = (fetched[idx] || []).map((r) => toRow(r, r.id, id));
+    });
+    combinedRows = mergeRowsDynamic(rowsByExam);
     rosterRows = [];
     rosterRemote = true;
     lastRemoteFetch = Date.now();

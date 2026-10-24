@@ -205,6 +205,25 @@ function yourText(q, v) {
   }
   return null;
 }
+function correctText(q) {
+  if (!q) return '';
+  if (isSingle(q)) return q.options[q.answer] !== undefined ? q.options[q.answer] : '';
+  if (q.type === 'typing') {
+    return Array.isArray(q.accepted) ? q.accepted.join(' / ') : '';
+  }
+  if (q.type === 'multi') {
+    return (q.answers || []).sort((a, b) => a - b).map((i) => q.options[i]).join(' + ');
+  }
+  if (q.type === 'ordering') {
+    return (q.answers || []).map((oi, k) => `${k + 1}. ${q.options[oi]}`).join(' → ');
+  }
+  if (q.type === 'matching') {
+    const cmap = {};
+    (q.answers || []).forEach((leftIdx, rightPos) => { cmap[leftIdx] = rightPos; });
+    return (q.lefts || []).map((l, li) => `${l} ↔ ${q.rights[cmap[li]] || '—'}`).join(' · ');
+  }
+  return '';
+}
 
 /* ---------------- persistence ---------------- */
 function loadState() {
@@ -818,9 +837,10 @@ async function finishExam(expired) {
       type: q.type,
       question: q.question,
       your: yourText(q, your),
+      correct: correctText(q),
       good,
-      explain: q.explain || ''
-      // NOTE: correct option intentionally NOT stored — report teaches via explanation only
+      explain: q.explain || '',
+      accepted: q.accepted || null
     };
   });
 
@@ -862,7 +882,7 @@ async function finishExam(expired) {
         owner: (exam.state.uid || null),
         clientAt: Date.now(),
         lang: currentLang,
-        items: items.map((it) => ({ n: it.n, type: it.type, good: it.good, your: it.your }))
+        items: items.map((it) => ({ n: it.n, id: it.id, type: it.type, good: it.good, question: it.question, your: it.your, correct: it.correct, explain: it.explain, accepted: it.accepted }))
       };
       await Promise.race([
         Remote.submitAttempt(EXAM_ID, (exam.state.uid || nameKey(report.name)), rec),
@@ -889,7 +909,7 @@ async function finishExam(expired) {
             owner: (exam.state.uid || null),
         clientAt: Date.now(),
             lang: currentLang,
-            items: items.map((it) => ({ n: it.n, type: it.type, good: it.good, your: it.your }))
+            items: items.map((it) => ({ n: it.n, id: it.id, type: it.type, good: it.good, question: it.question, your: it.your, correct: it.correct, explain: it.explain, accepted: it.accepted }))
           }
         });
       }
@@ -911,7 +931,7 @@ async function finishExam(expired) {
       expired: !!expired,
       submittedAt: Date.now(),
       lang: currentLang,
-      items: items.map((it) => ({ n: it.n, type: it.type, good: it.good, your: it.your }))
+      items: items.map((it) => ({ n: it.n, id: it.id, type: it.type, good: it.good, question: it.question, your: it.your, correct: it.correct, explain: it.explain, accepted: it.accepted }))
     });
     while (log.length > 100) log.shift();
     localStorage.setItem(LOG_KEY, JSON.stringify(log));
