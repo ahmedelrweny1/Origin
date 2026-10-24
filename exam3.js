@@ -297,7 +297,7 @@ function renderGate() {
     $('startExamBtn').classList.add('hidden');
     $('nameHint').classList.add('hidden');
     const ll = $('gateLoginLink');
-    ll.href = 'login.html?next=' + encodeURIComponent('exam2.html');
+    ll.href = 'login.html?next=' + encodeURIComponent('exam3.html');
     ll.classList.remove('hidden');
     return;
   }
@@ -368,7 +368,7 @@ async function startFresh() {
   if (isOnline()) {
     const u = onlineUser();
     if (!u || !u.uid) {
-      window.location.href = 'login.html?next=' + encodeURIComponent('exam2.html');
+      window.location.href = 'login.html?next=' + encodeURIComponent('exam3.html');
       return;
     }
     sname = (u.name || '').trim() || sname;
