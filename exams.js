@@ -38,6 +38,23 @@ const EXAMS = [
       windowStart: 0,
       windowEnd: 0
     }
+  },
+  {
+    id: 'final-l4',
+    total: 50,
+    runUrl: 'exam3.html',
+    tag: 'Lecture 4',
+    titleEn: 'Third Exam · Lecture 4 (Digital Representation)',
+    titleAr: 'الامتحان الثالث · المحاضرة الرابعة (التمثيل الرقمي)',
+    descKey: 'tx3CardDesc',
+    seed: {
+      durationMin: 60,
+      passMark: 25,
+      attemptLimit: 1,
+      windowEnabled: true,
+      windowStart: new Date(2026, 9, 24, 12, 0, 0).getTime(),
+      windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime()
+    }
   }
 ];
 

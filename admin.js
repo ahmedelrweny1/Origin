@@ -27,11 +27,22 @@ const EXAMS = {
       windowStart: 0,
       windowEnd: 0
     }
+  },
+  'final-l4': {
+    total: 50,
+    seed: {
+      durationMin: 60,
+      passMark: 25,
+      attemptLimit: 1,
+      windowEnabled: true,
+      windowStart: new Date(2026, 9, 24, 12, 0, 0).getTime(),
+      windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime()
+    }
   }
 };
 const ATT_KEY = (id) => `origin-timed-exam-${id}-attempts`;
 const LOG_KEY = (id) => `origin-timed-exam-${id}-log`;
-const EXAM_ORDER = ['final-l1l2', 'mid-l1l2'];
+const EXAM_ORDER = ['final-l1l2', 'mid-l1l2', 'final-l4'];
 const DEFAULT_PASS = '1234';
 const SESSION_KEY = 'origin-admin-unlocked';
 
@@ -53,6 +64,7 @@ function rosterView() {
 function examShort(id) {
   if (id === 'final-l1l2') return tOrEn('roFirst');
   if (id === 'mid-l1l2') return tOrEn('roSecond');
+  if (id === 'final-l4') return tOrEn('roThird');
   return id;
 }
 
