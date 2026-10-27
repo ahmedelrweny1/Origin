@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معاينة المحاضرة الخامسة | Origin Atlas</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=7">
+  <link rel="stylesheet" href="lecture1.css?v=7">
+  <link rel="stylesheet" href="lecture2.css?v=7">
+  <link rel="stylesheet" href="lecture3.css?v=7">
+  <link rel="stylesheet" href="lecture4.css?v=7">
+  <link rel="stylesheet" href="rtl.css?v=7">
+  <link rel="stylesheet" href="lecture-shell.css?v=7">
+  <style>
+    .l5-stage { margin-bottom: 5rem; }
+    .l5-funfact {
+      margin-top: 1.5rem; padding: 1rem 1.2rem; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(245,158,11,.12), rgba(245,158,11,.04));
+      border: 1px solid rgba(245,158,11,.35);
+      font-size: 0.95rem;
+    }
+    .l5-takeaway {
+      margin-top: 1rem; padding: 1rem 1.2rem; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(16,185,129,.12), rgba(16,185,129,.04));
+      border: 1px solid rgba(16,185,129,.35);
+      font-size: 0.95rem;
+    }
+    .l5-divider {
+      display: flex; align-items: center; gap: 1rem; margin: 6rem 0 3rem;
+      color: var(--muted, #888); font-size: .8rem; letter-spacing: .2em;
+    }
+    .l5-divider::before, .l5-divider::after { content: ""; flex: 1; height: 1px; background: rgba(128,128,128,.25); }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="header-inner">
+      <div class="header-top">
+        <span class="topbar-meta">معاينة محلية · Chapter 07</span>
+        <a class="brand" href="index.html">Origin <span>Atlas</span></a>
+        <div class="controls-group">
+          <a href="lectures.html" class="control-btn" style="text-decoration:none;">← الرحلات</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section class="hero-section">
+      <div class="hero-main">
+        <span class="badge-tag">🖥️ الفصل السابع · أولى ثانوي</span>
+        <h1 class="hero-title">
+          المحاضرة الخامسة<br><span class="text-gradient">تجميع الكمبيوتر والبرمجيات</span>
+        </h1>
+        <p class="hero-subtitle">
+          معاينة محلية للمحتوى العربي الجديد — المكونات الخمسة، الواجهات، البرمجيات، والدوائر المنطقية.
+        </p>
+      </div>
+      <aside class="hero-side">
+        <ul class="unit-meta">
+          <li><span class="label">UNIT</span><span class="value">Computer Fundamentals</span></li>
+          <li><span class="label">LEVEL</span><span class="value">1st Secondary</span></li>
+          <li><span class="label">STOPS</span><span class="value" id="stageCount">8 stages</span></li>
+          <li><span class="label">FINAL</span><span class="value">Match challenge</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section id="stageList"></section>
+
+    <section class="final-challenge-card">
+      <span class="badge-tag">🏁 Final Challenge</span>
+      <h2>تحدي مطابقة مفاهيم المحاضرة الخامسة</h2>
+      <p class="muted">حتى اتعمل اللعبة التفاعلية، دي قائمة عناصر الماتش الجاهزة في البيانات (16 عنصر):</p>
+      <div class="match-game-grid" id="matchPreview"></div>
+    </section>
+
+  </main>
+
+  <script src="data-lect5-ar.js"></script>
+  <script>
+    const stages = window.LECT5_STAGES_AR || [];
+    document.getElementById("stageCount").textContent = stages.length + " stages";
+    const list = document.getElementById("stageList");
+
+    stages.forEach((st, i) => {
+      const art = document.createElement("article");
+      art.className = "stage-card l5-stage";
+      art.innerHTML = `
+        <div class="stage-header">
+          <div class="stage-eyebrow">
+            <span class="stage-category">${st.category}</span>
+            <span class="stage-num">محطة ${String(i + 1).padStart(2, "0")} من ${String(stages.length).padStart(2, "0")}</span>
+          </div>
+          <h2 class="stage-title"><span>${st.glyph}</span> <span>${st.title}</span></h2>
+          <p class="stage-tagline">${st.tagline}</p>
+        </div>
+        <div class="stage-text">
+          ${st.story.join("")}
+        </div>
+        <div class="l5-takeaway">🎯 <strong>الخلاصة:</strong> ${st.takeaway}</div>
+        <div class="l5-funfact">💡 <strong>هل تعلم؟</strong> ${st.funFact}</div>
+        <div class="stage-quiz">
+          <h4 class="quiz-question"><span>🧠</span> سؤال التحدي السريع: ${st.quiz.question}</h4>
+          <div class="quiz-options-list">
+            ${st.quiz.options.map((opt, idx) => `<button class="quiz-btn" data-idx="${idx}">${opt}</button>`).join("")}
+          </div>
+          <div class="quiz-feedback-box" aria-live="polite"></div>
+        </div>
+      `;
+
+      // Bind quiz
+      art.querySelectorAll(".quiz-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const picked = Number(btn.dataset.idx);
+          art.querySelectorAll(".quiz-btn").forEach((b, idx) => {
+            b.disabled = true;
+            if (idx === st.quiz.answer) b.classList.add("correct");
+            else if (idx === picked) b.classList.add("wrong");
+          });
+          const good = picked === st.quiz.answer;
+          const fb = art.querySelector(".quiz-feedback-box");
+          fb.textContent = (good ? "✅ إجابة ممتازة وصحيحة! " : "❌ محاولة جيدة — الإجابة الصحيحة محددة بالأخضر. ") + st.quiz.explain;
+          fb.className = "quiz-feedback-box " + (good ? "good" : "bad");
+        });
+      });
+
+      if (i > 0) {
+        const div = document.createElement("div");
+        div.className = "l5-divider";
+        div.textContent = "◼";
+        list.appendChild(div);
+      }
+      list.appendChild(art);
+    });
+
+    // Match items preview
+    const items = window.LECT5_MATCH_ITEMS_AR || [];
+    const mb = document.getElementById("matchPreview");
+    mb.innerHTML = items.map(m => `
+      <div class="match-item" style="cursor:default;">
+        <div class="match-concept">${m.concept}</div>
+        <div class="quiet" style="font-size:.85rem; margin-top:.4rem;">${m.match}</div>
+      </div>
+    `).join("");
+  </script>
+</body>
+</html>
