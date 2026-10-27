@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <script src="gate.js?v=7"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{var _p=JSON.parse(localStorage.getItem("origin-lect5-progress")||"null");if(_p&&_p.visited&&_p.visited.length)document.documentElement.classList.add("skip-hero")}catch(e){}</script>
+  <title>الفصل السابع: تجميع الكمبيوتر والبرمجيات والدوائر المنطقية | Origin Atlas</title>
+  <meta name="description" content="رحلة تفاعلية بصرية في تجميع الكمبيوتر، الواجهات، العتاد والبرمجيات، نظام التشغيل والـ Drivers، والبوابات المنطقية ودوائر الجمع للصف الأول الثانوي.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=7">
+  <link rel="stylesheet" href="lecture1.css?v=7">
+  <link rel="stylesheet" href="lecture2.css?v=7">
+  <link rel="stylesheet" href="lecture3.css?v=7">
+  <link rel="stylesheet" href="lecture4.css?v=7">
+  <link rel="stylesheet" href="rtl.css?v=7">
+  <link rel="stylesheet" href="lecture-shell.css?v=7">
+  <script src="i18n.js?v=7"></script>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="header-inner">
+      <div class="header-top">
+        <span class="topbar-meta" data-i18n="lect5Edition">الفصل ٧ · أولى ثانوي</span>
+        <a class="brand" href="index.html">Origin <span>Atlas</span></a>
+        <div class="controls-group">          <a href="lectures.html" class="control-btn lect-back" data-i18n="lectBack">← الرحلات</a>
+
+          <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadQuizzes">🧠 Quizzes</a>
+          <button id="themeToggle" class="control-btn" aria-label="Toggle Theme">🌙</button>
+          <button id="langToggle" class="control-btn" aria-label="Toggle Language">AR / EN</button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section class="hero-section" id="heroSection">
+      <div class="hero-main">
+        <span class="badge-tag" data-i18n="lect5HeroBadge">🧩 الفصل السابع · أولى ثانوي</span>
+        <h1 class="hero-title" data-i18n="lect5HeroTitle">
+          تجميع الكمبيوتر والبرمجيات<br><span class="text-gradient">والدوائر المنطقية</span>
+        </h1>
+        <p class="hero-subtitle" data-i18n="lect5HeroDesc">
+          رحلة تفاعلية تحترف فيها المكونات الخمسة للكمبيوتر، الواجهات، العتاد والبرمجيات، نظام التشغيل والـ Drivers، والبوابات المنطقية ودوائر الجمع.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-arrow" id="startLectureBtn" data-i18n="lect5StartBtn">
+            ابدأ الاستكشاف التفاعلي
+          </button>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <ul class="unit-meta">
+          <li><span class="label">UNIT</span><span class="value" data-i18n="lect5UnitName">Computer Assembly, Software & Logic Circuits</span></li>
+          <li><span class="label">LEVEL</span><span class="value" data-i18n="lect5Level">1st Secondary</span></li>
+          <li><span class="label">STOPS</span><span class="value" data-i18n="lect5Stops">٨ محطات</span></li>
+          <li><span class="label">FINAL</span><span class="value" data-i18n="lect5Final">تحدي المطابقة</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="stage-experience hidden" id="lectureExperience">
+      <article class="stage-card" id="stagePanel" aria-live="polite"></article>
+
+      <div class="stage-navigation">
+        <button class="btn btn-ghost" id="prevBtn" data-i18n="btnPrev">&larr; المحطة السابقة</button>
+        <button class="btn btn-primary btn-arrow" id="nextBtn" data-i18n="btnNext">المحطة التالية &rarr;</button>
+      </div>
+    </section>
+
+    <section class="final-challenge-card hidden" id="finalChallengeSection">
+      <span class="badge-tag" data-i18n="finalChallengeBadge">🏁 Final Challenge</span>
+      <h2 data-i18n="lect5ChallengeTitle">تحدي مطابقة مفاهيم الفصل السابع</h2>
+      <p class="muted" data-i18n="lect5ChallengeDesc">
+        وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك لتجميع الكمبيوتر والبرمجيات والدوائر المنطقية.
+      </p>
+      <div class="match-game-grid" id="matchBoard"></div>
+      <div id="matchResult" class="hidden"></div>
+      <button class="btn btn-ghost" id="resetMatchBtn" data-i18n="btnResetMatch">🔄 إعادة الترتيب والمحاولة</button>
+    </section>
+
+  </main>
+
+  <script src="data-lect5-ar.js?v=7"></script>
+  <script src="lecture-shell.js?v=7"></script>
+  <script src="lecture5.js?v=7"></script>
+</body>
+</html>

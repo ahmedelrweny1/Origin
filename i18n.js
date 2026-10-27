@@ -126,6 +126,19 @@ const translations = {
     lect4ChallengeTitle: "Chapter 4 Concept Matching Challenge",
     lect4ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Digital Data Representation and Multimedia.",
 
+    // Lecture 5 (Chapter 7: Computer Assembly, Software & Logic Circuits)
+    lect5Edition: "Chapter 07 · 1st Secondary",
+    lect5HeroBadge: "🧩 Chapter 7 · 1st Secondary",
+    lect5HeroTitle: "Computer Assembly, Software <br><span class=\"text-gradient\">& Logic Circuits</span>",
+    lect5HeroDesc: "An interactive journey through the computer's five components, interfaces, hardware vs software, OS and drivers, and logic gates with AND, OR, NOT and binary adders.",
+    lect5StartBtn: "Start Interactive Journey",
+    lect5UnitName: "Computer Assembly, Software & Logic Circuits",
+    lect5Level: "1st Secondary",
+    lect5Stops: "8 chapters",
+    lect5Final: "Match challenge",
+    lect5ChallengeTitle: "Chapter 7 Concept Matching Challenge",
+    lect5ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Computer Assembly, Software and Logic Circuits.",
+
     ssTitle: "Lecture stops",
     ssFinal: "Final challenge",
     ssMenu: "Open stations menu",
@@ -624,6 +637,19 @@ const translations = {
     lect4Final: "تحدي المطابقة",
     lect4ChallengeTitle: "تحدي مطابقة مفاهيم الفصل الرابع",
     lect4ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك للتمثيل الرقمي للبيانات والوسائط.",
+
+    // Lecture 5 (Chapter 7: Computer Assembly, Software & Logic Circuits)
+    lect5Edition: "الفصل ٧ · أولى ثانوي",
+    lect5HeroBadge: "🧩 الفصل السابع · أولى ثانوي",
+    lect5HeroTitle: "تجميع الكمبيوتر والبرمجيات<br><span class=\"text-gradient\">والدوائر المنطقية</span>",
+    lect5HeroDesc: "رحلة تفاعلية تحترف فيها المكونات الخمسة للكمبيوتر، الواجهات، العتاد والبرمجيات، نظام التشغيل والـ Drivers، والبوابات المنطقية ودوائر الجمع.",
+    lect5StartBtn: "ابدأ الاستكشاف التفاعلي",
+    lect5UnitName: "تجميع الكمبيوتر والبرمجيات والدوائر المنطقية",
+    lect5Level: "أولى ثانوي",
+    lect5Stops: "٨ محطات",
+    lect5Final: "تحدي المطابقة",
+    lect5ChallengeTitle: "تحدي مطابقة مفاهيم الفصل السابع",
+    lect5ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك لتجميع الكمبيوتر والبرمجيات والدوائر المنطقية.",
 
     ssTitle: "محطات المحاضرة",
     ssFinal: "التحدي النهائي",

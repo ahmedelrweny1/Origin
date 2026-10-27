@@ -121,6 +121,29 @@ const journeys = [
       en: 'Chapter 4 · 1st Secondary',
       ar: 'الفصل الرابع · أولى ثانوي'
     }
+  },
+  {
+    id: 'assembly-software-logic',
+    title: {
+      en: 'Computer Assembly, Software & Logic Circuits',
+      ar: 'تجميع الكمبيوتر والبرمجيات والدوائر المنطقية'
+    },
+    description: {
+      en: "Assemble the computer's five components, meet USB/HDMI/Ethernet interfaces, system software, OS & drivers, then build logic gates AND/OR/NOT and binary adders.",
+      ar: 'اعرف المكونات الخمسة للكمبيوتر، الواجهات USB و HDMI و Ethernet، العتاد والبرمجيات والـ Drivers، وابنِ البوابات المنطقية ودوائر الجمع.'
+    },
+    url: 'lecture5.html',
+    hasQuizzes: false,
+    status: 'active',
+    icon: '🧩',
+    duration: {
+      en: '~30 min',
+      ar: '~٣٠ دقيقة'
+    },
+    tag: {
+      en: 'Chapter 7 · 1st Secondary',
+      ar: 'الفصل السابع · أولى ثانوي'
+    }
   }
 ];
 
@@ -129,7 +152,8 @@ const JOURNEY_TOTALS = {
   'privacy-and-ip': 7,
   'security-and-safety': 5,
   'abacus-to-ai': 11,
-  'digital-data-representation': 11
+  'digital-data-representation': 11,
+  'assembly-software-logic': 8
 };
 
 const JOURNEY_VISITED_KEYS = {
@@ -137,7 +161,8 @@ const JOURNEY_VISITED_KEYS = {
   'privacy-and-ip': 'origin-lect2-progress',
   'security-and-safety': 'origin-lect3-progress',
   'abacus-to-ai': 'origin-progress',
-  'digital-data-representation': 'origin-lect4-progress'
+  'digital-data-representation': 'origin-lect4-progress',
+  'assembly-software-logic': 'origin-lect5-progress'
 };
 
 function getJourneyProgress(id) {
