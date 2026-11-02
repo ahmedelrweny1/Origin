@@ -139,6 +139,20 @@ const translations = {
     lect5ChallengeTitle: "Chapter 7 Concept Matching Challenge",
     lect5ChallengeDesc: "You reached the destination! Match each concept with its definition to solidify your mastery of Computer Assembly, Software and Logic Circuits.",
 
+    // Lecture 6 (Practical: First steps in JavaScript - QUREO)
+    lect6Edition: "Lecture 01 · Practical",
+    lect6HeroBadge: "⌨️ Lecture 1 · Practical",
+    lect6HeroTitle: "Lecture 1 - Practical<br><span class=\"text-gradient\">First Steps in Programming</span>",
+    lect6HeroDesc: "A hands-on journey: meet the code editor and the console, run your first console.log, master arithmetic, strings and variables, and finish with a real midway code test.",
+    lect6StartBtn: "Start Interactive Journey",
+    lect6UnitName: "QUREO · Programming Practical",
+    lect6Level: "1st Secondary",
+    lect6Stops: "7 stops",
+    lect6Final: "Midway code test",
+    lect6ChallengeTitle: "The Midway Code Test — Chapters 1–4",
+    lect6ChallengeDesc: "You reached the final stop! Write real JavaScript in the editor, press Run, and match the console output with the expected result for each task.",
+    lect6ResetTest: "🔄 Reset the test and start over",
+
     ssTitle: "Lecture stops",
     ssFinal: "Final challenge",
     ssMenu: "Open stations menu",
@@ -650,6 +664,20 @@ const translations = {
     lect5Final: "تحدي المطابقة",
     lect5ChallengeTitle: "تحدي مطابقة مفاهيم الفصل السابع",
     lect5ChallengeDesc: "وصلت للمحطة الأخيرة! اضغط على كل مصطلح وما يناسبه من التعريفات لتثبيت فهمك لتجميع الكمبيوتر والبرمجيات والدوائر المنطقية.",
+
+    // Lecture 6 (Practical: First steps in JavaScript - QUREO)
+    lect6Edition: "المحاضرة الأولى · عملي",
+    lect6HeroBadge: "⌨️ المحاضرة الأولى · عملي",
+    lect6HeroTitle: "المحاضرة الأولى - عملي<br><span class=\"text-gradient\">أول خطواتك في البرمجة</span>",
+    lect6HeroDesc: "رحلة عملية: اتعرّف على محرر الأكواد والكونسول، شغّل أول console.log، احترف العمليات الحسابية والنصوص والمتغيرات، واختم باختبار نصفي تكتب فيه كود حقيقي.",
+    lect6StartBtn: "ابدأ الاستكشاف التفاعلي",
+    lect6UnitName: "QUREO · البرمجة العملية",
+    lect6Level: "أولى ثانوي",
+    lect6Stops: "٧ محطات",
+    lect6Final: "الاختبار النصفي بالكود",
+    lect6ChallengeTitle: "الاختبار النصفي بالكود — الفصول ١–٤",
+    lect6ChallengeDesc: "وصلت للمحطة الأخيرة! اكتب كود جافاسكريبت حقيقي في المحرر، اضغط تشغيل، ووافق مخرجات الكونسول على الناتج المتوقع في كل سؤال.",
+    lect6ResetTest: "🔄 صفّر الاختبار وابدأ من جديد",
 
     ssTitle: "محطات المحاضرة",
     ssFinal: "التحدي النهائي",

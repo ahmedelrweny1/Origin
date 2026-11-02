@@ -1,0 +1,286 @@
+/* ============================================================
+   LECTURE 6 - Practical (QUREO JavaScript first steps)
+   Editor / console / labs / midway test components
+   ============================================================ */
+
+/* ---- Code shell (code shown inside the story text) ---- */
+.code-shell {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  background: #10162d;
+  color: #d6e2ff;
+  border: var(--rule-medium, 2px) solid var(--rule, #444);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+}
+
+/* ---- Widget shared screen (console-like output) ---- */
+.console-screen {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.86rem;
+  line-height: 1.65;
+  background: #081224;
+  color: #7ee0b0;
+  border: var(--rule-medium, 2px) solid var(--ink, #222);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  min-height: 3.2rem;
+  direction: ltr;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.console-screen .cs-empty { color: #5b6b8c; }
+.console-screen .cs-line { display: block; }
+.console-screen .cs-line::before { content: "> "; color: #4c648a; }
+.console-screen .cs-err { color: #ff8f9d; }
+
+/* ---- Lab buttons (numbers / operators / chips) ---- */
+.lab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.9rem;
+}
+
+.lab-btn {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 0.9rem;
+  border: 2px solid var(--ink, #222);
+  background: var(--paper, #fff);
+  color: var(--ink, #222);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border-radius: 6px;
+  direction: ltr;
+}
+
+.lab-btn:hover { background: var(--ink, #222); color: var(--paper, #fff); }
+.lab-btn.active { background: var(--c-accent, #3fa3ff); border-color: var(--c-accent, #3fa3ff); color: #fff; }
+
+.lab-preview {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.88rem;
+  background: var(--paper-deep, rgba(0,0,0,.04));
+  border: 1px solid var(--rule-soft, #ccc);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.7rem;
+  direction: ltr;
+  text-align: left;
+  text-align: left;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* ---- Variable box visual ---- */
+.var-box-row { display: flex; align-items: center; gap: 1rem; margin: 0.6rem 0 0.8rem; flex-wrap: wrap; }
+
+.var-box {
+  min-width: 120px;
+  border: 2px solid var(--ink, #222);
+  border-radius: 10px;
+  background: var(--paper, #fff);
+  padding: 0.6rem 1rem;
+  text-align: center;
+  direction: ltr;
+}
+
+.var-box .vb-name {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-red, #e05d5d);
+  letter-spacing: 0.08em;
+  direction: ltr;
+}
+
+.var-box .vb-value {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 1.7rem;
+  font-weight: 800;
+  direction: ltr;
+}
+
+.var-box.bumped { animation: vbBump 0.35s ease; }
+@keyframes vbBump {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.var-old { color: var(--ink-soft, #999); text-decoration: line-through; font-size: 0.8rem; }
+.var-new { color: #10b981; font-weight: 800; font-size: 0.8rem; }
+
+/* ---- Sliders (x + y lab) ---- */
+.slider-row { display: flex; align-items: center; gap: 0.8rem; margin: 0.5rem 0; }
+.slider-row label { font-weight: 700; min-width: 2.6rem; direction: ltr; font-family: var(--font-mono, "JetBrains Mono", monospace); }
+.slider-row input[type="range"] { flex: 1; accent-color: var(--c-blue, #3fa3ff); }
+.slider-row .sl-val { font-family: var(--font-mono, "JetBrains Mono", monospace); font-weight: 800; min-width: 3rem; text-align: center; direction: ltr; }
+
+/* ---- Code editor (textarea) ---- */
+.code-editor-wrap { direction: ltr; }
+
+.code-editor {
+  width: 100%;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  background: #10162d;
+  color: #e8f0ff;
+  border: 2px solid var(--ink, #222);
+  border-radius: 10px 10px 0 0;
+  padding: 0.9rem 1rem;
+  resize: vertical;
+  min-height: 96px;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+.code-editor:focus { outline: 3px solid rgba(63,163,255,0.35); outline-offset: -1px; }
+
+.console-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--ink, #222);
+  color: var(--paper, #fff);
+  border-radius: 0 0 10px 10px;
+  padding: 0.35rem 0.9rem;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: -2px;
+}
+
+/* ---- Review checklist ---- */
+.review-list { display: flex; flex-direction: column; gap: 0.55rem; }
+
+.review-item { border: 2px solid var(--rule, #ccc); border-radius: 8px; background: var(--paper, #fff); overflow: hidden; }
+
+.review-item .rv-head {
+  width: 100%;
+  text-align: start;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.9rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink, #222);
+}
+
+.review-item .rv-head:hover { background: rgba(127,127,127,0.08); }
+.review-item .rv-num {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.72rem;
+  padding: 0.15rem 0.5rem;
+  background: var(--ink, #222);
+  color: var(--paper, #fff);
+  border-radius: 4px;
+  flex-shrink: 0;
+  direction: ltr;
+}
+.review-item .rv-toggle { margin-inline-start: auto; font-weight: 400; opacity: 0.6; }
+
+.review-item .rv-solution { display: none; padding: 0 0.9rem 0.9rem; }
+.review-item.open .rv-solution { display: block; }
+.review-item.open { border-color: var(--c-blue, #3fa3ff); }
+
+/* ---- Midway test ---- */
+.midway-test { text-align: start; }
+
+.midway-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1.2rem;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--ink, #222);
+  border-radius: 8px;
+  background: var(--paper-deep, rgba(0,0,0,.04));
+}
+
+.midway-progress .mt-score { font-weight: 800; color: #10b981; }
+
+.mt-task {
+  border: 2px solid var(--rule, #ccc);
+  border-radius: 12px;
+  padding: 1.1rem;
+  margin-bottom: 1rem;
+  background: var(--paper, #fff);
+}
+
+.mt-task.passed { border-color: #10b981; box-shadow: 3px 3px 0 rgba(16,185,129,0.25); }
+
+.mt-task .mt-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 800;
+  font-size: 1.02rem;
+  margin-bottom: 0.5rem;
+}
+
+.mt-task .mt-status { margin-inline-start: auto; font-size: 1.1rem; }
+
+.mt-expected {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  font-size: 0.78rem;
+  color: var(--ink-soft, #777);
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.06em;
+}
+
+.mt-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.6rem; }
+
+.mt-result {
+  margin-top: 0.7rem;
+  font-weight: 800;
+  font-size: 0.95rem;
+  min-height: 1.3rem;
+}
+.mt-result.good { color: #10b981; }
+.mt-result.bad { color: #ff8f9d; }
+
+.midway-banner {
+  margin-top: 1.4rem;
+  padding: 1.2rem;
+  border: 2px solid #10b981;
+  border-radius: 12px;
+  background: rgba(16,185,129,0.08);
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #0d9668;
+}
+
+/* ---- RTL adjustments ---- */
+html[dir="rtl"] .code-shell,
+html[dir="rtl"] .code-editor,
+html[dir="rtl"] .console-screen,
+html[dir="rtl"] .lab-preview,
+html[dir="rtl"] .mt-expected { direction: ltr; text-align: left; }

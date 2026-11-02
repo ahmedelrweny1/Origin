@@ -144,6 +144,29 @@ const journeys = [
       en: 'Chapter 7 · 1st Secondary',
       ar: 'الفصل السابع · أولى ثانوي'
     }
+  },
+  {
+    id: 'programming-practical-l1',
+    title: {
+      en: 'Practical Programming: First Steps in JavaScript',
+      ar: 'المحاضرة الأولى - عملي: أول خطواتك في البرمجة'
+    },
+    description: {
+      en: 'A hands-on QUREO lecture: the code editor and console, console.log, comments, arithmetic, strings, variables, and a real midway code test you run yourself.',
+      ar: 'محاضرة عملية (QUREO): محرر الأكواد والكونسول، أول console.log، التعليقات، العمليات الحسابية، النصوص، والمتغيرات — واختبار نصفي بتشغّل فيه كود حقيقي.'
+    },
+    url: 'lecture6.html',
+    hasQuizzes: false,
+    status: 'active',
+    icon: '⌨️',
+    duration: {
+      en: '~25 min',
+      ar: '~٢٥ دقيقة'
+    },
+    tag: {
+      en: 'Lecture 1 · Practical',
+      ar: 'المحاضرة الأولى · عملي'
+    }
   }
 ];
 
@@ -153,7 +176,8 @@ const JOURNEY_TOTALS = {
   'security-and-safety': 5,
   'abacus-to-ai': 11,
   'digital-data-representation': 11,
-  'assembly-software-logic': 8
+  'assembly-software-logic': 8,
+  'programming-practical-l1': 7
 };
 
 const JOURNEY_VISITED_KEYS = {
@@ -162,7 +186,8 @@ const JOURNEY_VISITED_KEYS = {
   'security-and-safety': 'origin-lect3-progress',
   'abacus-to-ai': 'origin-progress',
   'digital-data-representation': 'origin-lect4-progress',
-  'assembly-software-logic': 'origin-lect5-progress'
+  'assembly-software-logic': 'origin-lect5-progress',
+  'programming-practical-l1': 'origin-lect6-progress'
 };
 
 function getJourneyProgress(id) {
