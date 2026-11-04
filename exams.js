@@ -58,9 +58,25 @@ const EXAMS = [
       windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime(),
       hideScores: true
     }
+  {
+    id: 'theory-mix',
+    total: 50,
+    runUrl: 'exam-mix.html',
+    tag: 'Theory',
+    titleEn: 'Theory Review · 50 Questions',
+    titleAr: 'مراجعة النظري · 50 سؤال',
+    descKey: 'tx4CardDesc',
+    seed: {
+      durationMin: 60,
+      passMark: 25,
+      attemptLimit: 2,
+      windowEnabled: false,
+      windowStart: 0,
+      windowEnd: 0,
+      hideScores: true
+    }
   }
 ];
-
 const T_CONFIG_KEY = 'origin-admin-exam-config';
 const T_NAME_KEY = 'origin-student-name';
 const EXAM_STORE_KEY = (id) => `origin-exam-${id}`;
