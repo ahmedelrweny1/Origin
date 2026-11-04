@@ -62,18 +62,18 @@ const EXAMS = [
     id: 'theory-mix',
     total: 50,
     runUrl: 'exam-mix.html',
-    tag: 'Theory',
-    titleEn: 'Theory Review · 50 Questions',
-    titleAr: 'مراجعة النظري · 50 سؤال',
+    tag: 'Homework',
+    titleEn: 'Theory Review · Homework · 50 Questions',
+    titleAr: 'واجب مراجعة النظري · 50 سؤال',
     descKey: 'tx4CardDesc',
     seed: {
-      durationMin: 60,
+      durationMin: 120,
       passMark: 25,
-      attemptLimit: 2,
+      attemptLimit: 0,
       windowEnabled: false,
       windowStart: 0,
       windowEnd: 0,
-      hideScores: true
+      hideScores: false
     }
   }
 ];
