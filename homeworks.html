@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="gate.js?v=7"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homework — Origin Atlas</title>
+  <meta name="description" content="Homework assignments. AR / EN bilingual.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🜨</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@500;700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="atlas.css?v=7">
+  <link rel="stylesheet" href="portal.css?v=7">
+  <link rel="stylesheet" href="quiz.css?v=7">
+  <link rel="stylesheet" href="rtl.css?v=7">
+  <script src="i18n.js?v=7"></script>
+  <script src="nav.js?v=7"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="container masthead-inner">
+      <div class="masthead-meta">
+        <span data-i18n="hwEdition">Section · Homework</span>
+      </div>
+      <a href="index.html" class="wordmark">Origin <span>Atlas</span></a>
+      <div class="controls">
+        <button id="navBurger" class="control-btn nav-burger" aria-label="Menu" aria-expanded="false">☰</button>
+        <nav class="mast-nav" id="mastNav" aria-label="Sections">
+          <a href="lectures.html" class="control-btn" style="text-decoration:none;" data-i18n="navLectures">📚 Lectures</a>
+          <a href="exams.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadExams">⏱ Exams</a>
+          <a href="quizzes.html" class="control-btn" style="text-decoration:none;" data-i18n="mastheadQuizzes">🧠 Quizzes</a>
+          <a href="login.html" class="control-btn" style="text-decoration:none;" data-i18n="navAccount">👤 Account</a>
+        </nav>
+        <button id="themeToggle" class="control-btn" aria-label="Toggle theme">🌙</button>
+        <button id="langToggle" class="control-btn" aria-label="Toggle language">AR / EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <div class="hero-eyebrow">
+            <span class="bar"></span>
+            <span class="mono" data-i18n="hwEyebrow">Homework</span>
+          </div>
+          <h1>
+            <span data-i18n="hwTitle1">Practice what</span><br>
+            <span class="accent" data-i18n="hwTitle2">you</span>
+            <span class="strike" data-i18n="hwTitle3">learned</span>.
+          </h1>
+          <p class="muted" data-i18n="hwSubtitle">Self-paced homework assignments covering the theory lectures.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="padding:2rem 0 4rem;">
+      <div class="exams-grid" style="display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));">
+        <a class="exam-card" href="exam-mix.html" style="text-decoration:none;">
+          <span class="exam-tag" data-i18n="hwTag">Homework</span>
+          <h3 data-i18n="hwCardTitle">Theory review · 50 questions</h3>
+          <p class="muted" data-i18n="tx4CardDesc">50 comprehensive mixed questions from all theory lectures as a self-paced homework assignment.</p>
+          <div class="exam-meta">
+            <span>❓ 50 questions</span>
+            <span>· ⏱ 120 min</span>
+            <span>· 🎯 25 / 50</span>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <script src="nav.js?v=7"></script>
+</body>
+</html>
