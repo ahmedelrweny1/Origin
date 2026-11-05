@@ -6,11 +6,13 @@
 
 const params = new URLSearchParams(window.location.search);
 const lectureId = params.get('lecture');
+const hwId = params.get('hw'); // homework mode: quiz.html?hw=theory-mix
 const mode = params.get('mode') === 'exam' ? 'exam' : 'practice';
 const difficultyParam = params.get('difficulty') || 'all';
 
 const runnerState = {
   lecture: null,
+  hw: false,
   stages: [],
   bank: [],
   exam: [],
@@ -105,6 +107,7 @@ function shuffle(arr) {
    Init
 ------------------------------------------------------------------ */
 async function init() {
+  if (hwId) { initHomework(); return; }
   if (!lectureId) { renderNoLecture(); return; }
   const journey = getJourney(lectureId);
   if (!journey || !LECTURE_DATA_MAP[lectureId]) { renderUnknownLecture(); return; }
@@ -152,6 +155,67 @@ function renderUnknownLecture() {
        <p class="muted">${tOrEn('qzUnknownLectureHint')}</p>
        <p style="margin-top:2rem;"><a href="quizzes.html" class="btn btn-primary btn-arrow">${tOrEn('qzBackToList')}</a></p>
      </div>`;
+}
+
+/* ------------------------------------------------------------------
+   HOMEWORK MODE — ?hw=<bank>: like any ordinary homework.
+   Fixed order, instant feedback, no timer, unlimited attempts.
+------------------------------------------------------------------ */
+async function initHomework() {
+  runnerState.hw = true;
+  document.getElementById('quizLectureLabel').textContent = tOrEn('hwTag');
+  try {
+    await loadScript('exam-theory-mix-ar.js');
+  } catch (e) {
+    console.error('[quiz] failed to load homework bank', e);
+    return;
+  }
+  const raw = (typeof THEORY_MIX_EXAM_AR !== 'undefined') ? THEORY_MIX_EXAM_AR : [];
+  // Normalize: one flat homework list — no per-stage grouping, no difficulty split
+  runnerState.bank = raw.map(q => Object.assign({}, q, { difficulty: 'medium', stageId: null }));
+  runnerState.exam = [];
+  renderHwGate();
+}
+
+function renderHwGate() {
+  const count = runnerState.bank.length;
+  const pickerEl = document.getElementById('quizPicker');
+  pickerEl.innerHTML = `
+    <div class="picker-head">
+      <span class="mono">${tOrEn('tx4GateEyebrow')}</span>
+      <h1>${tOrEn('tx4GateTitle')}</h1>
+      <p class="muted">${tOrEn('tx4GateSub')}</p>
+      <p class="mono faint" style="margin-top:1.5rem;">❓ ${count} ${tOrEn('hwQWord')} · ${tOrEn('hwNoTime')}</p>
+    </div>
+    <div class="exam-actions">
+      <button class="btn btn-primary btn-arrow" id="startHwBtn">${tOrEn('hwGateStart')}</button>
+      <a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>
+    </div>
+  `;
+  document.getElementById('startHwBtn').addEventListener('click', startHw);
+  document.getElementById('quizProgressFill').style.width = '0%';
+  document.getElementById('quizProgressLabel').textContent = `00 / ${String(count).padStart(2, '0')}`;
+}
+
+function startHw() {
+  // Fixed order — a homework, not a shuffled exam
+  runnerState.questions = [...runnerState.bank];
+  runnerState.cursor = 0;
+  runnerState.correct = 0;
+  runnerState.wrong = 0;
+  runnerState.skipped = 0;
+  runnerState.answered = false;
+  runnerState.perDifficulty = {
+    easy: { c: 0, w: 0 }, medium: { c: 0, w: 0 },
+    hard: { c: 0, w: 0 }, creative: { c: 0, w: 0 }
+  };
+  runnerState.scopeLabel = tOrEn('hwCardTitle');
+
+  document.getElementById('quizPicker').classList.add('hidden');
+  document.getElementById('quizResult').classList.add('hidden');
+  document.getElementById('quizRunner').classList.remove('hidden');
+
+  renderCurrent();
 }
 
 /* ------------------------------------------------------------------
@@ -503,13 +567,24 @@ function renderCurrent() {
   document.getElementById('runnerScore').textContent =
     `${currentLang === 'ar' ? 'صحيحة' : 'correct'}: ${runnerState.correct} / ${runnerState.correct + runnerState.wrong}`;
 
-  document.getElementById('runnerStageTitle').innerHTML =
-    `${getStageGlyph(q.stageId) ? `<span class="qg">${getStageGlyph(q.stageId)}</span>` : ''}<span>${getStageTitle(q.stageId)}</span>`;
-  document.getElementById('runnerStageTitle').classList.remove('exam-title-hidden');
+  const stageTitleEl = document.getElementById('runnerStageTitle');
+  const badgeEl = document.getElementById('runnerDifficulty');
+  if (runnerState.hw) {
+    // Homework: title is the homework name; no difficulty badge
+    stageTitleEl.innerHTML = `<span>${tOrEn('hwCardTitle')}</span>`;
+    stageTitleEl.classList.remove('exam-title-hidden');
+    badgeEl.className = 'diff-badge';
+    badgeEl.textContent = '';
+    badgeEl.classList.add('hidden');
+  } else {
+    stageTitleEl.innerHTML =
+      `${getStageGlyph(q.stageId) ? `<span class="qg">${getStageGlyph(q.stageId)}</span>` : ''}<span>${getStageTitle(q.stageId)}</span>`;
+    stageTitleEl.classList.remove('exam-title-hidden');
 
-  document.getElementById('runnerDifficulty').textContent = tOrEn(`diff_${q.difficulty}`);
-  document.getElementById('runnerDifficulty').className = `diff-badge diff-${q.difficulty}`;
-  document.getElementById('runnerDifficulty').classList.remove('hidden');
+    badgeEl.textContent = tOrEn(`diff_${q.difficulty}`);
+    badgeEl.className = `diff-badge diff-${q.difficulty}`;
+    badgeEl.classList.remove('hidden');
+  }
 
   document.getElementById('runnerQuestion').innerHTML = q.question;
 
@@ -644,15 +719,28 @@ function finishQuiz() {
 
   // Restore default actions
   const actions = resultEl.querySelector('.result-actions');
-  actions.innerHTML = `
-    <button class="btn btn-ghost" id="resultRetryBtn">${tOrEn('qzRetry')}</button>
-    <a class="btn btn-primary btn-arrow" href="quizzes.html">${tOrEn('qzOtherLectures')}</a>
-  `;
-  actions.querySelector('#resultRetryBtn').addEventListener('click', () => {
-    document.getElementById('quizPicker').classList.remove('hidden');
-    document.getElementById('quizResult').classList.add('hidden');
-    document.getElementById('quizPicker').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
+  if (runnerState.hw) {
+    actions.innerHTML = `
+      <button class="btn btn-primary btn-arrow" id="resultRetryBtn">${tOrEn('hwGateStart')}</button>
+      <a class="btn btn-ghost" href="quizzes.html">${tOrEn('qzBackToList')}</a>
+    `;
+    actions.querySelector('#resultRetryBtn').addEventListener('click', () => {
+      document.getElementById('quizResult').classList.add('hidden');
+      document.getElementById('quizPicker').classList.remove('hidden');
+      renderHwGate();
+      document.getElementById('quizPicker').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  } else {
+    actions.innerHTML = `
+      <button class="btn btn-ghost" id="resultRetryBtn">${tOrEn('qzRetry')}</button>
+      <a class="btn btn-primary btn-arrow" href="quizzes.html">${tOrEn('qzOtherLectures')}</a>
+    `;
+    actions.querySelector('#resultRetryBtn').addEventListener('click', () => {
+      document.getElementById('quizPicker').classList.remove('hidden');
+      document.getElementById('quizResult').classList.add('hidden');
+      document.getElementById('quizPicker').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
 
   document.getElementById('quizResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -673,6 +761,17 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 window.addEventListener('langChanged', () => {
+  if (runnerState.hw) {
+    document.getElementById('quizLectureLabel').textContent = tOrEn('hwTag');
+    if (!document.getElementById('quizPicker').classList.contains('hidden')) {
+      renderHwGate();
+    } else if (!document.getElementById('quizRunner').classList.contains('hidden')) {
+      if (!runnerState.answered) renderCurrent();
+    } else if (!document.getElementById('quizResult').classList.contains('hidden')) {
+      finishQuiz();
+    }
+    return;
+  }
   if (!runnerState.lecture) return;
   const data = (typeof LECTURE_DATA_MAP !== 'undefined') ? LECTURE_DATA_MAP[runnerState.lecture.id] : null;
   if (!data) return;

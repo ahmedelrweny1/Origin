@@ -58,23 +58,6 @@ const EXAMS = [
       windowEnd: new Date(2026, 9, 26, 23, 59, 59).getTime(),
       hideScores: true
     }
-  {
-    id: 'theory-mix',
-    total: 50,
-    runUrl: 'exam-mix.html',
-    tag: 'Homework',
-    titleEn: 'Theory Review · Homework · 50 Questions',
-    titleAr: 'واجب مراجعة النظري · 50 سؤال',
-    descKey: 'tx4CardDesc',
-    seed: {
-      durationMin: 120,
-      passMark: 25,
-      attemptLimit: 0,
-      windowEnabled: false,
-      windowStart: 0,
-      windowEnd: 0,
-      hideScores: false
-    }
   }
 ];
 const T_CONFIG_KEY = 'origin-admin-exam-config';
